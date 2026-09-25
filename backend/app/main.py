@@ -6,12 +6,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
+from app.analysis.service import AnalysisService
 from app.api.router import API_PREFIX, api_router
+from app.case.config import load_case_config
+from app.case.repository import CaseRepository
 from app.core.config import Settings, get_settings
 from app.core.errors import register_error_handlers
 from app.core.logging import configure_logging
 from app.core.middleware import request_context_middleware
 from app.core.request_context import REQUEST_ID_HEADER
+from app.earth.catalog import StacCatalog
 
 logger = logging.getLogger("littora")
 
@@ -34,6 +38,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         lifespan=lifespan,
     )
     app.state.settings = settings
+    repository = CaseRepository(settings)
+    catalog_url = load_case_config(settings.case_config).pairing.catalog
+    app.state.repository = repository
+    app.state.analysis = AnalysisService(repository, StacCatalog(catalog_url), settings.storage_dir)
 
     app.middleware("http")(request_context_middleware)
     app.add_middleware(

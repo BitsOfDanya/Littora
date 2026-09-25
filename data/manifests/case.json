@@ -1,0 +1,30 @@
+{
+ "target": "data/case",
+ "inventoried": "2026-09-25",
+ "files": 2,
+ "bytes": 945937,
+ "by_suffix": {
+  ".md": {
+   "files": 1,
+   "bytes": 18459
+  },
+  ".csv": {
+   "files": 1,
+   "bytes": 927478
+  }
+ },
+ "by_folder": {
+  ".": 2
+ },
+ "rasters": [],
+ "listing": [
+  {
+   "file": "README_macroplastic_dataset.md",
+   "bytes": 18459
+  },
+  {
+   "file": "macroplastic_marine_samples.csv",
+   "bytes": 927478
+  }
+ ]
+}

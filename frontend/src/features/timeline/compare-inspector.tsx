@@ -196,6 +196,7 @@ function ComparePanel() {
             pair={pair}
             a={sideTotals(histories, pair.a)}
             b={sideTotals(histories, pair.b)}
+            detection={isDemo}
           />
           <ObjectDeltas rows={rows} pair={pair} />
         </>

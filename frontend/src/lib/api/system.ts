@@ -3,9 +3,16 @@ import { apiRequest } from "./client";
 
 export const capabilityKeySchema = z.enum([
   "scene_catalog",
+  "field_observations",
+  "pair_registry",
+  "quality_masks",
+  "analysis_requests",
+  "export",
   "debris_detection",
   "segmentation",
   "coverage_estimation",
+  "spectral_composites",
+  "concentration_model",
   "change_tracking",
   "drift_forecast",
   "survey_planning",

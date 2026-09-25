@@ -1,6 +1,6 @@
 import type { BBox, LngLat } from "./geo";
 
-export type AoiGroup = "reference" | "russian-seas";
+export type AoiGroup = "case" | "reference" | "russian-seas";
 
 export type WaterLabelRank = "major" | "minor";
 
@@ -9,6 +9,13 @@ export type WaterLabel = {
   position: LngLat;
   rank: WaterLabelRank;
   minZoom?: number;
+};
+
+export type AoiSurvey = {
+  source: string;
+  dates: readonly string[];
+  period: readonly [from: string, to: string];
+  events: readonly string[];
 };
 
 export type AreaOfInterest = {
@@ -24,4 +31,5 @@ export type AreaOfInterest = {
   rationale: string;
   datasets: readonly string[];
   waterLabels: readonly WaterLabel[];
+  survey?: AoiSurvey;
 };

@@ -1,11 +1,92 @@
 import type { AoiGroup, AreaOfInterest } from "@/domain/aoi";
 
 export const AOI_GROUP_LABELS: Record<AoiGroup, string> = {
+  case: "Кейс · Чёрное море, рейс DOORS 2024",
   reference: "Эталонные участки",
   "russian-seas": "Моря России",
 };
 
 export const AREAS_OF_INTEREST = [
+  {
+    id: "doors-west",
+    name: "Разрезы T1–T2",
+    seaName: "Чёрное море, западная часть",
+    country: "рейс DOORS · 2 июня 2024",
+    group: "case",
+    center: [29.75, 43.585],
+    zoom: 10.4,
+    bbox: [29.5, 43.45, 30.0, 43.72],
+    sentinel2Tiles: ["35TQJ"],
+    rationale: "Визуальный учёт плавающего мусора > 2,5 см с судна; снимок Sentinel-2 в день учёта",
+    datasets: [],
+    waterLabels: [{ name: "Чёрное море", position: [29.9, 43.66], rank: "major" }],
+    survey: {
+      source: "S4 · DOORS3",
+      dates: ["2024-06-02"],
+      period: ["2024-05-18", "2024-06-17"],
+      events: ["T1", "T2"],
+    },
+  },
+  {
+    id: "doors-central",
+    name: "Разрезы T30–T32",
+    seaName: "Чёрное море, западная котловина",
+    country: "рейс DOORS · 17 июня 2024",
+    group: "case",
+    center: [31.23, 42.49],
+    zoom: 9.9,
+    bbox: [30.8, 42.36, 31.66, 42.62],
+    sentinel2Tiles: ["36TUN"],
+    rationale: "Три разреза подряд в открытом море; пара с Sentinel-2B в день учёта",
+    datasets: [],
+    waterLabels: [{ name: "Чёрное море", position: [31.5, 42.4], rank: "major" }],
+    survey: {
+      source: "S4 · DOORS3",
+      dates: ["2024-06-17"],
+      period: ["2024-06-02", "2024-07-02"],
+      events: ["T30", "T31", "T32"],
+    },
+  },
+  {
+    id: "doors-batumi-north",
+    name: "Разрезы T18–T19",
+    seaName: "Чёрное море, юго-восточная часть",
+    country: "рейс DOORS · 5 июня 2024",
+    group: "case",
+    center: [41.15, 41.78],
+    zoom: 10.8,
+    bbox: [40.95, 41.68, 41.35, 41.88],
+    sentinel2Tiles: ["37TFG"],
+    rationale: "Два разреза в открытом море к северо-западу от Батуми; пара с Sentinel-2B",
+    datasets: [],
+    waterLabels: [{ name: "Чёрное море", position: [41.2, 41.72], rank: "major" }],
+    survey: {
+      source: "S4 · DOORS3",
+      dates: ["2024-06-05"],
+      period: ["2024-05-22", "2024-06-19"],
+      events: ["T18", "T19"],
+    },
+  },
+  {
+    id: "doors-batumi",
+    name: "Разрезы T20–T21",
+    seaName: "Чёрное море у Батуми",
+    country: "рейс DOORS · 7 июня 2024",
+    group: "case",
+    center: [41.6, 41.66],
+    zoom: 11.1,
+    bbox: [41.45, 41.52, 41.75, 41.8],
+    sentinel2Tiles: ["37TGG"],
+    rationale: "Прибрежные разрезы у Батуми: сток рек и порт; пара с Sentinel-2A",
+    datasets: [],
+    waterLabels: [{ name: "Чёрное море", position: [41.52, 41.7], rank: "major" }],
+    survey: {
+      source: "S4 · DOORS3",
+      dates: ["2024-06-07"],
+      period: ["2024-05-24", "2024-06-21"],
+      events: ["T20", "T21"],
+    },
+  },
   {
     id: "gulf-of-honduras",
     name: "Гондурасский залив",
@@ -126,7 +207,9 @@ export const AREAS_OF_INTEREST = [
 
 export type AoiId = (typeof AREAS_OF_INTEREST)[number]["id"];
 
-export const DEFAULT_AOI_ID: AoiId = "gulf-of-honduras";
+export const DEFAULT_AOI_ID: AoiId = "doors-west";
+
+export const DEMO_AOI: AoiId = "gulf-of-honduras";
 
 export function findAoi(id: string): AreaOfInterest | undefined {
   return AREAS_OF_INTEREST.find((aoi) => aoi.id === id);

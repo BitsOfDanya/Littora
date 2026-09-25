@@ -95,7 +95,7 @@ export function LayerRowsGroup({
                 showDemoTag={!allDemo}
                 legend={
                   hasLegend(layer.legend) ? (
-                    <LayerLegend kind={layer.legend} ground={ground} />
+                    <LayerLegend kind={layer.legend} ground={ground} truth={truth} />
                   ) : undefined
                 }
                 source={!allDemo && truth === "demo" ? DEMO_SOURCE[group] : undefined}

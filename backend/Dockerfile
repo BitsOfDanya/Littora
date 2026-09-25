@@ -3,14 +3,25 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+    LITTORA_DATA_DIR=/data \
+    LITTORA_REPORTS_DIR=/reports \
+    LITTORA_STORAGE_DIR=/storage
 
 WORKDIR /app
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libexpat1 ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY pyproject.toml ./
 COPY app ./app
+COPY config ./config
 RUN pip install . \
-    && useradd --create-home --uid 10001 littora
+    && useradd --create-home --uid 10001 littora \
+    && mkdir -p /storage \
+    && chown littora /storage
 
 USER littora
 

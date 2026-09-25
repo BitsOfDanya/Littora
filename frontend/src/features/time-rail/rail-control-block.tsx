@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useSceneCatalogState } from "@/data/scenes";
 import type { SceneSummary } from "@/domain/scene";
 import { formatPercent } from "@/lib/format/numbers";
 import { formatUtcDateTime } from "@/lib/format/time";
@@ -17,7 +18,7 @@ import {
   IconPlay,
 } from "@/ui/icons";
 import { Caps } from "@/ui/section";
-import { ageLabel } from "./rail-model";
+import { ageLabel, sceneLimit } from "./rail-model";
 import type { useSceneStepping } from "./use-scene-stepping";
 import type { PlaybackSpeed } from "./use-scene-playback";
 
@@ -61,10 +62,8 @@ function ControlShell({ children }: { children: ReactNode }) {
 }
 
 function cautionText(scene: SceneSummary): string | null {
-  if (scene.usability === "unusable")
-    return `облачность ${formatPercent(scene.cloudCover)} — объекты не наблюдались`;
-  if (scene.usability === "partial")
-    return `облачность ${formatPercent(scene.cloudCover)} — часть района закрыта`;
+  if (scene.usability === "unusable") return `${sceneLimit(scene)} — объекты не наблюдались`;
+  if (scene.usability === "partial") return `${sceneLimit(scene)} — часть района закрыта`;
   return null;
 }
 
@@ -160,17 +159,30 @@ export function SceneControlBlock({
   );
 }
 
+const CATALOG_TITLE = {
+  loading: "Каталог снимков…",
+  error: "Каталог недоступен",
+  ready: "Снимков нет",
+} as const;
+
 export function PlannedControlBlock() {
   const setDemoFixtures = useWorkspaceStore((state) => state.setDemoFixtures);
+  const catalog = useSceneCatalogState();
+  const known =
+    catalog.status === "loading" || catalog.status === "error" || catalog.status === "ready";
+  const subline =
+    catalog.status === "error"
+      ? catalog.message
+      : known
+        ? `${catalog.query.dateFrom} — ${catalog.query.dateTo}`
+        : "появится с каталогом Sentinel-2";
   return (
     <ControlShell>
       <RailHeader label="Снимок" sentence="выбранный пролёт Sentinel-2" demo={false} />
       <p className="text-[15px] leading-5 font-semibold whitespace-nowrap text-text-primary">
-        Снимок не выбран
+        {known ? CATALOG_TITLE[catalog.status] : "Снимок не выбран"}
       </p>
-      <p className="text-[11px] leading-[14px] text-text-secondary">
-        появится с каталогом Sentinel-2
-      </p>
+      <p className="truncate text-[11px] leading-[14px] text-text-secondary">{subline}</p>
       <div className="mt-0.5 flex items-center gap-1">
         <IconButton label="Предыдущий пролёт" shortcut="[" className={STEP_BUTTON} disabled>
           <IconChevronLeft />
@@ -178,9 +190,15 @@ export function PlannedControlBlock() {
         <IconButton label="Следующий пролёт" shortcut="]" className={STEP_BUTTON} disabled>
           <IconChevronRight />
         </IconButton>
-        <Button size="md" className={cn("min-w-0 px-2")} onClick={() => setDemoFixtures(true)}>
-          Показать на демо-данных
-        </Button>
+        {catalog.status === "error" ? (
+          <Button size="md" className={cn("min-w-0 px-2")} onClick={catalog.retry}>
+            Повторить
+          </Button>
+        ) : known ? null : (
+          <Button size="md" className={cn("min-w-0 px-2")} onClick={() => setDemoFixtures(true)}>
+            Показать на демо-данных
+          </Button>
+        )}
       </div>
     </ControlShell>
   );

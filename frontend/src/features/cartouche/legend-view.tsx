@@ -1,7 +1,9 @@
 "use client";
 
 import type { MapModeId } from "@/config/layers";
+import { useAnalysisStore } from "@/state/analysis-store";
 import { useWorkspaceStore } from "@/state/workspace-store";
+import { Button } from "@/ui/button";
 import { BasemapGroup } from "./basemap-group";
 import { CompareGroup } from "./compare-group";
 import { LegendNote } from "./layer-legend";
@@ -53,6 +55,38 @@ function ResultsGroup({ mode, showAll, density }: ViewProps) {
   );
 }
 
+function AnalysisGroup({ mode, showAll, density }: ViewProps) {
+  const truthOf = useLayerTruth();
+  const demoActive = useDemoActive();
+  const panelOpen = useAnalysisStore((state) => state.panelOpen);
+  const setPanelOpen = useAnalysisStore((state) => state.setPanelOpen);
+  const hasSelection = useWorkspaceStore((state) => state.selectedCandidateId !== null);
+  const closed = !demoActive && (!panelOpen || hasSelection);
+  return (
+    <LayerRowsGroup
+      mode={mode}
+      group="analysis"
+      truthOf={truthOf}
+      showAll={showAll}
+      density={density}
+      plannedNote={
+        <PlannedLine capability="analysis_requests">
+          Анализ района и измерения кейса придут с сервером API
+        </PlannedLine>
+      }
+      lead={
+        closed ? (
+          <div className="pb-1">
+            <Button size="sm" onClick={() => setPanelOpen(true)} disabled={hasSelection}>
+              Открыть панель анализа
+            </Button>
+          </div>
+        ) : null
+      }
+    />
+  );
+}
+
 function PrimaryGroup({ mode, showAll, density }: ViewProps) {
   const truthOf = useLayerTruth();
   switch (mode) {
@@ -82,6 +116,7 @@ export function LegendView({ mode, showAll, density }: ViewProps) {
     <div className="flex flex-col">
       <BasemapGroup mode={mode} density={density} />
       <PrimaryGroup mode={mode} showAll={showAll} density={density} />
+      <AnalysisGroup mode={mode} showAll={showAll} density={density} />
       <ResultsGroup mode={mode} showAll={showAll} density={density} />
       <LayerRowsGroup
         mode={mode}
@@ -90,7 +125,7 @@ export function LegendView({ mode, showAll, density }: ViewProps) {
         showAll={showAll}
         density={density}
         plannedNote={
-          <PlannedLine capability="scene_catalog">
+          <PlannedLine capability="quality_masks">
             Маска облаков и контур сцены придут с каталогом снимков
           </PlannedLine>
         }

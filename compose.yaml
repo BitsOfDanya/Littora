@@ -9,6 +9,10 @@ services:
       LITTORA_ENVIRONMENT: ${LITTORA_ENVIRONMENT:-production}
       LITTORA_LOG_LEVEL: ${LITTORA_LOG_LEVEL:-INFO}
       LITTORA_CORS_ORIGINS: ${LITTORA_CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+    volumes:
+      - ./data/case:/data/case:ro
+      - ./reports:/reports:ro
+      - analyses:/storage
     ports:
       - "${LITTORA_BACKEND_PORT:-8000}:8000"
     restart: unless-stopped
@@ -18,7 +22,7 @@ services:
       context: ./frontend
       args:
         NEXT_PUBLIC_API_BASE_URL: /
-        NEXT_PUBLIC_DEMO_FIXTURES: ${NEXT_PUBLIC_DEMO_FIXTURES:-true}
+        NEXT_PUBLIC_DEMO_FIXTURES: ${NEXT_PUBLIC_DEMO_FIXTURES:-false}
         LITTORA_API_PROXY_TARGET: http://backend:8000
     image: littora-frontend:0.1.0
     depends_on:
@@ -27,3 +31,6 @@ services:
     ports:
       - "${LITTORA_FRONTEND_PORT:-3000}:3000"
     restart: unless-stopped
+
+volumes:
+  analyses:

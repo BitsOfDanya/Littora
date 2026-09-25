@@ -10,6 +10,7 @@ loadEnvConfig(
 );
 
 const apiProxyTarget = process.env.LITTORA_API_PROXY_TARGET?.replace(/\/$/, "");
+const ANALYSIS_PROXY_TIMEOUT_MS = 180_000;
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -17,6 +18,7 @@ const nextConfig: NextConfig = {
   typedRoutes: true,
   devIndicators: false,
   output: "standalone",
+  experimental: { proxyTimeout: ANALYSIS_PROXY_TIMEOUT_MS },
   async rewrites() {
     if (!apiProxyTarget) return [];
     return [{ source: "/api/:path*", destination: `${apiProxyTarget}/api/:path*` }];

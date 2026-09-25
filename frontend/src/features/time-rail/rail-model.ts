@@ -1,4 +1,16 @@
+import type { SceneSummary } from "@/domain/scene";
+import { formatPercent } from "@/lib/format/numbers";
+
 export type Placed<T> = { item: T; ratio: number; offsetPx: number };
+
+const FULL_COVERAGE = 0.9;
+
+export function sceneLimit(scene: SceneSummary): string {
+  const coverage = scene.areaCoverage;
+  return coverage !== undefined && coverage < FULL_COVERAGE
+    ? `покрытие района ${formatPercent(coverage)}`
+    : `облачность ${formatPercent(scene.cloudCover)}`;
+}
 
 export function spreadMarks<T>(
   items: readonly T[],

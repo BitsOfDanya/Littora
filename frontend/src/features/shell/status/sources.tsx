@@ -11,11 +11,22 @@ const SOURCE_ENTRIES: readonly { title: string; source: AttributionId }[] = [
   { title: "Рельеф суши и дна", source: "gibs" },
 ];
 
+const DATA_ENTRIES: readonly { title: string; text: string }[] = [
+  {
+    title: "Снимки даты и маска SCL",
+    text: "Contains modified Copernicus Sentinel data, ESA · каталог Earth Search (Element 84), коллекция sentinel-2-c1-l2a",
+  },
+  {
+    title: "Натурные измерения кейса",
+    text: "macroplastic_marine_samples.csv: Большое тихоокеанское мусорное пятно 2018, Саргассово море 2015, Северное море, Чёрное море DOORS 2024 — источники и лицензии в README набора",
+  },
+];
+
 export function SourcesItem() {
   const compact = findBasemap(useMapLayersStore((state) => state.basemapId)).attribution;
   return (
     <StatusPopover
-      title="Источники подложек"
+      title="Источники данных и подложек"
       align="right"
       width="w-[380px]"
       triggerLabel={`Источники: ${compact}`}
@@ -27,6 +38,15 @@ export function SourcesItem() {
       }
     >
       <div className="flex flex-col gap-2.5 px-3 py-3">
+        <Caps>Данные анализа</Caps>
+        <ul className="flex flex-col gap-2.5 border-b border-line-hairline pb-2.5">
+          {DATA_ENTRIES.map((entry) => (
+            <li key={entry.title} className="flex flex-col gap-0.5">
+              <span className="text-[12px] font-semibold text-text-primary">{entry.title}</span>
+              <span className="text-[12px] leading-4 text-text-secondary">{entry.text}</span>
+            </li>
+          ))}
+        </ul>
         <Caps>Источники подложек</Caps>
         <ul className="flex flex-col gap-2.5">
           {SOURCE_ENTRIES.map((entry) => (

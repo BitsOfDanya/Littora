@@ -63,6 +63,8 @@ dist/
 !/data/sources.toml
 !/data/aoi/*.geojson
 !/data/manifests/*.json
+!/data/case/macroplastic_marine_samples.csv
+!/data/case/README_macroplastic_dataset.md
 
 *.tif
 *.tiff

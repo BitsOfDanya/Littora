@@ -89,7 +89,7 @@ export const useMapLayersStore = create<MapLayersStore>()(
       basemapId: "s2-mosaic",
       visible: DEFAULT_VISIBLE,
       opacity: {},
-      composite: null,
+      composite: "scene-true-color",
       particlesPaused: false,
       loadState: {},
       retryNonce: {},

@@ -399,3 +399,53 @@ export function SearchRadiusSwatch({ ground }: { ground: Ground }) {
     </GroundSwatch>
   );
 }
+
+export function MeasurementSwatch({
+  ground,
+  hollow,
+  faded,
+}: {
+  ground: Ground;
+  hollow?: boolean;
+  faded?: boolean;
+}) {
+  const ink = GROUND_INK[ground].outline;
+  return (
+    <GroundSwatch ground={ground} width={HEIGHT}>
+      <circle
+        cx={MID}
+        cy={MID}
+        r={4}
+        fill={hollow ? "none" : ink}
+        stroke={ink}
+        strokeWidth={1.4}
+        opacity={faded ? 0.4 : 1}
+      />
+    </GroundSwatch>
+  );
+}
+
+export function AreaStatusSwatch({ ground, color }: { ground: Ground; color: string }) {
+  return (
+    <GroundSwatch ground={ground}>
+      <rect
+        x="4"
+        y="3.5"
+        width={WIDTH - 8}
+        height={HEIGHT - 7}
+        fill="none"
+        stroke={color}
+        strokeWidth={1.6}
+        strokeDasharray="5 3"
+      />
+    </GroundSwatch>
+  );
+}
+
+export function MaskClassSwatch({ ground, color }: { ground: Ground; color: string }) {
+  return (
+    <GroundSwatch ground={ground} width={HEIGHT}>
+      <rect x="2" y="2" width={HEIGHT - 4} height={HEIGHT - 4} fill={color} />
+    </GroundSwatch>
+  );
+}

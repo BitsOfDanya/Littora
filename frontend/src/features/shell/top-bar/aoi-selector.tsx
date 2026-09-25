@@ -10,7 +10,7 @@ import { cn } from "@/ui/cn";
 import { IconChevronDown } from "@/ui/icons";
 import { useDismissable } from "../layout/use-dismiss";
 
-const GROUPS = ["reference", "russian-seas"] as const;
+const GROUPS = ["case", "reference", "russian-seas"] as const;
 
 function subline(aoi: AreaOfInterest): string {
   return [aoi.seaName, aoi.sentinel2Tiles[0]].filter(Boolean).join(" · ");

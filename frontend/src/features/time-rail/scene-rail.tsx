@@ -2,10 +2,14 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { useCandidateObservations } from "@/data/monitor-passes";
-import { type PlannedPass, usePlannedPasses } from "@/data/scenes";
+import {
+  type PlannedPass,
+  type SceneCatalogState,
+  useSceneCatalogState,
+  usePlannedPasses,
+} from "@/data/scenes";
 import type { SceneSummary } from "@/domain/scene";
 import { useQueue } from "@/features/shell/queue/use-queue";
-import { formatPercent } from "@/lib/format/numbers";
 import { formatUtcTime } from "@/lib/format/time";
 import { Button } from "@/ui/button";
 import { IconCaution } from "@/ui/icons";
@@ -31,6 +35,7 @@ import {
   useLaneWidth,
   useZoomableWindow,
 } from "./rail-tracks";
+import { sceneLimit } from "./rail-model";
 import { DAY, type TimeWindow, toRatio } from "./time-scale";
 import { useNow } from "./use-now";
 import { useScenePlayback } from "./use-scene-playback";
@@ -40,6 +45,7 @@ import { useSelectedScene } from "./use-selected-scene";
 const PAD_DAYS = 3;
 const EMPTY_WINDOW_BEFORE_DAYS = 45;
 const EMPTY_WINDOW_AFTER_DAYS = 15;
+const ARCHIVE_GAP_DAYS = 30;
 
 function fullWindow(
   scenes: readonly SceneSummary[],
@@ -53,9 +59,11 @@ function fullWindow(
     };
   const times = scenes.map((scene) => Date.parse(scene.acquiredAt));
   const future = planned.map((pass) => Date.parse(pass.at));
+  const latest = Math.max(...times, ...future);
+  const archive = now - latest > ARCHIVE_GAP_DAYS * DAY;
   return {
     start: Math.min(...times) - PAD_DAYS * DAY,
-    end: Math.max(now, ...times, ...future) + PAD_DAYS * DAY,
+    end: (archive ? latest : Math.max(now, latest)) + PAD_DAYS * DAY,
   };
 }
 
@@ -149,8 +157,8 @@ function CloudCallout({
   const x = ratio * width;
   const text =
     scene.usability === "unusable"
-      ? `Снимок ${shortDay(scene.acquiredAt)}: облачность ${formatPercent(scene.cloudCover)} — объекты не наблюдались`
-      : `Снимок ${shortDay(scene.acquiredAt)}: облачность ${formatPercent(scene.cloudCover)} — часть района не наблюдалась`;
+      ? `Снимок ${shortDay(scene.acquiredAt)}: ${sceneLimit(scene)} — объекты не наблюдались`
+      : `Снимок ${shortDay(scene.acquiredAt)}: ${sceneLimit(scene)} — часть района не наблюдалась`;
   return (
     <div
       role="status"
@@ -175,7 +183,22 @@ function CloudCallout({
   );
 }
 
+function catalogLine(catalog: SceneCatalogState): string | null {
+  switch (catalog.status) {
+    case "loading":
+      return "Запрашиваем каталог Sentinel-2 L2A…";
+    case "error":
+      return `Каталог снимков недоступен: ${catalog.message}`;
+    case "ready":
+      return `Нет снимков Sentinel-2 L2A за ${catalog.query.dateFrom} — ${catalog.query.dateTo}`;
+    default:
+      return null;
+  }
+}
+
 function PlannedTracks({ now }: { now: number }) {
+  const catalog = useSceneCatalogState();
+  const line = catalogLine(catalog);
   const { ref, width } = useLaneWidth();
   const window = useMemo(() => fullWindow([], [], now), [now]);
   const today = new Intl.DateTimeFormat("ru-RU", {
@@ -210,9 +233,9 @@ function PlannedTracks({ now }: { now: number }) {
             style={{ top: LANE_TOP.passes, height: LANES.passes }}
           >
             <span className="bg-surface-panel pr-2">
-              Каталог снимков не подключён · scene_catalog: planned
+              {line ?? "Каталог снимков не подключён · scene_catalog: planned"}
             </span>
-            <PlannedTag capability="scene_catalog" />
+            {line ? null : <PlannedTag capability="scene_catalog" />}
           </div>
           <div
             className="absolute inset-x-0 flex items-center text-[12px] text-text-tertiary"

@@ -1,0 +1,175 @@
+{
+ "unit": "шт./км²",
+ "primary_target": "litter-visual",
+ "targets": [
+  {
+   "key": "litter-visual",
+   "primary": true,
+   "title": "Плавающий макромусор, визуальный учёт с судна",
+   "records": 74,
+   "events": 74,
+   "profiles": [
+    "S3_visual_GT2",
+    "S4_visual_GT2_5"
+   ]
+  },
+  {
+   "key": "plastic-visual",
+   "primary": false,
+   "title": "Суммарный пластик, визуальный учёт с судна",
+   "records": 63,
+   "events": 63,
+   "profiles": [
+    "S2_visual_GT2"
+   ]
+  },
+  {
+   "key": "plastic-trawl",
+   "primary": false,
+   "title": "Макропластик 5–50 см, поверхностный трал",
+   "records": 83,
+   "events": 83,
+   "profiles": [
+    "S1_trawl_5_to_50"
+   ]
+  }
+ ],
+ "records": 935,
+ "selection": {
+  "accepted": 220,
+  "category": 362,
+  "item_observation": 337,
+  "profile_not_targeted": 16
+ },
+ "concentration_checks": {
+  "match": 461,
+  "missing": 15,
+  "published_only": 116,
+  "rounding": 6
+ },
+ "generated": "2026-09-25",
+ "catalog": "https://earth-search.aws.element84.com/v1",
+ "pairing_rules": {
+  "catalog": "https://earth-search.aws.element84.com/v1",
+  "sentinel2": "sentinel-2-c1-l2a",
+  "landsat": "landsat-c2-l2",
+  "sentinel2_start": "2015-06-27",
+  "window_days": 3,
+  "wide_window_days": 30,
+  "max_tile_cloud": 40.0,
+  "max_time_shift_hours": 12.0,
+  "unknown_time_max_days": 0,
+  "unknown_time_uncertainty_hours": 12.0,
+  "point_buffer_m": 2000.0,
+  "min_strip_width_m": 100.0,
+  "max_footprint_nodata": 0.05,
+  "max_footprint_cloud": 0.1,
+  "min_footprint_water": 0.5,
+  "bright_water_reflectance": 0.04,
+  "max_bright_water": 0.3,
+  "drift_speed_ms": 0.2
+ },
+ "events": {
+  "accepted": 9,
+  "candidate": 1,
+  "not_used": 98,
+  "rejected": 210
+ },
+ "event_reasons": {
+  "accepted": 9,
+  "before_mission": 55,
+  "no_scene_in_window": 17,
+  "no_target": 98,
+  "not_acquired": 83,
+  "partial_coverage": 2,
+  "quality_unverified": 1,
+  "tile_cloud": 7,
+  "time_shift": 46
+ },
+ "pairs": {
+  "accepted": 11,
+  "candidate": 3,
+  "rejected": 193
+ },
+ "pair_reasons": {
+  "accepted": 11,
+  "partial_coverage": 6,
+  "quality_unverified": 3,
+  "tile_cloud": 17,
+  "time_shift": 170
+ },
+ "accepted_pairs": [
+  {
+   "event_id": "S4:DOORS3:T1",
+   "scene_id": "S2A_T35TQJ_20240602T084613_L2A",
+   "platform": "S2A",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 1.0
+  },
+  {
+   "event_id": "S4:DOORS3:T18",
+   "scene_id": "S2B_T37TFG_20240605T081237_L2A",
+   "platform": "S2B",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 1.0
+  },
+  {
+   "event_id": "S4:DOORS3:T19",
+   "scene_id": "S2B_T37TFG_20240605T081237_L2A",
+   "platform": "S2B",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 1.0
+  },
+  {
+   "event_id": "S4:DOORS3:T2",
+   "scene_id": "S2A_T35TQJ_20240602T084613_L2A",
+   "platform": "S2A",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 1.0
+  },
+  {
+   "event_id": "S4:DOORS3:T20",
+   "scene_id": "S2A_T37TGG_20240607T080029_L2A",
+   "platform": "S2A",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 0.9962242416485345
+  },
+  {
+   "event_id": "S4:DOORS3:T21",
+   "scene_id": "S2A_T37TGG_20240607T080029_L2A",
+   "platform": "S2A",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 0.9664139717877362
+  },
+  {
+   "event_id": "S4:DOORS3:T30",
+   "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "platform": "S2B",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 1.0
+  },
+  {
+   "event_id": "S4:DOORS3:T31",
+   "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "platform": "S2B",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 1.0
+  },
+  {
+   "event_id": "S4:DOORS3:T32",
+   "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "platform": "S2B",
+   "shift_days": 0,
+   "shift_hours": null,
+   "water": 1.0
+  }
+ ]
+}

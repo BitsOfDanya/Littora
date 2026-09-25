@@ -89,7 +89,19 @@ function IncompleteNote({
   );
 }
 
-export function AreaSummary({ pair, a, b }: { pair: ComparePair; a: SideTotals; b: SideTotals }) {
+const NOT_MEASURED = <span className="text-text-tertiary">—</span>;
+
+export function AreaSummary({
+  pair,
+  a,
+  b,
+  detection,
+}: {
+  pair: ComparePair;
+  a: SideTotals;
+  b: SideTotals;
+  detection: boolean;
+}) {
   const coverageDelta =
     a.coverage && b.coverage ? formatPp((b.coverage.value - a.coverage.value) * 100) : "—";
   return (
@@ -114,15 +126,15 @@ export function AreaSummary({ pair, a, b }: { pair: ComparePair; a: SideTotals; 
         <tbody>
           <SummaryRow
             label="Кандидатов"
-            a={a.found}
-            b={b.found}
-            delta={formatSigned(b.found - a.found)}
+            a={detection ? a.found : NOT_MEASURED}
+            b={detection ? b.found : NOT_MEASURED}
+            delta={detection ? formatSigned(b.found - a.found) : NOT_MEASURED}
           />
           <SummaryRow
             label="Площадь, км²"
-            a={formatKm2(a.areaM2)}
-            b={formatKm2(b.areaM2)}
-            delta={formatSigned((b.areaM2 - a.areaM2) / 1_000_000, 2)}
+            a={detection ? formatKm2(a.areaM2) : NOT_MEASURED}
+            b={detection ? formatKm2(b.areaM2) : NOT_MEASURED}
+            delta={detection ? formatSigned((b.areaM2 - a.areaM2) / 1_000_000, 2) : NOT_MEASURED}
           />
           <SummaryRow
             label="Среднее покрытие, %"
@@ -141,8 +153,9 @@ export function AreaSummary({ pair, a, b }: { pair: ComparePair; a: SideTotals; 
       {!isUsable(pair.a) ? <IncompleteNote letter="A" scene={pair.a} totals={a} /> : null}
       {!isUsable(pair.b) ? <IncompleteNote letter="B" scene={pair.b} totals={b} /> : null}
       <p className="text-[11px] leading-4 text-text-tertiary">
-        Покрытие — доля пикселя 10 м, среднее по найденным пятнам, под значением 90 % ДИ. Источник:
-        фикстура demo/timeline · модель не подключена.
+        {detection
+          ? "Покрытие — доля пикселя 10 м, среднее по найденным пятнам, под значением 90 % ДИ. Источник: фикстура demo/timeline · модель не подключена."
+          : "Снимки A и B — из каталога Sentinel-2 L2A; пригодная вода — оценка по облачности тайла. Кандидаты, площадь и покрытие появятся с детектором."}
       </p>
     </PanelSection>
   );

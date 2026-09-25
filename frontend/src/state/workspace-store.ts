@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { DEFAULT_AOI_ID, type AoiId } from "@/config/aois";
+import { type AoiId, DEFAULT_AOI_ID, DEMO_AOI } from "@/config/aois";
 import { publicEnv } from "@/config/env";
 import type { ForecastHorizonH } from "@/domain/forecast";
 
@@ -32,7 +32,7 @@ type WorkspaceStore = {
 };
 
 export const useWorkspaceStore = create<WorkspaceStore>()((set) => ({
-  aoiId: DEFAULT_AOI_ID,
+  aoiId: publicEnv.demoFixtures ? DEMO_AOI : DEFAULT_AOI_ID,
   sceneId: null,
   selectedCandidateId: null,
   selectedTargetId: null,

@@ -28,6 +28,10 @@ class Settings(BaseSettings):
     cors_origins: Annotated[list[str], NoDecode] = Field(
         default_factory=lambda: ["http://localhost:3000", "http://127.0.0.1:3000"]
     )
+    data_dir: Path = REPOSITORY_DIR / "data"
+    reports_dir: Path = REPOSITORY_DIR / "reports"
+    storage_dir: Path = REPOSITORY_DIR / "data" / "processed" / "analyses"
+    case_config: Path = BACKEND_DIR / "config" / "case.toml"
 
     @field_validator("cors_origins", mode="before")
     @classmethod
@@ -39,6 +43,10 @@ class Settings(BaseSettings):
     @property
     def is_production(self) -> bool:
         return self.environment == "production"
+
+    @property
+    def registry_dir(self) -> Path:
+        return self.reports_dir / "registry"
 
 
 @lru_cache

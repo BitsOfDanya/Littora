@@ -10,9 +10,16 @@ export const CAPABILITY_KEYS: readonly CapabilityKey[] = capabilityKeySchema.opt
 
 export const CAPABILITY_LABELS: Record<CapabilityKey, string> = {
   scene_catalog: "Каталог снимков",
+  field_observations: "Натурные измерения кейса",
+  pair_registry: "Реестр пар снимок — измерение",
+  quality_masks: "Маска качества снимка",
+  analysis_requests: "Анализ района",
+  export: "Выгрузка GeoJSON и CSV",
   debris_detection: "Детекция мусора",
   segmentation: "Сегментация пятен",
   coverage_estimation: "Доля покрытия пикселя",
+  spectral_composites: "Спектральные композиты",
+  concentration_model: "Концентрация, шт./км²",
   change_tracking: "Сравнение по датам",
   drift_forecast: "Прогноз дрейфа",
   survey_planning: "Планирование обследований",

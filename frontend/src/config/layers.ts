@@ -2,7 +2,7 @@ import type { WorkspaceModeId } from "./modes";
 import type { CapabilityKey } from "@/lib/api/system";
 
 export type LayerGroupId =
-  "scene" | "results" | "conditions" | "context" | "compare" | "forecast" | "survey";
+  "scene" | "analysis" | "results" | "conditions" | "context" | "compare" | "forecast" | "survey";
 
 export type LegendKind =
   | "composite"
@@ -12,6 +12,8 @@ export type LegendKind =
   | "hotspot-cells"
   | "nodata-hatch"
   | "footprint-line"
+  | "analysis-area"
+  | "observation-marks"
   | "aoi-line"
   | "graticule"
   | "labels"
@@ -36,6 +38,8 @@ export type LayerId =
   | "hotspots"
   | "no-data"
   | "scene-footprint"
+  | "analysis-area"
+  | "field-observations"
   | "aoi-boundary"
   | "graticule"
   | "labels"
@@ -71,6 +75,7 @@ export const MAP_MODES: readonly MapModeId[] = ["monitor", "timeline", "forecast
 
 export const LAYER_GROUP_LABELS: Record<LayerGroupId, string> = {
   scene: "Снимок даты",
+  analysis: "Анализ района",
   results: "Результаты модели",
   conditions: "Условия наблюдения",
   context: "Контекст",
@@ -81,6 +86,8 @@ export const LAYER_GROUP_LABELS: Record<LayerGroupId, string> = {
 
 const ALL_MAP_MODES = MAP_MODES;
 const SCENE_REASON = "Нужен каталог сцен Sentinel-2 L2A — пока показана подложка.";
+const COMPOSITE_REASON =
+  "Сейчас строится только RGB-снимок даты; композиты и индексы — следующий этап.";
 const FORECAST_REASON = "Нужны поля течений CMEMS, ветер GFS и выбранное пятно.";
 const SURVEY_REASON = "Появится с модулем планирования обследований.";
 
@@ -99,31 +106,51 @@ export const LAYERS: readonly LayerDefinition[] = [
     id: "scene-false-color",
     label: "Ложные",
     group: "scene",
-    capability: "scene_catalog",
+    capability: "spectral_composites",
     hasDemo: false,
     modes: ["monitor"],
     legend: "composite",
-    plannedReason: SCENE_REASON,
+    plannedReason: COMPOSITE_REASON,
   },
   {
     id: "scene-fdi",
     label: "FDI",
     group: "scene",
-    capability: "scene_catalog",
+    capability: "spectral_composites",
     hasDemo: false,
     modes: ["monitor"],
     legend: "composite",
-    plannedReason: SCENE_REASON,
+    plannedReason: COMPOSITE_REASON,
   },
   {
     id: "scene-ndvi",
     label: "NDVI",
     group: "scene",
-    capability: "scene_catalog",
+    capability: "spectral_composites",
     hasDemo: false,
     modes: ["monitor"],
     legend: "composite",
-    plannedReason: SCENE_REASON,
+    plannedReason: COMPOSITE_REASON,
+  },
+  {
+    id: "analysis-area",
+    label: "Район анализа и статус",
+    group: "analysis",
+    capability: "analysis_requests",
+    hasDemo: false,
+    modes: ["monitor"],
+    legend: "analysis-area",
+    plannedReason: "Нужен сервис анализа района на сервере.",
+  },
+  {
+    id: "field-observations",
+    label: "Полевые измерения, шт./км²",
+    group: "analysis",
+    capability: "field_observations",
+    hasDemo: false,
+    modes: ["monitor"],
+    legend: "observation-marks",
+    plannedReason: "Нужны данные кейса в data/case на сервере.",
   },
   {
     id: "coverage",
@@ -169,11 +196,11 @@ export const LAYERS: readonly LayerDefinition[] = [
     id: "no-data",
     label: "Облака, блики, нет данных",
     group: "conditions",
-    capability: "scene_catalog",
+    capability: "quality_masks",
     hasDemo: true,
     modes: ["monitor", "timeline"],
     legend: "nodata-hatch",
-    plannedReason: "Маска облаков и бликов приходит вместе со сценой из каталога.",
+    plannedReason: "Маска облаков и бликов строится по слою SCL снимка при анализе района.",
   },
   {
     id: "scene-footprint",
@@ -319,6 +346,8 @@ export const LEGACY_LAYER_ALIASES: Record<LegacyLayerId, LayerId> = {
 };
 
 export const DEFAULT_VISIBLE_LAYERS: readonly LayerId[] = [
+  "analysis-area",
+  "field-observations",
   "coverage",
   "candidates",
   "hotspots",

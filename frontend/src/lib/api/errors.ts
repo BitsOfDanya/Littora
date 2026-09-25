@@ -50,3 +50,10 @@ export class ApiContractError extends Error {
     this.name = "ApiContractError";
   }
 }
+
+export function describeApiError(error: unknown): string {
+  if (error instanceof ApiUnreachableError) return "Сервер API недоступен";
+  if (error instanceof ApiContractError) return "Ответ API не совпал с ожидаемым форматом";
+  if (error instanceof ApiError) return error.message;
+  return "Запрос не выполнен";
+}

@@ -19,6 +19,17 @@ export function apiUrl(path: string): string {
   return resolveApiUrl(publicEnv.apiBaseUrl, path);
 }
 
+export function withQuery(
+  path: string,
+  params: Readonly<Record<string, string | number | null | undefined>>,
+): string {
+  const search = new URLSearchParams();
+  for (const [key, value] of Object.entries(params))
+    if (value !== null && value !== undefined && value !== "") search.set(key, String(value));
+  const query = search.toString();
+  return query ? `${path}?${query}` : path;
+}
+
 async function readErrorResponse(response: Response): Promise<ApiError> {
   const payload: unknown = await response.json().catch(() => null);
   const envelope = errorEnvelopeSchema.safeParse(payload);

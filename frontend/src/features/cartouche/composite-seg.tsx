@@ -45,6 +45,7 @@ export function CompositeSeg({ layers, truthOf, value, onChange, touch }: Compos
         if (!isComposite(layer.id)) return null;
         const spec = COMPOSITES[layer.id];
         const planned = truthOf(layer) === "planned";
+        const reason = layer.plannedReason ?? PLANNED_REASON;
         const selected = !planned && value === layer.id;
         const compositeId = layer.id;
         return (
@@ -55,11 +56,9 @@ export function CompositeSeg({ layers, truthOf, value, onChange, touch }: Compos
             aria-checked={selected}
             aria-disabled={planned || undefined}
             aria-label={
-              planned
-                ? `${layer.label}: ${spec.title}. ${PLANNED_REASON}`
-                : `${layer.label}: ${spec.title}`
+              planned ? `${layer.label}: ${spec.title}. ${reason}` : `${layer.label}: ${spec.title}`
             }
-            title={planned ? `${spec.title}\n${PLANNED_REASON}` : spec.title}
+            title={planned ? `${spec.title}\n${reason}` : spec.title}
             onClick={() => {
               if (!planned) onChange(compositeId);
             }}

@@ -453,7 +453,7 @@ function glintRow(candidate: DebrisCandidate, context: ConfuserContext): Confuse
     key: "sun_glint",
     label: "Солнечный блик",
     likelihood: flagged ? "possible" : scene.sunGlintRisk === "low" ? "excluded" : "unlikely",
-    reason: `зенит ${Math.round(scene.sunZenithDeg)}° · риск бликов ${GLINT_WORD[scene.sunGlintRisk]}`,
+    reason: `${scene.sunZenithDeg === null ? "" : `зенит ${Math.round(scene.sunZenithDeg)}° · `}риск бликов ${GLINT_WORD[scene.sunGlintRisk]}`,
   };
 }
 

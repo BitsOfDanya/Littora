@@ -1,4 +1,1 @@
 extend = "../backend/pyproject.toml"
-
-[lint]
-ignore = ["RUF001"]

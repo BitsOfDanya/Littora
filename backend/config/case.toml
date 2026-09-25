@@ -1,0 +1,75 @@
+[data]
+csv = "case/macroplastic_marine_samples.csv"
+
+[selection]
+record_type = "transect_density"
+category_scopes = ["plastic_category", "fisheries_litter_category"]
+exclude_flags = []
+
+[[targets]]
+key = "litter-visual"
+primary = true
+title = "Плавающий макромусор, визуальный учёт с судна"
+material = "весь плавающий мусор, преимущественно пластик"
+size_class = "от 2 см (Северное море) и от 2,5 см (Чёрное море)"
+unit = "шт./км²"
+target_scope = ["all_litter"]
+profiles = ["S3_visual_GT2", "S4_visual_GT2_5"]
+rationale = "Единственный профиль с парами Sentinel-2: трансекты DOORS в Чёрном море, июнь 2024. Оба источника — визуальный учёт в полосе с судна; метрики считаются отдельно по каждому размерному профилю. Величина относится ко всему плавающему мусору, долю пластика к отдельным наблюдениям не применяем."
+
+[[targets]]
+key = "plastic-visual"
+primary = false
+title = "Суммарный пластик, визуальный учёт с судна"
+material = "пластик всех полимеров, включая вспененный"
+size_class = "от 2 см"
+unit = "шт./км²"
+target_scope = ["total_plastic"]
+profiles = ["S2_visual_GT2"]
+rationale = "Пластик отдельно от прочего мусора: Саргассово море, апрель 2015. Число предметов и площадь известны, но спутниковых пар нет: наблюдения раньше запуска Sentinel-2 и в открытом океане."
+
+[[targets]]
+key = "plastic-trawl"
+primary = false
+title = "Макропластик 5–50 см, поверхностный трал"
+material = "пластик"
+size_class = "5–50 см"
+unit = "шт./км²"
+target_scope = ["total_plastic"]
+profiles = ["S1_trawl_5_to_50"]
+rationale = "Большое тихоокеанское мусорное пятно, 2015–2016. Другой метод и размерный класс, чем у визуального учёта, поэтому отдельная величина. Открытый океан Sentinel-2 не снимает."
+
+[concentration]
+match_relative = 0.005
+rounding_relative = 0.01
+
+[pairing]
+catalog = "https://earth-search.aws.element84.com/v1"
+sentinel2 = "sentinel-2-c1-l2a"
+landsat = "landsat-c2-l2"
+sentinel2_start = "2015-06-27"
+window_days = 3
+wide_window_days = 30
+max_tile_cloud = 40.0
+max_time_shift_hours = 12.0
+unknown_time_max_days = 0
+unknown_time_uncertainty_hours = 12.0
+point_buffer_m = 2000.0
+min_strip_width_m = 100.0
+max_footprint_nodata = 0.05
+max_footprint_cloud = 0.10
+min_footprint_water = 0.50
+bright_water_reflectance = 0.04
+max_bright_water = 0.30
+drift_speed_ms = 0.2
+
+[analysis]
+collection = "sentinel-2-c1-l2a"
+max_window_days = 15
+max_span_deg = 1.0
+render_max_size = 1600
+quality_max_size = 1600
+max_cloud = 0.3
+max_nodata = 0.2
+min_water = 0.05
+scene_cache_seconds = 600

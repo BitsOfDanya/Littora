@@ -68,7 +68,7 @@ function useMonitorVisibility() {
 
 type HoverSource = "candidates" | "hit" | "hotspots";
 
-function useHoverTracking(selectedId: string | null) {
+function useHoverTracking(selectedId: string | null, enabled: boolean) {
   const map = useMainMap();
   const setHint = useStatusHintStore((state) => state.setHint);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -98,8 +98,9 @@ function useHoverTracking(selectedId: string | null) {
   );
 
   useEffect(() => {
-    if (useStatusHintStore.getState().hint === null && !selectedRef.current) setHint(IDLE_HINT);
-  }, [setHint]);
+    if (enabled && useStatusHintStore.getState().hint === null && !selectedRef.current)
+      setHint(IDLE_HINT);
+  }, [enabled, setHint]);
 
   useEffect(
     () => () => {
@@ -187,7 +188,7 @@ export function MonitorLayers() {
   const zoomedOut = useMapViewStore((state) => state.isReady && state.zoom < HOTSPOT_MAX_ZOOM);
   const reducedMotion = usePrefersReducedMotion();
   const selectedId = useWorkspaceStore((state) => state.selectedCandidateId);
-  const { hoveredId, report } = useHoverTracking(selectedId);
+  const { hoveredId, report } = useHoverTracking(selectedId, isDemo);
   const handlers = useCandidateHandlers(report);
   const motion: LayerMotion = useMemo(
     () => ({ fadeMs: reducedMotion ? 0 : FADE_MS }),

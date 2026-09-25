@@ -47,7 +47,10 @@ export function SceneSection({
         {scene ? (
           <>
             <KeyValue label="Спутник · тайл · орбита">
-              {scene.platform} · T{scene.mgrsTile} · R{String(scene.relativeOrbit).padStart(3, "0")}
+              {scene.platform} · T{scene.mgrsTile}
+              {scene.relativeOrbit === null
+                ? ""
+                : ` · R${String(scene.relativeOrbit).padStart(3, "0")}`}
             </KeyValue>
             <KeyValue label="Время съёмки">{acquiredStamp(scene.acquiredAt)}</KeyValue>
             <KeyValue label="Облачность">
@@ -55,7 +58,8 @@ export function SceneSection({
               {formatPercent(dossier.cloudOverSpot)}
             </KeyValue>
             <KeyValue label="Солнце · блики">
-              зенит {Math.round(scene.sunZenithDeg)}° · риск бликов {GLINT_WORD[scene.sunGlintRisk]}
+              {scene.sunZenithDeg === null ? "" : `зенит ${Math.round(scene.sunZenithDeg)}° · `}
+              риск бликов {GLINT_WORD[scene.sunGlintRisk]}
             </KeyValue>
             <KeyValue label="Обработка">
               {scene.processingLevel} · {baseline}

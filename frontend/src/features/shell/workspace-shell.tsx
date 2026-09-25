@@ -13,6 +13,7 @@ import { type ShellLayout, useShellLayout } from "./layout/use-environment";
 import { Viewport } from "./layout/viewport";
 import { useActiveMode } from "./orientation/modes";
 import { useDefaultFit } from "./orientation/use-default-fit";
+import { useDemoArea } from "./orientation/use-demo-area";
 import { useDocumentTitle } from "./orientation/use-document-title";
 import { useSelectionFocus } from "./orientation/use-selection-focus";
 import { useUrlSync } from "./orientation/use-url-sync";
@@ -31,6 +32,7 @@ function useShellEffects(layout: ShellLayout, modeId: WorkspaceModeId | undefine
   useUrlSync();
   useDocumentTitle();
   useDefaultFit();
+  useDemoArea();
   useSystemEventsWatcher();
 }
 

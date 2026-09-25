@@ -2,6 +2,8 @@
 
 import { type ReactNode, useCallback } from "react";
 import type { LayerDefinition } from "@/config/layers";
+import { useCurrentAnalysis } from "@/features/analysis/use-analysis";
+import { useObservationsView } from "@/features/analysis/use-observations-view";
 import { useGround } from "@/features/map/use-map-palette";
 import { useMapLayersStore, useParticlesPaused } from "@/state/map-layers-store";
 import { Button } from "@/ui/button";
@@ -34,9 +36,27 @@ export function ParticlesPauseButton() {
   );
 }
 
+function observationsNote(total: number, inWindow: number, windowDays: number, dated: boolean) {
+  if (total === 0) return "на участке измерений кейса нет";
+  return dated
+    ? `${total} на участке · ${inWindow} в окне ±${windowDays} сут`
+    : `${total} на участке`;
+}
+
 export function useRowExtras(): (layer: LayerDefinition) => LayerRowExtras {
   const ground = useGround();
   const tile = useCurrentScene()?.scene.mgrsTile;
+  const analysis = useCurrentAnalysis().data;
+  const view = useObservationsView();
+  const measurements = observationsNote(
+    view.mapTotal,
+    view.mapInWindow,
+    view.windowDays,
+    view.reference !== null,
+  );
+  const status = analysis
+    ? `${analysis.status.label} · ${analysis.concentration.label}`
+    : "анализ ещё не запускался";
 
   return useCallback(
     (layer: LayerDefinition): LayerRowExtras => {
@@ -53,10 +73,14 @@ export function useRowExtras(): (layer: LayerDefinition) => LayerRowExtras {
           return { trailing: <ParticlesPauseButton /> };
         case "change-delta":
           return { forceLegend: true };
+        case "analysis-area":
+          return { description: status };
+        case "field-observations":
+          return { description: measurements };
         default:
           return {};
       }
     },
-    [ground, tile],
+    [ground, tile, status, measurements],
   );
 }

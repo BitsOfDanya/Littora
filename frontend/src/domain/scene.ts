@@ -12,11 +12,13 @@ export type SceneSummary = {
   processingLevel: ProcessingLevel;
   acquiredAt: string;
   mgrsTile: string;
-  relativeOrbit: number;
+  relativeOrbit: number | null;
   footprint: BBox;
+  outline?: GeoJSON.Polygon | GeoJSON.MultiPolygon | null;
+  areaCoverage?: number;
   cloudCover: number;
   validWaterFraction: number;
   sunGlintRisk: "low" | "moderate" | "high";
-  sunZenithDeg: number;
+  sunZenithDeg: number | null;
   usability: SceneUsability;
 };

@@ -2,8 +2,8 @@ from datetime import UTC, datetime
 
 from fastapi import APIRouter
 
-from app.api.dependencies import SettingsDep
-from app.core.capabilities import CAPABILITY_STATUS
+from app.api.dependencies import AnalysisDep, SettingsDep
+from app.core.capabilities import capability_status
 from app.schemas.system import CapabilityState, HealthResponse, MetaResponse
 
 API_VERSION = "v1"
@@ -23,13 +23,15 @@ async def read_health(settings: SettingsDep) -> HealthResponse:
 
 
 @router.get("/meta", response_model=MetaResponse)
-async def read_meta(settings: SettingsDep) -> MetaResponse:
+async def read_meta(settings: SettingsDep, analysis: AnalysisDep) -> MetaResponse:
+    statuses = capability_status(
+        detector_ready=analysis.detector.name is not None,
+        concentration_ready=analysis.concentration_model.name is not None,
+    )
     return MetaResponse(
         service=settings.app_name,
         version=settings.version,
         api_version=API_VERSION,
         environment=settings.environment,
-        capabilities=[
-            CapabilityState(key=key, status=status) for key, status in CAPABILITY_STATUS.items()
-        ],
+        capabilities=[CapabilityState(key=key, status=status) for key, status in statuses.items()],
     )
