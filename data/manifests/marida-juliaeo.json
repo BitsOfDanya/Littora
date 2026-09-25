@@ -1,0 +1,19 @@
+{
+  "key": "marida-juliaeo",
+  "title": "MARIDA subset JuliaEO 2023",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.5281/zenodo.8113073",
+  "retrieved": "2026-09-25",
+  "bytes": 95620537,
+  "files": [
+    {
+      "name": "MARIDA_JuliaEO_subset.tar.gz",
+      "bytes": 95620537,
+      "md5": "90b0c5d3dcd7e3f670d47a0972b8315f"
+    }
+  ],
+  "unpacked": {
+    "files": 18,
+    "bytes": 637780918
+  }
+}

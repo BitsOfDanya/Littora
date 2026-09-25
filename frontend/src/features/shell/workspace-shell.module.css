@@ -1,0 +1,244 @@
+.root {
+  --top-h: 48px;
+  --frame: 0px;
+  --status-h: 0px;
+  --rail-h: 0px;
+  --stepper-h: 52px;
+  --inspector-w: 0px;
+  --inspector-row-h: 42dvh;
+  --cartouche-w: 288px;
+  --queue-w: 44px;
+  --control-w: 220px;
+
+  position: absolute;
+  inset: 0;
+  display: grid;
+  pointer-events: none;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: var(--top-h) minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    "top"
+    "viewport"
+    "stepper"
+    "dock";
+}
+
+.root > * {
+  pointer-events: auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+.root > .viewport {
+  pointer-events: none;
+}
+
+.top {
+  grid-area: top;
+  position: relative;
+  z-index: 30;
+}
+
+.modes {
+  grid-area: modes;
+  display: none;
+  position: relative;
+  z-index: 25;
+}
+
+.side {
+  grid-area: side;
+  display: none;
+}
+
+.viewport {
+  grid-area: viewport;
+  position: relative;
+  isolation: isolate;
+}
+
+.inspector {
+  grid-area: inspector;
+  display: none;
+  position: relative;
+  z-index: 10;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--surface-panel);
+}
+
+.rail {
+  grid-area: rail;
+  display: none;
+  position: relative;
+  z-index: 20;
+  background: var(--surface-panel);
+  border-top: 1px solid var(--line-hairline);
+}
+
+.status {
+  grid-area: status;
+  display: none;
+  position: relative;
+  z-index: 30;
+}
+
+.tools {
+  position: absolute;
+  top: calc(var(--frame) + 12px);
+  right: calc(var(--frame) + 12px);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.tools > * {
+  pointer-events: auto;
+}
+
+.stepper {
+  grid-area: stepper;
+  position: relative;
+  z-index: 20;
+  height: var(--stepper-h);
+  background: var(--surface-panel);
+  border-top: 1px solid var(--line-hairline);
+}
+
+.stepper[data-empty="true"] {
+  display: none;
+}
+
+.dock {
+  grid-area: dock;
+  position: relative;
+  z-index: 30;
+}
+
+@media (min-width: 430px) {
+  .root {
+    --frame: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .root {
+    --top-h: 44px;
+    --frame: 14px;
+    --status-h: 24px;
+    --rail-h: 96px;
+    --inspector-w: 100%;
+    --control-w: 220px;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: var(--top-h) 40px minmax(0, 1fr) auto var(--rail-h) var(--status-h);
+    grid-template-areas:
+      "top top"
+      "modes modes"
+      "side viewport"
+      "inspector inspector"
+      "rail rail"
+      "status status";
+    transition: grid-template-rows var(--t-4) var(--e-std);
+  }
+
+  .root[data-mode="timeline"] {
+    --rail-h: 120px;
+  }
+
+  .modes,
+  .side,
+  .status {
+    display: block;
+  }
+
+  .rail {
+    display: flex;
+  }
+
+  .tools {
+    z-index: 11;
+  }
+
+  .stepper,
+  .dock {
+    display: none;
+  }
+
+  .inspector[data-state="open"],
+  .inspector[data-state="closing"] {
+    display: block;
+    height: var(--inspector-row-h);
+    border-top: 1px solid var(--line-hairline);
+  }
+
+  .side[data-occupied="false"] {
+    width: 0;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
+    --inspector-w: 340px;
+    --control-w: 240px;
+    --rail-h: 100px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-rows: var(--top-h) minmax(0, 1fr) var(--rail-h) var(--status-h);
+    grid-template-areas:
+      "top top top"
+      "side viewport inspector"
+      "rail rail rail"
+      "status status status";
+  }
+
+  .root[data-mode="timeline"] {
+    --rail-h: 128px;
+  }
+
+  .modes {
+    display: none;
+  }
+
+  .inspector[data-state="open"],
+  .inspector[data-state="closing"] {
+    height: auto;
+    width: var(--inspector-w);
+    border-top: 0;
+    border-left: 1px solid var(--line-hairline);
+  }
+}
+
+@media (min-width: 1280px) {
+  .root {
+    --frame: 16px;
+    --inspector-w: 360px;
+    --queue-w: 280px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .root {
+    --frame: 18px;
+    --inspector-w: 392px;
+    --cartouche-w: 304px;
+    --queue-w: 320px;
+    --control-w: 264px;
+    --rail-h: 108px;
+  }
+
+  .root[data-mode="timeline"] {
+    --rail-h: 136px;
+  }
+}
+
+.root[data-mode="models"] {
+  --rail-h: 0px;
+}
+
+.root[data-mode="models"] .rail,
+.root[data-mode="models"] .stepper {
+  display: none;
+}
+
+.root[data-frame="off"] {
+  --frame: 0px;
+}

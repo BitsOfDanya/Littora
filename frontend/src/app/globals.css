@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+@custom-variant day (&:where([data-theme="day"], [data-theme="day"] *));
+
+@theme {
+  --breakpoint-sm: 430px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+}
+
+:root {
+  --radius-ctl: 2px;
+  --radius-pop: 3px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --t-1: 70ms;
+  --t-2: 110ms;
+  --t-3: 150ms;
+  --t-4: 240ms;
+  --t-5: 400ms;
+  --e-std: cubic-bezier(0.2, 0, 0.38, 0.9);
+  --e-exit: cubic-bezier(0.2, 0, 1, 0.9);
+  --e-heavy: cubic-bezier(0.72, 0, 0.18, 1);
+  --e-settle: cubic-bezier(0.2, 0, 0.2, 1);
+
+  --top-h: 44px;
+  --status-h: 24px;
+  --frame: 18px;
+  --inspector-w: 392px;
+  --cartouche-w: 304px;
+  --queue-w: 320px;
+  --queue-w-collapsed: 44px;
+  --control-w: 264px;
+  --rail-h: 108px;
+}
+
+:root,
+[data-theme="night"] {
+  color-scheme: dark;
+  --surface-app: #0a0e11;
+  --surface-panel: #12171b;
+  --surface-raised: #1a2126;
+  --surface-sunken: #080b0d;
+  --line-hairline: #2a333a;
+  --line-control: #68757d;
+  --line-strong: #8a969a;
+  --text-primary: #d4eaee;
+  --text-secondary: #a3b4b7;
+  --text-tertiary: #8a969a;
+  --text-disabled: #5b666c;
+  --text-inverse: #0a0e11;
+  --accent-selection: #ddadf4;
+  --accent-selection-wash: rgba(221, 173, 244, 0.14);
+  --state-caution: #eb7d36;
+  --state-caution-wash: rgba(235, 125, 54, 0.14);
+  --state-alarm: #f15469;
+  --state-alarm-wash: rgba(241, 84, 105, 0.14);
+  --state-ok: #7cc9a1;
+  --state-ok-wash: rgba(124, 201, 161, 0.14);
+  --state-info: #9db4c0;
+  --focus-ring: #7db2ff;
+  --demo-stripe: rgba(212, 234, 238, 0.16);
+  --demo-ink: #a3b4b7;
+  --primary-fill: #d4eaee;
+  --primary-text: #0a0e11;
+  --shadow-menu: 0 0 0 1px #2a333a, 0 12px 32px rgba(0, 0, 0, 0.55);
+
+  --map-bg: #0b1620;
+  --map-water: #0d151a;
+  --map-land: #1c1f1d;
+  --map-coast: #8fa0a6;
+  --map-isobath: #2e4250;
+  --map-graticule: rgba(212, 234, 238, 0.12);
+  --map-label: #d3dadd;
+  --map-label-water: #94b9cb;
+  --map-halo: rgba(5, 8, 10, 0.85);
+  --map-scrim: rgba(10, 14, 17, 0.78);
+  --frame-ink: #a3b4b7;
+  --frame-paper: #12171b;
+  --frame-label: #8a969a;
+}
+
+[data-theme="day"] {
+  color-scheme: light;
+  --surface-app: #e9e7e0;
+  --surface-panel: #f5f4ef;
+  --surface-raised: #ffffff;
+  --surface-sunken: #eceae3;
+  --line-hairline: #d8d6ce;
+  --line-control: #7b8083;
+  --line-strong: #5c6569;
+  --text-primary: #111416;
+  --text-secondary: #4a5256;
+  --text-tertiary: #5c6569;
+  --text-disabled: #a3a7a6;
+  --text-inverse: #f5f4ef;
+  --accent-selection: #9c3399;
+  --accent-selection-wash: rgba(156, 51, 153, 0.1);
+  --state-caution: #835f00;
+  --state-caution-wash: rgba(131, 95, 0, 0.1);
+  --state-alarm: #b0303f;
+  --state-alarm-wash: rgba(176, 48, 63, 0.09);
+  --state-ok: #1b6e45;
+  --state-ok-wash: rgba(27, 110, 69, 0.1);
+  --state-info: #3e5f70;
+  --focus-ring: #1d5fd0;
+  --demo-stripe: rgba(17, 20, 22, 0.1);
+  --demo-ink: #4a5256;
+  --primary-fill: #111416;
+  --primary-text: #f5f4ef;
+  --shadow-menu: 0 0 0 1px #d8d6ce, 0 12px 32px rgba(40, 38, 30, 0.18);
+
+  --map-bg: #d4e6ec;
+  --map-water: #d4e6ec;
+  --map-land: #dcd3b0;
+  --map-coast: #5e6a6e;
+  --map-isobath: #9db4bd;
+  --map-graticule: rgba(17, 20, 22, 0.14);
+  --map-label: #2e3538;
+  --map-label-water: #3a6780;
+  --map-halo: rgba(255, 255, 255, 0.9);
+  --map-scrim: rgba(233, 231, 224, 0.84);
+  --frame-ink: rgba(17, 20, 22, 0.7);
+  --frame-paper: #ffffff;
+  --frame-label: #5c6569;
+}
+
+@theme inline {
+  --color-surface-app: var(--surface-app);
+  --color-surface-panel: var(--surface-panel);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-line-hairline: var(--line-hairline);
+  --color-line-control: var(--line-control);
+  --color-line-strong: var(--line-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-inverse: var(--text-inverse);
+  --color-accent-selection: var(--accent-selection);
+  --color-accent-selection-wash: var(--accent-selection-wash);
+  --color-state-caution: var(--state-caution);
+  --color-state-caution-wash: var(--state-caution-wash);
+  --color-state-alarm: var(--state-alarm);
+  --color-state-alarm-wash: var(--state-alarm-wash);
+  --color-state-ok: var(--state-ok);
+  --color-state-ok-wash: var(--state-ok-wash);
+  --color-state-info: var(--state-info);
+  --color-focus-ring: var(--focus-ring);
+  --color-demo-ink: var(--demo-ink);
+  --color-primary-fill: var(--primary-fill);
+  --color-primary-text: var(--primary-text);
+  --font-sans: var(--font-ui), system-ui, sans-serif;
+  --font-mono: var(--font-data), ui-monospace, monospace;
+  --font-serif: var(--font-chart), Georgia, serif;
+  --shadow-popover: var(--shadow-menu);
+  --ease-std: var(--e-std);
+  --ease-exit: var(--e-exit);
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--surface-app);
+  color: var(--text-primary);
+}
+body {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.demo-hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--demo-stripe) 0 2px,
+    transparent 2px 6px
+  );
+}
+.future-hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--line-hairline) 0 1px,
+    transparent 1px 6px
+  );
+}
+.nodata-hatch {
+  background-image:
+    repeating-linear-gradient(45deg, var(--text-tertiary) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(-45deg, var(--text-tertiary) 0 1px, transparent 1px 4px);
+}
+.font-mono {
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+.plan-dash {
+  border-style: dashed;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

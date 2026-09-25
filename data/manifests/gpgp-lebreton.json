@@ -1,0 +1,40 @@
+{
+  "key": "gpgp-lebreton",
+  "title": "Большое тихоокеанское мусорное пятно: концентрации (Lebreton et al., 2018)",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.6084/m9.figshare.5873142.v2",
+  "retrieved": "2026-09-25",
+  "bytes": 4973774,
+  "files": [
+    {
+      "name": "GPGP_contours.zip",
+      "bytes": 39182,
+      "md5": "ab6f0e9fdbbf6db6eb8e8bb59413887b"
+    },
+    {
+      "name": "Lebreton2018_Characterisation.xls",
+      "bytes": 1447424,
+      "md5": "947f6b258a4ab274bfdd6cf9aa43db74"
+    },
+    {
+      "name": "Lebreton2018_Concentration.xls",
+      "bytes": 316416,
+      "md5": "188cc67ed301d37b4b0ea76cea54baca"
+    },
+    {
+      "name": "Lebreton2018_HistoricalDataset.xls",
+      "bytes": 687104,
+      "md5": "c014881f0daaa8ceb651802d38c5dd43"
+    },
+    {
+      "name": "Lebreton2018_SamplingInformation.xls",
+      "bytes": 2280448,
+      "md5": "37c0be5ba6e995868d4ddb709e1635da"
+    },
+    {
+      "name": "MassConcentrationAllSizes.tif",
+      "bytes": 203200,
+      "md5": "416739e1891ab1e8117e05847f285fd3"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "key": "emblas-floating-litter",
+  "title": "EMBLAS: плавающий мусор в Чёрном море, 2017 и 2019 (González-Fernández et al., 2022)",
+  "license": "CC-BY-NC-4.0",
+  "source": null,
+  "retrieved": "2026-09-25",
+  "bytes": 58688,
+  "files": [
+    {
+      "name": "gonzalez-fernandez2022-mmc2.xlsx",
+      "bytes": 58688,
+      "md5": "2118e64c762e108f64050e9a1e79eb4e"
+    }
+  ]
+}

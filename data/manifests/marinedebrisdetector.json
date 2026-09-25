@@ -1,0 +1,29 @@
+{
+  "key": "marinedebrisdetector",
+  "title": "marinedebrisdetector: данные к модели Rußwurm et al., 2023",
+  "license": "как у исходных",
+  "source": "https://github.com/MarcCoru/marinedebrisdetector",
+  "retrieved": "2026-09-25",
+  "bytes": 1233369064,
+  "files": [
+    {
+      "name": "PLP.zip",
+      "bytes": 39709659,
+      "md5": "6515cf77785c0a16947f6a48d9eeb02f"
+    },
+    {
+      "name": "S2SHIPS.zip",
+      "bytes": 717442830,
+      "md5": "6f4b41f6e728a1dca43e4af6bb07752b"
+    },
+    {
+      "name": "durban.zip",
+      "bytes": 476216575,
+      "md5": "1770ff17502d8bb8a6c09d2e6d7af06c"
+    }
+  ],
+  "unpacked": {
+    "files": 436,
+    "bytes": 3320441603
+  }
+}

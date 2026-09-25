@@ -1,0 +1,15 @@
+{
+  "key": "river-plastic-meijer2021",
+  "title": "Вынос пластика реками (Meijer et al., 2021)",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.6084/m9.figshare.14515590.v1",
+  "retrieved": "2026-09-25",
+  "bytes": 707627,
+  "files": [
+    {
+      "name": "Meijer2021_midpoint_emissions.zip",
+      "bytes": 707627,
+      "md5": "0cb076477d711569f7555a8fb4f6a5c4"
+    }
+  ]
+}

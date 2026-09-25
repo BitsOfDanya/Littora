@@ -1,0 +1,20 @@
+{
+  "key": "plp2021",
+  "title": "Plastic Litter Project 2021 (University of the Aegean)",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.5281/zenodo.7085112",
+  "retrieved": "2026-09-25",
+  "bytes": 7386824112,
+  "files": [
+    {
+      "name": "20210611.zip",
+      "bytes": 7386783133,
+      "md5": "f8474899a5dafc5a2258a975ccaec52e"
+    },
+    {
+      "name": "ancillary_data_log.pdf",
+      "bytes": 40979,
+      "md5": "426f259d9a050b0b10887f290054f1eb"
+    }
+  ]
+}

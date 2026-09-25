@@ -1,0 +1,20 @@
+{
+  "key": "marine-regions-iho",
+  "title": "Marine Regions: границы морей IHO",
+  "license": "CC-BY-4.0",
+  "source": "https://www.marineregions.org",
+  "retrieved": "2026-09-25",
+  "bytes": 22766707,
+  "files": [
+    {
+      "name": "iho-russian-seas.geojson",
+      "bytes": 22494732,
+      "md5": "d190285b960231994ff32d9d5622eeab"
+    },
+    {
+      "name": "seavox-caspian.geojson",
+      "bytes": 271975,
+      "md5": "78252d2afd2dff1aea54137d99a214c1"
+    }
+  ]
+}

@@ -1,0 +1,1106 @@
+{
+ "catalog": "https://earth-search.aws.element84.com/v1",
+ "crops": {
+  "amur-liman": {
+   "S2C_54UWD_20260726_0_L2A": {
+    "date": "2026-07-26",
+    "size": [
+     3594,
+     3582
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.6837,
+     "snow": 0.0
+    },
+    "bytes": 115964059,
+    "md5": "05d62bc0f9f00076c2b1c2f047447d37"
+   }
+  },
+  "anadyr": {
+   "S2B_60WWS_20250907_0_L2A": {
+    "date": "2025-09-07",
+    "size": [
+     2256,
+     2250
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.4868,
+     "snow": 0.0
+    },
+    "bytes": 47853589,
+    "md5": "0e1996c260a6a3cdd2835aa92187431c"
+   }
+  },
+  "anapa": {
+   "S2A_37TCK_20250812_1_L2A": {
+    "date": "2025-08-12",
+    "size": [
+     2286,
+     2274
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.6647,
+     "snow": 0.0
+    },
+    "bytes": 50056269,
+    "md5": "b026320a9fb4bcd13db017b088647334"
+   },
+   "S2B_37TCK_20250726_0_L2A": {
+    "date": "2025-07-26",
+    "size": [
+     2286,
+     2274
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0052,
+     "water": 0.6672,
+     "snow": 0.0
+    },
+    "bytes": 46948193,
+    "md5": "5ba77632c6a155a9441013caf9ea0d76"
+   },
+   "S2B_37TCK_20250805_0_L2A": {
+    "date": "2025-08-05",
+    "size": [
+     2286,
+     2274
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0018,
+     "water": 0.6667,
+     "snow": 0.0
+    },
+    "bytes": 48081925,
+    "md5": "8c086a25a08fb93cd9f776f623d8201a"
+   },
+   "S2B_37TCK_20250904_0_L2A": {
+    "date": "2025-09-04",
+    "size": [
+     2286,
+     2274
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.6583,
+     "snow": 0.0
+    },
+    "bytes": 48200615,
+    "md5": "f29bf99e277cb7b69f3c30c2b16bd3ee"
+   },
+   "S2C_37TCK_20260825_0_L2A": {
+    "date": "2026-08-25",
+    "size": [
+     2286,
+     2274
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.6502,
+     "snow": 0.0001
+    },
+    "bytes": 48357101,
+    "md5": "ff43b55858f672716a883ba8985ee73a"
+   }
+  },
+  "aniva": {
+   "S2A_54TXS_20250707_1_L2A": {
+    "date": "2025-07-07",
+    "size": [
+     2286,
+     2280
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.6434,
+     "snow": 0.0
+    },
+    "bytes": 50492915,
+    "md5": "0f300244c7a710e0c88ad5b350cfe76f"
+   }
+  },
+  "avacha": {
+   "S2C_57UVU_20260804_0_L2A": {
+    "date": "2026-08-04",
+    "size": [
+     2022,
+     2016
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0016,
+     "water": 0.5851,
+     "snow": 0.0001
+    },
+    "bytes": 39106425,
+    "md5": "e394026d386092e76f1a5cd09ee2499b"
+   }
+  },
+  "baltiysk": {
+   "S2A_34UDF_20250925_0_L2A": {
+    "date": "2025-09-25",
+    "size": [
+     1818,
+     1818
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.8851,
+     "snow": 0.0
+    },
+    "bytes": 27160985,
+    "md5": "5d7a3e0baf6c637bb82dcaa44693ef32"
+   }
+  },
+  "bering-strait": {
+   "S2B_2WNU_20250704_0_L2A": {
+    "date": "2025-07-04",
+    "size": [
+     3192,
+     3192
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.7665,
+     "snow": 0.0078
+    },
+    "bytes": 87284982,
+    "md5": "2529c38f41997aad100b7bf20d2dcd56"
+   }
+  },
+  "don-delta": {
+   "S2A_37TEN_20250710_0_L2A": {
+    "date": "2025-07-10",
+    "size": [
+     2238,
+     2232
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.8189,
+     "snow": 0.0
+    },
+    "bytes": 42135143,
+    "md5": "a08f3bc791fc766d9285448cc0ed0073"
+   },
+   "S2A_37TEN_20250730_0_L2A": {
+    "date": "2025-07-30",
+    "size": [
+     2238,
+     2232
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.8187,
+     "snow": 0.0
+    },
+    "bytes": 43735321,
+    "md5": "187a86fca6ceeb04ff01329a0277fc09"
+   },
+   "S2A_37TEN_20250819_0_L2A": {
+    "date": "2025-08-19",
+    "size": [
+     2238,
+     2232
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.8203,
+     "snow": 0.0
+    },
+    "bytes": 41559771,
+    "md5": "c2a14d9000440fa659767434c897b6f9"
+   },
+   "S2A_37TEN_20250829_0_L2A": {
+    "date": "2025-08-29",
+    "size": [
+     2238,
+     2232
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.8198,
+     "snow": 0.0
+    },
+    "bytes": 42507499,
+    "md5": "4d0f90199edcf855fbd064ad9008336e"
+   },
+   "S2C_37TEN_20250728_0_L2A": {
+    "date": "2025-07-28",
+    "size": [
+     2238,
+     2232
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.8193,
+     "snow": 0.0
+    },
+    "bytes": 42606677,
+    "md5": "208d71396b8a29d0368bfdca4d19b5a9"
+   }
+  },
+  "dvina-bay": {
+   "S2A_37WEM_20250729_0_L2A": {
+    "date": "2025-07-29",
+    "size": [
+     2736,
+     2730
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.5149,
+     "snow": 0.0
+    },
+    "bytes": 70513857,
+    "md5": "a77882eebdef45746e6fe50d6eb7b155"
+   },
+   "S2B_37WEM_20250722_0_L2A": {
+    "date": "2025-07-22",
+    "size": [
+     2736,
+     2730
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.5135,
+     "snow": 0.0
+    },
+    "bytes": 69879489,
+    "md5": "33a96f038046b35d71671a80edd8d3ac"
+   },
+   "S2C_37WEM_20250720_0_L2A": {
+    "date": "2025-07-20",
+    "size": [
+     2736,
+     2730
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.5194,
+     "snow": 0.0
+    },
+    "bytes": 69090641,
+    "md5": "8f15e5d2fefaa3eec68c98abf6d4c56d"
+   },
+   "S2C_37WEM_20250723_0_L2A": {
+    "date": "2025-07-23",
+    "size": [
+     2736,
+     2730
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.5131,
+     "snow": 0.0
+    },
+    "bytes": 69352223,
+    "md5": "bea6f2109cc5bd3540b0b8d59a533254"
+   },
+   "S2C_37WEM_20260612_0_L2A": {
+    "date": "2026-06-12",
+    "size": [
+     2736,
+     2730
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.5294,
+     "snow": 0.0
+    },
+    "bytes": 69351499,
+    "md5": "04f88bbbfbd8a85e3cdbcb68515c4b72"
+   }
+  },
+  "kandalaksha": {
+   "S2B_36WVV_20250717_0_L2A": {
+    "date": "2025-07-17",
+    "size": [
+     1806,
+     1806
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.5299,
+     "snow": 0.0
+    },
+    "bytes": 30694971,
+    "md5": "30c4091a715d72f338d16ecc85924f1a"
+   }
+  },
+  "kerch-strait": {
+   "S2A_36TYR_20250812_0_L2A": {
+    "date": "2025-08-12",
+    "size": [
+     3264,
+     3258
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0007,
+     "water": 0.6109,
+     "snow": 0.0024
+    },
+    "bytes": 101965649,
+    "md5": "b4e3cf3248bd093a58fc848ba3583ef0"
+   },
+   "S2A_36TYR_20250911_0_L2A": {
+    "date": "2025-09-11",
+    "size": [
+     3264,
+     3258
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.001,
+     "water": 0.613,
+     "snow": 0.0011
+    },
+    "bytes": 100603667,
+    "md5": "92d53c715084b4828f6f1c6edc387eb0"
+   },
+   "S2A_36TYR_20260807_0_L2A": {
+    "date": "2026-08-07",
+    "size": [
+     3264,
+     3258
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0006,
+     "water": 0.6116,
+     "snow": 0.0019
+    },
+    "bytes": 103635759,
+    "md5": "202bd2050fb24443c8111523287d7458"
+   },
+   "S2B_36TYR_20260830_0_L2A": {
+    "date": "2026-08-30",
+    "size": [
+     3264,
+     3258
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0005,
+     "water": 0.6127,
+     "snow": 0.0009
+    },
+    "bytes": 103295051,
+    "md5": "b68fd75cf06a5e69525dc9384400ff44"
+   },
+   "S2C_36TYR_20260825_0_L2A": {
+    "date": "2026-08-25",
+    "size": [
+     3264,
+     3258
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0003,
+     "water": 0.6126,
+     "snow": 0.0011
+    },
+    "bytes": 99094895,
+    "md5": "1b217bbf1342afbc9d360ffd67162f1d"
+   }
+  },
+  "kola-bay": {
+   "S2A_36WWB_20260705_1_L2A": {
+    "date": "2026-07-05",
+    "size": [
+     3150,
+     3150
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0029,
+     "water": 0.195,
+     "snow": 0.0
+    },
+    "bytes": 103134403,
+    "md5": "54682b7223df6a61cc01db877d3daa4d"
+   },
+   "S2A_36WWB_20260814_1_L2A": {
+    "date": "2026-08-14",
+    "size": [
+     3150,
+     3150
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0284,
+     "water": 0.1821,
+     "snow": 0.0
+    },
+    "bytes": 104903635,
+    "md5": "0eba13f717c0e38ee775fb6703d6a56b"
+   },
+   "S2B_36WWB_20250911_0_L2A": {
+    "date": "2025-09-11",
+    "size": [
+     3150,
+     3150
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0253,
+     "water": 0.1986,
+     "snow": 0.0
+    },
+    "bytes": 105397517,
+    "md5": "d722672b06982b96cdd13fabf8c4b526"
+   },
+   "S2C_36WWB_20250718_0_L2A": {
+    "date": "2025-07-18",
+    "size": [
+     3150,
+     3150
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0576,
+     "water": 0.1874,
+     "snow": 0.0
+    },
+    "bytes": 103144593,
+    "md5": "26fc0ea10e94e23b881a1abd68112113"
+   },
+   "S2C_36WWB_20260829_0_L2A": {
+    "date": "2026-08-29",
+    "size": [
+     3150,
+     3150
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0387,
+     "water": 0.1916,
+     "snow": 0.0
+    },
+    "bytes": 104357173,
+    "md5": "97fe71091d6f0b01836df3a923fe5898"
+   }
+  },
+  "kolyma-mouth": {
+   "S2C_57WWT_20250729_0_L2A": {
+    "date": "2025-07-29",
+    "size": [
+     3252,
+     3252
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.7335,
+     "snow": 0.0
+    },
+    "bytes": 91976121,
+    "md5": "c325b6563b8a43eacd4fb9e1faf9655a"
+   }
+  },
+  "kuban-mouth": {
+   "S2C_37TCL_20260825_0_L2A": {
+    "date": "2026-08-25",
+    "size": [
+     1830,
+     1818
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.733,
+     "snow": 0.0
+    },
+    "bytes": 30902955,
+    "md5": "b53ab679e1c247f2b36761760a6dfa82"
+   }
+  },
+  "magadan": {
+   "S2B_56VLM_20260831_0_L2A": {
+    "date": "2026-08-31",
+    "size": [
+     1620,
+     1614
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0002,
+     "water": 0.207,
+     "snow": 0.0002
+    },
+    "bytes": 25256037,
+    "md5": "86ca778d6807a372695d1f73b2971147"
+   }
+  },
+  "makhachkala": {
+   "S2C_38TQN_20260803_0_L2A": {
+    "date": "2026-08-03",
+    "size": [
+     1842,
+     1836
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.6596,
+     "snow": 0.0
+    },
+    "bytes": 32950585,
+    "md5": "e760048373e4733f15dd6ab6351b9a5d"
+   }
+  },
+  "nakhodka": {
+   "S2B_53TLH_20250927_0_L2A": {
+    "date": "2025-09-27",
+    "size": [
+     1836,
+     1824
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0003,
+     "water": 0.5409,
+     "snow": 0.0
+    },
+    "bytes": 28972337,
+    "md5": "305d119771921dd0e5baaa3675ea1486"
+   }
+  },
+  "neva-bay": {
+   "S2A_35VPG_20260716_1_L2A": {
+    "date": "2026-07-16",
+    "size": [
+     2334,
+     2334
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.6503,
+     "snow": 0.0
+    },
+    "bytes": 49886311,
+    "md5": "f5de2799f484652407df7f2ec5ab54db"
+   },
+   "S2A_36VUM_20250718_0_L2A": {
+    "date": "2025-07-18",
+    "size": [
+     2334,
+     2334
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0002,
+     "water": 0.6514,
+     "snow": 0.0
+    },
+    "bytes": 48875287,
+    "md5": "2bea94231f4daf1f5297d791603cb495"
+   },
+   "S2A_36VUM_20250929_1_L2A": {
+    "date": "2025-09-29",
+    "size": [
+     2334,
+     2334
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.004,
+     "water": 0.6601,
+     "snow": 0.0
+    },
+    "bytes": 51301301,
+    "md5": "3077a3db6368ef6807bf524a09e61943"
+   },
+   "S2B_36VUM_20250614_0_L2A": {
+    "date": "2025-06-14",
+    "size": [
+     2334,
+     2334
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.008,
+     "water": 0.6539,
+     "snow": 0.0
+    },
+    "bytes": 49280733,
+    "md5": "d1a9cc54b08760b312a871246e48b803"
+   },
+   "S2C_36VUM_20250907_0_L2A": {
+    "date": "2025-09-07",
+    "size": [
+     2334,
+     2334
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.6558,
+     "snow": 0.0
+    },
+    "bytes": 49209655,
+    "md5": "3e222d4e1e099f83cb32bb496c65915f"
+   }
+  },
+  "novorossiysk": {
+   "S2A_37TDK_20250710_0_L2A": {
+    "date": "2025-07-10",
+    "size": [
+     2040,
+     2034
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0004,
+     "water": 0.3397,
+     "snow": 0.0
+    },
+    "bytes": 40367783,
+    "md5": "a1130324a62f972820d2cbb5109838f7"
+   },
+   "S2A_37TDK_20250829_0_L2A": {
+    "date": "2025-08-29",
+    "size": [
+     2040,
+     2034
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0004,
+     "water": 0.3393,
+     "snow": 0.0
+    },
+    "bytes": 41989159,
+    "md5": "6ef06bb699ca443e8d19162ae8c60e6a"
+   },
+   "S2C_37TDK_20250628_0_L2A": {
+    "date": "2025-06-28",
+    "size": [
+     2040,
+     2034
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0005,
+     "water": 0.3397,
+     "snow": 0.0
+    },
+    "bytes": 39990745,
+    "md5": "e25addfe4b3271a5b9d0359f0d3deafa"
+   },
+   "S2C_37TDK_20250728_0_L2A": {
+    "date": "2025-07-28",
+    "size": [
+     2040,
+     2034
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0009,
+     "water": 0.3391,
+     "snow": 0.0
+    },
+    "bytes": 40781811,
+    "md5": "500180b4b913cf024e617ae412b4a3e6"
+   },
+   "S2C_37TDK_20260822_0_L2A": {
+    "date": "2026-08-22",
+    "size": [
+     2040,
+     2034
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0003,
+     "water": 0.34,
+     "snow": 0.0
+    },
+    "bytes": 39918559,
+    "md5": "caa8d56a145eeb80cd83e6dadeb69efd"
+   }
+  },
+  "ob-sabetta": {
+   "S2C_42WXE_20250901_0_L2A": {
+    "date": "2025-09-01",
+    "size": [
+     2820,
+     2826
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0005,
+     "water": 0.6137,
+     "snow": 0.0
+    },
+    "bytes": 74457935,
+    "md5": "e12ca9ec843804533f15264cbc354a5f"
+   }
+  },
+  "pechora-bay": {
+   "S2B_39WXS_20250802_0_L2A": {
+    "date": "2025-08-02",
+    "size": [
+     3276,
+     3264
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.9301,
+     "snow": 0.0
+    },
+    "bytes": 76934929,
+    "md5": "4fcf3686e84710870dda1cb8386a5ae8"
+   }
+  },
+  "pevek": {
+   "S2B_59WMT_20250820_0_L2A": {
+    "date": "2025-08-20",
+    "size": [
+     1812,
+     1812
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0009,
+     "water": 0.5876,
+     "snow": 0.0
+    },
+    "bytes": 29420373,
+    "md5": "4bc7f7cad667d0f7105f672388c37b0e"
+   }
+  },
+  "primorsk": {
+   "S2B_35VNG_20250614_0_L2A": {
+    "date": "2025-06-14",
+    "size": [
+     1608,
+     1602
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.4036,
+     "snow": 0.0
+    },
+    "bytes": 24858239,
+    "md5": "e5ee4b6988bbd0c600bd98d1a7c471bc"
+   }
+  },
+  "sochi": {
+   "S2C_37TEJ_20250608_0_L2A": {
+    "date": "2025-06-08",
+    "size": [
+     2256,
+     2250
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.5706,
+     "snow": 0.0
+    },
+    "bytes": 50620201,
+    "md5": "cc502cfe297c1efaa3e7e29a1e41a21c"
+   }
+  },
+  "tiksi-lena": {
+   "S2C_52WDE_20260702_0_L2A": {
+    "date": "2026-07-02",
+    "size": [
+     3606,
+     3594
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.2992,
+     "snow": 0.1004
+    },
+    "bytes": 128996543,
+    "md5": "e6296893a74117e76209603fa5a25fd3"
+   }
+  },
+  "tuapse": {
+   "S2C_37TEJ_20250608_0_L2A": {
+    "date": "2025-06-08",
+    "size": [
+     1794,
+     1788
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0005,
+     "water": 0.2987,
+     "snow": 0.0
+    },
+    "bytes": 33015099,
+    "md5": "19a383737b61ea679335ecfc362e0610"
+   }
+  },
+  "ust-luga": {
+   "S2B_35VNG_20250614_0_L2A": {
+    "date": "2025-06-14",
+    "size": [
+     1830,
+     1824
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.3445,
+     "snow": 0.0
+    },
+    "bytes": 33648979,
+    "md5": "7cc23261787762e916d9748c14afb16e"
+   }
+  },
+  "vanino": {
+   "S2C_54UVV_20250929_0_L2A": {
+    "date": "2025-09-29",
+    "size": [
+     1806,
+     1800
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.5527,
+     "snow": 0.0
+    },
+    "bytes": 28814491,
+    "md5": "05b9f277487c4ce019f1ef6e88427aaf"
+   }
+  },
+  "varandey": {
+   "S2C_40WEB_20260915_0_L2A": {
+    "date": "2026-09-15",
+    "size": [
+     1596,
+     1596
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.7016,
+     "snow": 0.0
+    },
+    "bytes": 23082149,
+    "md5": "c0d962e4469e03c4cecd4f7793355103"
+   }
+  },
+  "vladivostok": {
+   "S2A_52TGN_20250927_1_L2A": {
+    "date": "2025-09-27",
+    "size": [
+     2316,
+     2304
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.6497,
+     "snow": 0.0
+    },
+    "bytes": 48177231,
+    "md5": "83738677ca89c76da4bae18abc685945"
+   },
+   "S2B_52TGN_20260905_0_L2A": {
+    "date": "2026-09-05",
+    "size": [
+     2316,
+     2304
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.6498,
+     "snow": 0.0
+    },
+    "bytes": 49402885,
+    "md5": "38065247fcd8ca02a12ffe337f5254d9"
+   },
+   "S2C_52TGN_20250915_0_L2A": {
+    "date": "2025-09-15",
+    "size": [
+     2316,
+     2304
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.65,
+     "snow": 0.0
+    },
+    "bytes": 47939315,
+    "md5": "2e7e50f3deb74b6d5cecda33a32ed2f1"
+   },
+   "S2C_52TGN_20260602_0_L2A": {
+    "date": "2026-06-02",
+    "size": [
+     2316,
+     2304
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.6472,
+     "snow": 0.0
+    },
+    "bytes": 52346909,
+    "md5": "2efe710e261fda1a4d007b68410c0e2a"
+   },
+   "S2C_52TGN_20260910_0_L2A": {
+    "date": "2026-09-10",
+    "size": [
+     2316,
+     2304
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0009,
+     "water": 0.6497,
+     "snow": 0.0
+    },
+    "bytes": 48028027,
+    "md5": "5f072ab36d6d478b8ec7e1b3896c362d"
+   }
+  },
+  "volga-delta": {
+   "S2A_38TQR_20250731_1_L2A": {
+    "date": "2025-07-31",
+    "size": [
+     2790,
+     2784
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.8603,
+     "snow": 0.0
+    },
+    "bytes": 69652041,
+    "md5": "659a8655d1af90587a6dfa390cf4d513"
+   },
+   "S2B_38TQR_20250604_0_L2A": {
+    "date": "2025-06-04",
+    "size": [
+     2790,
+     2784
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.887,
+     "snow": 0.0
+    },
+    "bytes": 73985745,
+    "md5": "2bbc18bc6f0aa6e9cc77bc1e7efc7a05"
+   },
+   "S2B_38TQR_20250823_0_L2A": {
+    "date": "2025-08-23",
+    "size": [
+     2790,
+     2784
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.8514,
+     "snow": 0.0
+    },
+    "bytes": 71787377,
+    "md5": "5637acd68424b4a33bccd5eaa668b0ed"
+   },
+   "S2B_38TQR_20250830_0_L2A": {
+    "date": "2025-08-30",
+    "size": [
+     2790,
+     2784
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0003,
+     "water": 0.851,
+     "snow": 0.0
+    },
+    "bytes": 70920435,
+    "md5": "199f36fede16f259f649093c00d6e594"
+   },
+   "S2C_38TQR_20250709_0_L2A": {
+    "date": "2025-07-09",
+    "size": [
+     2790,
+     2784
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0001,
+     "water": 0.8576,
+     "snow": 0.0
+    },
+    "bytes": 72924137,
+    "md5": "d792a1e02e4d66bbb6bdb58d6b47b977"
+   }
+  },
+  "yenisei-gulf": {
+   "S2C_44XMF_20250806_0_L2A": {
+    "date": "2025-08-06",
+    "size": [
+     4062,
+     4050
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.0,
+     "water": 0.8785,
+     "snow": 0.0
+    },
+    "bytes": 135693473,
+    "md5": "5a04532d2a2cd345da1e86dfcde10bb2"
+   }
+  },
+  "yeysk": {
+   "S2A_37TDM_20250710_0_L2A": {
+    "date": "2025-07-10",
+    "size": [
+     1584,
+     1578
+    ],
+    "aoi_fractions": {
+     "nodata": 0.0,
+     "cloud": 0.001,
+     "water": 0.665,
+     "snow": 0.0
+    },
+    "bytes": 22998469,
+    "md5": "974c4769f3c59f035e1f62fb653b5256"
+   }
+  }
+ }
+}

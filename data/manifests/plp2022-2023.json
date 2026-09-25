@@ -1,0 +1,19 @@
+{
+  "key": "plp2022-2023",
+  "title": "Plastic Litter Project 2022–2023: минимальная обнаружимая доля",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.5281/zenodo.10046182",
+  "retrieved": "2026-09-25",
+  "bytes": 3829262931,
+  "files": [
+    {
+      "name": "PLP2022_PLP2023_min_fraction_dataset.zip",
+      "bytes": 3829262931,
+      "md5": "f42528c23e582ec88e132c9daf55a50c"
+    }
+  ],
+  "unpacked": {
+    "files": 64,
+    "bytes": 4202638895
+  }
+}

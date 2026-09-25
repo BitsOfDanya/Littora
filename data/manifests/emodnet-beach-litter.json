@@ -1,0 +1,25 @@
+{
+  "key": "emodnet-beach-litter",
+  "title": "EMODnet Chemistry: мусор на пляжах европейских морей, v2025",
+  "license": "CC-BY-4.0",
+  "source": "https://emodnet.ec.europa.eu/en/marine-litter",
+  "retrieved": "2026-09-25",
+  "bytes": 5703134,
+  "files": [
+    {
+      "name": "EMODnet_beachLitter_Arctic_2025_unrestricted.zip",
+      "bytes": 348795,
+      "md5": "d75ed0ce1e761c17c0966087dce365e8"
+    },
+    {
+      "name": "EMODnet_beachLitter_Baltic_2025_unrestricted.zip",
+      "bytes": 4224612,
+      "md5": "a66bc81635d480ae7ac86b7e57505d9c"
+    },
+    {
+      "name": "EMODnet_beachLitter_BlackSea_2025_unrestricted.zip",
+      "bytes": 1129727,
+      "md5": "00356ac8cc72fc24addaf265d7f4cf77"
+    }
+  ]
+}

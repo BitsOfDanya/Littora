@@ -1,0 +1,15 @@
+{
+  "key": "windrows-med",
+  "title": "Mediterranean Sentinel-2 Litter Windrows Catalogue v1.0 (Cózar et al., 2024)",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.5281/zenodo.11045944",
+  "retrieved": "2026-09-25",
+  "bytes": 2064602440,
+  "files": [
+    {
+      "name": "WASP_LW_SENT2_MED_L1C_B_201506_202109_10m_6y_NRT_v1.0.nc",
+      "bytes": 2064602440,
+      "md5": "ee45eba972fda47e226fcfffcc1cd4f3"
+    }
+  ]
+}

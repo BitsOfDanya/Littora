@@ -1,0 +1,15 @@
+{
+  "key": "litterlines",
+  "title": "LitterLines — полосы мусора на снимках PlanetScope",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.5281/zenodo.19571437",
+  "retrieved": "2026-09-25",
+  "bytes": 382272,
+  "files": [
+    {
+      "name": "LitterLines_dataset.zip",
+      "bytes": 382272,
+      "md5": "ee8ce9c4f5f6a16ea493e9e6aae65bcf"
+    }
+  ]
+}

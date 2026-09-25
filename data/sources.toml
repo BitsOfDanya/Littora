@@ -1,0 +1,672 @@
+[marida]
+title = "MARIDA — Marine Debris Archive (Kikaki et al., 2022)"
+about = "1 381 патч Sentinel-2 256×256 с масками 15 классов: морской мусор, саргассум, пена, суда, облака, мутная вода и др.; маски уверенности разметчика"
+kind = "labelled"
+region = "international"
+use = ["pretrain", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "1.16 GB"
+doi = "10.5281/zenodo.5151941"
+paper = "https://doi.org/10.1371/journal.pone.0262247"
+zenodo = 5151941
+
+[marida-juliaeo]
+title = "MARIDA subset JuliaEO 2023"
+about = "таблица 208 тыс. пикселей MARIDA (11 каналов, NDVI, FDI, NDWI, NDMI, 6 классов) и кроп сцены Гондурасского залива по каналам"
+kind = "labelled"
+region = "international"
+use = ["baseline", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "96 MB"
+doi = "10.5281/zenodo.8113073"
+zenodo = 8113073
+
+[mados]
+title = "MADOS — Marine Debris and Oil Spill (Kikaki et al., 2024)"
+about = "2 803 кропа 240×240 из 174 сцен Sentinel-2, 15 классов: мусор, нефть, саргассум, пена, морская слизь, медузы и др."
+kind = "labelled"
+region = "international"
+use = ["pretrain", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "4.04 GB"
+doi = "10.5281/zenodo.10664073"
+paper = "https://doi.org/10.1016/j.isprsjprs.2024.02.017"
+zenodo = 10664073
+
+[plp2019]
+title = "Plastic Litter Project 2019 (University of the Aegean)"
+about = "искусственные мишени из бутылок и пакетов у Лесбоса: доля пластика в каждом пикселе Sentinel-2, снимки с БПЛА"
+kind = "labelled"
+region = "international"
+use = ["calibration", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "69 MB"
+doi = "10.5281/zenodo.3752719"
+paper = "https://doi.org/10.3390/rs12122013"
+zenodo = 3752719
+
+[plp2021]
+title = "Plastic Litter Project 2021 (University of the Aegean)"
+about = "22 даты Sentinel-2 над мишенями из HDPE и дерева 28 м; архив одной даты 5.3–10.3 GB: L1C SAFE, ACOLITE L2W, ортофото мишеней"
+kind = "labelled"
+region = "international"
+use = ["calibration", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "159.5 GB"
+doi = "10.5281/zenodo.7085112"
+paper = "https://doi.org/10.3390/rs14235997"
+zenodo = 7085112
+
+[plp2022-2023]
+title = "Plastic Litter Project 2022–2023: минимальная обнаружимая доля"
+about = "мишени HDPE 1, 2 и 3 м² на снимках Sentinel-2 и Planet SuperDove — предел обнаружения"
+kind = "labelled"
+region = "international"
+use = ["calibration", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "3.83 GB"
+doi = "10.5281/zenodo.10046182"
+paper = "https://doi.org/10.1016/j.jag.2024.104245"
+zenodo = 10046182
+
+[windrows-med]
+title = "Mediterranean Sentinel-2 Litter Windrows Catalogue v1.0 (Cózar et al., 2024)"
+about = "14 374 полосы плавающего мусора в Средиземном море за 2015–2021 с 13-канальными спектрами L1C каждого пикселя"
+kind = "labelled"
+region = "international"
+use = ["pretrain", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "2.06 GB"
+doi = "10.5281/zenodo.11045944"
+paper = "https://doi.org/10.1038/s41467-024-48674-7"
+zenodo = 11045944
+
+[marinedebrisdetector]
+title = "marinedebrisdetector: данные к модели Rußwurm et al., 2023"
+about = "12-канальные кропы Sentinel-2: мишени PLP 2021–2022, уточнённые FloatingObjects для валидации, суда как негативы, MARIDA целыми сценами L2A"
+kind = "labelled"
+region = "international"
+use = ["pretrain", "validation"]
+license = "как у исходных"
+commercial = true
+access = "open"
+size = "54.1 GB"
+paper = "https://doi.org/10.1016/j.isci.2023.108402"
+homepage = "https://github.com/MarcCoru/marinedebrisdetector"
+files = [
+  { url = "https://marinedebrisdetector.s3.eu-central-1.amazonaws.com/data/PLP.zip" },
+  { url = "https://marinedebrisdetector.s3.eu-central-1.amazonaws.com/data/S2SHIPS.zip" },
+  { url = "https://marinedebrisdetector.s3.eu-central-1.amazonaws.com/data/durban.zip" },
+  { url = "https://marinedebrisdetector.s3.eu-central-1.amazonaws.com/data/refinedfloatingobjects.zip" },
+  { url = "https://marinedebrisdetector.s3.eu-central-1.amazonaws.com/data/MARIDA.zip" },
+  { url = "https://marinedebrisdetector.s3.eu-central-1.amazonaws.com/data/floatingobjects.zip" },
+]
+
+[nasa-marine-debris]
+title = "NASA / Planet Marine Debris Dataset for Object Detection"
+about = "739 RGB-чипов PlanetScope ~3 м с 1 624 рамками плавающего мусора, в основном Гондурасский залив"
+kind = "labelled"
+region = "international"
+use = ["validation"]
+license = "CC-BY-NC-4.0"
+commercial = false
+access = "open"
+size = "77 MB"
+doi = "10.34911/rdnt.9r6ekg"
+s3_listing = { endpoint = "https://data.source.coop", bucket = "nasa", prefix = "marine-debris/" }
+
+[litterlines]
+title = "LitterLines — полосы мусора на снимках PlanetScope"
+about = "966 линий разметки полос мусора; сами снимки PlanetScope заказываются в Planet отдельно"
+kind = "labelled"
+region = "international"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "0.4 MB"
+doi = "10.5281/zenodo.19571437"
+zenodo = 19571437
+
+[flodas]
+title = "FLODAS — плавающий материал на снимках Planet SuperDove"
+about = "4 сцены SuperDove 3 м с полигонами полос мусора у устьев рек Греции и обученная U-Net"
+kind = "labelled"
+region = "international"
+use = ["validation"]
+license = "CC-BY-NC-4.0"
+commercial = false
+access = "open"
+size = "2.03 GB"
+doi = "10.5281/zenodo.20275122"
+zenodo = 20275122
+
+[s1-floatdet-korea]
+title = "floatdet v1: плавающий мусор на Sentinel-1 в реках Кореи"
+about = "14 397 патчей радара Sentinel-1 VV с масками кандидатов в мусор; задел на всепогодный канал"
+kind = "labelled"
+region = "international"
+use = ["pretrain"]
+license = "CC-BY-NC-4.0"
+commercial = false
+access = "open"
+size = "2.92 GB"
+doi = "10.5281/zenodo.22292926"
+zenodo = 22292926
+
+[duarte-azevedo]
+title = "Floating Marine Debris Data (Duarte & Azevedo, 2023)"
+about = "пиксели Sentinel-2 после ACOLITE для 7 классов: вода, пластик, дерево, водоросли, пемза, морская слизь, пена"
+kind = "labelled"
+region = "international"
+use = ["pretrain"]
+license = "CC-BY-4.0"
+commercial = true
+access = "request"
+size = "293 MB"
+paper = "https://doi.org/10.1109/TGRS.2023.3283607"
+homepage = "https://github.com/miguelmendesduarte/Floating-Marine-Debris-Data"
+
+[labplas-spectra]
+title = "LABPLAS Spectral Library for Sentinel-2"
+about = "115 410 спектральных кривых Sentinel-2 совместимых с MARIDA: пластик, пена, волны, аквакультура, цветение"
+kind = "spectra"
+region = "international"
+use = ["pretrain"]
+license = "CC-BY-4.0"
+commercial = true
+access = "embargo"
+size = "?"
+doi = "10.5281/zenodo.15079005"
+
+[knaeps-spectra]
+title = "Гиперспектры сухого, мокрого и погружённого мусора (Knaeps et al., 2021)"
+about = "47 образцов пластика, 350–2500 нм; свёртка с откликом каналов Sentinel-2 даёт эталоны для смешанных пикселей"
+kind = "spectra"
+region = "international"
+use = ["calibration"]
+license = "CC0-1.0"
+commercial = true
+access = "open"
+size = "4.9 MB"
+doi = "10.4121/12896312.v2"
+paper = "https://doi.org/10.5194/essd-13-713-2021"
+figshare = { api = "https://data.4tu.nl/v2", article = 12896312 }
+
+[doors-blacksea]
+title = "DOORS: плавающий макромусор на трансектах в Чёрном море, 2024"
+about = "плотность плавающего мусора (шт/км²) на 33 трансектах у Болгарии, Турции и Грузии, 1–20 июня 2024"
+kind = "observations"
+region = "international"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "10 KB"
+doi = "10.5281/zenodo.15172377"
+zenodo = 15172377
+
+[emodnet-beach-litter]
+title = "EMODnet Chemistry: мусор на пляжах европейских морей, v2025"
+about = "обследования пляжей по методике MSFD; есть 5 российских пляжей Чёрного моря и 4 — Финского залива, 2016–2018"
+kind = "observations"
+region = "russia"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "5.7 MB"
+homepage = "https://emodnet.ec.europa.eu/en/marine-litter"
+files = [
+  { url = "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_beachLitter_BlackSea_2025_unrestricted.zip" },
+  { url = "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_beachLitter_Baltic_2025_unrestricted.zip" },
+  { url = "https://nodc.ogs.it/repository/aggregated-datasets/litter/EMODnet_beachLitter_Arctic_2025_unrestricted.zip" },
+]
+
+[dalnie-zelentsy-2023]
+title = "Мониторинг с судна «Дальние Зеленцы», осень 2023 (ИО РАН)"
+about = "видео судовой камеры и ~10 тыс. кадров с разметкой YOLO: плавающий мусор, птицы, блики, капли; Баренцево и Карское моря, 12–28 сентября 2023; журнал наблюдений с координатами"
+kind = "observations"
+region = "russia"
+use = ["pretrain", "validation"]
+license = "CC-BY-SA-4.0"
+commercial = true
+access = "open"
+size = "92.9 GB"
+doi = "10.34740/kaggle/dsv/12296647"
+paper = "https://doi.org/10.3389/fmars.2025.1689783"
+homepage = "https://www.kaggle.com/datasets/olgabilousova/marine-monitoring-autumn-2023-dalnie-zelentsy"
+files = [
+  { name = "Observational-Journal.xlsx", url = "https://www.kaggle.com/api/v1/datasets/download/olgabilousova/marine-monitoring-autumn-2023-dalnie-zelentsy/Observational-Journal.xlsx" },
+  { name = "dalnie-zelentsy-2023.zip", url = "https://www.kaggle.com/api/v1/datasets/download/olgabilousova/marine-monitoring-autumn-2023-dalnie-zelentsy" },
+]
+
+[marine-litterwatch]
+title = "EEA Marine LitterWatch — мусор на пляжах, волонтёрские обследования"
+about = "обследования пляжей Европы 2013–2021; 21 российское событие: Чёрное море 11, Финский залив 9, Каспий 1 (Дербент)"
+kind = "observations"
+region = "russia"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "68 MB"
+homepage = "https://www.eea.europa.eu/themes/water/europes-seas-and-coasts/assessments/marine-litterwatch"
+files = [
+  { name = "marine-litterwatch-eea.zip", url = "https://sdi.eea.europa.eu/datashare/s/mjSqmZp8Lfi8iFb/download" },
+]
+
+[haseler2020-beaches]
+title = "Мусор на пляжах Балтики, граблевые обследования (Haseler et al., 2020)"
+about = "таблица обследований с координатами; 20 российских: Балтийск и Балтийская коса, Зеленоградск, Санкт-Петербург, 2018–2019"
+kind = "observations"
+region = "russia"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "40 KB"
+paper = "https://doi.org/10.3389/fenvs.2020.599978"
+files = [
+  { name = "haseler2020-table-s1.xlsx", url = "https://www.frontiersin.org/api/v4/articles/599978/file/Table_1.XLSX/599978_supplementary-materials_tables_1_xlsx/1" },
+]
+
+[emblas-floating-litter]
+title = "EMBLAS: плавающий мусор в Чёрном море, 2017 и 2019 (González-Fernández et al., 2022)"
+about = "302 сессии наблюдений плавающего мусора с судов, в том числе 6 российских (Геленджик, Новороссийск, Сочи, Керченский пролив); координат нет"
+kind = "observations"
+region = "russia"
+use = ["validation"]
+license = "CC-BY-NC-4.0"
+commercial = false
+access = "open"
+size = "59 KB"
+paper = "https://doi.org/10.1016/j.envpol.2022.119816"
+files = [
+  { name = "gonzalez-fernandez2022-mmc2.xlsx", url = "https://ars.els-cdn.com/content/image/1-s2.0-S0269749122010302-mmc2.xlsx" },
+]
+
+[adis-ocean-cleanup]
+title = "ADIS (The Ocean Cleanup): калиброванное обилие макропластика 2019–2024"
+about = "учёт плавающего макропластика судовыми камерами по всему миру; несколько сегментов в Охотском море и у Курил"
+kind = "observations"
+region = "international"
+use = ["calibration", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "566 MB"
+doi = "10.4121/ddede7f5-aca5-42ae-b851-e0bbb9a2c4c2"
+figshare = { api = "https://data.4tu.nl/v2", article = "ddede7f5-aca5-42ae-b851-e0bbb9a2c4c2" }
+
+[blacksea-oil-s1]
+title = "Нефтяные пятна на Sentinel-1 в Чёрном море (Kokorin et al., 2025)"
+about = "1 358 радарных кропов с масками нефти; 709 — сцены декабря 2024 у Керченского пролива и Анапы, маски там пустые; не мусор, только двойники"
+kind = "labelled"
+region = "russia"
+use = ["pretrain"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "584 MB"
+doi = "10.5281/zenodo.16320854"
+zenodo = 16320854
+
+[gpgp-lebreton]
+title = "Большое тихоокеанское мусорное пятно: концентрации (Lebreton et al., 2018)"
+about = "концентрации макро- и мегапластика по тралам и аэросъёмке, связь площади предмета с массой"
+kind = "observations"
+region = "international"
+use = ["calibration"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "5 MB"
+doi = "10.6084/m9.figshare.5873142.v2"
+paper = "https://doi.org/10.1038/s41598-018-22939-w"
+figshare = { api = "https://api.figshare.com/v2", article = 5873142 }
+
+[oceanscan]
+title = "Ocean Scan — каталог полевых наблюдений морского мусора"
+about = "кампании наблюдений со ссылками на спутниковые снимки; лицензия у каждой кампании своя, выгрузка через портал"
+kind = "observations"
+region = "international"
+use = ["validation"]
+license = "по кампаниям"
+commercial = false
+access = "account"
+size = "?"
+homepage = "https://www.oceanscan.org/datasets"
+
+[locate-blacksea]
+title = "LOCATE: модель переноса мусора в Чёрном море за 2017 год"
+about = "траектории частиц от рек и равномерного выпуска, с дрейфом Стокса и без; эталон для проверки модуля дрейфа"
+kind = "model"
+region = "international"
+use = ["drift", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "10.7 GB"
+doi = "10.5281/zenodo.15412820"
+zenodo = 15412820
+
+[global-lagrangian-litter]
+title = "Global Lagrangian dataset of marine litter (Chassignet et al., 2021)"
+about = "траектории частиц мусора от побережий и рек по всему океану за 2010–2021: априорная карта зон накопления"
+kind = "model"
+region = "global"
+use = ["drift"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "88.4 GB"
+doi = "10.5281/zenodo.6310460"
+paper = "https://doi.org/10.3389/fmars.2021.667591"
+zenodo = 6310460
+
+[sentinel2-earth-search]
+title = "Sentinel-2 L2A в каталоге Earth Search (AWS Open Data)"
+about = "все сцены Sentinel-2 L2A в формате COG без регистрации; поиск и вырезка по районам — scripts/data/scenes.py"
+kind = "imagery"
+region = "global"
+use = ["inference", "demo", "pretrain"]
+license = "Copernicus"
+commercial = true
+access = "open"
+size = "~1 GB/тайл"
+homepage = "https://earth-search.aws.element84.com/v1"
+
+[sentinel2-cdse]
+title = "Sentinel-2 L1C / L2A в Copernicus Data Space Ecosystem"
+about = "официальный архив Copernicus: L1C для своей атмосферной коррекции (ACOLITE), поиск без регистрации, загрузка по аккаунту"
+kind = "imagery"
+region = "global"
+use = ["inference", "pretrain"]
+license = "Copernicus"
+commercial = true
+access = "account"
+size = "~0.8 GB/тайл"
+homepage = "https://dataspace.copernicus.eu"
+
+[sentinel2-planetary-computer]
+title = "Sentinel-2 L2A в Microsoft Planetary Computer"
+about = "резервный каталог COG Sentinel-2 L2A; скачивание по анонимному SAS-токену, который живёт около часа"
+kind = "imagery"
+region = "global"
+use = ["inference", "pretrain"]
+license = "Copernicus"
+commercial = true
+access = "open"
+size = "~1 GB/тайл"
+homepage = "https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a"
+
+[roscosmos-open-data]
+title = "Открытые данные ДЗЗ Роскосмоса (pod.gptl.ru)"
+about = "Метеор-М КМСС 60 и 120 м, Ресурс-П КШМСА 60 и 118 м; для макропластика слишком грубо, годится только для контекста"
+kind = "imagery"
+region = "russia"
+use = ["demo"]
+license = "не указана"
+access = "open"
+size = "?"
+homepage = "https://pod.gptl.ru"
+
+[iki-see-the-sea]
+title = "ИКИ РАН «See the Sea» и «Вега-Science»"
+about = "архив радарных и оптических снимков Чёрного, Балтийского и Каспийского морей; See the Sea — платный доступ, Вега-Science — по договору"
+kind = "imagery"
+region = "russia"
+use = ["validation"]
+license = "по договору"
+access = "request"
+size = "?"
+homepage = "http://ocean.smislab.ru/static/index.sht"
+
+[cmems-blacksea-phy]
+title = "Copernicus Marine: течения Чёрного и Азовского морей"
+about = "BLKSEA_ANALYSISFORECAST_PHY_007_001 — NEMO 1/40° (~2.5 км), поверхность через 15 мин и 1 ч, прогноз на 10 суток; Азовское море входит"
+kind = "ocean"
+region = "russia"
+use = ["drift"]
+license = "Copernicus Marine"
+commercial = true
+access = "account"
+size = "по району"
+doi = "10.48670/mds-00355"
+
+[cmems-baltic-phy]
+title = "Copernicus Marine: течения Балтийского моря"
+about = "BALTICSEA_ANALYSISFORECAST_PHY_003_006 — NEMO ~1 миля, до 30.21° в. д. (Невская губа внутри), поверхность через 15 мин и 1 ч, прогноз на 9 суток"
+kind = "ocean"
+region = "russia"
+use = ["drift"]
+license = "Copernicus Marine"
+commercial = true
+access = "account"
+size = "по району"
+doi = "10.48670/moi-00010"
+
+[cmems-arctic-phy]
+title = "Copernicus Marine: течения Арктики"
+about = "ARCTIC_ANALYSISFORECAST_PHY_002_001 (TOPAZ5, 6 км) и ARCTIC_ANALYSISFORECAST_PHY_TIDE_002_015 (3 км, с приливами): Баренцево, Белое, Печорское, Карское, Лаптевых, Восточно-Сибирское, Чукотское"
+kind = "ocean"
+region = "russia"
+use = ["drift"]
+license = "Copernicus Marine"
+commercial = true
+access = "account"
+size = "по району"
+doi = "10.48670/moi-00001"
+
+[cmems-global-phy]
+title = "Copernicus Marine: глобальные течения 1/12°"
+about = "GLOBAL_ANALYSISFORECAST_PHY_001_024: часовое поле utotal (течение + прилив + дрейф Стокса); Охотское, Японское, Берингово моря и резерв для остальных; Каспия нет"
+kind = "ocean"
+region = "global"
+use = ["drift"]
+license = "Copernicus Marine"
+commercial = true
+access = "account"
+size = "по району"
+doi = "10.48670/moi-00016"
+
+[cmems-waves]
+title = "Copernicus Marine: волны и дрейф Стокса"
+about = "GLOBAL_ANALYSISFORECAST_WAV_001_027 (1/12°, 3 ч, частично Каспий) и региональные: BLKSEA_..._WAV_007_003, BALTICSEA_..._WAV_003_010, ARCTIC_ANALYSIS_FORECAST_WAV_002_014"
+kind = "ocean"
+region = "global"
+use = ["drift"]
+license = "Copernicus Marine"
+commercial = true
+access = "account"
+size = "по району"
+homepage = "https://data.marine.copernicus.eu/product/GLOBAL_ANALYSISFORECAST_WAV_001_027/description"
+
+[cmems-wind]
+title = "Copernicus Marine: приводный ветер L4"
+about = "WIND_GLO_PHY_L4_NRT_012_004 — 0.125°, 1 ч, по скаттерометрам; покрывает и Каспий"
+kind = "atmosphere"
+region = "global"
+use = ["drift"]
+license = "Copernicus Marine"
+commercial = true
+access = "account"
+size = "по району"
+homepage = "https://data.marine.copernicus.eu/product/WIND_GLO_PHY_L4_NRT_012_004/description"
+
+[era5]
+title = "ERA5 — реанализ ECMWF"
+about = "ветер 10 м и волны по всему миру с 1940 года, 0.25°, задержка около 6 суток"
+kind = "atmosphere"
+region = "global"
+use = ["drift"]
+license = "CC-BY-4.0"
+commercial = true
+access = "account"
+size = "по району"
+doi = "10.24381/cds.adbb2d47"
+
+[gfs]
+title = "NOAA GFS 0.25° — прогноз ветра"
+about = "ветер 10 м на 16 суток вперёд без регистрации, вырезка района через NOMADS; архив около 10 суток"
+kind = "atmosphere"
+region = "global"
+use = ["drift"]
+license = "NOAA open data"
+commercial = true
+access = "open"
+size = "~1 KB/запрос"
+homepage = "https://nomads.ncep.noaa.gov"
+
+[hycom]
+title = "HYCOM ESPC-D-V02 — глобальные течения 1/12°"
+about = "течения без регистрации через OPeNDAP и NCSS, прогноз на 8 суток; Каспия нет, прибрежные ячейки часто пустые"
+kind = "ocean"
+region = "global"
+use = ["drift"]
+license = "Public release"
+commercial = true
+access = "open"
+size = "по району"
+homepage = "https://tds.hycom.org/thredds/catalog.html"
+
+[open-meteo]
+title = "Open-Meteo: течения SMOC и ветер по точкам"
+about = "API без ключа: течения из Copernicus SMOC (нет Каспия и Кольского залива), ветер ECMWF, GFS, ICON; бесплатно только некоммерчески"
+kind = "ocean"
+region = "global"
+use = ["drift", "demo"]
+license = "CC-BY-4.0"
+commercial = false
+access = "open"
+size = "~50 KB/точка"
+homepage = "https://open-meteo.com/en/docs/marine-weather-api"
+
+[natural-earth]
+title = "Natural Earth 1:10m — береговая линия, суша, моря, реки, порты"
+about = "обзорные векторные слои; есть все моря России и Каспий, реки Волга, Дон, Кубань, Нева, Сев. Двина, Печора, Обь, Енисей, Лена, Колыма, Амур"
+kind = "geo"
+region = "global"
+use = ["aoi"]
+license = "Public domain"
+commercial = true
+access = "open"
+size = "13 MB"
+homepage = "https://www.naturalearthdata.com"
+files = [
+  { url = "https://naciscdn.org/naturalearth/10m/physical/ne_10m_coastline.zip" },
+  { url = "https://naciscdn.org/naturalearth/10m/physical/ne_10m_land.zip" },
+  { url = "https://naciscdn.org/naturalearth/10m/physical/ne_10m_ocean.zip" },
+  { url = "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_marine_polys.zip" },
+  { url = "https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip" },
+  { url = "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_ports.zip" },
+]
+
+[marine-regions-iho]
+title = "Marine Regions: границы морей IHO"
+about = "полигоны 13 морей России по IHO и Каспий по SeaVoX; не перераспространять, хранить только локально"
+kind = "geo"
+region = "russia"
+use = ["aoi"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "23 MB"
+homepage = "https://www.marineregions.org"
+files = [
+  { name = "iho-russian-seas.geojson", url = "https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=MarineRegions:iho&outputFormat=application/json&CQL_FILTER=name%20IN%20%28%27Black%20Sea%27%2C%27Sea%20of%20Azov%27%2C%27Baltic%20Sea%27%2C%27Gulf%20of%20Finland%27%2C%27Barentsz%20Sea%27%2C%27White%20Sea%27%2C%27Kara%20Sea%27%2C%27Laptev%20Sea%27%2C%27East%20Siberian%20Sea%27%2C%27Chukchi%20Sea%27%2C%27Bering%20Sea%27%2C%27Sea%20of%20Okhotsk%27%2C%27Japan%20Sea%27%29" },
+  { name = "seavox-caspian.geojson", url = "https://geo.vliz.be/geoserver/MarineRegions/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=MarineRegions:seavox_v19&outputFormat=application/json&CQL_FILTER=sub_region%3D%27CASPIAN%20SEA%27" },
+]
+
+[world-port-index]
+title = "World Port Index (NGA Pub 150)"
+about = "3 807 портов мира с координатами, из них 68 российских; каспийских портов в индексе нет"
+kind = "geo"
+region = "global"
+use = ["aoi"]
+license = "не указана"
+access = "open"
+size = "3.5 MB"
+homepage = "https://msi.nga.mil/Publications/WPI"
+files = [
+  { name = "UpdatedPub150.csv", url = "https://msi.nga.mil/api/publications/download?type=view&key=16920959/SFH00000/UpdatedPub150.csv" },
+]
+
+[river-plastic-meijer2021]
+title = "Вынос пластика реками (Meijer et al., 2021)"
+about = "31 819 устьев с модельным выносом, т/год; есть Дон, Кубань, Амур, дельта Волги; рек севернее 59.8° с. ш. нет"
+kind = "model"
+region = "global"
+use = ["aoi"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "0.7 MB"
+doi = "10.6084/m9.figshare.14515590.v1"
+paper = "https://doi.org/10.1126/sciadv.aaz5803"
+figshare = { api = "https://api.figshare.com/v2", article = 14515590 }
+
+[river-plastic-lebreton2017]
+title = "Вынос пластика реками (Lebreton et al., 2017)"
+about = "40 760 водосборов с помесячным выносом; у Амура самый большой российский вынос; рек севернее 60.4° с. ш. нет"
+kind = "model"
+region = "global"
+use = ["aoi"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "27 MB"
+doi = "10.6084/m9.figshare.4725541.v6"
+paper = "https://doi.org/10.1038/ncomms15611"
+figshare = { api = "https://api.figshare.com/v2", article = 4725541 }
+
+[shipping-density]
+title = "Плотность судоходства (World Bank / IMF)"
+about = "плотность AIS 2015–2021 на сетке ~500 м по типам судов; порты и трассы России видны, открытая Арктика почти пустая"
+kind = "geo"
+region = "global"
+use = ["aoi", "validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "1.2 GB"
+homepage = "https://datacatalog.worldbank.org/search/dataset/0037580/global-shipping-traffic-density"
+files = [
+  { url = "https://datacatalogfiles.worldbank.org/ddh-published/0037580/5/DR0045406/shipdensity_global.zip" },
+  { url = "https://datacatalogfiles.worldbank.org/ddh-published/0037580/5/DR0045405/shipdensity_commercial_.zip" },
+  { url = "https://datacatalogfiles.worldbank.org/ddh-published/0037580/5/DR0045403/ShipDensity_Fishing.zip" },
+  { url = "https://datacatalogfiles.worldbank.org/ddh-published/0037580/5/DR0045404/ShipDensity_Passenger.zip" },
+  { url = "https://datacatalogfiles.worldbank.org/ddh-published/0037580/5/DR0045402/ShipDensity_OilGas.zip" },
+  { url = "https://datacatalogfiles.worldbank.org/ddh-published/0037580/5/DR0045401/ShipDensity_Leisure.zip" },
+]
+
+[osm-water-polygons]
+title = "OpenStreetMap: полигоны воды и суши"
+about = "точная маска суши для снимков 10 м, обновляется ежедневно; Каспий размечен как море"
+kind = "geo"
+region = "global"
+use = ["aoi"]
+license = "ODbL-1.0"
+commercial = true
+access = "open"
+size = "0.9 GB"
+homepage = "https://osmdata.openstreetmap.de"
+files = [
+  { url = "https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip" },
+  { url = "https://osmdata.openstreetmap.de/download/land-polygons-split-4326.zip" },
+]

@@ -1,0 +1,29 @@
+name: littora
+
+services:
+  backend:
+    build:
+      context: ./backend
+    image: littora-backend:0.1.0
+    environment:
+      LITTORA_ENVIRONMENT: ${LITTORA_ENVIRONMENT:-production}
+      LITTORA_LOG_LEVEL: ${LITTORA_LOG_LEVEL:-INFO}
+      LITTORA_CORS_ORIGINS: ${LITTORA_CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+    ports:
+      - "${LITTORA_BACKEND_PORT:-8000}:8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_BASE_URL: /
+        NEXT_PUBLIC_DEMO_FIXTURES: ${NEXT_PUBLIC_DEMO_FIXTURES:-true}
+        LITTORA_API_PROXY_TARGET: http://backend:8000
+    image: littora-frontend:0.1.0
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${LITTORA_FRONTEND_PORT:-3000}:3000"
+    restart: unless-stopped

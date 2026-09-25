@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "littora-backend"
+dynamic = ["version"]
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.141,<1",
+  "uvicorn[standard]>=0.53",
+  "pydantic>=2.13,<3",
+  "pydantic-settings>=2.15,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9.1",
+  "httpx2>=2.13",
+  "ruff>=0.16",
+]
+
+[tool.hatch.version]
+path = "app/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF", "ASYNC"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

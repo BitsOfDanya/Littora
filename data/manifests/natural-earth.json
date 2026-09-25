@@ -1,0 +1,40 @@
+{
+  "key": "natural-earth",
+  "title": "Natural Earth 1:10m — береговая линия, суша, моря, реки, порты",
+  "license": "Public domain",
+  "source": "https://www.naturalearthdata.com",
+  "retrieved": "2026-09-25",
+  "bytes": 12600180,
+  "files": [
+    {
+      "name": "ne_10m_coastline.zip",
+      "bytes": 3069451,
+      "md5": "7b79c23ead071ef6417f9e83ebe3ab20"
+    },
+    {
+      "name": "ne_10m_geography_marine_polys.zip",
+      "bytes": 940563,
+      "md5": "fe6903f8a018305353e7a66011a0af4d"
+    },
+    {
+      "name": "ne_10m_land.zip",
+      "bytes": 3269070,
+      "md5": "be3001f37196d2894e17aacd13ff2cc2"
+    },
+    {
+      "name": "ne_10m_ocean.zip",
+      "bytes": 3189765,
+      "md5": "c5ee907d7e0aaae198cbb74a04d8c2b0"
+    },
+    {
+      "name": "ne_10m_ports.zip",
+      "bytes": 51824,
+      "md5": "363b370150a7d2ca30aa50a2672105ab"
+    },
+    {
+      "name": "ne_10m_rivers_lake_centerlines.zip",
+      "bytes": 2079507,
+      "md5": "686e256cbb714e63ab7728aeda7a269d"
+    }
+  ]
+}

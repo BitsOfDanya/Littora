@@ -1,0 +1,15 @@
+{
+  "key": "dalnie-zelentsy-2023",
+  "title": "Мониторинг с судна «Дальние Зеленцы», осень 2023 (ИО РАН)",
+  "license": "CC-BY-SA-4.0",
+  "source": "https://doi.org/10.34740/kaggle/dsv/12296647",
+  "retrieved": "2026-09-25",
+  "bytes": 19316,
+  "files": [
+    {
+      "name": "Observational-Journal.xlsx",
+      "bytes": 19316,
+      "md5": "d3b79609fe54ac1ba0473fa555479426"
+    }
+  ]
+}

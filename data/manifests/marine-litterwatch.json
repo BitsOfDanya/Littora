@@ -1,0 +1,15 @@
+{
+  "key": "marine-litterwatch",
+  "title": "EEA Marine LitterWatch — мусор на пляжах, волонтёрские обследования",
+  "license": "CC-BY-4.0",
+  "source": "https://www.eea.europa.eu/themes/water/europes-seas-and-coasts/assessments/marine-litterwatch",
+  "retrieved": "2026-09-25",
+  "bytes": 68138373,
+  "files": [
+    {
+      "name": "marine-litterwatch-eea.zip",
+      "bytes": 68138373,
+      "md5": "bc582b1a8a9acdc42c05ccef02a654fb"
+    }
+  ]
+}

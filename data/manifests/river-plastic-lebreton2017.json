@@ -1,0 +1,20 @@
+{
+  "key": "river-plastic-lebreton2017",
+  "title": "Вынос пластика реками (Lebreton et al., 2017)",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.6084/m9.figshare.4725541.v6",
+  "retrieved": "2026-09-25",
+  "bytes": 26617672,
+  "files": [
+    {
+      "name": "PlasticRiverInputs.csv",
+      "bytes": 20852862,
+      "md5": "765b73263911fd4e364503a5d012a6ad"
+    },
+    {
+      "name": "PlasticRiverInputs.zip",
+      "bytes": 5764810,
+      "md5": "4b3167c75df6b1227839e6b1674d3cda"
+    }
+  ]
+}

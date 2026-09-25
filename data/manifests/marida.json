@@ -1,0 +1,19 @@
+{
+  "key": "marida",
+  "title": "MARIDA — Marine Debris Archive (Kikaki et al., 2022)",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.5281/zenodo.5151941",
+  "retrieved": "2026-09-25",
+  "bytes": 1164612748,
+  "files": [
+    {
+      "name": "MARIDA.zip",
+      "bytes": 1164612748,
+      "md5": "9bf32266f6e3711c9dfa3699b856c76f"
+    }
+  ],
+  "unpacked": {
+    "files": 4462,
+    "bytes": 4712219518
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "key": "mados",
+  "title": "MADOS — Marine Debris and Oil Spill (Kikaki et al., 2024)",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.5281/zenodo.10664073",
+  "retrieved": "2026-09-25",
+  "bytes": 4038418740,
+  "files": [
+    {
+      "name": "MADOS.zip",
+      "bytes": 4038418740,
+      "md5": "1076b25d2797be3095d82a61105c7380"
+    }
+  ],
+  "unpacked": {
+    "files": 56063,
+    "bytes": 5753203875
+  }
+}

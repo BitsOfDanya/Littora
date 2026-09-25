@@ -1,0 +1,25 @@
+{
+  "key": "adis-ocean-cleanup",
+  "title": "ADIS (The Ocean Cleanup): калиброванное обилие макропластика 2019–2024",
+  "license": "CC-BY-4.0",
+  "source": "https://doi.org/10.4121/ddede7f5-aca5-42ae-b851-e0bbb9a2c4c2",
+  "retrieved": "2026-09-25",
+  "bytes": 14657085,
+  "files": [
+    {
+      "name": "Objects.csv",
+      "bytes": 6682721,
+      "md5": "4a66306c0294505614ce89ed0413b763"
+    },
+    {
+      "name": "Readme.txt",
+      "bytes": 5379,
+      "md5": "864c3fe341f7764f864fde38b18aaf47"
+    },
+    {
+      "name": "Segments.csv",
+      "bytes": 7968985,
+      "md5": "ba97305806f04baf5588f71136c5bcba"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "key": "world-port-index",
+  "title": "World Port Index (NGA Pub 150)",
+  "license": "не указана",
+  "source": "https://msi.nga.mil/Publications/WPI",
+  "retrieved": "2026-09-25",
+  "bytes": 3508891,
+  "files": [
+    {
+      "name": "UpdatedPub150.csv",
+      "bytes": 3508891,
+      "md5": "b0f070d944a03ad7ad656e573928ac43"
+    }
+  ]
+}

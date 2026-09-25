@@ -1,0 +1,25 @@
+{
+  "key": "knaeps-spectra",
+  "title": "Гиперспектры сухого, мокрого и погружённого мусора (Knaeps et al., 2021)",
+  "license": "CC0-1.0",
+  "source": "https://doi.org/10.4121/12896312.v2",
+  "retrieved": "2026-09-25",
+  "bytes": 4856703,
+  "files": [
+    {
+      "name": "HYPER_mean.txt",
+      "bytes": 2472409,
+      "md5": "3274c24c7b7b6357f827be2ebf46e62e"
+    },
+    {
+      "name": "HYPER_stdev.txt",
+      "bytes": 2382223,
+      "md5": "10faef9b03390bbf9c3bc5d6bac602ca"
+    },
+    {
+      "name": "README.txt",
+      "bytes": 2071,
+      "md5": "9b9a873a297b55ee91cf5fe5f55e35d0"
+    }
+  ]
+}
