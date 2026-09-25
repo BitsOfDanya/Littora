@@ -153,7 +153,7 @@ docker compose down
 
 ## Продакшен и автодеплой
 
-Push в `main` запускает [GitHub Actions](.github/workflows/deploy.yml): workflow передаёт архив коммита на сервер и вызывает [deploy/deploy.sh](deploy/deploy.sh). Скрипт под блокировкой собирает образы, обновляет Compose, ждёт healthcheck обоих сервисов и проверяет главную страницу и `/api/v1/health`. При ошибке workflow завершается с ошибкой; номер успешно развернутого коммита записывается в `/opt/littora/deployed-revision`. Ручной запуск доступен через `workflow_dispatch`.
+Push в `main` запускает [GitHub Actions](.github/workflows/deploy.yml): workflow проверяет backend и frontend, затем передаёт архив коммита на сервер и вызывает [deploy/deploy.sh](deploy/deploy.sh). Скрипт под блокировкой собирает образы, обновляет Compose, ждёт healthcheck обоих сервисов и проверяет главную страницу и `/api/v1/health`. При ошибке workflow завершается с ошибкой; номер успешно развернутого коммита записывается в `/opt/littora/deployed-revision`. Ручной запуск доступен через `workflow_dispatch`.
 
 На сервере приложение доступно по `http://5.129.225.86/`. Backend слушает только `127.0.0.1:8000`. Настройки хранятся в `/opt/littora/shared/.env`, результаты анализов — в Docker volume `littora_analyses`. Для SSH деплоя используется отдельный пользователь `littora-deploy` и секрет GitHub Actions `LITTORA_DEPLOY_SSH_KEY_V2`.
 
