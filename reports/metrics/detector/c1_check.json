@@ -200,6 +200,189 @@
      }
     }
    }
+  },
+  "raunet__marida_mixed_c1__common": {
+   "rule": {
+    "source": "reports/metrics/detector/raunet__marida_mixed_c1__common.json",
+    "in_service": false,
+    "threshold": 0.025401383638381958,
+    "min_pixels": 2,
+    "sea_mask": {
+     "grow": -2,
+     "max_hole": 100
+    }
+   },
+   "val": {
+    "tolerant": {
+     "patches": 143,
+     "scenes": 6,
+     "c1": {
+      "precision": 0.9243027888446215,
+      "recall": 0.9805194805194806,
+      "f1": 0.9515815779108776,
+      "zones_on_debris": 232,
+      "zones_on_other_labels": 19,
+      "objects_found": 302,
+      "objects": 308
+     },
+     "c1_f1_ci95": [
+      0.9200589315626955,
+      0.9889710338140831
+     ],
+     "l2a": {
+      "precision": 0.9308943089430894,
+      "recall": 0.987012987012987,
+      "f1": 0.958132621321809,
+      "zones_on_debris": 229,
+      "zones_on_other_labels": 17,
+      "objects_found": 304,
+      "objects": 308
+     },
+     "l2a_f1_ci95": [
+      0.923962750478091,
+      0.9968847352024921
+     ],
+     "c1_minus_l2a_f1": -0.006551043410931379,
+     "c1_minus_l2a_f1_ci95": [
+      -0.010212913276787194,
+      -0.003903818915395485
+     ],
+     "pooled": {
+      "precision": 0.9275653923541247,
+      "recall": 0.9837662337662337,
+      "f1": 0.9548395476093636,
+      "zones_on_debris": 461,
+      "zones_on_other_labels": 36,
+      "objects_found": 606,
+      "objects": 616
+     },
+     "counts": {
+      "c1": [
+       232,
+       19,
+       302,
+       308
+      ],
+      "l2a": [
+       229,
+       17,
+       304,
+       308
+      ]
+     }
+    },
+    "strict": {
+     "patches": 0,
+     "scenes": 0
+    }
+   },
+   "test": {
+    "tolerant": {
+     "patches": 116,
+     "scenes": 5,
+     "c1": {
+      "precision": 0.9696969696969697,
+      "recall": 0.9850746268656716,
+      "f1": 0.977325312355391,
+      "zones_on_debris": 64,
+      "zones_on_other_labels": 2,
+      "objects_found": 66,
+      "objects": 67
+     },
+     "c1_f1_ci95": [
+      0.9623376623376624,
+      1.0
+     ],
+     "l2a": {
+      "precision": 0.9253731343283582,
+      "recall": 0.9552238805970149,
+      "f1": 0.9400615967780146,
+      "zones_on_debris": 62,
+      "zones_on_other_labels": 5,
+      "objects_found": 64,
+      "objects": 67
+     },
+     "l2a_f1_ci95": [
+      0.8740359897172236,
+      0.9841269841269841
+     ],
+     "c1_minus_l2a_f1": 0.0372637155773764,
+     "c1_minus_l2a_f1_ci95": [
+      0.00787301587301581,
+      0.10186404003582594
+     ],
+     "pooled": {
+      "precision": 0.9473684210526315,
+      "recall": 0.9701492537313433,
+      "f1": 0.9586235149528882,
+      "zones_on_debris": 126,
+      "zones_on_other_labels": 7,
+      "objects_found": 130,
+      "objects": 134
+     },
+     "counts": {
+      "c1": [
+       64,
+       2,
+       66,
+       67
+      ],
+      "l2a": [
+       62,
+       5,
+       64,
+       67
+      ]
+     }
+    },
+    "strict": {
+     "patches": 52,
+     "scenes": 2,
+     "c1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "iou": 1.0
+     },
+     "c1_f1_ci95": [
+      1.0,
+      1.0
+     ],
+     "l2a": {
+      "precision": 1.0,
+      "recall": 0.9393939393939394,
+      "f1": 0.96875,
+      "iou": 0.9393939393939394
+     },
+     "l2a_f1_ci95": [
+      0.8,
+      1.0
+     ],
+     "c1_minus_l2a_f1": 0.03125,
+     "c1_minus_l2a_f1_ci95": [
+      0.0,
+      0.19999999999999996
+     ],
+     "pooled": {
+      "precision": 1.0,
+      "recall": 0.9696969696969697,
+      "f1": 0.9846153846153847,
+      "iou": 0.9696969696969697
+     },
+     "counts": {
+      "c1": [
+       33,
+       0,
+       0
+      ],
+      "l2a": [
+       31,
+       0,
+       2
+      ]
+     }
+    }
+   }
   }
  }
 }
