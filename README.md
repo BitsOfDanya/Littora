@@ -736,6 +736,7 @@ C = N / A, где N — число предметов, A — обследова�
 |---|---|---|
 | анализ: район со статусом и концентрацией, зоны, полевые измерения | GeoJSON, CSV (столбцы `feature`, `id`, `value_kind`, `status`, `estimate_status`, `value`, `unit`, `lower`, `upper`, `target`, `measurement_profile`, `date`, `scene_id`, `longitude`, `latitude`, `area_km2`, `pixels`, `probability_max`, `probability_mean`, `note`) | панель анализа, `/api/v1/analyses/{id}/export.*` |
 | отметки команды | GeoJSON, CSV | `/api/v1/reviews/export.*` |
+| сценарий дрейфа зоны: облака 90 % и медианы по горизонтам, обратный дрейф, участки берега под риском | GeoJSON | режим «Прогноз», кнопка «GeoJSON» |
 | маршрут обследования | GPX | режим «Обследование» |
 | отчёт моделей | HTML, печать в PDF | режим «Модели», `/api/v1/models/report.html` |
 
