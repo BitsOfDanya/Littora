@@ -75,3 +75,25 @@ export async function apiRequest<Schema extends z.ZodType>(
   if (!parsed.success) throw new ApiContractError(url, parsed.error.issues);
   return parsed.data;
 }
+
+export async function apiUpload<Schema extends z.ZodType>(
+  path: string,
+  body: Blob,
+  schema: Schema,
+): Promise<z.infer<Schema>> {
+  const url = apiUrl(path);
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      method: "POST",
+      headers: { Accept: "application/json", "Content-Type": "application/octet-stream" },
+      body,
+    });
+  } catch (cause) {
+    throw new ApiUnreachableError(url, cause);
+  }
+  if (!response.ok) throw await readErrorResponse(response);
+  const parsed = schema.safeParse(await response.json());
+  if (!parsed.success) throw new ApiContractError(url, parsed.error.issues);
+  return parsed.data;
+}

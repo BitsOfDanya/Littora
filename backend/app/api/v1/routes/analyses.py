@@ -2,7 +2,7 @@ import datetime as dt
 import json
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, Request
 from fastapi.responses import FileResponse, Response
 from starlette.concurrency import run_in_threadpool
 
@@ -14,7 +14,9 @@ from app.analysis.service import (
     PROBABILITY_FILE,
     AnalysisRequest,
 )
+from app.analysis.upload import MAX_BYTES, UploadError
 from app.api.dependencies import AnalysisDep
+from app.api.v1.params import parse_bbox
 from app.core.errors import NotFoundError
 from app.schemas.analysis import AnalysisCreate
 
@@ -79,6 +81,21 @@ def read_mask(analysis_id: str, analysis: AnalysisDep) -> FileResponse:
 
 def _attachment(name: str) -> dict[str, str]:
     return {"Content-Disposition": f'attachment; filename="{name}"'}
+
+
+@router.post("/uploads", status_code=201)
+async def upload_image(
+    request: Request,
+    analysis: AnalysisDep,
+    name: Annotated[str, Query(max_length=120)] = "снимок",
+    bbox: Annotated[str | None, Query(max_length=120)] = None,
+    date: dt.date | None = None,
+) -> dict[str, Any]:
+    declared = request.headers.get("content-length")
+    if declared and declared.isdigit() and int(declared) > MAX_BYTES:
+        raise UploadError("Файл больше 150 МБ")
+    content = await request.body()
+    return await run_in_threadpool(analysis.analyze_upload, content, name, parse_bbox(bbox), date)
 
 
 @router.get("/concentration/domains")

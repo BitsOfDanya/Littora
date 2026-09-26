@@ -43,6 +43,14 @@ function RerunNote({
   const run = useRunAnalysis();
   const runStart = useAnalysisRunStart();
   const running = run.isPending || runStart !== null;
+  if (analysis.upload)
+    return (
+      <div className="rounded-[var(--radius-ctl)] bg-state-caution-wash px-2.5 py-2">
+        <p className="text-[12px] leading-4 text-state-caution">
+          {text} Это загруженный снимок — загрузите файл снова в разделе «Свой снимок».
+        </p>
+      </div>
+    );
   return (
     <div className="flex flex-col items-start gap-1.5 rounded-[var(--radius-ctl)] bg-state-caution-wash px-2.5 py-2">
       <p className="text-[12px] leading-4 text-state-caution">{text}</p>

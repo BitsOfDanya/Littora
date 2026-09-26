@@ -229,7 +229,6 @@ class OnnxDetector:
         return measure
 
     def detect(self, scene: Scene, area: BaseGeometry) -> DetectionOutcome:
-        manifest = self.manifest
         height, width = grid_size(scene, area)
         if height * width > self.max_pixels:
             return DetectionOutcome(
@@ -249,6 +248,13 @@ class OnnxDetector:
                 retryable=isinstance(error, RasterReadError),
             )
         timings["read_s"] = round(time.perf_counter() - started, 2)
+        return self.detect_stack(stack, timings)
+
+    def detect_stack(
+        self, stack: BandStack, timings: dict[str, float] | None = None
+    ) -> DetectionOutcome:
+        manifest = self.manifest
+        timings = {} if timings is None else timings
         started = time.perf_counter()
         raw = sliding(stack.image, self._run, manifest["patch"], manifest["stride"])
         tiles = len(

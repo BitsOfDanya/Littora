@@ -144,6 +144,16 @@ function sceneLayers(
         textureParameters: { minFilter: "nearest", magFilter: "nearest" },
       }),
     );
+  if (analysis.layers.anomalies)
+    layers.push(
+      new BitmapLayer<Anchored>({
+        id: `analysis:anomalies:${analysis.id}`,
+        ...UNDER_LABELS,
+        image: analysisFileUrl(analysis.id, "layers/anomalies.png"),
+        bounds: cornersForDeck(analysis.layers.anomalies.corners),
+        textureParameters: { minFilter: "nearest", magFilter: "nearest" },
+      }),
+    );
   if (showCoverage && coverage)
     layers.push(
       new BitmapLayer<Anchored>({

@@ -28,6 +28,7 @@ import {
   useSelectedZone,
   useSurveySceneDefault,
 } from "./use-analysis";
+import { UploadSection } from "./upload-section";
 import { ZoneDossier } from "./zone-dossier";
 
 function PanelHeader({
@@ -126,6 +127,7 @@ function AnalysisPanel() {
       footer={analysis ? <ExportBar analysis={analysis} /> : undefined}
     >
       <RequestSection analysis={analysis} />
+      <UploadSection />
       {analysis ? (
         <>
           <ResultSection analysis={analysis} />

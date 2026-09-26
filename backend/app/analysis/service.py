@@ -14,6 +14,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+from rasterio.warp import transform as transform_points
 from shapely.geometry import Point, box, mapping, shape
 from shapely.geometry.base import BaseGeometry
 
@@ -30,15 +32,20 @@ from app.analysis.models import (
 from app.analysis.pixels import PIXELS_FILE, read_pixel
 from app.analysis.statuses import STATUS_LABELS, ResultStatus, ValueKind
 from app.analysis.structures import OsmStructures, PortLike, annotate
+from app.analysis.upload import read_upload, rgb_anomalies
 from app.case.concentration import UNIT
 from app.case.repository import CaseRepository
 from app.core.errors import AppError, NotFoundError, NotImplementedYetError
 from app.earth.catalog import CatalogError, Scene, SceneCatalog
 from app.earth.raster import (
+    MASK_COLORS,
+    SCL_GROUPS,
     QualityShares,
     RasterError,
     RasterReadError,
     RenderedLayer,
+    encode_png,
+    layer_corners,
     quality_shares,
     render_quality_mask,
     render_true_color,
@@ -49,7 +56,10 @@ ANALYSIS_ID = re.compile(r"^[0-9a-f]{16}$")
 IMAGE_FILE = "image.png"
 MASK_FILE = "mask.png"
 PROBABILITY_FILE = "probability.png"
-EXTRA_LAYER_FILES = ("false_color.png", "fdi.png", "ndvi.png", "coverage.png")
+UPLOAD_MAX_PIXELS = 12_000_000
+UPLOAD_MIN_WATER = 0.05
+ANOMALY_FILE = "anomalies.png"
+EXTRA_LAYER_FILES = ("false_color.png", "fdi.png", "ndvi.png", "coverage.png", ANOMALY_FILE)
 RESULT_FILE = "result.json"
 CONDITIONS_FILE = "conditions.json"
 WAIT_SECONDS = 20.0
@@ -276,6 +286,11 @@ class AnalysisService:
         )
 
     def is_stale(self, result: dict[str, Any]) -> bool:
+        if result.get("upload") is not None:
+            return (
+                result.get("pipeline_version") != PIPELINE_VERSION
+                or result.get("models") != self.models()
+            )
         request = result.get("request") or {}
         scene = result.get("scene")
         try:
@@ -645,6 +660,182 @@ class AnalysisService:
             },
             "observations": self._observations(area, request.date, request.window_days),
             "messages": messages,
+        }
+        result = self._finite(result)
+        (folder / RESULT_FILE).write_text(
+            json.dumps(result, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8"
+        )
+        return {**result, "stale": False}
+
+    def analyze_upload(
+        self,
+        content: bytes,
+        name: str,
+        bbox: tuple[float, float, float, float] | None,
+        day: dt.date | None,
+    ) -> dict[str, Any]:
+        upload = read_upload(content, getattr(self.detector, "max_pixels", UPLOAD_MAX_PIXELS), bbox)
+        day = day or dt.datetime.now(dt.UTC).date()
+        target = self.config.primary_target
+        digest = hashlib.sha256(content)
+        digest.update(json.dumps([PIPELINE_VERSION, self.models(), day.isoformat(), bbox]).encode())
+        analysis_id = digest.hexdigest()[:16]
+        saved = self._saved(analysis_id)
+        if saved is not None:
+            return saved
+        started = time.perf_counter()
+        folder = self._folder(analysis_id)
+        folder.mkdir(parents=True, exist_ok=True)
+        west, south, east, north = upload.bounds
+        area = box(west, south, east, north)
+        height, width = upload.scl.shape
+        corners = layer_corners(upload.transform, upload.crs, height, width)
+        (folder / IMAGE_FILE).write_bytes(encode_png(upload.rgb))
+        mask = np.zeros((height, width, 4), dtype=np.uint8)
+        total = max(int(upload.valid.sum()), 1)
+        shares = {}
+        for group, codes in SCL_GROUPS.items():
+            inside = np.isin(upload.scl, codes)
+            mask[inside] = MASK_COLORS[group]
+            shares[group] = float((inside & upload.valid).sum()) / total
+        (folder / MASK_FILE).write_bytes(encode_png(mask))
+        layers: dict[str, Any] = {
+            "image": {"file": IMAGE_FILE, "corners": corners},
+            "mask": {"file": MASK_FILE, "corners": corners},
+        }
+        usable = upload.stack is not None and shares["water"] >= UPLOAD_MIN_WATER
+        reasons = [] if usable else ["детекция по этому файлу невозможна"]
+        quality = {
+            "pixels": total,
+            **shares,
+            "bright_water": None,
+            "usable": usable,
+            "reasons": reasons,
+        }
+        messages = list(upload.notes)
+        timings: dict[str, float] = {}
+        detect_stack = getattr(self.detector, "detect_stack", None)
+        upload_info: dict[str, Any] = {
+            "kind": "sentinel2" if upload.stack is not None else "visible",
+            "bands": upload.bands,
+            "anomalies": [],
+        }
+        if upload.stack is None:
+            overlay, anomalies = rgb_anomalies(upload.visible, upload.valid)
+            (folder / ANOMALY_FILE).write_bytes(encode_png(overlay))
+            layers["anomalies"] = {"file": ANOMALY_FILE, "corners": corners}
+            points = [
+                upload.transform * (item["col"] + 0.5, item["row"] + 0.5) for item in anomalies
+            ]
+            lons, lats = (
+                transform_points(upload.crs, "EPSG:4326", *map(list, zip(*points, strict=True)))
+                if points
+                else ([], [])
+            )
+            upload_info["anomalies"] = [
+                {
+                    "id": f"a-{rank}",
+                    "centroid": [round(lon, 6), round(lat, 6)],
+                    "pixels": item["pixels"],
+                    "contrast": item["contrast"],
+                }
+                for rank, (item, lon, lat) in enumerate(zip(anomalies, lons, lats, strict=True), 1)
+            ]
+            detection = DetectionOutcome(
+                status=ResultStatus.INSUFFICIENT_DATA,
+                reason="в файле нет 11 каналов Sentinel-2: по видимым каналам мусор не виден",
+            )
+        elif detect_stack is None:
+            detection = DetectionOutcome(
+                status=ResultStatus.INSUFFICIENT_DATA, reason="детектор не подключён"
+            )
+        elif not usable:
+            detection = DetectionOutcome(
+                status=ResultStatus.INSUFFICIENT_DATA, reason="воды на снимке меньше 5 %"
+            )
+        else:
+            detection = detect_stack(upload.stack)
+            messages.extend(self._annotate(detection.zones, area))
+            timings.update(detection.timings)
+            if detection.layer is not None:
+                (folder / PROBABILITY_FILE).write_bytes(detection.layer.png)
+                layers["probability"] = {"file": PROBABILITY_FILE, "corners": corners}
+            if detection.pixels is not None:
+                (folder / PIXELS_FILE).write_bytes(detection.pixels)
+            for key, extra in detection.extra_layers.items():
+                file = f"{key}.png"
+                (folder / file).write_bytes(extra.png)
+                layers[key] = {"file": file, "corners": corners}
+        concentration = self.concentration_model.estimate(
+            None, area, detection, EstimateContext(target.key, day)
+        )
+        overall = (
+            detection.status
+            if detection.status in (ResultStatus.DETECTED, ResultStatus.NOT_DETECTED)
+            else ResultStatus.INSUFFICIENT_DATA
+        )
+        label = f"Свой снимок · {name}"[:160]
+        result = {
+            "id": analysis_id,
+            "pipeline_version": PIPELINE_VERSION,
+            "retryable": False,
+            "models": self.models(),
+            "computed_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
+            "request": {
+                "aoi_id": None,
+                "aoi_name": label,
+                "bbox": [round(value, 5) for value in upload.bounds],
+                "date": day.isoformat(),
+                "window_days": 0,
+                "scene_id": None,
+                "target": target.key,
+            },
+            "area": mapping(area),
+            "target": {
+                "key": target.key,
+                "title": target.title,
+                "material": target.material,
+                "size_class": target.size_class,
+                "unit": UNIT,
+            },
+            "scene": {
+                "id": f"upload:{name}"[:120],
+                "collection": "upload",
+                "platform": "свой снимок",
+                "acquired_at": f"{day.isoformat()}T00:00:00.000Z",
+                "cloud_cover": None,
+                "tile": f"{upload.bands} кан.",
+                "relative_orbit": None,
+                "sun_elevation": None,
+                "water_percentage": round(shares["water"] * 100, 1),
+                "footprint": [round(value, 5) for value in upload.bounds],
+            },
+            "quality": quality,
+            "layers": layers,
+            "timings": {**timings, "total_s": round(time.perf_counter() - started, 2)},
+            "status": _status(overall),
+            "detection": {
+                **_status(detection.status),
+                "reason": detection.reason,
+                "model": detection.model,
+                "threshold": detection.threshold,
+                "zones": detection.zones,
+            },
+            "concentration": {
+                **_status(concentration.status),
+                "reason": concentration.reason,
+                "model": concentration.model,
+                "value": concentration.value,
+                "lower": concentration.lower,
+                "upper": concentration.upper,
+                "profile": concentration.profile,
+                "coverage": concentration.coverage,
+                "unit": UNIT,
+                "value_kind": ValueKind.MODEL_ESTIMATE.value,
+            },
+            "observations": self._observations(area, day, 3),
+            "messages": messages,
+            "upload": upload_info,
         }
         result = self._finite(result)
         (folder / RESULT_FILE).write_text(

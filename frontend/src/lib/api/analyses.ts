@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { BBox } from "@/domain/geo";
-import { apiRequest, apiUrl, withQuery } from "./client";
+import { apiRequest, apiUpload, apiUrl, withQuery } from "./client";
 import { observationSchema } from "./case";
 import { bboxSchema, geometrySchema, polygonSchema, positionSchema } from "./geojson";
 
@@ -114,8 +114,23 @@ export const analysisSchema = z.object({
     fdi: layerSchema.optional(),
     ndvi: layerSchema.optional(),
     coverage: layerSchema.optional(),
+    anomalies: layerSchema.optional(),
   }),
   timings: z.record(z.string(), z.number()).optional(),
+  upload: z
+    .object({
+      kind: z.enum(["sentinel2", "visible"]),
+      bands: z.number().int(),
+      anomalies: z.array(
+        z.object({
+          id: z.string(),
+          centroid: positionSchema,
+          pixels: z.number().int(),
+          contrast: z.number(),
+        }),
+      ),
+    })
+    .optional(),
   status: statusSchema,
   detection: statusSchema.extend({
     reason: z.string(),
@@ -210,7 +225,8 @@ export type AnalysisFile =
   | "layers/false_color.png"
   | "layers/fdi.png"
   | "layers/ndvi.png"
-  | "layers/coverage.png";
+  | "layers/coverage.png"
+  | "layers/anomalies.png";
 
 export const ANALYSIS_ID_PATTERN = /^[0-9a-f]{16}$/;
 
@@ -352,3 +368,16 @@ export type ConcentrationDomain = z.infer<typeof domainFeatureSchema>;
 
 export const getConcentrationDomains = (signal?: AbortSignal) =>
   apiRequest("/concentration/domains", domainCollectionSchema, { signal });
+
+export type UploadOptions = { name: string; bbox: BBox | null; date: string | null };
+
+export const uploadImage = (file: Blob, options: UploadOptions) =>
+  apiUpload(
+    withQuery("/uploads", {
+      name: options.name.slice(0, 120),
+      bbox: options.bbox ? options.bbox.map((value) => value.toFixed(5)).join(",") : null,
+      date: options.date,
+    }),
+    file,
+    analysisSchema,
+  );
