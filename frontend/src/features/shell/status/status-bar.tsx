@@ -46,13 +46,7 @@ function ApiItems() {
       <Cell className="px-0">
         <StatusPopover
           title="Сервер и модули анализа"
-          trigger={
-            <ApiStatusLabel
-              status={status}
-              versionClassName="hidden min-[1600px]:inline"
-              detailClassName="hidden min-[1600px]:inline"
-            />
-          }
+          trigger={<ApiStatusLabel status={status} detailClassName="hidden min-[1600px]:inline" />}
         >
           {details}
         </StatusPopover>

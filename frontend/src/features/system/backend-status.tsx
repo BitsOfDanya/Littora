@@ -89,18 +89,11 @@ function apiStatusParts({
 
 type ApiStatusLabelProps = {
   status: ApiStatus;
-  versionClassName?: string;
   detailClassName?: string;
   className?: string;
 };
 
-export function ApiStatusLabel({
-  status,
-  versionClassName,
-  detailClassName,
-  className,
-}: ApiStatusLabelProps) {
-  const reachable = status.state === "online" || status.state === "slow";
+export function ApiStatusLabel({ status, detailClassName, className }: ApiStatusLabelProps) {
   const { main, contact, retry } = apiStatusParts(status);
   return (
     <span
@@ -115,9 +108,6 @@ export function ApiStatusLabel({
       <span>{main}</span>
       {contact ? <span className={detailClassName}>· {contact}</span> : null}
       {retry ? <span>· {retry}</span> : null}
-      {reachable && status.health && versionClassName !== undefined ? (
-        <span className={versionClassName}>· v{status.health.version}</span>
-      ) : null}
     </span>
   );
 }
