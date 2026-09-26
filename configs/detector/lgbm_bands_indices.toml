@@ -1,0 +1,22 @@
+name = "lgbm_bands_indices"
+data = "marida_l2a"
+split = "common"
+seed = 42
+
+[features]
+indices = true
+local = false
+
+[labels]
+max_confidence_code = 3
+
+[model]
+kind = "lightgbm"
+n_estimators = 3000
+learning_rate = 0.03
+num_leaves = 63
+min_child_samples = 40
+subsample = 0.8
+subsample_freq = 1
+colsample_bytree = 0.8
+reg_lambda = 1.0

@@ -32,6 +32,7 @@ export function useLayerTruth(): LayerTruthResolver {
   return useCallback(
     (layer: LayerDefinition): LayerTruth => {
       if (layer.hasDemo && demoActive) return "demo";
+      if (layer.demoOnly) return "planned";
       if (!layer.capability || isAvailable(meta, layer.capability)) return "real";
       return "planned";
     },

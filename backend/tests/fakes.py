@@ -8,6 +8,7 @@ from shapely.geometry.base import BaseGeometry
 
 from app.analysis.models import DetectionOutcome
 from app.analysis.statuses import ResultStatus
+from app.drift.forcing import Domain, Forcing, ForcingError, hourly
 from app.earth.catalog import CatalogError, Scene
 from app.earth.raster import QualityShares, RenderedLayer, encode_png
 
@@ -114,3 +115,63 @@ class FakeDetector:
             model=self.name,
             zones=[zone],
         )
+
+
+def uniform_forcing(
+    domain: Domain,
+    start: dt.datetime,
+    end: dt.datetime,
+    current: tuple[float, float] = (0.0, 0.0),
+    stokes: tuple[float, float] = (0.0, 0.0),
+    wind: tuple[float, float] = (0.0, 0.0),
+    step: float = 0.1,
+) -> Forcing:
+    lats = np.arange(domain.south, domain.north + step, step)
+    lons = np.arange(domain.west, domain.east + step, step)
+    shape = (len(hourly(start, end)), lats.size, lons.size, 2)
+
+    def constant(vector: tuple[float, float]) -> np.ndarray:
+        return np.broadcast_to(np.array(vector, dtype=float), shape).copy()
+
+    return Forcing(
+        start=start,
+        lons=lons,
+        lats=lats,
+        current=constant(current),
+        stokes=constant(stokes),
+        wind=constant(wind),
+        water=np.ones(shape[1:3], dtype=bool),
+        provenance={
+            "currents": {"available": True, "source": "fake"},
+            "waves": {"available": True, "source": "fake"},
+            "wind": {"available": True, "source": "fake wind"},
+            "fetched_at": "2024-06-10T00:00:00+00:00",
+        },
+    )
+
+
+class FakeForcing:
+    def __init__(
+        self,
+        current: tuple[float, float] = (0.1, 0.0),
+        stokes: tuple[float, float] = (0.02, 0.0),
+        wind: tuple[float, float] = (5.0, 0.0),
+        fail: bool = False,
+        fail_wide: bool = False,
+    ) -> None:
+        self.current = current
+        self.stokes = stokes
+        self.wind = wind
+        self.fail = fail
+        self.fail_wide = fail_wide
+        self.calls = 0
+        self.limits: list[dict[str, int]] = []
+        self.domains: list[Domain] = []
+
+    def load(self, domain: Domain, start: dt.datetime, end: dt.datetime, **limits: int) -> Forcing:
+        self.calls += 1
+        self.limits.append(limits)
+        self.domains.append(domain)
+        if self.fail or (limits and self.fail_wide):
+            raise ForcingError("нет связи")
+        return uniform_forcing(domain, start, end, self.current, self.stokes, self.wind)

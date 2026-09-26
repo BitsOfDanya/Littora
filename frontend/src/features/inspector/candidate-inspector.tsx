@@ -2,6 +2,7 @@
 
 import { findAoi } from "@/config/aois";
 import { useCandidates } from "@/data/candidates";
+import { useAnalysisZones } from "@/features/analysis/use-analysis";
 import { ShellSlot } from "@/features/shell/shell-slots";
 import { useWorkspaceStore } from "@/state/workspace-store";
 import { Button } from "@/ui/button";
@@ -43,8 +44,10 @@ function PlannedDossier({ candidateId }: { candidateId: string }) {
 export function CandidateInspector() {
   const selectedId = useWorkspaceStore((state) => state.selectedCandidateId);
   const candidates = useCandidates();
+  const zones = useAnalysisZones();
 
   if (!selectedId) return null;
+  if (zones?.zones.some((zone) => zone.id === selectedId)) return null;
   if (candidates.origin === "none")
     return (
       <ShellSlot region="inspector">

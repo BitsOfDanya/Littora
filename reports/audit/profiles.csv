@@ -1,0 +1,13 @@
+source_id,measurement_profile,target_scope,material,size_class,rows,events,rows_per_event,concentration_present,concentration_missing,zeros,mean,coefficient_of_variation,dates,survey_days,clusters_25km,clusters_100km,time_known,median,q90,sampled_area_km2
+S1_GPGP2018,S1_aerial_GT50,plastic_category,plastic,>50 cm (megaplastic),81,30,2.7,81,0,2,0.653,1.134,2016-10-02 .. 2016-10-06,2,30,1,0,0.378,1.51,
+S1_GPGP2018,S1_aerial_GT50,total_plastic,plastic,>50 cm (megaplastic),16,16,1.0,1,15,1,0.0,,2016-10-02 .. 2016-10-06,2,16,2,0,0.0,0.0,
+S1_GPGP2018,S1_trawl_5_to_50,total_plastic,plastic,5-50 cm (macroplastic),83,83,1.0,83,0,0,708.81,0.71,2015-07-25 .. 2015-08-18,24,76,11,83,633.667,1412.176,
+S1_GPGP2018,S1_trawl_GT5_F,plastic_category,foamed plastic (including EPS),>5 cm (macro+mega),6,6,1.0,6,0,0,16.404,0.458,2015-08-01 .. 2015-08-17,6,6,6,6,16.581,23.652,
+S1_GPGP2018,S1_trawl_GT5_H,plastic_category,plastic,>5 cm (macro+mega),70,70,1.0,70,0,0,471.111,0.749,2015-07-25 .. 2015-08-17,22,46,17,70,346.783,1039.535,
+S1_GPGP2018,S1_trawl_GT5_N,plastic_category,plastic,>5 cm (macro+mega),94,94,1.0,94,0,0,290.694,1.003,2015-07-27 .. 2015-08-18,22,56,18,94,203.712,648.824,
+S2_SARGASSO_MSM41,S2_visual_GT2,plastic_category,expanded polystyrene (EPS),>2 cm (macro),7,7,1.0,7,0,0,5.08,0.294,2015-04-02 .. 2015-04-22,6,7,7,7,4.317,6.815,
+S2_SARGASSO_MSM41,S2_visual_GT2,plastic_category,plastic,>2 cm (macro),63,63,1.0,63,0,0,52.754,0.817,2015-04-01 .. 2015-04-26,26,61,22,63,36.092,100.29,
+S2_SARGASSO_MSM41,S2_visual_GT2,total_plastic,plastic (all polymers),>2 cm (macro),63,63,1.0,63,0,0,53.319,0.811,2015-04-01 .. 2015-04-26,26,61,22,63,36.092,100.29,
+S3_SE_NORTH_SEA,S3_visual_GT2,all_litter,mixed (predominantly plastic),>2 cm (macro),41,41,1.0,41,0,0,34.702,1.017,2014-04-03 .. 2016-04-10,12,9,1,41,29.5,52.3,
+S3_SE_NORTH_SEA,S3_visual_GT2,fisheries_litter_category,plastic (fishing gear),>2 cm (macro),41,41,1.0,41,0,35,1.191,2.639,2014-04-03 .. 2016-04-10,12,9,1,41,0.0,4.745,
+S4_BLACK_SEA_DOORS3,S4_visual_GT2_5,all_litter,mixed (predominantly plastic),>2.5 cm (macro),33,33,1.0,33,0,0,290.451,0.8,2024-06-02 .. 2024-06-18,12,14,5,0,224.92,597.874,

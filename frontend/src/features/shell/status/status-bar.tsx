@@ -21,7 +21,8 @@ import { CoordinateFormatSeg, CoordinateText, ScaleText, ZoomText } from "./coor
 import { SourcesItem } from "./sources";
 import { StatusPopover } from "./status-popover";
 
-const DEFAULT_HINT = "Колесо — масштаб · перетаскивание — сдвиг";
+const DEFAULT_HINT =
+  "Колесо — масштаб · перетаскивание — сдвиг · I — лупа по пикселю · R — линейка";
 
 function Cell({ children, className }: { children: ReactNode; className?: string }) {
   return (
@@ -59,10 +60,10 @@ function ApiItems() {
       <Cell className="hidden px-0 lg:flex">
         <StatusPopover
           title="Сервер и модули анализа"
-          triggerLabel={`Модули анализа: подключено ${capabilities.availableCount} из ${capabilities.total}`}
+          triggerLabel={`Функции сервиса: работают ${capabilities.availableCount} из ${capabilities.total}`}
           trigger={
             <span>
-              Модули{" "}
+              Функции{" "}
               <span className="font-mono text-text-primary">
                 {capabilities.status === "ready" ? capabilities.availableCount : "—"} /{" "}
                 {capabilities.total}
@@ -120,7 +121,7 @@ function QueueItem() {
 function DemoItem() {
   const enabled = useWorkspaceStore((state) => state.demoFixtures);
   const candidates = useCandidates();
-  if (!enabled) return <Cell className="text-text-tertiary">Фикстуры скрыты</Cell>;
+  if (!enabled) return null;
   return (
     <Cell>
       <DemoTag />
@@ -157,7 +158,7 @@ function KeysItem() {
       aria-keyshortcuts="Shift+Slash"
       className="hidden h-full shrink-0 items-center gap-1 px-1.5 hover:bg-surface-raised hover:text-text-primary lg:flex"
     >
-      <span className="font-mono text-text-primary">?</span> Клавиши
+      <span className="font-mono text-text-primary">?</span> Помощь
     </button>
   );
 }

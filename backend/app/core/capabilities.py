@@ -37,13 +37,29 @@ SERVICE_CAPABILITIES = frozenset(
 
 
 def capability_status(
-    detector_ready: bool = False, concentration_ready: bool = False
+    detector_ready: bool = False,
+    concentration_ready: bool = False,
+    drift_ready: bool = False,
+    evaluation_ready: bool = False,
+    survey_ready: bool = False,
 ) -> dict[CapabilityKey, CapabilityStatus]:
     available = set(SERVICE_CAPABILITIES)
     if detector_ready:
-        available |= {CapabilityKey.DEBRIS_DETECTION, CapabilityKey.SEGMENTATION}
+        available |= {
+            CapabilityKey.DEBRIS_DETECTION,
+            CapabilityKey.SEGMENTATION,
+            CapabilityKey.CHANGE_TRACKING,
+            CapabilityKey.COVERAGE_ESTIMATION,
+            CapabilityKey.SPECTRAL_COMPOSITES,
+        }
     if concentration_ready:
         available.add(CapabilityKey.CONCENTRATION_MODEL)
+    if drift_ready:
+        available.add(CapabilityKey.DRIFT_FORECAST)
+    if evaluation_ready:
+        available.add(CapabilityKey.MODEL_EVALUATION)
+    if survey_ready:
+        available.add(CapabilityKey.SURVEY_PLANNING)
     return {
         key: CapabilityStatus.AVAILABLE if key in available else CapabilityStatus.PLANNED
         for key in CapabilityKey

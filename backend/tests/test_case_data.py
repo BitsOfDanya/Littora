@@ -1,7 +1,9 @@
 import math
 from collections import Counter
+from dataclasses import replace
 
 import pytest
+from shapely.geometry import box
 
 from app.case.concentration import (
     CheckStatus,
@@ -10,8 +12,16 @@ from app.case.concentration import (
     strip_area_km2,
 )
 from app.case.data import CaseData, load_case_data
-from app.case.geometry import FootprintKind, area_km2, build_footprint, distance_km
-from app.case.selection import SelectionReason
+from app.case.geometry import (
+    FootprintKind,
+    MissingPositionError,
+    area_km2,
+    build_footprint,
+    distance_km,
+)
+from app.case.records import CaseRecord
+from app.case.registry import selection_summary
+from app.case.selection import SelectionReason, select_record
 from app.core.config import Settings
 
 
@@ -77,15 +87,75 @@ def _record(case: CaseData, event_id: str):
 
 
 def test_point_footprint_for_black_sea_transects(case: CaseData) -> None:
-    footprint = build_footprint(_record(case, "S4:DOORS3:T1"), 2000.0, 100.0)
+    rules = case.config.pairing
+    record = _record(case, "S4:DOORS3:T1")
+    footprint = build_footprint(record, rules.unknown_extent_buffer_m, rules.min_strip_width_m)
+    radius_km = rules.unknown_extent_buffer_m / 1000
     assert footprint.kind is FootprintKind.POINT
-    assert footprint.analysis_area_km2 == pytest.approx(math.pi * 4, rel=0.03)
+    assert footprint.radius_m == rules.unknown_extent_buffer_m
+    assert footprint.analysis_area_km2 == pytest.approx(math.pi * radius_km**2, rel=0.03)
 
 
 def test_strip_footprint_keeps_the_surveyed_width(case: CaseData) -> None:
     record = _record(case, "S3:HE419_MarLitter_transect01")
-    footprint = build_footprint(record, 2000.0, 100.0)
+    footprint = build_footprint(record, 6000.0, 100.0)
     assert footprint.kind is FootprintKind.STRIP
+    assert footprint.radius_m == 50.0
     start, end = record.segment
     expected = distance_km(start, end) * 0.1 + math.pi * 0.05**2
     assert area_km2(footprint.analysis) == pytest.approx(expected, rel=0.02)
+
+
+def test_footprint_without_coordinates_is_reported() -> None:
+    record = CaseRecord({"sample_id": "X-1", "event_id": "X:1"})
+    with pytest.raises(MissingPositionError):
+        build_footprint(record, 6000.0, 100.0)
+
+
+def test_footprint_coverage_by_a_scene(case: CaseData) -> None:
+    record = _record(case, "S4:DOORS3:T1")
+    footprint = build_footprint(record, 6000.0, 100.0)
+    lon, lat = record.position
+    assert footprint.covered_by(box(lon - 1, lat - 1, lon + 1, lat + 1)) == 1.0
+    assert footprint.covered_by(box(lon, lat - 1, lon + 1, lat + 1)) == pytest.approx(0.5, abs=0.01)
+    assert footprint.covered_by(box(lon + 1, lat + 1, lon + 2, lat + 2)) == 0.0
+
+
+def _mismatch_record() -> CaseRecord:
+    return CaseRecord(
+        {
+            "sample_id": "MM-1",
+            "event_id": "MM:1",
+            "source_id": "MM",
+            "record_type": "transect_density",
+            "measurement_profile": "S2_visual_GT2",
+            "target_scope": "total_plastic",
+            "concentration_items_km2": "100",
+            "density_numerator_items": "30",
+            "sampled_area_km2": "0.2",
+        }
+    )
+
+
+def test_mismatch_is_kept_unless_the_flag_is_set(case: CaseData) -> None:
+    record = _mismatch_record()
+    kept = select_record(record, case.config)
+    assert kept.check.status is CheckStatus.MISMATCH
+    assert kept.reason is SelectionReason.ACCEPTED
+    strict = replace(case.config, selection=replace(case.config.selection, reject_on_mismatch=True))
+    rejected = select_record(record, strict)
+    assert rejected.reason is SelectionReason.CONCENTRATION_MISMATCH
+    assert rejected.target_key == "plastic-visual"
+    assert "50.0 %" in rejected.label
+
+
+def test_summary_reports_verifiable_share_per_target(case: CaseData) -> None:
+    targets = {
+        item["key"]: item for item in selection_summary(case.config, case.selections)["targets"]
+    }
+    litter = targets["litter-visual"]
+    assert litter["records"] == 74
+    assert litter["verifiable_records"] == 41
+    assert litter["verifiable_share"] == pytest.approx(41 / 74, abs=1e-4)
+    assert litter["concentration_checks"]["published_only"] == 33
+    assert sum(litter["concentration_checks"].values()) == litter["records"]

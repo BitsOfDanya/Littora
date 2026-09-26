@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { useCandidates } from "@/data/candidates";
+import { useCapability } from "@/features/system/use-capabilities";
 import { cn } from "@/ui/cn";
 import { DemoTag } from "@/ui/demo-mark";
 import { IconSocket } from "@/ui/icons";
@@ -10,13 +11,15 @@ type StampVariant = "demo" | "planned";
 
 const STAMP_COPY: Readonly<Record<StampVariant, { lead: string; tail: string }>> = {
   demo: { lead: "Демо-объекты на карте", tail: "не результат модели" },
-  planned: { lead: "Детекция не подключена", tail: "реальные: подложка, граница района, сетка" },
+  planned: { lead: "Детектор не подключён", tail: "реальные: снимок, маска качества, измерения" },
 };
 
 function useStampVariant(): StampVariant | null {
   const origin = useCandidates().origin;
+  const detector = useCapability("debris_detection");
   if (origin === "api") return null;
-  return origin === "demo" ? "demo" : "planned";
+  if (origin === "demo") return "demo";
+  return detector === "available" ? null : "planned";
 }
 
 type MapStampProps = { align: "center" | "start"; style: CSSProperties };

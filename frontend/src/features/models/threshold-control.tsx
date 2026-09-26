@@ -5,7 +5,7 @@ import type { ModelEvaluation } from "@/data/models";
 import { Button } from "@/ui/button";
 import { PR_COPY } from "./copy";
 import { DASH, formatShare } from "./format";
-import { f1Score, pointAtThreshold, snapThreshold, thresholdRange } from "./pr-math";
+import { curveOf, f1Score, pointAtThreshold, snapThreshold, thresholdRange } from "./pr-math";
 import styles from "./report.module.css";
 
 type ThresholdControlProps = {
@@ -16,10 +16,14 @@ type ThresholdControlProps = {
 
 export function ThresholdControl({ model, threshold, onThreshold }: ThresholdControlProps) {
   const inputId = useId();
-  const curve = model?.prCurve ?? null;
+  const curve = curveOf(model);
   const [min, max] = curve ? thresholdRange(curve) : [0, 1];
-  const value = threshold ?? 0.5;
-  const point = curve ? pointAtThreshold(curve, value) : null;
+  const value = threshold ?? model?.threshold ?? 0.5;
+  const point = curve
+    ? pointAtThreshold(curve, value)
+    : model
+      ? { threshold: model.threshold, ...model.metrics }
+      : null;
   const fill = `${(((value - min) / (max - min || 1)) * 100).toFixed(1)}%`;
   const changed =
     model !== null && threshold !== null && Math.abs(threshold - model.threshold) > 0.001;
@@ -50,7 +54,7 @@ export function ThresholdControl({ model, threshold, onThreshold }: ThresholdCon
         className={`min-w-[140px] flex-1 ${styles.range}`}
       />
       <output htmlFor={inputId} className="w-9 font-mono text-[13px] font-medium text-text-primary">
-        {curve ? formatShare(value) : DASH}
+        {curve || model ? formatShare(value) : DASH}
       </output>
       <output
         htmlFor={inputId}
@@ -73,14 +77,17 @@ export function ThresholdControl({ model, threshold, onThreshold }: ThresholdCon
 }
 
 export function PrLegend({ model }: { model: ModelEvaluation | null }) {
+  const curve = curveOf(model);
   return (
     <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 pl-[44px] text-[12px] leading-4 text-text-tertiary max-md:pl-0">
-      <li className="inline-flex items-center gap-1.5">
-        <svg width={18} height={8} aria-hidden>
-          <path d="M1 4H17" strokeWidth={2} className="stroke-text-primary" />
-        </svg>
-        {PR_COPY.legendCurve}
-      </li>
+      {curve ? (
+        <li className="inline-flex items-center gap-1.5">
+          <svg width={18} height={8} aria-hidden>
+            <path d="M1 4H17" strokeWidth={2} className="stroke-text-primary" />
+          </svg>
+          {PR_COPY.legendCurve}
+        </li>
+      ) : null}
       <li className="inline-flex items-center gap-1.5">
         <svg width={10} height={10} aria-hidden>
           <circle
@@ -94,12 +101,14 @@ export function PrLegend({ model }: { model: ModelEvaluation | null }) {
         {PR_COPY.legendOperating}
         {model ? <span className="font-mono">{formatShare(model.threshold)}</span> : null}
       </li>
-      <li className="inline-flex items-center gap-1.5">
-        <svg width={10} height={10} aria-hidden>
-          <circle cx={5} cy={5} r={4} className="fill-accent-selection" />
-        </svg>
-        {PR_COPY.legendChosen}
-      </li>
+      {curve ? (
+        <li className="inline-flex items-center gap-1.5">
+          <svg width={10} height={10} aria-hidden>
+            <circle cx={5} cy={5} r={4} className="fill-accent-selection" />
+          </svg>
+          {PR_COPY.legendChosen}
+        </li>
+      ) : null}
       <li className="inline-flex items-center gap-1.5">
         <svg width={18} height={8} aria-hidden>
           <path

@@ -22,7 +22,8 @@ export const STATUS_TONES: Record<ResultStatus, StatusTone> = {
 export const STATUS_HINTS: Record<ResultStatus, string> = {
   detected: "модель нашла зоны плавающего мусора на снимке",
   not_detected: "снимок пригоден, модель зон мусора не нашла",
-  insufficient_data: "нет пригодного снимка или не подключена модель — вывода нет",
+  insufficient_data:
+    "вывода нет: снимок непригоден, район не подходит детектору или модель не подключена",
   research_estimate: "значение получено, но перенос на снимки не подтверждён",
   concentration_unavailable: "значение шт./км² по снимку не выдаётся",
 };

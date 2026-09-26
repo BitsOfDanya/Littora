@@ -1,0 +1,201 @@
+zone_id,aoi,scene_id,date,lon,lat,pixels,probability_max,scl_at_centroid,stratum,crop,class,confidence,comment,reviewer
+anapa-005,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.287673,44.915862,2,0.9985,вода,мелкая (2–3 пикс.),crops/anapa-005.png,ship,2,compact bright point,team
+anapa-006,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.267197,44.953875,5,0.9983,вода,крупная (≥4 пикс.),crops/anapa-006.png,ship,3,судно с заметным следом,team
+anapa-007,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.156953,45.040235,11,0.9982,вода,крупная (≥4 пикс.),crops/anapa-007.png,water,3,чистая тёмная вода,team
+anapa-008,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.158421,45.041408,4,0.9979,вода,крупная (≥4 пикс.),crops/anapa-008.png,plume,2,диффузная зелёная взвесь,team
+anapa-010,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.15873,45.041683,2,0.9962,вода,мелкая (2–3 пикс.),crops/anapa-010.png,plume,2,обширная мутная взвесь,team
+anapa-013,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.157568,45.040701,5,0.9862,вода,крупная (≥4 пикс.),crops/anapa-013.png,water,3,чистая тёмная вода,team
+anapa-015,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.293621,44.901098,4,0.9793,вода,крупная (≥4 пикс.),crops/anapa-015.png,ship,2,compact bright point,team
+anapa-018,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.296235,44.903372,3,0.9604,вода,мелкая (2–3 пикс.),crops/anapa-018.png,ship,2,compact bright point in haze,team
+anapa-019,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.292588,44.899642,2,0.8281,вода,мелкая (2–3 пикс.),crops/anapa-019.png,unknown,1,неясная слабая аномалия,team
+anapa-020,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.295904,44.920306,2,0.709,вода,мелкая (2–3 пикс.),crops/anapa-020.png,ship,2,compact bright point through thin cloud,team
+anapa-021,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.156468,45.037978,4,0.5992,вода,крупная (≥4 пикс.),crops/anapa-021.png,water,3,центр на воде,team
+anapa-022,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.156495,45.037461,9,0.5236,вода,крупная (≥4 пикс.),crops/anapa-022.png,water,3,центр на тёмной воде,team
+anapa-025,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.229905,45.013643,4,0.4071,вода,крупная (≥4 пикс.),crops/anapa-025.png,land_edge,3,береговая граница в центре,team
+anapa-029,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.329071,44.933534,5,0.3306,вода,крупная (≥4 пикс.),crops/anapa-029.png,land_edge,3,береговая линия с растительностью,team
+anapa-032,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.245598,45.045166,5,0.2813,вода,крупная (≥4 пикс.),crops/anapa-032.png,water,3,центр на воде вдали от края,team
+anapa-033,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.303163,44.863071,2,0.278,вода,мелкая (2–3 пикс.),crops/anapa-033.png,cloud_edge,2,яркая точка на краю тонкой облачности,team
+anapa-034,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.180726,45.027723,4,0.2402,вода,крупная (≥4 пикс.),crops/anapa-034.png,land_edge,3,береговая граница в центре,team
+anapa-038,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.158003,45.040591,2,0.2186,вода,мелкая (2–3 пикс.),crops/anapa-038.png,water,3,однородная тёмная вода,team
+anapa-039,anapa,S2B_37TCK_20250904_0_L2A,2025-09-04,37.253284,45.04713,2,0.1839,вода,мелкая (2–3 пикс.),crops/anapa-039.png,water,3,центр на воде ниже берега,team
+don-delta-001,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.133189,47.189081,6,0.9998,вода,крупная (≥4 пикс.),crops/don-delta-001.png,ship,2,bright compact object in turbid water,team
+don-delta-002,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.076069,47.131075,5,0.9997,вода,крупная (≥4 пикс.),crops/don-delta-002.png,unknown,1,объект неразличим,team
+don-delta-003,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.067952,47.115216,4,0.9994,вода,крупная (≥4 пикс.),crops/don-delta-003.png,unknown,1,неясная слабая отметка,team
+don-delta-005,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.083757,47.070579,7,0.9911,вода,крупная (≥4 пикс.),crops/don-delta-005.png,ship,2,яркий вытянутый объект,team
+don-delta-006,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.221112,47.137528,5,0.9891,вода,крупная (≥4 пикс.),crops/don-delta-006.png,unknown,1,неоднозначная тёмная текстура,team
+don-delta-008,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.134115,47.079694,5,0.9788,вода,крупная (≥4 пикс.),crops/don-delta-008.png,ship,2,elongated bright object ~ship-sized,team
+don-delta-011,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.215008,47.145644,3,0.9665,вода,мелкая (2–3 пикс.),crops/don-delta-011.png,unknown,1,слабая тёмная точка,team
+don-delta-022,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.19685,47.181041,6,0.896,вода,крупная (≥4 пикс.),crops/don-delta-022.png,plume,2,диффузная полоса взвеси,team
+don-delta-023,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.226576,47.171008,9,0.8834,вода,крупная (≥4 пикс.),crops/don-delta-023.png,plume,2,неоднородный шлейф взвеси,team
+don-delta-026,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.203935,47.181539,3,0.8201,вода,мелкая (2–3 пикс.),crops/don-delta-026.png,unknown,1,объект неотделим от фона,team
+don-delta-027,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.217937,47.222021,6,0.8065,вода,крупная (≥4 пикс.),crops/don-delta-027.png,plume,2,широкая мутная полоса,team
+don-delta-030,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.228818,47.172328,4,0.7938,вода,крупная (≥4 пикс.),crops/don-delta-030.png,unknown,1,неясная центральная отметка,team
+don-delta-033,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.217041,47.212844,2,0.7812,вода,мелкая (2–3 пикс.),crops/don-delta-033.png,plume,2,диффузная полоса взвеси,team
+don-delta-036,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.209678,47.170835,4,0.7207,вода,крупная (≥4 пикс.),crops/don-delta-036.png,unknown,1,dark mottled spot in green turbid water,team
+don-delta-038,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.196981,47.180666,2,0.7083,вода,мелкая (2–3 пикс.),crops/don-delta-038.png,unknown,1,неоднозначная тёмная отметка,team
+don-delta-039,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.199885,47.180931,2,0.677,вода,мелкая (2–3 пикс.),crops/don-delta-039.png,unknown,1,объект неразличим в полосе,team
+don-delta-040,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.219675,47.221733,3,0.6703,вода,мелкая (2–3 пикс.),crops/don-delta-040.png,unknown,1,неясный тёмный фрагмент,team
+don-delta-041,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.2146,47.213389,4,0.6445,вода,крупная (≥4 пикс.),crops/don-delta-041.png,unknown,1,dark mottled spot in green turbid water,team
+don-delta-043,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.206459,47.133686,5,0.6147,вода,крупная (≥4 пикс.),crops/don-delta-043.png,unknown,1,dark mottled spot in green turbid water,team
+don-delta-045,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.216952,47.214111,7,0.6007,вода,крупная (≥4 пикс.),crops/don-delta-045.png,plume,2,размытая граница взвеси,team
+don-delta-046,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.218006,47.211958,3,0.5937,вода,мелкая (2–3 пикс.),crops/don-delta-046.png,plume,2,широкая тёмная полоса,team
+don-delta-047,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.235923,47.123002,2,0.5911,вода,мелкая (2–3 пикс.),crops/don-delta-047.png,unknown,1,неоднородный мелководный фон,team
+don-delta-048,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.263379,47.200944,3,0.5872,вода,мелкая (2–3 пикс.),crops/don-delta-048.png,structure,2,яркий объект у пересечения каналов,team
+don-delta-050,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.242011,47.250039,5,0.5628,вода,крупная (≥4 пикс.),crops/don-delta-050.png,land_edge,3,смешанный пиксель у берега с прибоем,team
+don-delta-052,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.211097,47.129439,4,0.5555,вода,крупная (≥4 пикс.),crops/don-delta-052.png,unknown,1,точка сливается с пятнами,team
+don-delta-053,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.282825,47.145244,7,0.5424,вода,крупная (≥4 пикс.),crops/don-delta-053.png,land_edge,3,центр на береговой кромке,team
+don-delta-054,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.205582,47.135298,4,0.5367,вода,крупная (≥4 пикс.),crops/don-delta-054.png,unknown,1,dark mottled spot in green turbid water,team
+don-delta-056,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.208069,47.13048,6,0.5151,вода,крупная (≥4 пикс.),crops/don-delta-056.png,unknown,1,dark mottled spot in green turbid water,team
+don-delta-057,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.208805,47.133313,2,0.5146,вода,мелкая (2–3 пикс.),crops/don-delta-057.png,unknown,1,dark mottled spot in green turbid water,team
+don-delta-062,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.225185,47.171256,2,0.4418,вода,мелкая (2–3 пикс.),crops/don-delta-062.png,unknown,1,объект неразличим,team
+don-delta-069,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.216051,47.213116,2,0.3743,вода,мелкая (2–3 пикс.),crops/don-delta-069.png,plume,2,диффузная мутная полоса,team
+don-delta-071,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.21491,47.126643,2,0.3668,вода,мелкая (2–3 пикс.),crops/don-delta-071.png,unknown,1,dark mottled spot in green turbid water,team
+don-delta-073,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.208884,47.170252,2,0.3229,вода,мелкая (2–3 пикс.),crops/don-delta-073.png,unknown,1,неясная центральная точка,team
+don-delta-076,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.281978,47.205999,3,0.3076,вода,мелкая (2–3 пикс.),crops/don-delta-076.png,land_edge,3,центр у берегового выступа,team
+don-delta-078,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.239082,47.121825,2,0.2997,вода,мелкая (2–3 пикс.),crops/don-delta-078.png,water,3,объектов в центре нет,team
+don-delta-082,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.240605,47.123397,2,0.2881,вода,мелкая (2–3 пикс.),crops/don-delta-082.png,water,3,чистая вода в центре,team
+don-delta-085,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.216755,47.207626,4,0.2744,вода,крупная (≥4 пикс.),crops/don-delta-085.png,unknown,1,неоднозначная донная текстура,team
+don-delta-086,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.216784,47.214689,3,0.2719,вода,мелкая (2–3 пикс.),crops/don-delta-086.png,unknown,1,тёмная отметка сливается с фоном,team
+don-delta-090,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.216769,47.211045,2,0.2315,вода,мелкая (2–3 пикс.),crops/don-delta-090.png,plume,2,диффузная тёмная полоса,team
+don-delta-093,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.232519,47.098083,2,0.2238,вода,мелкая (2–3 пикс.),crops/don-delta-093.png,water,2,объектов в центре не видно,team
+don-delta-095,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.219651,47.221343,2,0.2114,вода,мелкая (2–3 пикс.),crops/don-delta-095.png,unknown,1,неясная линейная отметка,team
+don-delta-096,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.228084,47.17044,2,0.2089,вода,мелкая (2–3 пикс.),crops/don-delta-096.png,unknown,1,объект сливается с текстурой,team
+don-delta-097,don-delta,S2A_37TEN_20250829_0_L2A,2025-08-29,39.223044,47.227275,3,0.1923,вода,мелкая (2–3 пикс.),crops/don-delta-097.png,plume,2,широкая размытая полоса,team
+kerch-strait-001,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.72536,45.366838,6,0.9997,вода,крупная (≥4 пикс.),crops/kerch-strait-001.png,unknown,1,неразличимая цель в тёмной воде,team
+kerch-strait-003,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.751389,45.394343,5,0.9989,вода,крупная (≥4 пикс.),crops/kerch-strait-003.png,cloud_edge,2,полупрозрачная облачная дымка,team
+kerch-strait-004,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.732049,45.368026,5,0.9986,вода,крупная (≥4 пикс.),crops/kerch-strait-004.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-006,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.73872,45.378358,6,0.9978,вода,крупная (≥4 пикс.),crops/kerch-strait-006.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-007,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.666183,45.321257,4,0.9978,вода,крупная (≥4 пикс.),crops/kerch-strait-007.png,unknown,1,неоднозначное яркое пятно,team
+kerch-strait-012,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.727662,45.365105,4,0.9964,вода,крупная (≥4 пикс.),crops/kerch-strait-012.png,plume,2,"green plume pixel, not discrete floating material",team
+kerch-strait-013,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.721952,45.361289,7,0.996,вода,крупная (≥4 пикс.),crops/kerch-strait-013.png,land_edge,2,цель у границы суши,team
+kerch-strait-017,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.742089,45.380693,6,0.9949,вода,крупная (≥4 пикс.),crops/kerch-strait-017.png,cloud_edge,2,диффузная облачная полоса,team
+kerch-strait-018,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.675945,45.329164,6,0.9944,вода,крупная (≥4 пикс.),crops/kerch-strait-018.png,foam,2,яркая прибрежная пена,team
+kerch-strait-021,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.742249,45.382473,5,0.9935,вода,крупная (≥4 пикс.),crops/kerch-strait-021.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-022,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.720955,45.358937,5,0.9932,вода,крупная (≥4 пикс.),crops/kerch-strait-022.png,land_edge,3,выраженная граница суши и воды,team
+kerch-strait-023,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.740223,45.380037,5,0.9929,вода,крупная (≥4 пикс.),crops/kerch-strait-023.png,plume,2,диффузный светлый вынос,team
+kerch-strait-026,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.737153,45.376219,3,0.9909,вода,мелкая (2–3 пикс.),crops/kerch-strait-026.png,unknown,1,слабая цель без чёткой формы,team
+kerch-strait-027,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.736243,45.371976,5,0.9905,вода,крупная (≥4 пикс.),crops/kerch-strait-027.png,cloud_edge,2,дымчатая полупрозрачная область,team
+kerch-strait-028,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.730102,45.367418,3,0.9898,вода,мелкая (2–3 пикс.),crops/kerch-strait-028.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-030,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.689768,45.335664,3,0.9886,вода,мелкая (2–3 пикс.),crops/kerch-strait-030.png,land_edge,3,"яркая точка на узкой косе/перешейке, не судно",team
+kerch-strait-031,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.702283,45.347028,4,0.9883,вода,крупная (≥4 пикс.),crops/kerch-strait-031.png,cloud_edge,2,край светлой дымки,team
+kerch-strait-032,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.737325,45.374953,3,0.9883,вода,мелкая (2–3 пикс.),crops/kerch-strait-032.png,cloud_edge,2,диффузная облачная граница,team
+kerch-strait-034,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.707386,45.33333,17,0.9867,вода,крупная (≥4 пикс.),crops/kerch-strait-034.png,land_edge,3,"линейный берег/прибой, не шлейф",team
+kerch-strait-035,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.747676,45.390171,4,0.9866,вода,крупная (≥4 пикс.),crops/kerch-strait-035.png,water,2,однородная тёмная вода,team
+kerch-strait-036,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.741073,45.382721,3,0.9844,вода,мелкая (2–3 пикс.),crops/kerch-strait-036.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-037,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.743857,45.382645,4,0.9828,вода,крупная (≥4 пикс.),crops/kerch-strait-037.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-039,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.682946,45.338225,4,0.9819,вода,крупная (≥4 пикс.),crops/kerch-strait-039.png,water,3,однородная вода у моста,team
+kerch-strait-042,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.754848,45.394103,5,0.9788,вода,крупная (≥4 пикс.),crops/kerch-strait-042.png,cloud_edge,2,граница светлой дымки,team
+kerch-strait-043,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.7409,45.378166,3,0.9754,вода,мелкая (2–3 пикс.),crops/kerch-strait-043.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-044,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.768964,45.374899,11,0.9716,вода,крупная (≥4 пикс.),crops/kerch-strait-044.png,land_edge,3,"оконечность косы/мола, не судно",team
+kerch-strait-046,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.740297,45.376556,9,0.9695,вода,крупная (≥4 пикс.),crops/kerch-strait-046.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-051,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.728506,45.36483,2,0.9666,вода,мелкая (2–3 пикс.),crops/kerch-strait-051.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-053,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.743566,45.384522,4,0.9611,вода,крупная (≥4 пикс.),crops/kerch-strait-053.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-056,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.666378,45.315787,10,0.9541,вода,крупная (≥4 пикс.),crops/kerch-strait-056.png,land_edge,3,яркая береговая кромка / прибой,team
+kerch-strait-057,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.728524,45.365099,2,0.9533,вода,мелкая (2–3 пикс.),crops/kerch-strait-057.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-058,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.743137,45.382662,7,0.9533,вода,крупная (≥4 пикс.),crops/kerch-strait-058.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-059,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.738954,45.378035,4,0.9526,вода,крупная (≥4 пикс.),crops/kerch-strait-059.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-061,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.720334,45.359006,6,0.9488,вода,крупная (≥4 пикс.),crops/kerch-strait-061.png,land_edge,2,прибрежная зона с сооружениями,team
+kerch-strait-068,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.677482,45.334171,6,0.925,вода,крупная (≥4 пикс.),crops/kerch-strait-068.png,water,3,тёмная вода рядом с мостом,team
+kerch-strait-069,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.741569,45.384273,4,0.9224,вода,крупная (≥4 пикс.),crops/kerch-strait-069.png,water,3,однородная тёмная вода,team
+kerch-strait-071,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.666066,45.324389,4,0.9093,вода,крупная (≥4 пикс.),crops/kerch-strait-071.png,land_edge,2,цель на прибрежной границе,team
+kerch-strait-073,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.727848,45.362271,3,0.9065,вода,мелкая (2–3 пикс.),crops/kerch-strait-073.png,cloud_edge,2,светлая дымчатая полоса,team
+kerch-strait-074,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.728693,45.366318,5,0.9044,вода,крупная (≥4 пикс.),crops/kerch-strait-074.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-080,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.742862,45.382093,5,0.8819,вода,крупная (≥4 пикс.),crops/kerch-strait-080.png,cloud_edge,2,размытая светлая область,team
+kerch-strait-084,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.7393,45.377225,8,0.8681,вода,крупная (≥4 пикс.),crops/kerch-strait-084.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-086,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.704971,45.332966,4,0.8597,вода,крупная (≥4 пикс.),crops/kerch-strait-086.png,foam,2,яркая пена у берега,team
+kerch-strait-087,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.740974,45.382267,8,0.8582,вода,крупная (≥4 пикс.),crops/kerch-strait-087.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-090,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.690096,45.334821,4,0.8506,вода,крупная (≥4 пикс.),crops/kerch-strait-090.png,plume,3,крупный мутный прибрежный вынос,team
+kerch-strait-091,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.698508,45.341502,2,0.8459,вода,мелкая (2–3 пикс.),crops/kerch-strait-091.png,land_edge,2,сложная береговая граница,team
+kerch-strait-093,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.750879,45.396097,4,0.8431,вода,крупная (≥4 пикс.),crops/kerch-strait-093.png,water,3,тёмная вода рядом с мостом,team
+kerch-strait-094,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.754884,45.39451,3,0.8421,вода,мелкая (2–3 пикс.),crops/kerch-strait-094.png,plume,3,широкая светлая мутная область,team
+kerch-strait-097,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.649861,45.315974,4,0.8256,вода,крупная (≥4 пикс.),crops/kerch-strait-097.png,land_edge,2,цель на границе берега,team
+kerch-strait-103,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.728363,45.366743,5,0.7894,вода,крупная (≥4 пикс.),crops/kerch-strait-103.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-108,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.739045,45.375857,3,0.7548,вода,мелкая (2–3 пикс.),crops/kerch-strait-108.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-110,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.724647,45.364888,4,0.7288,вода,крупная (≥4 пикс.),crops/kerch-strait-110.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-111,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.482911,45.35279,3,0.7232,вода,мелкая (2–3 пикс.),crops/kerch-strait-111.png,ship,3,отчётливое вытянутое судно,team
+kerch-strait-113,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.709485,45.335325,3,0.6976,вода,мелкая (2–3 пикс.),crops/kerch-strait-113.png,plume,2,широкая светлая полоса в воде,team
+kerch-strait-115,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.643417,45.31645,4,0.6862,вода,крупная (≥4 пикс.),crops/kerch-strait-115.png,water,2,однородный тёмный водоём,team
+kerch-strait-117,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.737919,45.377646,5,0.6745,вода,крупная (≥4 пикс.),crops/kerch-strait-117.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-118,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.732486,45.375817,2,0.6723,вода,мелкая (2–3 пикс.),crops/kerch-strait-118.png,water,3,тёмная вода у мостового пролёта,team
+kerch-strait-122,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.671735,45.318333,4,0.6599,вода,крупная (≥4 пикс.),crops/kerch-strait-122.png,water,2,тёмная вода у побережья,team
+kerch-strait-123,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.754819,45.393852,2,0.6283,вода,мелкая (2–3 пикс.),crops/kerch-strait-123.png,plume,3,светлый диффузный вынос,team
+kerch-strait-126,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.626719,45.302715,6,0.6021,вода,крупная (≥4 пикс.),crops/kerch-strait-126.png,land_edge,3,ярко выраженная береговая линия,team
+kerch-strait-129,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.703296,45.344452,2,0.5879,вода,мелкая (2–3 пикс.),crops/kerch-strait-129.png,cloud_edge,2,полупрозрачная светлая дымка,team
+kerch-strait-138,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.702891,45.34445,3,0.5122,вода,мелкая (2–3 пикс.),crops/kerch-strait-138.png,cloud_edge,2,диффузная полоса над поверхностью,team
+kerch-strait-140,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.739969,45.382773,2,0.5039,вода,мелкая (2–3 пикс.),crops/kerch-strait-140.png,water,2,однородная тёмная вода,team
+kerch-strait-141,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.727739,45.366445,3,0.5034,вода,мелкая (2–3 пикс.),crops/kerch-strait-141.png,plume,2,green sediment/bloom swirl texture,team
+kerch-strait-142,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.750982,45.393798,2,0.4832,вода,мелкая (2–3 пикс.),crops/kerch-strait-142.png,cloud_edge,2,размытая граница дымки,team
+kerch-strait-147,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.664272,45.317151,5,0.4603,вода,крупная (≥4 пикс.),crops/kerch-strait-147.png,foam,3,яркая прибрежная пена,team
+kerch-strait-150,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.60797,45.207262,2,0.4476,вода,мелкая (2–3 пикс.),crops/kerch-strait-150.png,unknown,1,слабая отметка у берега; сооружение в круге не видно,team
+kerch-strait-151,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.735349,45.378558,3,0.4435,вода,мелкая (2–3 пикс.),crops/kerch-strait-151.png,water,2,тёмная вода рядом с мостом,team
+kerch-strait-153,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.723628,45.361524,2,0.4288,вода,мелкая (2–3 пикс.),crops/kerch-strait-153.png,land_edge,2,цель на сложной береговой границе,team
+kerch-strait-155,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.770431,45.370893,6,0.4237,вода,крупная (≥4 пикс.),crops/kerch-strait-155.png,structure,3,выраженное береговое сооружение,team
+kerch-strait-156,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.726712,45.363763,2,0.4236,вода,мелкая (2–3 пикс.),crops/kerch-strait-156.png,unknown,1,tiny dark pixel in green plume field,team
+kerch-strait-160,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.729616,45.367794,3,0.4106,вода,мелкая (2–3 пикс.),crops/kerch-strait-160.png,water,2,однородная тёмная вода,team
+kerch-strait-168,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.728086,45.365249,2,0.3533,вода,мелкая (2–3 пикс.),crops/kerch-strait-168.png,plume,3,выраженные зелёные завихрения взвеси,team
+kerch-strait-170,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.673423,45.330941,3,0.3317,вода,мелкая (2–3 пикс.),crops/kerch-strait-170.png,water,2,тёмная вода у берега,team
+kerch-strait-172,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.754144,45.394279,2,0.3178,вода,мелкая (2–3 пикс.),crops/kerch-strait-172.png,slick,2,компактное тёмное гладкое пятно,team
+kerch-strait-173,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.695685,45.345194,2,0.3111,вода,мелкая (2–3 пикс.),crops/kerch-strait-173.png,land_edge,3,граница вода/суша,team
+kerch-strait-174,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.482759,45.352389,2,0.2995,вода,мелкая (2–3 пикс.),crops/kerch-strait-174.png,ship,3,отчётливое судно с изогнутым следом,team
+kerch-strait-179,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.630508,45.305115,2,0.2847,вода,мелкая (2–3 пикс.),crops/kerch-strait-179.png,structure,3,яркий объект на оконечности косы/причала,team
+kerch-strait-180,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.606204,45.202502,2,0.283,вода,мелкая (2–3 пикс.),crops/kerch-strait-180.png,water,2,однородная вода в заливе,team
+kerch-strait-185,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.735923,45.381465,2,0.2559,вода,мелкая (2–3 пикс.),crops/kerch-strait-185.png,water,3,тёмная вода у моста,team
+kerch-strait-187,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.73796,45.383289,2,0.1903,вода,мелкая (2–3 пикс.),crops/kerch-strait-187.png,water,3,однородная тёмная вода у моста,team
+kerch-strait-188,kerch-strait,S2C_36TYR_20250522_0_L2A,2025-05-22,36.721877,45.36014,2,0.1901,вода,мелкая (2–3 пикс.),crops/kerch-strait-188.png,land_edge,3,чёткая береговая линия,team
+kuban-mouth-001,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.329387,45.38896,14,0.9973,вода,крупная (≥4 пикс.),crops/kuban-mouth-001.png,ship,3,яркая компактная цель,team
+kuban-mouth-007,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.456859,45.350087,4,0.9348,вода,крупная (≥4 пикс.),crops/kuban-mouth-007.png,water,3,тёмная вода,team
+kuban-mouth-009,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.441544,45.350719,6,0.8683,вода,крупная (≥4 пикс.),crops/kuban-mouth-009.png,water,3,однородная вода,team
+kuban-mouth-011,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.367746,45.337746,6,0.8104,вода,крупная (≥4 пикс.),crops/kuban-mouth-011.png,water,2,вода у берега,team
+kuban-mouth-016,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.452395,45.349936,4,0.6496,вода,крупная (≥4 пикс.),crops/kuban-mouth-016.png,water,3,тёмная вода,team
+kuban-mouth-017,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.444982,45.350286,4,0.648,вода,крупная (≥4 пикс.),crops/kuban-mouth-017.png,water,3,вода над сооружением,team
+kuban-mouth-020,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.442249,45.350798,5,0.5909,вода,крупная (≥4 пикс.),crops/kuban-mouth-020.png,water,3,тёмная вода,team
+kuban-mouth-022,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.446496,45.350141,3,0.5507,вода,мелкая (2–3 пикс.),crops/kuban-mouth-022.png,water,3,вода над светлой кромкой,team
+kuban-mouth-023,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.286121,45.292788,4,0.5243,вода,крупная (≥4 пикс.),crops/kuban-mouth-023.png,water,2,вода рядом со следом,team
+kuban-mouth-024,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.435463,45.348265,4,0.5062,вода,крупная (≥4 пикс.),crops/kuban-mouth-024.png,land_edge,2,размытая береговая кромка,team
+kuban-mouth-025,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.454881,45.35006,2,0.506,вода,мелкая (2–3 пикс.),crops/kuban-mouth-025.png,water,3,тёмная вода,team
+kuban-mouth-030,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.443762,45.350539,2,0.4145,вода,мелкая (2–3 пикс.),crops/kuban-mouth-030.png,water,3,вода над сооружением,team
+kuban-mouth-032,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.457349,45.350078,3,0.4009,вода,мелкая (2–3 пикс.),crops/kuban-mouth-032.png,water,3,вода рядом со светлой полосой,team
+kuban-mouth-033,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.268978,45.29385,3,0.3915,вода,мелкая (2–3 пикс.),crops/kuban-mouth-033.png,water,3,однородная вода,team
+kuban-mouth-034,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.432384,45.348808,2,0.3764,вода,мелкая (2–3 пикс.),crops/kuban-mouth-034.png,land_edge,2,размытая граница берега,team
+kuban-mouth-035,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.282476,45.293138,6,0.3305,вода,крупная (≥4 пикс.),crops/kuban-mouth-035.png,water,3,однородная вода,team
+kuban-mouth-036,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.444025,45.350273,2,0.3153,вода,мелкая (2–3 пикс.),crops/kuban-mouth-036.png,land_edge,3,яркие точки вдоль береговой линии / прибоя,team
+kuban-mouth-038,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.268168,45.293912,2,0.2851,вода,мелкая (2–3 пикс.),crops/kuban-mouth-038.png,water,3,однородная вода,team
+kuban-mouth-039,kuban-mouth,S2A_37TCL_20250822_1_L2A,2025-08-22,37.386148,45.340693,2,0.2123,вода,мелкая (2–3 пикс.),crops/kuban-mouth-039.png,land_edge,2,тёмное пятно на границе вода/суша,team
+novorossiysk-001,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.762892,44.610764,5,1.0,вода,крупная (≥4 пикс.),crops/novorossiysk-001.png,likely_debris,2,"отдельное красновато-коричневое пятно в воде, не судно",team
+novorossiysk-002,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.914781,44.599465,13,1.0,вода,крупная (≥4 пикс.),crops/novorossiysk-002.png,ship,2,малое вытянутое судно,team
+novorossiysk-005,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.821584,44.714115,27,0.9992,вода,крупная (≥4 пикс.),crops/novorossiysk-005.png,water,3,чистая вода в центре,team
+novorossiysk-008,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.81046,44.675961,5,0.9981,вода,крупная (≥4 пикс.),crops/novorossiysk-008.png,unknown,1,неразличимая слабая отметка,team
+novorossiysk-009,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.810738,44.675307,6,0.9976,вода,крупная (≥4 пикс.),crops/novorossiysk-009.png,water,2,вода без явного объекта,team
+novorossiysk-011,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.79618,44.722837,12,0.995,вода,крупная (≥4 пикс.),crops/novorossiysk-011.png,ship,3,судно с длинным следом,team
+novorossiysk-012,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.909683,44.60528,6,0.9917,вода,крупная (≥4 пикс.),crops/novorossiysk-012.png,ship,3,яркое компактное судно,team
+novorossiysk-014,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.818327,44.637125,4,0.9778,вода,крупная (≥4 пикс.),crops/novorossiysk-014.png,ship,2,compact bright point,team
+novorossiysk-021,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.83858,44.705797,3,0.8802,вода,мелкая (2–3 пикс.),crops/novorossiysk-021.png,structure,3,линейное портовое сооружение,team
+novorossiysk-022,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.839808,44.71067,2,0.8802,вода,мелкая (2–3 пикс.),crops/novorossiysk-022.png,water,3,чистая вода в центре,team
+novorossiysk-024,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.898106,44.637728,3,0.8711,вода,мелкая (2–3 пикс.),crops/novorossiysk-024.png,ship,3,яркое малое судно,team
+novorossiysk-025,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.835357,44.702062,8,0.8581,вода,крупная (≥4 пикс.),crops/novorossiysk-025.png,unknown,1,центр между судами,team
+novorossiysk-027,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.901167,44.664855,3,0.8332,вода,мелкая (2–3 пикс.),crops/novorossiysk-027.png,ship,2,bright pinkish point typical of vessel,team
+novorossiysk-028,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.811498,44.672074,2,0.8234,вода,мелкая (2–3 пикс.),crops/novorossiysk-028.png,ship,3,яркое вытянутое судно,team
+novorossiysk-029,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.90845,44.621773,3,0.7712,вода,мелкая (2–3 пикс.),crops/novorossiysk-029.png,unknown,1,слабая отметка у судна; материала не видно,team
+novorossiysk-033,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.835068,44.701485,4,0.6922,вода,крупная (≥4 пикс.),crops/novorossiysk-033.png,unknown,1,одиночный пиксель у крупного судна,team
+novorossiysk-037,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.786268,44.602445,2,0.5654,вода,мелкая (2–3 пикс.),crops/novorossiysk-037.png,ship,2,компактная яркая точка в открытой воде,team
+novorossiysk-039,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.808068,44.722452,2,0.3654,вода,мелкая (2–3 пикс.),crops/novorossiysk-039.png,ship,3,крупное красное судно,team
+novorossiysk-040,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.795545,44.729612,2,0.3613,вода,мелкая (2–3 пикс.),crops/novorossiysk-040.png,structure,3,оконечность причала,team
+novorossiysk-041,novorossiysk,S2B_37TDK_20250904_0_L2A,2025-09-04,37.895857,44.604547,2,0.3562,вода,мелкая (2–3 пикс.),crops/novorossiysk-041.png,water,3,чистая вода в центре,team
+sochi-001,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.702153,43.54821,2,0.996,вода,мелкая (2–3 пикс.),crops/sochi-001.png,ship,2,compact bright point on open water,team
+sochi-004,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.749369,43.47232,4,0.9745,вода,крупная (≥4 пикс.),crops/sochi-004.png,unknown,1,редкая россыпь ярких точек; нет явной полосы материала,team
+sochi-006,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.814581,43.467192,4,0.9384,вода,крупная (≥4 пикс.),crops/sochi-006.png,ship,3,яркий объект со следом,team
+sochi-007,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.760389,43.547523,2,0.9153,вода,мелкая (2–3 пикс.),crops/sochi-007.png,unknown,1,almost invisible speck,team
+sochi-008,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.746504,43.545903,2,0.84,вода,мелкая (2–3 пикс.),crops/sochi-008.png,ship,2,compact bright point,team
+sochi-010,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.8648,43.477763,2,0.8072,вода,мелкая (2–3 пикс.),crops/sochi-010.png,unknown,1,центр неразличим,team
+sochi-011,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.70225,43.561851,2,0.7864,вода,мелкая (2–3 пикс.),crops/sochi-011.png,unknown,1,слабое размытое пятно,team
+sochi-012,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.716284,43.549788,4,0.7586,вода,крупная (≥4 пикс.),crops/sochi-012.png,ship,2,compact bright point amid other vessels/specks,team
+sochi-016,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.886928,43.473137,2,0.5337,вода,мелкая (2–3 пикс.),crops/sochi-016.png,water,3,объект в центре отсутствует,team
+sochi-017,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.862551,43.480436,2,0.4989,вода,мелкая (2–3 пикс.),crops/sochi-017.png,ship,2,compact bright point,team
+sochi-020,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.858305,43.494965,2,0.4075,вода,мелкая (2–3 пикс.),crops/sochi-020.png,unknown,1,неясное тёмное пятно,team
+sochi-021,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.811026,43.464876,2,0.4071,вода,мелкая (2–3 пикс.),crops/sochi-021.png,unknown,1,слабое пятно рядом с судном; материал не подтверждён,team
+sochi-024,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.881406,43.471784,2,0.2892,вода,мелкая (2–3 пикс.),crops/sochi-024.png,ship,2,яркий прямоугольный объект ~2–3 px,team
+sochi-025,sochi,S2C_37TEJ_20250923_0_L2A,2025-09-23,39.722224,43.549616,2,0.2808,вода,мелкая (2–3 пикс.),crops/sochi-025.png,ship,2,compact bright point,team
+tuapse-002,tuapse,S2C_37TEJ_20250728_0_L2A,2025-07-28,39.009476,44.10668,3,0.9997,вода,мелкая (2–3 пикс.),crops/tuapse-002.png,ship,2,небольшой яркий прямоугольный объект,team
+tuapse-003,tuapse,S2C_37TEJ_20250728_0_L2A,2025-07-28,39.0095,44.130613,4,0.9988,вода,крупная (≥4 пикс.),crops/tuapse-003.png,ship,2,небольшой яркий прямоугольный объект,team
+tuapse-008,tuapse,S2C_37TEJ_20250728_0_L2A,2025-07-28,39.021245,44.115981,2,0.8744,вода,мелкая (2–3 пикс.),crops/tuapse-008.png,ship,2,компактный яркий объект,team
+tuapse-011,tuapse,S2C_37TEJ_20250728_0_L2A,2025-07-28,39.030867,44.112918,2,0.3776,вода,мелкая (2–3 пикс.),crops/tuapse-011.png,water,3,центр круга находится на воде,team

@@ -7,6 +7,7 @@ import {
   elapsedLabel,
   ellipseOf,
   horizonLabel,
+  reliabilityHint,
   reliabilityOf,
   shiftIso,
   stepHorizon,
@@ -71,6 +72,13 @@ describe("drift math", () => {
       "medium",
       "low",
     ]);
+  });
+
+  it("leaves scenario reliability ungraded", () => {
+    expect(reliabilityHint(24, true)).toBe("надёжность высокая");
+    expect([6, 24, 72].map((hour) => reliabilityHint(hour, false))).toEqual(
+      Array(3).fill("надёжность сценария не оценена"),
+    );
   });
 
   it("formats horizons and elapsed time in Russian", () => {

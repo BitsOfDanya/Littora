@@ -1,0 +1,25 @@
+run,data,split,threshold,threshold_source,tta,postprocessing,val_precision,val_recall,val_f1,val_iou,val_pr_auc,val_positives,test_precision,test_recall,test_f1,test_iou,test_pr_auc,test_positives
+raunet__marida,marida,official,0.706,val_max_f1,True,,0.9289,0.9358,0.9323,0.8733,0.9542,1075,0.7831,0.9475,0.8575,0.7505,0.9233,381
+raunet__marida__on_marida__common,marida,common,0.706,fixed,True,,0.9284,0.9354,0.9319,0.8725,0.9539,1068,0.7808,0.9532,0.8584,0.752,0.9332,299
+lgbm_pixel__marida,marida,official,0.9465,val_max_f1,,,0.8976,0.8809,0.8892,0.8005,0.9215,1075,0.8077,0.937,0.8676,0.7661,0.9424,381
+fdi_rule__marida,marida,official,0.7708,val_max_f1,,,0.2461,0.2902,0.2663,0.1536,0.057,1075,0.4727,0.3412,0.3963,0.2471,0.3142,381
+fdi_threshold__marida,marida,official,0.7521,val_max_f1,,,0.0072,0.9079,0.0142,0.0072,0.0041,1075,0.0028,0.8031,0.0055,0.0028,0.0018,381
+ensemble__raunet__marida_mixed__common+raunet_hard__marida_l2a__common+unetpp_resnet34__marida_l2a__common,marida_l2a,common,0.1654,val_max_f1,,scl=False min=2,0.9318,0.9588,0.9451,0.8959,0.9366,1068,0.8179,0.9766,0.8902,0.8022,0.9759,299
+ensemble__raunet__marida_l2a__common+raunet_hard__marida_l2a__common+lgbm_pixel__marida_l2a__common,marida_l2a,common,0.2506,val_max_f1,,scl=False min=2,0.9301,0.9466,0.9383,0.8837,0.9401,1068,0.7887,0.9365,0.8563,0.7487,0.9589,299
+ensemble__raunet__marida_l2a__common+lgbm_pixel__marida_l2a__common,marida_l2a,common,0.2941,val_max_f1,,scl=False min=1,0.9317,0.9448,0.9382,0.8835,0.9322,1068,0.7839,0.9097,0.8421,0.7273,0.9407,299
+ensemble__raunet__marida_l2a__common+raunet_hard__marida_l2a__common,marida_l2a,common,0.2941,val_max_f1,,scl=False min=1,0.9317,0.9448,0.9382,0.8835,0.9322,1068,0.7839,0.9097,0.8421,0.7273,0.9407,299
+raunet__marida_l2a__common,marida_l2a,common,0.2939,val_max_f1,True,scl=False min=1,0.9317,0.9448,0.9382,0.8835,0.9322,1068,0.7839,0.9097,0.8421,0.7273,0.9407,299
+raunet_focal_dice__marida_l2a__common,marida_l2a,common,0.1167,val_max_f1,False,scl=False min=2,0.9268,0.9485,0.9375,0.8824,0.9354,1068,0.8056,0.9699,0.8801,0.7859,0.9666,299
+raunet_aux__marida_l2a__common,marida_l2a,common,0.5166,val_max_f1,False,scl=False min=2,0.9353,0.9335,0.9344,0.8769,0.9287,1068,0.8338,0.9064,0.8686,0.7677,0.957,299
+raunet_hard__marida_l2a__common,marida_l2a,common,0.2571,val_max_f1,True,scl=False min=1,0.9369,0.9316,0.9343,0.8767,0.9292,1068,0.8369,0.9264,0.8794,0.7847,0.9608,299
+raunet_focal_tversky__marida_l2a__common,marida_l2a,common,0.5239,val_max_f1,True,scl=False min=2,0.9156,0.9345,0.9249,0.8603,0.9191,1068,0.7493,0.9298,0.8299,0.7092,0.927,299
+unetpp_resnet34__marida_l2a__common,marida_l2a,common,0.3301,val_max_f1,True,scl=True min=2,0.9026,0.8942,0.8984,0.8155,0.8971,1068,0.8762,0.8997,0.8878,0.7982,0.9465,299
+lgbm_bands_indices__marida_l2a__common,marida_l2a,common,0.912,val_max_f1,,scl=False min=1,0.9018,0.8689,0.8851,0.7938,0.9006,1068,0.7299,0.913,0.8113,0.6825,0.8871,299
+lgbm_bands__marida_l2a__common,marida_l2a,common,0.6379,val_max_f1,,scl=True min=1,0.8831,0.8773,0.8802,0.7861,0.8817,1068,0.6494,0.9231,0.7624,0.6161,0.9023,299
+lgbm_pixel__marida_l2a__common,marida_l2a,common,0.9879,val_max_f1,,scl=False min=1,0.9082,0.8427,0.8742,0.7765,0.8893,1068,0.9033,0.9064,0.9048,0.8262,0.9575,299
+rf_pixel__marida_l2a__common,marida_l2a,common,0.5723,val_max_f1,,scl=False min=1,0.908,0.8315,0.868,0.7668,0.8888,1068,0.8386,0.8863,0.8618,0.7571,0.9435,299
+raunet__marida__on_marida_l2a__common,marida_l2a,common,0.706,fixed,True,,0.9495,0.7575,0.8427,0.7282,0.8901,1068,0.9623,0.6823,0.7984,0.6645,0.9288,299
+fdi_rule__marida_l2a__common,marida_l2a,common,0.7521,val_max_f1,,scl=False min=1,0.4729,0.1713,0.2515,0.1439,0.0931,1068,0.4601,0.3278,0.3828,0.2367,0.2391,299
+lgbm_rgb__marida_l2a__common,marida_l2a,common,0.8495,val_max_f1,,scl=True min=1,0.0917,0.47,0.1535,0.0831,0.0847,1068,0.0151,0.505,0.0293,0.0149,0.0138,299
+fdi_threshold__marida_l2a__common,marida_l2a,common,0.7521,val_max_f1,,scl=False min=1,0.0075,0.9419,0.0148,0.0075,0.0041,1068,0.0025,0.8696,0.0051,0.0025,0.0015,299
+raunet__marida_mixed__common,marida_mixed,common,0.1592,val_max_f1,True,scl=False min=2,0.9283,0.9579,0.9429,0.8919,0.9372,1068,0.8357,0.9699,0.8978,0.8146,0.9764,299

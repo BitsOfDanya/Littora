@@ -29,6 +29,10 @@ class CatalogError(RuntimeError):
     pass
 
 
+HARMONIZED_COLLECTION = "sentinel-2-l2a"
+HARMONIZED_BASELINE = 4.0
+
+
 def build_ssl_context() -> ssl.SSLContext:
     defaults = ssl.get_default_verify_paths()
     if defaults.cafile or defaults.capath:
@@ -103,6 +107,17 @@ def _asset_hrefs(assets: dict) -> tuple[dict[str, str], bool]:
     return hrefs, requester_pays
 
 
+def _reflectance_offset(feature: dict, band: dict) -> float:
+    baseline = str(feature.get("properties", {}).get("s2:processing_baseline") or "0")
+    try:
+        harmonized = float(baseline) >= HARMONIZED_BASELINE
+    except ValueError:
+        harmonized = False
+    if feature.get("collection") == HARMONIZED_COLLECTION and harmonized:
+        return 0.0
+    return float(band.get("offset", 0.0))
+
+
 def parse_scene(feature: dict) -> Scene:
     properties = feature.get("properties", {})
     assets, requester_pays = _asset_hrefs(feature.get("assets", {}))
@@ -121,7 +136,7 @@ def parse_scene(feature: dict) -> Scene:
         geometry=shape(feature["geometry"]),
         assets=assets,
         reflectance_scale=float(band.get("scale", 0.0001)),
-        reflectance_offset=float(band.get("offset", 0.0)),
+        reflectance_offset=_reflectance_offset(feature, band),
         requester_pays=requester_pays,
     )
 

@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     data_dir: Path = REPOSITORY_DIR / "data"
     reports_dir: Path = REPOSITORY_DIR / "reports"
     storage_dir: Path = REPOSITORY_DIR / "data" / "processed" / "analyses"
+    models_dir: Path = REPOSITORY_DIR / "models"
     case_config: Path = BACKEND_DIR / "config" / "case.toml"
 
     @field_validator("cors_origins", mode="before")

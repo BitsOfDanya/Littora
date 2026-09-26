@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { analysisListSchema, analysisSchema } from "./analyses";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { analysisListSchema, analysisSchema, createAnalysis } from "./analyses";
 import { observationCollectionSchema } from "./case";
 import { sceneListSchema, toSceneSummary } from "./scenes";
 
@@ -215,5 +215,40 @@ describe("API contracts", () => {
     expect(summary.relativeOrbit).toBeNull();
     expect(summary.areaCoverage).toBe(1);
     expect(summary.aoiId).toBe("doors-west");
+  });
+});
+
+describe("analysis run", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.useRealTimers();
+  });
+
+  it("keeps asking while the server is still computing and returns the result", async () => {
+    vi.useFakeTimers();
+    const running = {
+      id: analysis.id,
+      state: "running",
+      started_at: "2026-09-26T09:00:00+00:00",
+      elapsed_s: 20,
+      scene: analysis.scene,
+    };
+    const replies = [running, running, analysis];
+    const fetchMock = vi.fn(
+      async () =>
+        new Response(JSON.stringify(replies.shift()), {
+          status: replies.length ? 202 : 200,
+          headers: { "Content-Type": "application/json" },
+        }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    const result = createAnalysis({
+      bbox: analysis.request.bbox as [number, number, number, number],
+      date: analysis.request.date,
+      window_days: 1,
+    });
+    await vi.runAllTimersAsync();
+    await expect(result).resolves.toMatchObject({ id: analysis.id, retryable: false });
+    expect(fetchMock).toHaveBeenCalledTimes(3);
   });
 });

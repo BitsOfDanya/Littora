@@ -59,6 +59,10 @@ class RasterError(RuntimeError):
     pass
 
 
+class RasterReadError(RasterError):
+    pass
+
+
 @dataclass(frozen=True)
 class QualityShares:
     pixels: int
@@ -150,16 +154,19 @@ def _read(
     shape_hint: tuple[int, int] | None = None,
     indexes: int | list[int] = 1,
 ) -> tuple[np.ndarray, Affine, object, Window, dict]:
-    with rasterio.Env(**GDAL_OPTIONS), rasterio.open(href) as dataset:
-        window, projected = _window(dataset, geometry)
-        out_height, out_width = shape_hint or _output_shape(window, max_size)
-        bands = len(indexes) if isinstance(indexes, list) else None
-        out_shape = (bands, out_height, out_width) if bands else (out_height, out_width)
-        data = dataset.read(
-            indexes, window=window, out_shape=out_shape, resampling=Resampling.nearest
-        )
-        scale = Affine.scale(window.width / out_width, window.height / out_height)
-        return data, dataset.window_transform(window) * scale, dataset.crs, window, projected
+    try:
+        with rasterio.Env(**GDAL_OPTIONS), rasterio.open(href) as dataset:
+            window, projected = _window(dataset, geometry)
+            out_height, out_width = shape_hint or _output_shape(window, max_size)
+            bands = len(indexes) if isinstance(indexes, list) else None
+            out_shape = (bands, out_height, out_width) if bands else (out_height, out_width)
+            data = dataset.read(
+                indexes, window=window, out_shape=out_shape, resampling=Resampling.nearest
+            )
+            scale = Affine.scale(window.width / out_width, window.height / out_height)
+            return data, dataset.window_transform(window) * scale, dataset.crs, window, projected
+    except rasterio.errors.RasterioIOError as error:
+        raise RasterReadError(f"снимок не читается: {error}") from error
 
 
 def _classes(scl: np.ndarray) -> dict[str, np.ndarray]:
@@ -195,8 +202,8 @@ def _class_raster(scene: Scene, geometry: BaseGeometry, max_size: int | None) ->
         if "nir" in scene.assets:
             nir, *_ = _read(scene.assets["nir"], geometry, shape_hint=scl.shape)
             reflectance = nir.astype("float32") * scene.reflectance_scale + scene.reflectance_offset
-    except rasterio.errors.RasterioIOError as error:
-        raise RasterError(f"маска SCL не читается: {error}") from error
+    except RasterReadError as error:
+        raise RasterReadError(f"маска SCL не читается: {error.__cause__}") from error
     result = ClassRaster(scl, affine, crs, projected, reflectance)
     with _CLASS_CACHE_LOCK:
         _CLASS_CACHE[key] = result
@@ -230,9 +237,9 @@ def quality_shares(
     return QualityShares(pixels=total, bright_water=bright, **shares)
 
 
-def _corners(affine: Affine, crs, height: int, width: int) -> list[list[float]]:
+def layer_corners(affine: Affine, crs, height: int, width: int) -> list[list[float]]:
     pixel_corners = [(0, 0), (width, 0), (width, height), (0, height)]
-    xs, ys = zip(*(affine * corner for corner in pixel_corners), strict=True)
+    xs, ys = zip(*(affine @ corner for corner in pixel_corners), strict=True)
     lons, lats = transform_points(crs, "EPSG:4326", list(xs), list(ys))
     return [[round(lon, 7), round(lat, 7)] for lon, lat in zip(lons, lats, strict=True)]
 
@@ -245,7 +252,7 @@ def render_true_color(scene: Scene, geometry: BaseGeometry, max_size: int = 1600
     alpha = np.where(pixels.max(axis=2) > 0, 255, 0).astype(np.uint8)
     rgba = np.dstack([pixels, alpha])
     height, width = alpha.shape
-    return RenderedLayer(encode_png(rgba), _corners(affine, crs, height, width), width, height)
+    return RenderedLayer(encode_png(rgba), layer_corners(affine, crs, height, width), width, height)
 
 
 def render_quality_mask(
@@ -265,5 +272,5 @@ def render_quality_mask(
             "bright_water"
         ]
     height, width = scl.shape
-    corners = _corners(raster.affine, raster.crs, height, width)
+    corners = layer_corners(raster.affine, raster.crs, height, width)
     return RenderedLayer(encode_png(rgba), corners, width, height)

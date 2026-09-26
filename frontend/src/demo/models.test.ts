@@ -61,8 +61,11 @@ describe("demo model report stays internally consistent", () => {
 
   it("brackets every metric with its 95 % interval", () => {
     for (const model of DEMO_MODEL_REPORT.models) {
+      const intervals = model.metricsCi95;
+      expect(intervals).not.toBeNull();
+      if (!intervals) continue;
       for (const key of ["f1", "iou", "precision", "recall"] as const) {
-        const [low, high] = model.metricsCi95[key];
+        const [low, high] = intervals[key];
         expect(low).toBeLessThanOrEqual(model.metrics[key]);
         expect(high).toBeGreaterThanOrEqual(model.metrics[key]);
         expect(high - low).toBeLessThan(0.2);

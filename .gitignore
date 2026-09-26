@@ -62,6 +62,8 @@ dist/
 !/data/**/.gitkeep
 !/data/sources.toml
 !/data/aoi/*.geojson
+!/data/validation/*.geojson
+!/data/validation/black_sea_zone_audit.csv
 !/data/manifests/*.json
 !/data/case/macroplastic_marine_samples.csv
 !/data/case/README_macroplastic_dataset.md
@@ -81,6 +83,7 @@ dist/
 *.pt
 *.pth
 *.onnx
+!/models/detector/service/detector.onnx
 *.ckpt
 *.safetensors
 *.pkl
@@ -95,3 +98,14 @@ tmp/
 temp/
 cache/
 .cache/
+
+/models/**/*.joblib
+/models/detector/*/
+!/models/detector/service/
+!/models/detector/raunet__marida_mixed__common/
+!/models/detector/raunet__marida_mixed__common/model.pt
+/models/concentration/*/
+!/models/concentration/service/
+/reports/predictions/detector/*/
+!/reports/predictions/detector/raunet__marida_mixed__common/
+/reports/predictions/concentration/external/

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import type { BBox } from "@/domain/geo";
 import { apiRequest, withQuery } from "./client";
-import { lineStringSchema, pointSchema } from "./geojson";
+import { geometrySchema, lineStringSchema, pointSchema } from "./geojson";
 
 export const caseTargetSchema = z.object({
   key: z.string(),
@@ -101,3 +101,21 @@ export const getObservations = (query: ObservationQuery, signal?: AbortSignal) =
     observationCollectionSchema,
     { signal },
   ).then((collection) => collection.features);
+
+const eventFeatureSchema = z.object({
+  type: z.literal("Feature"),
+  geometry: geometrySchema,
+  properties: z
+    .object({ event_id: z.string(), date: z.string().nullable().optional() })
+    .passthrough(),
+});
+
+export const eventCollectionSchema = z.object({
+  type: z.literal("FeatureCollection"),
+  features: z.array(eventFeatureSchema),
+});
+
+export type CaseEvent = z.infer<typeof eventFeatureSchema>;
+
+export const getEvents = (signal?: AbortSignal) =>
+  apiRequest(withQuery("/events", { decision: "accepted" }), eventCollectionSchema, { signal });

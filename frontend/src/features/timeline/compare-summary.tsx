@@ -310,8 +310,8 @@ export function ObjectDeltas({ rows, pair }: { rows: readonly ObjectRow[]; pair:
           checked={false}
           onChange={() => undefined}
           disabled
-          disabledReason="Слой Δ покрытия появится с возможностью change_tracking"
-          trailing={<PlannedTag capability="change_tracking" />}
+          disabledReason="Слой Δ покрытия появится с моделью доли покрытия пикселя"
+          trailing={<PlannedTag capability="coverage_estimation" />}
         >
           Слой Δ на карте
         </Checkbox>

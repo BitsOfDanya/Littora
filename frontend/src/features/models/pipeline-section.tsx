@@ -2,9 +2,9 @@ import { PlannedTag } from "@/ui/planned";
 import { PIPELINE_STEPS } from "./copy";
 import { ReportSection } from "./report-section";
 
-export function PipelineSection() {
+export function PipelineSection({ index = 6 }: { index?: number }) {
   return (
-    <ReportSection id="pipeline" index={6} aside={<PlannedTag capability="model_evaluation" />}>
+    <ReportSection id="pipeline" index={index} aside={<PlannedTag capability="model_evaluation" />}>
       <ol className="grid grid-cols-1 gap-x-6 @xl:grid-cols-2 @3xl:grid-cols-3 @4xl:grid-cols-6">
         {PIPELINE_STEPS.map((step, index) => (
           <li

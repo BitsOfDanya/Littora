@@ -4,8 +4,9 @@ import type { PickingInfo } from "@deck.gl/core";
 import { PathStyleExtension, type PathStyleExtensionProps } from "@deck.gl/extensions";
 import { GeoJsonLayer } from "@deck.gl/layers";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useCandidates } from "@/data/candidates";
-import type { ConfidenceClass, DebrisCandidate } from "@/domain/detection";
+import type { DriftCandidate } from "@/data/drift";
+import { useDriftCandidates } from "@/data/forecast";
+import type { ConfidenceClass } from "@/domain/detection";
 import { withAlpha } from "@/features/map/color";
 import { type Anchored, UNDER_COASTLINE, UNDER_LABELS } from "@/features/map/deck/anchors";
 import { useDeckLayers } from "@/features/map/deck/use-deck-layers";
@@ -17,8 +18,8 @@ import { useStatusHintStore } from "@/features/shell/status-hint-store";
 import { useLayerVisible } from "@/state/map-layers-store";
 import { useWorkspaceStore } from "@/state/workspace-store";
 
-type CandidateProps = { candidate: DebrisCandidate };
-type CandidateFeature = GeoJSON.Feature<GeoJSON.Polygon, CandidateProps>;
+type CandidateProps = { candidate: DriftCandidate };
+type CandidateFeature = GeoJSON.Feature<GeoJSON.Polygon | GeoJSON.MultiPolygon, CandidateProps>;
 
 const LEVEL: Record<ConfidenceClass, ConfidenceLevel> = {
   likely: "high",
@@ -29,9 +30,12 @@ const LEVEL: Record<ConfidenceClass, ConfidenceLevel> = {
 const HOVER_WIDTH_PX = 2.4;
 const SELECTION_WIDTH_PX = 2.6;
 const SELECTION_HALO_PX = 6;
+const ZONE_LINE = { dash: [0, 0], widthPx: 1.6 } as const;
+const ZONE_FILL_ALPHA = 0.25;
 
 function lineStyle(feature: CandidateFeature) {
-  return CONFIDENCE_LINES[LEVEL[feature.properties.candidate.confidence.class]];
+  const { confidence } = feature.properties.candidate;
+  return confidence ? CONFIDENCE_LINES[LEVEL[confidence.class]] : ZONE_LINE;
 }
 
 function outlinesLayer(
@@ -47,14 +51,21 @@ function outlinesLayer(
     pickable: true,
     filled: true,
     stroked: true,
-    getFillColor: [0, 0, 0, 0],
-    getLineColor: palette.outline,
+    getFillColor: (feature) =>
+      feature.properties.candidate.confidence
+        ? [0, 0, 0, 0]
+        : withAlpha(palette.alarm, ZONE_FILL_ALPHA),
+    getLineColor: (feature) =>
+      feature.properties.candidate.confidence ? palette.outline : palette.alarm,
     getLineWidth: (feature) => lineStyle(feature as CandidateFeature).widthPx,
     lineWidthUnits: "pixels",
     getDashArray: (feature: CandidateFeature) => [...lineStyle(feature).dash],
     dashJustified: true,
     extensions: [new PathStyleExtension({ dash: true })],
-    updateTriggers: { getLineColor: palette.outline },
+    updateTriggers: {
+      getLineColor: [palette.outline, palette.alarm],
+      getFillColor: palette.alarm,
+    },
     onHover,
     onClick,
   });
@@ -81,9 +92,11 @@ function outline(
 
 export function ForecastCandidates() {
   const map = useMainMap();
-  const sourced = useCandidates();
+  const sourced = useDriftCandidates();
   const palette = useMapPalette();
-  const visible = useLayerVisible("candidates");
+  const candidatesVisible = useLayerVisible("candidates");
+  const zonesVisible = useLayerVisible("detector-zones");
+  const visible = sourced.origin === "api" ? zonesVisible : candidatesVisible;
   const selectedId = useWorkspaceStore((state) => state.selectedCandidateId);
   const selectCandidate = useWorkspaceStore((state) => state.selectCandidate);
   const setHint = useStatusHintStore((state) => state.setHint);

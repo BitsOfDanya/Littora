@@ -49,7 +49,9 @@ function useUrlRead(): { current: boolean } {
     pendingSelectionRef.current = null;
     const exists =
       candidates.origin !== "none" && candidates.data.some((candidate) => candidate.id === pending);
-    if (exists) selectCandidate(pending);
+    const liveZone =
+      candidates.origin !== "demo" && useAnalysisStore.getState().analysisId !== null;
+    if (exists || liveZone) selectCandidate(pending);
     else setHint(`Объект ${pending} не найден в текущих данных`);
   }, [candidates, setAoi, selectCandidate, setHint, setAnalysis]);
 

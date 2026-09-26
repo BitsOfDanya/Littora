@@ -6,6 +6,7 @@ import type { PrCurvePoint } from "@/domain/model";
 import { PR_COPY } from "./copy";
 import { formatShare } from "./format";
 import {
+  curveOf,
   ISO_F1_LEVELS,
   isoF1Curve,
   pointAtThreshold,
@@ -45,6 +46,11 @@ function describe(model: ModelEvaluation, chosen: PrCurvePoint | null): string {
     `Для сравнения: ${at(0.3)}; ${at(0.7)}.`,
   ];
   return parts.filter(Boolean).join(" ");
+}
+
+function describeOperating(model: ModelEvaluation): string {
+  const { precision, recall } = model.metrics;
+  return `PR-кривая модели ${model.name} не сохранена. Рабочий порог ${formatShare(model.threshold)}: точность ${formatShare(precision)}, полнота ${formatShare(recall)}.`;
 }
 
 function Grid({ width, height, scale }: { width: number; height: number; scale: Scale }) {
@@ -176,6 +182,26 @@ function ChosenMark({
   );
 }
 
+function OperatingLabel({ point, scale }: { point: PrCurvePoint; scale: Scale }) {
+  const cx = scale.x(point.recall);
+  const cy = scale.y(point.precision);
+  const labelRight = cx - LABEL_WIDTH - 12 < MARGIN.left;
+  return (
+    <text
+      aria-hidden
+      x={labelRight ? cx + 10 : cx - 10}
+      y={cy - 10}
+      textAnchor={labelRight ? "start" : "end"}
+      paintOrder="stroke"
+      strokeWidth={4}
+      strokeLinejoin="round"
+      className="fill-text-primary stroke-surface-panel font-mono text-[11px] font-medium"
+    >
+      P {formatShare(point.precision)} · R {formatShare(point.recall)}
+    </text>
+  );
+}
+
 type PrChartProps = {
   model: ModelEvaluation | null;
   threshold: number | null;
@@ -194,9 +220,17 @@ export function PrChart({ model, threshold, onThreshold }: PrChartProps) {
     x: (recall) => MARGIN.left + recall * plotWidth,
     y: (precision) => MARGIN.top + (1 - precision) * plotHeight,
   };
-  const curve = model?.prCurve ?? null;
+  const curve = curveOf(model);
   const chosen = curve && threshold !== null ? pointAtThreshold(curve, threshold) : null;
-  const operating = curve && model ? pointAtThreshold(curve, model.threshold) : null;
+  const operating = model
+    ? curve
+      ? pointAtThreshold(curve, model.threshold)
+      : { threshold: model.threshold, ...model.metrics }
+    : null;
+  const describeChart = () => {
+    if (!model) return `PR-кривая: ${PR_COPY.empty.toLowerCase()}`;
+    return curve ? describe(model, chosen) : describeOperating(model);
+  };
   const byRecall = curve ? [...curve].sort((a, b) => a.recall - b.recall) : [];
 
   const pick = (event: PointerEvent<SVGRectElement>) => {
@@ -214,7 +248,7 @@ export function PrChart({ model, threshold, onThreshold }: PrChartProps) {
           height={height}
           viewBox={`0 0 ${width} ${height}`}
           role="img"
-          aria-label={model ? describe(model, chosen) : `PR-кривая: ${PR_COPY.empty.toLowerCase()}`}
+          aria-label={describeChart()}
           className="block select-none"
         >
           <Grid width={width} height={height} scale={scale} />
@@ -239,7 +273,7 @@ export function PrChart({ model, threshold, onThreshold }: PrChartProps) {
               strokeLinejoin="round"
               className="fill-text-tertiary stroke-surface-panel text-[12px]"
             >
-              {PR_COPY.empty}
+              {model ? PR_COPY.missing : PR_COPY.empty}
             </text>
           )}
           {operating ? (
@@ -251,6 +285,7 @@ export function PrChart({ model, threshold, onThreshold }: PrChartProps) {
               className="fill-surface-panel stroke-text-primary"
             />
           ) : null}
+          {operating && !curve ? <OperatingLabel point={operating} scale={scale} /> : null}
           {chosen ? <ChosenMark point={chosen} scale={scale} bottom={bottom} /> : null}
           {curve ? (
             <rect

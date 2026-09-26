@@ -21,7 +21,7 @@ export function StageRoot({ children }: { children: ReactNode }) {
   return (
     <MapProvider>
       <ThemeSync />
-      <main className="relative h-dvh w-full overflow-hidden bg-surface-app">
+      <main className="relative h-dvh w-full overflow-clip bg-surface-app">
         <GateMapSettle>
           {aoi ? (
             <MapStage mapStyle={mapStyle} initialCenter={aoi.center} initialZoom={aoi.zoom} />

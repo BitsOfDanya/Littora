@@ -1,0 +1,120 @@
+{
+ "name": "raunet__marida_mixed__common",
+ "file": "detector.onnx",
+ "bands": [
+  "B01",
+  "B02",
+  "B03",
+  "B04",
+  "B05",
+  "B06",
+  "B07",
+  "B08",
+  "B8A",
+  "B11",
+  "B12"
+ ],
+ "patch": 256,
+ "stride": 192,
+ "threshold": 0.15921302139759064,
+ "scl_filter": false,
+ "sea_mask": {
+  "classes": [
+   6,
+   10
+  ],
+  "grow": -2,
+  "max_hole": 100,
+  "rule": "море — вода и перистые облака по SCL; дыры до 100 пикселей (1 га) внутри воды считаются морем, острова, косы и мосты — нет; маска сжата на 2 пикселя от берега; вне моря вероятность обнуляется; на train и val сохраняется 97,7 % и 99,4 % пикселей мусора"
+ },
+ "min_pixels": 2,
+ "max_pixels": 12000000,
+ "test_metrics": {
+  "precision": 0.8357348703170029,
+  "recall": 0.9698996655518395,
+  "f1": 0.8978328173374613,
+  "iou": 0.8146067415730337,
+  "pr_auc": 0.9763768210137505
+ },
+ "test_ci95": {
+  "precision": [
+   0.7386585784642188,
+   0.9174829931972788
+  ],
+  "recall": [
+   0.9263487998205339,
+   1.0
+  ],
+  "f1": [
+   0.8309253594128929,
+   0.9491031773755462
+  ],
+  "iou": [
+   0.7107548262548262,
+   0.9031364066804407
+  ]
+ },
+ "postprocessed_test_metrics": {
+  "precision": 0.8558558558558559,
+  "recall": 0.9531772575250836,
+  "f1": 0.9018987341772151,
+  "iou": 0.8213256484149856
+ },
+ "data": "marida_mixed",
+ "split": "common",
+ "validation": "MARIDA (marida_mixed, разбиение common); порог, TTA и постобработка выбраны на валидации; precision — по размеченным пикселям",
+ "onnx_max_abs_difference": 1.6093254089355469e-06,
+ "config": {
+  "name": "raunet",
+  "data": "marida_mixed",
+  "split": "common",
+  "seed": 42,
+  "input": {
+   "indices": true
+  },
+  "model": {
+   "kind": "raunet",
+   "width": 32,
+   "depth": 4,
+   "dropout": 0.1
+  },
+  "loss": {
+   "kind": "bce_dice",
+   "pos_weight": 4.0,
+   "aux_weight": 0.0
+  },
+  "train": {
+   "epochs": 80,
+   "batch": 16,
+   "lr": 0.001,
+   "weight_decay": 0.0001,
+   "positive_oversample": 3.0,
+   "patience": 25,
+   "tta": true
+  },
+  "labels": {
+   "max_confidence_code": 3
+  }
+ },
+ "service_metrics": {
+  "val": {
+   "precision": 0.9348230912476723,
+   "recall": 0.9400749063670412,
+   "f1": 0.9374416433239963,
+   "iou": 0.8822495606326889
+  },
+  "test": {
+   "precision": 0.8738461538461538,
+   "recall": 0.9498327759197325,
+   "f1": 0.9102564102564104,
+   "iou": 0.8352941176470589
+  },
+  "mode": "как работает сервис: без TTA, порог манифеста, маска моря, зоны от 2 пикс.; порог выбран на val, test посчитан один раз"
+ },
+ "calibration": {
+  "method": "temperature",
+  "temperature": 1.5930379225170281,
+  "threshold": 0.2602624470665689,
+  "note": "показываемая вероятность откалибрована на val; решения детектора те же"
+ }
+}

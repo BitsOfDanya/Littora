@@ -1,0 +1,46 @@
+seed = 42
+outer_splits = 5
+inner_splits = 4
+repetitions = 10
+bootstrap = 2000
+coverage = 0.8
+spatial_clusters = 5
+domain_buffer_km = 60
+profiles = ["S2_visual_GT2", "S1_trawl_5_to_50", "S3_visual_GT2", "S4_visual_GT2_5"]
+features_cache = "data/interim/concentration/features.parquet"
+report_name = "compact"
+
+[feature_sets]
+spatial = ["spatial"]
+spatial_season = ["spatial", "season"]
+spatial_geography_no_season = ["spatial", "geography"]
+spatial_weather_no_season = ["spatial", "weather"]
+all = ["spatial", "season", "geography", "weather"]
+
+[search]
+options = [
+  "tweedie_glm|spatial",
+  "tweedie_glm|spatial_season",
+  "tweedie_glm|spatial_geography_no_season",
+  "tweedie_glm|spatial_weather_no_season",
+  "tweedie_glm|all",
+  "gp_matern|spatial",
+  "gp_matern|spatial_season",
+  "random_forest|spatial_geography_no_season",
+  "random_forest|spatial_weather_no_season",
+  "random_forest|all",
+  "catboost|spatial_geography_no_season",
+  "catboost|spatial_weather_no_season",
+  "catboost|all",
+  "ensemble|spatial",
+  "ensemble|spatial_season",
+  "ensemble|all",
+]
+
+[service]
+options = ["median", "idw_k5", "tweedie_glm|spatial"]
+doy_margin_days = 30
+season_holdout = 0.7
+
+[transfer]
+pairs = [["S3_visual_GT2", "S4_visual_GT2_5"], ["S4_visual_GT2_5", "S3_visual_GT2"]]

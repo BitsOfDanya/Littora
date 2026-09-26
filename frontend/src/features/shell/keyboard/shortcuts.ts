@@ -54,8 +54,8 @@ export const SHORTCUTS: readonly Shortcut[] = [
   { group: "map", combos: [["G"]], action: "Сетка и рамка: вкл / выкл" },
   { group: "map", combos: [["J"], ["K"]], action: "Следующий / предыдущий объект по приоритету" },
   { group: "map", combos: [["Shift", "J"]], action: "Следующий объект с неквитированным событием" },
-  { group: "map", combos: [["I"]], action: "Пиксель под курсором", planned: "pixel_probe" },
-  { group: "map", combos: [["R"]], action: "Линейка", planned: "measure" },
+  { group: "map", combos: [["I"]], action: "Лупа: значения пикселя" },
+  { group: "map", combos: [["R"]], action: "Линейка" },
   { group: "rail", combos: [["Q"]], action: "Очередь событий: развернуть / свернуть" },
   { group: "rail", combos: [["["], ["]"]], action: "Предыдущий / следующий пролёт" },
   {

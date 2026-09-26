@@ -11,6 +11,13 @@ size = "1.16 GB"
 doi = "10.5281/zenodo.5151941"
 paper = "https://doi.org/10.1371/journal.pone.0262247"
 zenodo = 5151941
+sensor = "Sentinel-2 MSI, L1C после ACOLITE"
+bands = "11 каналов B01–B12 без B09/B10, приведены к 10 м"
+labels = "попиксельные маски 15 классов, уверенность 1–3; 0 — не размечено, а не фон"
+detector_use = "основной набор T2; разметка перенесена на L2A Earth Search: 1275 из 1381 патча"
+concentration_use = "нет: пиксельная разметка без шт./км²"
+domain_shift = "ACOLITE против Sen2Cor L2A: L2A темнее на 0,002–0,009; сеть с исходных данных теряет полноту на L2A"
+verdict = "используется"
 
 [marida-juliaeo]
 title = "MARIDA subset JuliaEO 2023"
@@ -38,6 +45,13 @@ size = "4.04 GB"
 doi = "10.5281/zenodo.10664073"
 paper = "https://doi.org/10.1016/j.isprsjprs.2024.02.017"
 zenodo = 10664073
+sensor = "Sentinel-2 MSI, L1C после ACOLITE (rhorc)"
+bands = "11 каналов раздельными файлами 10/20/60 м"
+labels = "попиксельные маски 15 классов с нефтью и морской слизью"
+detector_use = "не в основной модели: выданные GeoTIFF без геопривязки, перенести разметку на L2A нельзя"
+concentration_use = "нет"
+domain_shift = "тот же ACOLITE, что у MARIDA, пересекается с ней по сценам"
+verdict = "отложен"
 
 [plp2019]
 title = "Plastic Litter Project 2019 (University of the Aegean)"
@@ -52,6 +66,9 @@ size = "69 MB"
 doi = "10.5281/zenodo.3752719"
 paper = "https://doi.org/10.3390/rs12122013"
 zenodo = 3752719
+detector_use = "кандидат для проверки на мишенях известной площади; нужна своя разметка на L2A"
+concentration_use = "нет"
+verdict = "не используется в метриках"
 
 [plp2021]
 title = "Plastic Litter Project 2021 (University of the Aegean)"
@@ -66,6 +83,9 @@ size = "159.5 GB"
 doi = "10.5281/zenodo.7085112"
 paper = "https://doi.org/10.3390/rs14235997"
 zenodo = 7085112
+detector_use = "кандидат для проверки на мишенях известной площади; нужна своя разметка на L2A"
+concentration_use = "нет"
+verdict = "не используется в метриках"
 
 [plp2022-2023]
 title = "Plastic Litter Project 2022–2023: минимальная обнаружимая доля"
@@ -80,6 +100,9 @@ size = "3.83 GB"
 doi = "10.5281/zenodo.10046182"
 paper = "https://doi.org/10.1016/j.jag.2024.104245"
 zenodo = 10046182
+detector_use = "кандидат для проверки на мишенях известной площади; нужна своя разметка на L2A"
+concentration_use = "нет"
+verdict = "не используется в метриках"
 
 [windrows-med]
 title = "Mediterranean Sentinel-2 Litter Windrows Catalogue v1.0 (Cózar et al., 2024)"
@@ -94,6 +117,9 @@ size = "2.06 GB"
 doi = "10.5281/zenodo.11045944"
 paper = "https://doi.org/10.1038/s41467-024-48674-7"
 zenodo = 11045944
+detector_use = "кандидат положительных примеров: полосы мусора, но разметка линиями, а не масками"
+concentration_use = "нет"
+verdict = "не используется"
 
 [marinedebrisdetector]
 title = "marinedebrisdetector: данные к модели Rußwurm et al., 2023"
@@ -115,6 +141,9 @@ files = [
   { url = "https://marinedebrisdetector.s3.eu-central-1.amazonaws.com/data/MARIDA.zip" },
   { url = "https://marinedebrisdetector.s3.eu-central-1.amazonaws.com/data/floatingobjects.zip" },
 ]
+detector_use = "Durban 2019 — кандидат внешней проверки на новом регионе; кропы L1C, разметка точками"
+concentration_use = "нет"
+verdict = "не используется"
 
 [nasa-marine-debris]
 title = "NASA / Planet Marine Debris Dataset for Object Detection"
@@ -128,6 +157,9 @@ access = "open"
 size = "77 MB"
 doi = "10.34911/rdnt.9r6ekg"
 s3_listing = { endpoint = "https://data.source.coop", bucket = "nasa", prefix = "marine-debris/" }
+detector_use = "другой сенсор: PlanetScope RGB 3 м с рамками"
+concentration_use = "нет"
+verdict = "не используется"
 
 [litterlines]
 title = "LitterLines — полосы мусора на снимках PlanetScope"
@@ -300,6 +332,47 @@ files = [
   { name = "gonzalez-fernandez2022-mmc2.xlsx", url = "https://ars.els-cdn.com/content/image/1-s2.0-S0269749122010302-mmc2.xlsx" },
 ]
 
+[seanoe-burgas]
+title = "Плавающий мусор в Бургасском заливе, 2021–2023 (IBER-BAS, BRIDGE-BS WP5)"
+about = "84 трансекты-события: 8 постоянных трансект 2250 × 6 м (0,0135 км²), 21 день съёмки, 11 кампаний с 13.09.2021 по 22.11.2023; в кампаниях 2023-04 и 2023-06 плотности кратны 1/0,027, то есть площадь учёта вдвое больше; плотность шт./км² всего мусора от 2,5 см и 20 категорий; одна точка на трансекту, роль точки и часовой пояс не указаны"
+kind = "observations"
+region = "international"
+use = ["validation", "train"]
+license = "CC-BY-4.0"
+license_note = "JSON-LD страницы SEANOE: CC-BY 4.0, файл скачивается без аккаунта; текст страницы (Utilisation): «Data is available for BRIDGE-BAS project partners upon request, as well as by external organizations once data produced within the project is made public». Противоречие не снято; сырой файл в репозиторий не кладём, до ответа авторов не распространяем"
+commercial = true
+access = "open"
+size = "20 KB"
+doi = "10.17882/98351"
+paper = "https://doi.org/10.5281/zenodo.14608279"
+attribution = "Bobchev N., Berov D., Karamfilov V. (2023). Floating marine litter monitoring in Burgas Bay, Black Sea (09.2021-12.2023). IBER-BAS BRIDGE-BS WP5 survey. SEANOE. https://doi.org/10.17882/98351; метод: Bobchev et al. 2024, Bul. J. Meteo & Hydro 28/2"
+role = "внешний источник T3 в схеме кейса, профиль S4_visual_GT2_5 (визуально, весь мусор, от 2,5 см); отдельный source_id S4X_BG_BURGAS_SEANOE, в data/case не входит; проверка на отложенных кампаниях и трансектах; фиксированный эффект источника при смешивании с DOORS"
+files = [
+  { name = "107709.txt", url = "https://www.seanoe.org/data/00872/98351/data/107709.txt" },
+]
+concentration_use = "площадь выводится по кампании: если все плотности × 0,0135 целые — 0,0135 км²; иначе если все × 0,027 целые — 0,027 км² с флагом sampled_area_0027_inferred_from_density_quantum (2023-04 и 2023-06, 12 строк; разбиение на длину и ширину неизвестно); иначе items пусто. items = round(плотность × площадь), все 84 строки целые, сумма 502 — сходится со статьёй. Время считаем местным EET/EEST и переводим в UTC с флагом; роль точки (начало или середина) неизвестна, флаг"
+verdict = "используется во внешней проверке T3"
+
+[emblas2016-russia]
+title = "EMBLAS-II 2016: плавающий макромусор на российских трансектах (JOSS RF и NPMS RF-III)"
+about = "12 трансект с координатами, восстановленных по таблицам научного отчёта: JOSS RF 29–30.05.2016 (8 трансект между станциями, полоса 50 м) и NPMS RF-III 9–10.05.2016 у Анапы и Геленджика (4 трансекты, полоса 20 м); число предметов, площадь, плотность"
+kind = "observations"
+region = "russia"
+use = ["validation"]
+license = "не указана"
+license_note = "у PDF отчёта лицензия не указана; в data/external лежат отчёт и производная таблица emblas2016_russia_transects_derived.csv, в git не входят"
+commercial = false
+access = "open"
+size = "13 MB"
+homepage = "https://emblasproject.org"
+attribution = "EMBLAS-II. Scientific Report – Joint Black Sea Surveys 2016, ISBN 978-617-7953-60-8: табл. VII.2.7 (FMML JOSS RF), табл. 6–7 и 9 (станции и время)"
+role = "только внешний тест T3, в обучение не входит; provenance: reconstructed from report tables; station mapping inferred («ст 16» = станция 116 и т. д.)"
+files = [
+  { name = "EMBLAS-II_NPMS_JOSS_2016_ScReport_ISBN-978-617-7953-60-8-2.pdf", url = "https://emblasproject.org/wp-content/uploads/2022/03/EMBLAS-II_NPMS_JOSS_2016_ScReport_ISBN-978-617-7953-60-8-2.pdf" },
+]
+concentration_use = "производная таблица составлена вручную по отчёту; пятая трансекта NPMS (0,5 км, 0 предметов) не привязывается и исключена; окно времени JOSS — местное (UTC+3) по CTD-станциям; дата NPMS 9 или 10 мая, берётся 9 мая с флагом"
+verdict = "внешний тест T3"
+
 [adis-ocean-cleanup]
 title = "ADIS (The Ocean Cleanup): калиброванное обилие макропластика 2019–2024"
 about = "учёт плавающего макропластика судовыми камерами по всему миру; несколько сегментов в Охотском море и у Курил"
@@ -339,6 +412,8 @@ size = "5 MB"
 doi = "10.6084/m9.figshare.5873142.v2"
 paper = "https://doi.org/10.1038/s41598-018-22939-w"
 figshare = { api = "https://api.figshare.com/v2", article = 5873142 }
+concentration_use = "запрещено как признак T3: модельная карта построена по тем же тралам S1"
+verdict = "только контекст"
 
 [oceanscan]
 title = "Ocean Scan — каталог полевых наблюдений морского мусора"
@@ -390,6 +465,8 @@ commercial = true
 access = "open"
 size = "~1 GB/тайл"
 homepage = "https://earth-search.aws.element84.com/v1"
+detector_use = "снимки L2A для переноса разметки MARIDA, пар T1 и анализа в сервисе"
+verdict = "используется"
 
 [sentinel2-cdse]
 title = "Sentinel-2 L1C / L2A в Copernicus Data Space Ecosystem"
@@ -556,6 +633,8 @@ commercial = false
 access = "open"
 size = "~50 KB/точка"
 homepage = "https://open-meteo.com/en/docs/marine-weather-api"
+concentration_use = "признаки T3: ветер ERA5 и волнение ERA5-Ocean на момент учёта и за 24–72 ч"
+verdict = "используется"
 
 [natural-earth]
 title = "Natural Earth 1:10m — береговая линия, суша, моря, реки, порты"
@@ -576,6 +655,8 @@ files = [
   { url = "https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip" },
   { url = "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_ports.zip" },
 ]
+concentration_use = "признак T3: расстояние до берега по береговой линии 1:10m"
+verdict = "используется"
 
 [marine-regions-iho]
 title = "Marine Regions: границы морей IHO"
@@ -599,10 +680,13 @@ about = "3 807 портов мира с координатами, из них 68
 kind = "geo"
 region = "global"
 use = ["aoi"]
-license = "не указана"
+license = "public domain"
+license_note = "издание правительства США (NGA), открытое распространение"
+commercial = true
 access = "open"
 size = "3.5 MB"
 homepage = "https://msi.nga.mil/Publications/WPI"
+role = "data/aoi/ports.geojson: 117 портов Чёрного и Азовского морей и морей России без нефтяных терминалов — базы для плана обследования; собирает scripts/data/ports.py"
 files = [
   { name = "UpdatedPub150.csv", url = "https://msi.nga.mil/api/publications/download?type=view&key=16920959/SFH00000/UpdatedPub150.csv" },
 ]
@@ -634,6 +718,8 @@ size = "27 MB"
 doi = "10.6084/m9.figshare.4725541.v6"
 paper = "https://doi.org/10.1038/ncomms15611"
 figshare = { api = "https://api.figshare.com/v2", article = 4725541 }
+concentration_use = "признаки T3: взвешенный по расстоянию речной вынос в радиусе 500 км"
+verdict = "используется"
 
 [shipping-density]
 title = "Плотность судоходства (World Bank / IMF)"
@@ -670,3 +756,79 @@ files = [
   { url = "https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip" },
   { url = "https://osmdata.openstreetmap.de/download/land-polygons-split-4326.zip" },
 ]
+
+[cmems-drifter-blk-4401656]
+title = "Copernicus Marine: дрифтер SVP-B WMO 4401656 в Чёрном море, 2026"
+about = "единственный свободный дрейф в Чёрном море в открытых архивах после 2014 года: EUMETSAT SVP_BRST, ежечасные координаты с флагом качества; якорение у Варны до 02.02.2026, волочение якоря 03–21.02, свободный дрейф 22.02–12.03 на юг вдоль Болгарии, с 13.03 на мели у турецкого берега; флага дрога нет"
+kind = "ocean"
+region = "international"
+use = ["validation", "drift"]
+license = "Copernicus Marine"
+license_note = "Copernicus Marine Service Commitments and Licence: бесплатно, с указанием источника; файлы читаются из публичного S3 без учётной записи, формально лицензия привязана к бесплатной регистрации; используются только для проверки, не распространяются"
+commercial = true
+access = "open"
+size = "0.4 MB"
+doi = "10.48670/moi-00033"
+attribution = "Generated using E.U. Copernicus Marine Service Information; INSITU_BLK_PHYBGCWAV_DISCRETE_MYNRT_013_034, https://doi.org/10.48670/moi-00033"
+role = "разбор случая для сверки сценария дрейфа (ml drift check); статистики не даёт: один дрифтер"
+files = [
+  { url = "https://s3.waw3-1.cloudferro.com/mdl-native-08/native/INSITU_BLK_PHYBGCWAV_DISCRETE_MYNRT_013_034/cmems_obs-ins_blk_phybgcwav_mynrt_na_irr_202311/monthly/DB/202601/GL_TS_DB_4401656_202601.nc" },
+  { url = "https://s3.waw3-1.cloudferro.com/mdl-native-08/native/INSITU_BLK_PHYBGCWAV_DISCRETE_MYNRT_013_034/cmems_obs-ins_blk_phybgcwav_mynrt_na_irr_202311/monthly/DB/202602/GL_TS_DB_4401656_202602.nc" },
+  { url = "https://s3.waw3-1.cloudferro.com/mdl-native-08/native/INSITU_BLK_PHYBGCWAV_DISCRETE_MYNRT_013_034/cmems_obs-ins_blk_phybgcwav_mynrt_na_irr_202311/monthly/DB/202603/GL_TS_DB_4401656_202603.nc" },
+  { url = "https://s3.waw3-1.cloudferro.com/mdl-native-08/native/INSITU_BLK_PHYBGCWAV_DISCRETE_MYNRT_013_034/cmems_obs-ins_blk_phybgcwav_mynrt_na_irr_202311/monthly/DB/202604/GL_TS_DB_4401656_202604.nc" },
+]
+verdict = "используется в проверке дрейфа"
+
+[cmems-drifters-med]
+title = "Copernicus Marine: часовые дрифтеры Средиземного моря 2022–2025 (INSITU_GLO_PHY_UV_DISCRETE_MY_013_044)"
+about = "138 дрифтеров, файл целиком внутри 6° з. д.–36,5° в. д., 30–46° с. ш. и заканчивается не раньше 2022 года: ежечасные координаты с POSITION_QC и флагом дрога DROGUE_TEST на каждом фиксе (1 — с дрогом, 3 — без, 0 — неизвестно); в основном западное и центральное Средиземноморье"
+kind = "ocean"
+region = "international"
+use = ["validation", "calibration", "drift"]
+license = "Copernicus Marine"
+license_note = "Copernicus Marine Service Commitments and Licence: бесплатно, с указанием источника; файлы читаются из публичного S3 без учётной записи, формально лицензия привязана к бесплатной регистрации; используются только для проверки, не распространяются"
+commercial = true
+access = "open"
+size = "33 MB"
+doi = "10.17882/86236"
+attribution = "Generated using E.U. Copernicus Marine Service Information; INSITU_GLO_PHY_UV_DISCRETE_MY_013_044, https://doi.org/10.17882/86236"
+role = "статистика сверки дрейфа: подбор парусности и Стокса на 2022–2023, отчёт на 2024–2025 по непересекающимся дрифтерам; с дрогом 15 м — проверка течений, без дрога — приповерхностный объект"
+insitu_index = { index = "https://s3.waw3-1.cloudferro.com/mdl-native-03/native/INSITU_GLO_PHY_UV_DISCRETE_MY_013_044/cmems_obs-ins_glo_phy-cur_my_drifter_PT1H_202511/index_history.txt", base = "https://s3.waw3-1.cloudferro.com/mdl-native-03/native/INSITU_GLO_PHY_UV_DISCRETE_MY_013_044/cmems_obs-ins_glo_phy-cur_my_drifter_PT1H_202511/", strip = 2, bbox = [-6.0, 30.0, 36.5, 46.0], since = "2022-01-01" }
+verdict = "используется в проверке дрейфа"
+
+[swot-med-drifters]
+title = "SWOT-Med 2023: дрифтеры западного Средиземноморья (SEANOE)"
+about = "163 дрифтера кампаний C-SWOT-2023, BioSWOT-Med и FaSt-SWOT, 27.03.2023–22.01.2024, сглаженные часовые траектории с маской пропусков; приповерхностные CARTHE и HEREON (дрог 0,5 м), CODE (1 м), а также SVP, MELODI и SPOTTER"
+kind = "ocean"
+region = "international"
+use = ["validation", "calibration", "drift"]
+license = "CC-BY-SA-4.0"
+commercial = true
+access = "open"
+size = "10 MB"
+doi = "10.17882/100828"
+attribution = "Demol M., Berta M., Gomez Navarro L. et al. (2023). A Drifter Dataset for the Western Mediterranean Sea collected during the SWOT mission calibration and validation phase. SEANOE. https://doi.org/10.17882/100828"
+role = "сверка дрейфа на приповерхностных дрифтерах (CARTHE, HEREON, CODE), только подбор: все треки 2023 года"
+files = [
+  { name = "115798.zip", url = "https://www.seanoe.org/data/00896/100828/data/115798.zip" },
+]
+verdict = "используется в проверке дрейфа"
+
+[nautilos-litter-drifters]
+title = "NAUTILOS: дрифтеры из настоящего мусора, Лигурийское и Тирренское моря (CNR-ISMAR)"
+about = "13 миссий 2021–2024: бутылки (flacone, flacone 3L), доски (tavoletta, tavoletta forata) и кольцо (ciambella) с GSM-трекером, фиксы примерно раз в 10–60 минут"
+kind = "observations"
+region = "international"
+use = ["validation", "calibration", "drift"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "0.4 MB"
+homepage = "https://data-nautilos-h2020.eu/erddap/tabledap/mini_drifter.html"
+paper = "https://doi.org/10.3390/s23020935"
+attribution = "CNR-ISMAR, NAUTILOS (H2020 No. 101000825), mini_drifter ERDDAP dataset, CC-BY 4.0; https://doi.org/10.13127/misc/73"
+role = "парусность настоящих предметов мусора по типам; миссии до 2022 года не используются — нет течений SMOC в Open-Meteo"
+files = [
+  { name = "mini_drifter.csv", url = "https://data-nautilos-h2020.eu/erddap/tabledap/mini_drifter.csv?mission,ID,time,latitude,longitude,drifter_type" },
+]
+verdict = "используется в проверке дрейфа"

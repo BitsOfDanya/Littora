@@ -209,6 +209,7 @@ function SeriesSvg({
   const max = Math.max(1e-6, ...points.map((point) => point.high ?? point.value ?? 0)) * 1.1;
   const x = (iso: string) => ratioIn(window, Date.parse(iso)) * size.width;
   const y = (value: number) => bottom - (value / max) * (bottom - top);
+  const scaled = points.some((point) => point.state === "observed");
   return (
     <svg
       width={size.width}
@@ -216,17 +217,21 @@ function SeriesSvg({
       aria-hidden
       className="absolute inset-0 overflow-visible"
     >
-      <line
-        x1={0}
-        x2={size.width}
-        y1={y(max / 1.1)}
-        y2={y(max / 1.1)}
-        stroke="var(--line-hairline)"
-        strokeDasharray="2 3"
-      />
-      <text x={3} y={y(max / 1.1) - 3} className="fill-text-tertiary font-mono text-[10.5px]">
-        {formatNumber(max / 1.1, max < 1 ? 2 : 0)} {unit}
-      </text>
+      {scaled ? (
+        <>
+          <line
+            x1={0}
+            x2={size.width}
+            y1={y(max / 1.1)}
+            y2={y(max / 1.1)}
+            stroke="var(--line-hairline)"
+            strokeDasharray="2 3"
+          />
+          <text x={3} y={y(max / 1.1) - 3} className="fill-text-tertiary font-mono text-[10.5px]">
+            {formatNumber(max / 1.1, max < 1 ? 2 : 0)} {unit}
+          </text>
+        </>
+      ) : null}
       {splitRuns(points).map((run) => (
         <polyline
           key={run[0].id}
@@ -291,10 +296,12 @@ function SeriesPlot({
   points,
   window,
   unit,
+  emptyText,
 }: {
   points: readonly SeriesPoint[];
   window: TimeWindow;
   unit: string;
+  emptyText?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const size = useElementSize(ref);
@@ -302,6 +309,11 @@ function SeriesPlot({
     <div ref={ref} className="relative h-full min-h-0">
       {size.width > 0 && size.height > 0 ? (
         <SeriesSvg points={points} window={window} size={size} unit={unit} />
+      ) : null}
+      {emptyText && !points.length ? (
+        <p className="absolute inset-0 flex items-center font-serif text-[13px] text-text-tertiary italic">
+          {emptyText}
+        </p>
       ) : null}
     </div>
   );
@@ -354,6 +366,7 @@ export type CompareTracksProps = {
   series: readonly SeriesPoint[];
   seriesLabel: string;
   seriesUnit: string;
+  seriesEmpty?: string;
   isDemo: boolean;
   onPick: (side: CompareSide, sceneId: string) => void;
 };
@@ -368,6 +381,7 @@ export function CompareTracks({
   series,
   seriesLabel,
   seriesUnit,
+  seriesEmpty,
   isDemo,
   onPick,
 }: CompareTracksProps) {
@@ -453,7 +467,7 @@ export function CompareTracks({
         {isDemo ? <DemoTag /> : null}
       </span>
       <div className="relative col-start-2 row-start-3 min-h-0 border-b border-line-hairline">
-        <SeriesPlot points={series} window={window} unit={seriesUnit} />
+        <SeriesPlot points={series} window={window} unit={seriesUnit} emptyText={seriesEmpty} />
       </div>
       <div aria-hidden className="pointer-events-none relative col-start-2 row-span-3 row-start-1">
         {showNow ? (

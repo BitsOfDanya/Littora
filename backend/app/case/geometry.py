@@ -21,7 +21,7 @@ class FootprintKind(StrEnum):
 
 FOOTPRINT_LABELS: dict[FootprintKind, str] = {
     FootprintKind.STRIP: "полоса по концам трансекты",
-    FootprintKind.POINT: "только центр наблюдения, круг неопределённости",
+    FootprintKind.POINT: "только центр наблюдения: протяжённость неизвестна, круг неопределённости",
 }
 
 
@@ -46,6 +46,7 @@ class Footprint:
     kind: FootprintKind
     observed: BaseGeometry
     analysis: BaseGeometry
+    radius_m: float
     width_m: float | None
     length_km: float | None
     approximate: bool
@@ -60,6 +61,17 @@ class Footprint:
 
     def geojson(self) -> dict:
         return mapping(self.observed)
+
+    def covered_by(self, cover: BaseGeometry) -> float:
+        if cover.contains(self.analysis):
+            return 1.0
+        overlap = cover.intersection(self.analysis)
+        if overlap.is_empty:
+            return 0.0
+        center = self.analysis.centroid
+        projection = LocalProjection(center.x, center.y)
+        inside = transform(projection.forward, overlap).area
+        return min(inside / transform(projection.forward, self.analysis).area, 1.0)
 
 
 def area_km2(geometry: BaseGeometry) -> float:
@@ -79,8 +91,12 @@ def _buffered(geometry: BaseGeometry, projection: LocalProjection, radius_m: flo
     return transform(projection.inverse, metric)
 
 
+class MissingPositionError(ValueError):
+    pass
+
+
 def build_footprint(
-    record: CaseRecord, point_buffer_m: float, min_strip_width_m: float
+    record: CaseRecord, unknown_extent_buffer_m: float, min_strip_width_m: float
 ) -> Footprint:
     approximate = any(flag in APPROXIMATE_FLAGS for flag in record.flags)
     segment = record.segment
@@ -90,13 +106,18 @@ def build_footprint(
         (lon_a, lat_a), (lon_b, lat_b) = segment
         projection = LocalProjection((lon_a + lon_b) / 2, (lat_a + lat_b) / 2)
         line = LineString(segment)
+        radius = max(width or 0, min_strip_width_m) / 2
         observed = _buffered(line, projection, (width or 0) / 2) if width else line
-        analysis = _buffered(line, projection, max(width or 0, min_strip_width_m) / 2)
-        return Footprint(FootprintKind.STRIP, observed, analysis, width, length, approximate)
+        analysis = _buffered(line, projection, radius)
+        return Footprint(
+            FootprintKind.STRIP, observed, analysis, radius, width, length, approximate
+        )
     position = record.position
     if position is None:
-        raise ValueError(f"{record.sample_id}: no coordinates")
+        raise MissingPositionError(f"{record.sample_id}: no coordinates")
     projection = LocalProjection(*position)
     point = Point(position)
-    analysis = _buffered(point, projection, point_buffer_m)
-    return Footprint(FootprintKind.POINT, point, analysis, width, length, approximate)
+    analysis = _buffered(point, projection, unknown_extent_buffer_m)
+    return Footprint(
+        FootprintKind.POINT, point, analysis, unknown_extent_buffer_m, width, length, approximate
+    )

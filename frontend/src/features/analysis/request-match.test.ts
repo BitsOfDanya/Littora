@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import type { AnalysisCreate } from "@/lib/api/analyses";
+import type { AnalysisCreate, AnalysisListItem } from "@/lib/api/analyses";
 import { roundBbox, spanTooLarge } from "./area";
-import { matchesRequest } from "./use-analysis";
+import { latestZonesAnalysis, matchesRequest } from "./use-analysis";
 
 const saved = {
   request: {
@@ -44,5 +44,24 @@ describe("saved analysis lookup", () => {
     expect(roundBbox([29.123456, 43.000049, 29.5, 43.99999])).toEqual([29.1235, 43, 29.5, 44]);
     expect(spanTooLarge([29, 43, 30, 44])).toBe(false);
     expect(spanTooLarge([29, 43, 30.5, 44])).toBe(true);
+  });
+
+  it("adopts the newest current result with zones of the same area", () => {
+    const item = (id: string, zones: number, stale = false, aoi = "doors-west") =>
+      ({
+        id,
+        computed_at: "2026-09-26T08:00:00+00:00",
+        request: { ...saved.request, aoi_id: aoi },
+        scene_id: null,
+        scene_acquired_at: null,
+        status: { status: "detected", label: "обнаружено" },
+        concentration: { status: "concentration_unavailable", label: "концентрация недоступна" },
+        observations: 0,
+        zones,
+        stale,
+      }) satisfies AnalysisListItem;
+    const history = [item("empty", 0), item("old", 4, true), item("other", 3, false, "anapa")];
+    expect(latestZonesAnalysis(history, "doors-west")).toBeNull();
+    expect(latestZonesAnalysis([...history, item("fresh", 2)], "doors-west")?.id).toBe("fresh");
   });
 });

@@ -19,7 +19,7 @@ export function TopBar() {
       <div className="ml-auto hidden shrink-0 items-center gap-1.5 pr-3 pl-2 md:flex">
         <DemoSwitch />
         <CommandBox />
-        <span className="hidden xl:inline-flex">
+        <span className="hidden min-[1600px]:inline-flex">
           <UtcClock />
         </span>
         <ThemeSeg />

@@ -120,6 +120,15 @@ def _representative(geometry: dict[str, Any] | None) -> tuple[float | None, floa
     return round(lon, 6), round(lat, 6)
 
 
+def _zone_note(zone: dict[str, Any]) -> str:
+    parts = [flag["label"] for flag in zone.get("flags") or []]
+    stability = zone.get("stability")
+    if stability:
+        agreement, views = stability["agreement"], stability["views"]
+        parts.append(f"согласие поворотов {agreement:.2f}, видов {views}")
+    return "; ".join(parts)
+
+
 def to_csv(result: dict[str, Any]) -> str:
     rows = []
     area = _area_properties(result)
@@ -161,7 +170,7 @@ def to_csv(result: dict[str, Any]) -> str:
                 "scene_id": area["scene_id"],
                 "longitude": zone_lon,
                 "latitude": zone_lat,
-                "note": "",
+                "note": _zone_note(zone),
             }
         )
     for observation in result.get("observations", []):

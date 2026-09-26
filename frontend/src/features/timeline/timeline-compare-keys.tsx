@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { type LiveTimeline, useRefreshAfterRun } from "@/data/timeline";
 import type { SceneSummary } from "@/domain/scene";
 import { useHotkey } from "@/features/shell/hotkeys";
 import { useStatusHintStore } from "@/features/shell/status-hint-store";
@@ -17,15 +18,27 @@ function moveDivider(action: DividerAction, large: boolean): void {
   updateCompare({ position: nextDividerPosition(compare.position, action, large) });
 }
 
-function useDefaultPair(scenes: readonly SceneSummary[]): void {
+function useDefaultPair(scenes: readonly SceneSummary[], live: LiveTimeline): void {
   const hasPair = useWorkspaceStore((state) =>
     Boolean(state.compare.beforeSceneId && state.compare.afterSceneId),
   );
+  const settled = live.status !== "loading";
+  const comparable = useMemo(
+    () =>
+      new Set(
+        live.status === "ready"
+          ? live.timeline.passes
+              .filter((entry) => entry.analysis && entry.analysis.zone_count !== null)
+              .map((entry) => entry.scene.id)
+          : [],
+      ),
+    [live],
+  );
   useEffect(() => {
-    if (hasPair) return;
-    const ids = defaultPairIds(scenes);
+    if (hasPair || !settled) return;
+    const ids = defaultPairIds(scenes, comparable);
     if (ids) useWorkspaceStore.getState().updateCompare(ids);
-  }, [hasPair, scenes]);
+  }, [hasPair, settled, scenes, comparable]);
 }
 
 export function TimelineCompareKeys() {
@@ -37,7 +50,8 @@ export function TimelineCompareKeys() {
   const enabled = !modalOpen;
   const stepping = enabled && data.pair !== null && data.enoughUsable;
 
-  useDefaultPair(data.scenes);
+  useDefaultPair(data.scenes, data.live);
+  useRefreshAfterRun(data.live.status === "ready" ? data.live.timeline.run : null);
   usePlaybackController(data, actions);
 
   useHotkey("KeyX", actions.swap, { enabled: enabled && data.pair !== null });

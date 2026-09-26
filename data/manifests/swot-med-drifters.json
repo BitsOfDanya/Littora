@@ -1,0 +1,19 @@
+{
+  "key": "swot-med-drifters",
+  "title": "SWOT-Med 2023: дрифтеры западного Средиземноморья (SEANOE)",
+  "license": "CC-BY-SA-4.0",
+  "source": "https://doi.org/10.17882/100828",
+  "retrieved": "2026-09-26",
+  "bytes": 10132425,
+  "files": [
+    {
+      "name": "115798.zip",
+      "bytes": 10132425,
+      "md5": "4a8087068a132d9fd81b240ea9208aee"
+    }
+  ],
+  "unpacked": {
+    "files": 161,
+    "bytes": 17606723
+  }
+}

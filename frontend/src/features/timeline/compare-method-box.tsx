@@ -7,11 +7,30 @@ import { IconLens, IconOpacity, IconSwipe } from "@/ui/icons";
 import { SeverityGlyph } from "@/ui/indicators";
 import { type SegmentOption, Segmented } from "@/ui/segmented";
 import { useCompareViewStore } from "./compare-view-store";
+import { liveCompareView } from "./live-map-layers";
+import { useCompareData } from "./use-compare";
 
 export type CompareMethod = "swipe" | "opacity" | "lens";
 
 export const COMPARE_HONESTY_NOTE =
   "Под шторкой — годовые мозаики EOX 2024 и 2025, а не снимки дат A и B: каталог сцен не подключён";
+
+const LIVE_NOTES = {
+  both: "Под шторкой — снимки Sentinel-2 дат A и B из анализа района; контуры — зоны детектора на каждой дате",
+  a: "Слева — снимок Sentinel-2 даты A из анализа района, справа — подложка: дата B ещё не проанализирована",
+  b: "Справа — снимок Sentinel-2 даты B из анализа района, слева — мозаика EOX 2024: дата A ещё не проанализирована",
+  none: "Под шторкой — годовые мозаики EOX 2024 и 2025, а не снимки дат A и B: снимки появятся после анализа обеих дат",
+} as const;
+
+export function useCompareHonestyNote(): string {
+  const { isDemo, hasCatalog, pair, passes } = useCompareData();
+  if (isDemo || !hasCatalog) return COMPARE_HONESTY_NOTE;
+  const view = liveCompareView(pair, passes);
+  if (view.aImage && view.bImage) return LIVE_NOTES.both;
+  if (view.aImage) return LIVE_NOTES.a;
+  if (view.bImage) return LIVE_NOTES.b;
+  return LIVE_NOTES.none;
+}
 
 export const METHOD_PLANNED_REASON = "в плане: появится вместе с каталогом сцен";
 
@@ -101,6 +120,9 @@ function BasemapNote() {
 export function CompareMethodBox() {
   const frame = useFrameWidth();
   const phone = useIsPhoneWidth();
+  const note = useCompareHonestyNote();
+  const { isDemo, pair, passes } = useCompareData();
+  const aImage = !isDemo && liveCompareView(pair, passes).aImage;
   if (phone) return null;
   const inset = frame + FURNITURE_GAP_PX;
   return (
@@ -115,8 +137,8 @@ export function CompareMethodBox() {
         options={COMPARE_METHODS}
         onChange={() => undefined}
       />
-      <p className="text-[12px] leading-4 text-text-secondary">{COMPARE_HONESTY_NOTE}</p>
-      <BasemapNote />
+      <p className="text-[12px] leading-4 text-text-secondary">{note}</p>
+      {aImage ? null : <BasemapNote />}
     </section>
   );
 }

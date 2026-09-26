@@ -1,0 +1,128 @@
+{
+ "detector": "raunet__marida_mixed__common",
+ "threshold": 0.15921302139759064,
+ "events": 7,
+ "correlations": {
+  "fdi_mean": {
+   "spearman": -0.42857142857142866,
+   "p_value": 0.3373683110858241
+  },
+  "fdi_p99": {
+   "spearman": -0.1785714285714286,
+   "p_value": 0.7016579425162728
+  },
+  "ndvi_mean": {
+   "spearman": -0.14285714285714288,
+   "p_value": 0.7599453002180928
+  },
+  "nir_p99": {
+   "spearman": 0.30631873731649006,
+   "p_value": 0.5040270086665882
+  },
+  "probability_mean": {
+   "spearman": 0.3214285714285715,
+   "p_value": 0.4820720382996776
+  },
+  "probability_p99": {
+   "spearman": 0.39285714285714296,
+   "p_value": 0.3833168704269725
+  },
+  "detected_share": {
+   "spearman": 0.49256900389943786,
+   "p_value": 0.2614245269466299
+  }
+ },
+ "rows": [
+  {
+   "event_id": "S4:DOORS3:T1",
+   "scene_id": "S2A_T35TQJ_20240602T084613_L2A",
+   "water_pixels": 1126187,
+   "fdi_mean": 0.006998323369771242,
+   "fdi_p99": 0.009206588380038738,
+   "ndvi_mean": -0.2382718175649643,
+   "nir_p99": 0.01109999418258667,
+   "probability_mean": 2.2681337213725783e-05,
+   "probability_p99": 5.902270277147181e-05,
+   "detected_share": 0.0,
+   "concentration": 192.54
+  },
+  {
+   "event_id": "S4:DOORS3:T18",
+   "scene_id": "S2B_T37TFG_20240605T081237_L2A",
+   "water_pixels": 1125253,
+   "fdi_mean": 0.0032362916972488165,
+   "fdi_p99": 0.0048849498853087425,
+   "ndvi_mean": -0.4079296588897705,
+   "nir_p99": 0.007099993526935577,
+   "probability_mean": 3.47245586453937e-05,
+   "probability_p99": 9.23852639971301e-05,
+   "detected_share": 0.0,
+   "concentration": 348.74
+  },
+  {
+   "event_id": "S4:DOORS3:T19",
+   "scene_id": "S2B_T37TFG_20240605T081237_L2A",
+   "water_pixels": 1125460,
+   "fdi_mean": 0.003437982639297843,
+   "fdi_p99": 0.006089967675507069,
+   "ndvi_mean": -0.3460938036441803,
+   "nir_p99": 0.01109999418258667,
+   "probability_mean": 3.2272248063236475e-05,
+   "probability_p99": 9.729956946102902e-05,
+   "detected_share": 0.0,
+   "concentration": 544.69
+  },
+  {
+   "event_id": "S4:DOORS3:T2",
+   "scene_id": "S2A_T35TQJ_20240602T084613_L2A",
+   "water_pixels": 1126350,
+   "fdi_mean": 0.006149563938379288,
+   "fdi_p99": 0.008520480245351791,
+   "ndvi_mean": -0.23810657858848572,
+   "nir_p99": 0.012199997901916504,
+   "probability_mean": 3.606695827329531e-05,
+   "probability_p99": 8.282063208753243e-05,
+   "detected_share": 1.7756470013761264e-06,
+   "concentration": 439.84
+  },
+  {
+   "event_id": "S4:DOORS3:T30",
+   "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "water_pixels": 1125079,
+   "fdi_mean": 0.003942136187106371,
+   "fdi_p99": 0.008543265983462334,
+   "ndvi_mean": -0.45219069719314575,
+   "nir_p99": 0.01629999279975891,
+   "probability_mean": 0.00010625145660014823,
+   "probability_p99": 0.00040955530130304396,
+   "detected_share": 5.155193546408741e-05,
+   "concentration": 587.41
+  },
+  {
+   "event_id": "S4:DOORS3:T31",
+   "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "water_pixels": 1125213,
+   "fdi_mean": 0.0038186588790267706,
+   "fdi_p99": 0.006229361519217491,
+   "ndvi_mean": -0.4914240539073944,
+   "nir_p99": 0.00939999520778656,
+   "probability_mean": 6.039477375452407e-05,
+   "probability_p99": 0.0002577626146376133,
+   "detected_share": 4.443603122253298e-06,
+   "concentration": 345.29
+  },
+  {
+   "event_id": "S4:DOORS3:T32",
+   "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "water_pixels": 1125464,
+   "fdi_mean": 0.004306923132389784,
+   "fdi_p99": 0.008166045881807804,
+   "ndvi_mean": -0.3975500464439392,
+   "nir_p99": 0.013499997556209564,
+   "probability_mean": 6.466846389230341e-05,
+   "probability_p99": 0.0003007790364790708,
+   "detected_share": 0.0,
+   "concentration": 198.51
+  }
+ ]
+}

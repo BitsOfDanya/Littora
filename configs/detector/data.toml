@@ -1,0 +1,32 @@
+[marida]
+root = "data/external/marida"
+cache = "data/processed/detector/marida"
+
+[l2a]
+cache = "data/processed/detector/marida_l2a"
+catalog = "https://earth-search.aws.element84.com/v1"
+collections = ["sentinel-2-l2a", "sentinel-2-c1-l2a"]
+min_alignment = 0.97
+workers = 10
+
+[c1]
+cache = "data/processed/detector/marida_c1"
+catalog = "https://earth-search.aws.element84.com/v1"
+collections = ["sentinel-2-c1-l2a"]
+min_alignment = 0.97
+workers = 10
+
+[review]
+source = "data/validation/black_sea_zone_audit.csv"
+cache = "data/processed/detector/review"
+catalog = "https://earth-search.aws.element84.com/v1"
+collections = ["sentinel-2-c1-l2a", "sentinel-2-l2a"]
+min_confidence = 2
+
+[mixed_c1]
+cache = "data/processed/detector/marida_mixed_c1"
+
+[labels]
+positive = [1]
+ignore = [0]
+max_confidence_code = 3

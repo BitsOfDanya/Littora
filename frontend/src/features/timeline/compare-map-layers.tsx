@@ -34,6 +34,7 @@ import { usePreferencesStore } from "@/state/preferences-store";
 import { useWorkspaceStore } from "@/state/workspace-store";
 import { type ComparePair, passAt } from "./compare-model";
 import { useCompareViewStore } from "./compare-view-store";
+import { liveCompareView, useLiveCompareLayers } from "./live-map-layers";
 import { RasterTintExtension, tintFactors } from "./raster-tint-extension";
 import { useCompareData } from "./use-compare";
 
@@ -450,10 +451,13 @@ function useOutlineLayers(pair: ComparePair | null): Layer[] {
 }
 
 export function CompareMapLayers() {
-  const { pair, hasCatalog, enoughUsable } = useCompareData();
-  const mosaic = useMosaicLayers(!hasCatalog || enoughUsable);
+  const { pair, hasCatalog, enoughUsable, isDemo, passes } = useCompareData();
+  const livePair = isDemo ? null : pair;
+  const view = liveCompareView(livePair, passes);
+  const live = useLiveCompareLayers(livePair, passes);
+  const mosaic = useMosaicLayers((!hasCatalog || enoughUsable) && !view.aImage);
   const outlines = useOutlineLayers(pair);
-  const layers = useMemo(() => [...mosaic, ...outlines], [mosaic, outlines]);
+  const layers = useMemo(() => [...mosaic, ...live, ...outlines], [mosaic, live, outlines]);
   useDeckLayers(OWNER, layers);
   return null;
 }

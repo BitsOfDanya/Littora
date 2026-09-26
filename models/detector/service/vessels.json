@@ -1,0 +1,12 @@
+{
+ "name": "vessels__raunet__marida_mixed__common",
+ "window": 20,
+ "min_water": 20,
+ "swir_peak": 0.03948745727539063,
+ "visible_contrast": 0.09895220827311278,
+ "trail_contrast": 0.009989418089389801,
+ "trail_pixels": 111.0,
+ "rule": "«вероятно судно», если максимум B11 в зоне и кольце 1 пикс. не ниже swir_peak или видимая яркость выше фона воды не меньше чем на visible_contrast; след и NIR − red показываются как свидетельства и в правило не входят: на train+val след не добавил ни одного судна сверх яркости",
+ "fitted_on": "marida_l2a, разбиение common, train+val: 144 судов и 962 обломков по разметке MARIDA; квантиль 0.975 обломков",
+ "report": "reports/metrics/detector/flags/vessels.json"
+}

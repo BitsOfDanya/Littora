@@ -13,6 +13,8 @@ import { AoiBoundaryLayer } from "./furniture/aoi-boundary-layer";
 import { GraticuleLayer } from "./furniture/graticule-layer";
 import { PlaceLabelsVisibility } from "./furniture/place-labels-visibility";
 import { MAIN_MAP_ID, MAPLIBRE_WORKER_URL } from "./map-constants";
+import { PixelProbe } from "./probe/pixel-probe";
+import { RulerLayer } from "./ruler/ruler-layer";
 import { useMapViewStore } from "./state/map-view-store";
 
 const MAX_ZOOM = 16;
@@ -84,6 +86,8 @@ export default function MapView({ mapStyle, initialCenter, initialZoom }: MapVie
       <GraticuleLayer />
       <AoiBoundaryLayer />
       <PlaceLabelsVisibility />
+      <RulerLayer />
+      <PixelProbe />
     </Map>
   );
 }

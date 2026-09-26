@@ -1,6 +1,8 @@
 "use client";
 
+import type { ModelReportFetch } from "@/data/models";
 import { useApiMeta, useCapability } from "@/features/system/use-capabilities";
+import { apiUrl } from "@/lib/api/client";
 import { useWorkspaceStore } from "@/state/workspace-store";
 import { Button } from "@/ui/button";
 import { cn } from "@/ui/cn";
@@ -28,27 +30,57 @@ function CapabilityMark() {
   return <PlannedTag capability={CAPABILITY} />;
 }
 
-function PdfAction() {
+function PdfAction({ isDemo }: { isDemo: boolean }) {
+  const availability = useCapability(CAPABILITY);
+  if (isDemo || availability !== "available")
+    return (
+      <span title={REPORT_COPY.pdfWhy} className="inline-flex items-center gap-2">
+        <Button disabled icon={<IconDownload />} aria-describedby="models-pdf-why">
+          {REPORT_COPY.pdf}
+        </Button>
+        <PlannedTag capability={CAPABILITY} />
+        <span id="models-pdf-why" className="sr-only">
+          {REPORT_COPY.pdfWhy}
+        </span>
+      </span>
+    );
+  const printable = apiUrl("/models/report.html?print=true");
+  const standalone = apiUrl("/models/report.html?download=true");
   return (
-    <span title={REPORT_COPY.pdfWhy} className="inline-flex items-center gap-2">
-      <Button disabled icon={<IconDownload />} aria-describedby="models-pdf-why">
+    <span className="inline-flex items-center gap-2">
+      <Button
+        icon={<IconDownload />}
+        title={REPORT_COPY.pdfHow}
+        onClick={() => window.open(printable, "_blank", "noopener")}
+      >
         {REPORT_COPY.pdf}
       </Button>
-      <PlannedTag capability={CAPABILITY} />
-      <span id="models-pdf-why" className="sr-only">
-        {REPORT_COPY.pdfWhy}
-      </span>
+      <a
+        href={standalone}
+        className="text-[12px] text-text-secondary underline underline-offset-2 hover:text-text-primary"
+      >
+        HTML
+      </a>
     </span>
   );
 }
 
-export function ReportHeader({ titleId, isDemo }: { titleId: string; isDemo: boolean }) {
+const CAPABILITY_LINE =
+  "flex flex-wrap items-center gap-x-1.5 gap-y-1 px-4 py-2 font-mono text-[11px] text-text-tertiary @2xl:px-8";
+
+type ReportHeaderProps = {
+  titleId: string;
+  isDemo: boolean;
+  sources?: readonly string[];
+};
+
+export function ReportHeader({ titleId, isDemo, sources }: ReportHeaderProps) {
   return (
     <>
       <header className="px-4 pt-6 pb-5 @2xl:px-8 @2xl:pt-8 @2xl:pb-6">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
           <Caps>{REPORT_COPY.eyebrow}</Caps>
-          <PdfAction />
+          <PdfAction isDemo={isDemo} />
         </div>
         <h1
           id={titleId}
@@ -69,7 +101,7 @@ export function ReportHeader({ titleId, isDemo }: { titleId: string; isDemo: boo
       {isDemo ? (
         <>
           <DemoRibbon source="demo/models.ts" className="@2xl:px-8" />
-          <p className="flex flex-wrap items-center gap-x-1.5 gap-y-1 px-4 py-2 font-mono text-[11px] text-text-tertiary @2xl:px-8">
+          <p className={CAPABILITY_LINE}>
             <span>{CAPABILITY}</span>
             <span aria-hidden>·</span>
             <CapabilityMark />
@@ -77,11 +109,60 @@ export function ReportHeader({ titleId, isDemo }: { titleId: string; isDemo: boo
           </p>
         </>
       ) : null}
+      {!isDemo && sources ? (
+        <p
+          className={cn(CAPABILITY_LINE, "border-t border-line-hairline")}
+          title={sources.join("\n")}
+        >
+          <span>{CAPABILITY}</span>
+          <span aria-hidden>·</span>
+          <CapabilityMark />
+          <span className="font-sans text-[12px]">
+            — {REPORT_COPY.apiNote}, артефактов: {sources.length}
+          </span>
+          <span aria-hidden>·</span>
+          <span>GET /api/v1/models</span>
+        </p>
+      ) : null}
     </>
   );
 }
 
-export function ReportPlannedState() {
+function ReportFetchError({ message, retry }: { message: string; retry: () => void }) {
+  return (
+    <section className="flex max-w-[720px] flex-col gap-2 rounded-[var(--radius-ctl)] border border-dashed border-line-control bg-surface-panel p-4">
+      <h3 className="flex items-center gap-2 text-[13px] font-semibold text-text-primary">
+        <IconAlarm size={14} className="shrink-0 text-state-alarm" />
+        {REPORT_COPY.errorTitle}
+      </h3>
+      <p className="text-[13px] text-state-alarm">{message}</p>
+      <p className="font-mono text-[11px] text-text-tertiary">GET /api/v1/models</p>
+      <div className="pt-1">
+        <Button onClick={retry}>{REPORT_COPY.retry}</Button>
+      </div>
+    </section>
+  );
+}
+
+export function ReportPlannedState({ fetch }: { fetch?: ModelReportFetch }) {
+  if (fetch?.status === "loading")
+    return (
+      <div className="px-4 pb-7 @2xl:px-8 @2xl:pb-8">
+        <p aria-live="polite" className="text-[13px] text-text-secondary">
+          {REPORT_COPY.loading}
+        </p>
+      </div>
+    );
+  if (fetch?.status === "error")
+    return (
+      <div className="px-4 pb-7 @2xl:px-8 @2xl:pb-8">
+        <ReportFetchError message={fetch.message} retry={fetch.retry} />
+      </div>
+    );
+  return <ReportCapabilityState />;
+}
+
+function ReportCapabilityState() {
   const meta = useApiMeta();
   const demoFixtures = useWorkspaceStore((state) => state.demoFixtures);
   const setDemoFixtures = useWorkspaceStore((state) => state.setDemoFixtures);

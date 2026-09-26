@@ -6,6 +6,7 @@ import { fitAoi } from "@/features/map/camera";
 import { useMainMap } from "@/features/map/use-main-map";
 import type { AnalysisListItem, ResultStatus } from "@/lib/api/analyses";
 import { describeApiError } from "@/lib/api/errors";
+import { upperFirst } from "@/features/forecast/forecast-copy";
 import { formatUtcDateTime } from "@/lib/format/time";
 import { useAnalysisStore } from "@/state/analysis-store";
 import { useWorkspaceStore } from "@/state/workspace-store";
@@ -16,6 +17,7 @@ import { StatusTag } from "@/ui/status-tag";
 import { RESULT_STATUS_ORDER, STATUS_LABELS, STATUS_TONES } from "./analysis-copy";
 import { formatDay } from "./format";
 import { FIELD_CONTROL } from "./request-section";
+import { STALE_NOTE } from "./result-sections";
 import { useAnalysisHistory } from "./use-analysis";
 
 const SCOPE_OPTIONS = [
@@ -39,6 +41,7 @@ function HistoryRow({
       className={cn(
         "border-b border-line-hairline last:border-b-0",
         current && "shadow-[inset_3px_0_0_var(--text-primary)]",
+        item.stale && "text-text-secondary",
       )}
     >
       <button
@@ -51,11 +54,25 @@ function HistoryRow({
           <span className="font-mono">{formatDay(item.request.date)}</span> ·{" "}
           {item.request.aoi_name ?? "район"}
         </span>
-        <StatusTag tone={STATUS_TONES[item.status.status]} className="h-[18px] px-1.5 text-[11px]">
-          {item.status.label}
-        </StatusTag>
+        {item.stale ? (
+          <StatusTag
+            tone="neutral"
+            title={upperFirst(STALE_NOTE)}
+            className="h-[18px] px-1.5 text-[11px]"
+          >
+            прежняя модель
+          </StatusTag>
+        ) : (
+          <StatusTag
+            tone={STATUS_TONES[item.status.status]}
+            className="h-[18px] px-1.5 text-[11px]"
+          >
+            {item.status.label}
+          </StatusTag>
+        )}
         <span className="col-span-2 truncate font-mono text-[11px] leading-[14px] text-text-tertiary">
-          {item.scene_id ?? "без снимка"} · измерений {item.observations} · расчёт{" "}
+          {item.scene_id ?? "без снимка"}
+          {item.zones ? ` · зон ${item.zones}` : ""} · измерений {item.observations} · расчёт{" "}
           {formatUtcDateTime(item.computed_at)}
         </span>
       </button>

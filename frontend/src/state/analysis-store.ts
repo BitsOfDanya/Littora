@@ -12,6 +12,7 @@ export type WindowDays = (typeof WINDOW_DAYS)[number];
 
 type AnalysisStore = {
   analysisId: string | null;
+  zoneId: string | null;
   panelOpen: boolean;
   areaMode: AnalysisAreaMode;
   windowDays: WindowDays;
@@ -21,6 +22,7 @@ type AnalysisStore = {
   historyStatus: ResultStatus | null;
   historyAllAreas: boolean;
   setAnalysis: (analysisId: string | null) => void;
+  selectZone: (zoneId: string | null) => void;
   setPanelOpen: (open: boolean) => void;
   setAreaMode: (mode: AnalysisAreaMode) => void;
   setWindowDays: (days: WindowDays) => void;
@@ -33,6 +35,7 @@ type AnalysisStore = {
 
 export const useAnalysisStore = create<AnalysisStore>()((set) => ({
   analysisId: null,
+  zoneId: null,
   panelOpen: true,
   areaMode: "aoi",
   windowDays: 1,
@@ -41,7 +44,13 @@ export const useAnalysisStore = create<AnalysisStore>()((set) => ({
   observationDates: "all",
   historyStatus: null,
   historyAllAreas: false,
-  setAnalysis: (analysisId) => set({ analysisId, panelOpen: true }),
+  setAnalysis: (analysisId) =>
+    set((state) => ({
+      analysisId,
+      panelOpen: true,
+      zoneId: analysisId === state.analysisId ? state.zoneId : null,
+    })),
+  selectZone: (zoneId) => set({ zoneId, panelOpen: true }),
   setPanelOpen: (panelOpen) => set({ panelOpen }),
   setAreaMode: (areaMode) => set({ areaMode }),
   setWindowDays: (windowDays) => set({ windowDays }),
@@ -54,5 +63,5 @@ export const useAnalysisStore = create<AnalysisStore>()((set) => ({
 
 useWorkspaceStore.subscribe((state, previous) => {
   if (state.aoiId !== previous.aoiId)
-    useAnalysisStore.setState({ analysisId: null, observationId: null });
+    useAnalysisStore.setState({ analysisId: null, zoneId: null, observationId: null });
 });

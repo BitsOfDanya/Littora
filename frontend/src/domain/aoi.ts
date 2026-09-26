@@ -13,9 +13,15 @@ export type WaterLabel = {
 
 export type AoiSurvey = {
   source: string;
+  target: string;
   dates: readonly string[];
   period: readonly [from: string, to: string];
   events: readonly string[];
+};
+
+export type AoiReference = {
+  date: string;
+  period: readonly [from: string, to: string];
 };
 
 export type AreaOfInterest = {
@@ -32,4 +38,5 @@ export type AreaOfInterest = {
   datasets: readonly string[];
   waterLabels: readonly WaterLabel[];
   survey?: AoiSurvey;
+  reference?: AoiReference;
 };

@@ -175,6 +175,27 @@ def list_s3_files(endpoint: str, bucket: str, prefix: str) -> list[RemoteFile]:
     return files
 
 
+def list_insitu_index(source: dict) -> list[RemoteFile]:
+    west, south, east, north = source["bbox"]
+    since = source.get("since", "")
+    with open_url(source["index"]) as response:
+        lines = response.read().decode("utf-8").splitlines()
+    files = []
+    for line in lines:
+        if line.startswith("#") or not line.strip():
+            continue
+        fields = [field.strip() for field in line.split(",")]
+        lat_min, lat_max, lon_min, lon_max = map(float, fields[2:6])
+        inside = west <= lon_min and lon_max <= east and south <= lat_min and lat_max <= north
+        if not inside or fields[7] < since:
+            continue
+        relative = "/".join(fields[1].strip("/").split("/")[source.get("strip", 0) :])
+        files.append(
+            RemoteFile(name=Path(relative).name, url=source["base"] + relative, size=None, md5=None)
+        )
+    return files
+
+
 def probe_url(url: str, name: str | None = None) -> RemoteFile:
     try:
         with open_url(url, method="HEAD") as response:
@@ -196,13 +217,16 @@ def list_remote_files(entry: dict) -> list[RemoteFile]:
     if "s3_listing" in entry:
         listing = entry["s3_listing"]
         return list_s3_files(listing["endpoint"], listing["bucket"], listing["prefix"])
+    if "insitu_index" in entry:
+        return list_insitu_index(entry["insitu_index"])
     if "files" in entry:
         return [probe_url(item["url"], item.get("name")) for item in entry["files"]]
     return []
 
 
 def is_downloadable(entry: dict) -> bool:
-    return any(field in entry for field in ("zenodo", "figshare", "s3_listing", "files"))
+    fields = ("zenodo", "figshare", "s3_listing", "insitu_index", "files")
+    return any(field in entry for field in fields)
 
 
 def format_size(size: int | None) -> str:

@@ -1,3 +1,4 @@
+import type { DriftState } from "@/data/drift";
 import type { BeachSegmentRisk, DriftForecastDetail, ProbabilityEstimate } from "@/data/forecast";
 import type { DriftEnvelope, ForecastHorizonH } from "@/domain/forecast";
 import { formatNumber } from "@/lib/format/numbers";
@@ -5,6 +6,10 @@ import { compassPoint, ellipseOf, horizonLabel } from "./drift-math";
 import { horizonRow, topSource } from "./forecast-model";
 
 const NNBSP = " ";
+
+export const SCENARIO_NOTE = "сценарий дрейфа, не проверен на дрифтерах";
+
+export type DriftStateCopy = { title: string; detail: string };
 
 export function formatProbability(value: number): string {
   return formatNumber(value, 2);
@@ -38,7 +43,7 @@ export function formatWindow([from, to]: readonly [number, number]): string {
 
 export function envelopeHint(envelope: DriftEnvelope): string {
   const ellipse = ellipseOf(envelope.polygon);
-  return `Облако ${horizonLabel(envelope.horizonH)} · 90${NNBSP}% ансамбля · ${formatAxes(ellipse.majorAxisM, ellipse.minorAxisM)} — щелчок: выбрать горизонт`;
+  return `Облако ${horizonLabel(envelope.horizonH)} · ${formatNumber(Math.round(envelope.probability * 100))}${NNBSP}% ансамбля · ${formatAxes(ellipse.majorAxisM, ellipse.minorAxisM)} — щелчок: выбрать горизонт`;
 }
 
 export function horizonHint(forecast: DriftForecastDetail, horizonH: ForecastHorizonH): string {
@@ -59,4 +64,42 @@ export function hindcastText(
   const lead = `${horizonLabel(-forecast.hindcastPath.length + 1)}`;
   if (!source) return `${lead} · источник не определён`;
   return `${lead} · вероятный источник: ${lowerFirst(source.name)} · ${formatProbability(source.probability.value)}`;
+}
+
+export function upperFirst(text: string): string {
+  return text.charAt(0).toLocaleUpperCase("ru") + text.slice(1);
+}
+
+export function driftStateCopy(state: DriftState): DriftStateCopy | null {
+  switch (state.status) {
+    case "no-analysis":
+      return {
+        title: "Нет анализа района",
+        detail:
+          "сценарий строится от зон детектора: запустите в «Мониторинге» анализ, где найдены зоны, и нажмите «Сценарий дрейфа»",
+      };
+    case "loading":
+      return { title: "Загружаем дрейф…", detail: "зоны анализа и сохранённый сценарий" };
+    case "no-zones":
+      return {
+        title: "Нет зон детектора для дрейфа",
+        detail: state.reason ?? "в выбранном анализе детектор не выделил ни одной зоны",
+      };
+    case "absent":
+      return {
+        title: "Дрейф не рассчитан",
+        detail: "ветер, волны и течения Open-Meteo от момента снимка",
+      };
+    case "computing":
+      return {
+        title: "Считаем сценарий дрейфа…",
+        detail: "загружаем ветер, волны и течения Open-Meteo",
+      };
+    case "failed":
+      return { title: "Дрейф не получен", detail: state.message };
+    case "unavailable":
+      return { title: upperFirst(state.label), detail: state.reason };
+    default:
+      return null;
+  }
 }

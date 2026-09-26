@@ -6,40 +6,54 @@ import json
 import re
 import threading
 import time
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
+from concurrent.futures import Future, ThreadPoolExecutor
+from concurrent.futures import TimeoutError as FutureTimeout
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from shapely.geometry import Point, box, mapping
+from shapely.geometry import Point, box, mapping, shape
 from shapely.geometry.base import BaseGeometry
 
+from app.analysis.conditions import WeatherSource
+from app.analysis.detector import bbox_pixels, oversize_side_km
 from app.analysis.models import (
     ConcentrationModel,
     DetectionOutcome,
     Detector,
+    EstimateContext,
     UnavailableConcentrationModel,
     UnavailableDetector,
 )
+from app.analysis.pixels import PIXELS_FILE, read_pixel
 from app.analysis.statuses import STATUS_LABELS, ResultStatus, ValueKind
+from app.analysis.structures import OsmStructures, PortLike, annotate
 from app.case.concentration import UNIT
 from app.case.repository import CaseRepository
-from app.core.errors import AppError, NotFoundError
+from app.core.errors import AppError, NotFoundError, NotImplementedYetError
 from app.earth.catalog import CatalogError, Scene, SceneCatalog
 from app.earth.raster import (
     QualityShares,
     RasterError,
+    RasterReadError,
     RenderedLayer,
     quality_shares,
     render_quality_mask,
     render_true_color,
 )
 
-PIPELINE_VERSION = "1"
+PIPELINE_VERSION = "4"
 ANALYSIS_ID = re.compile(r"^[0-9a-f]{16}$")
 IMAGE_FILE = "image.png"
 MASK_FILE = "mask.png"
+PROBABILITY_FILE = "probability.png"
+EXTRA_LAYER_FILES = ("false_color.png", "fdi.png", "ndvi.png", "coverage.png")
 RESULT_FILE = "result.json"
+CONDITIONS_FILE = "conditions.json"
+WAIT_SECONDS = 20.0
+WORKERS = 2
+FAILURE_KEEP_SECONDS = 120.0
 
 
 class CatalogUnavailableError(AppError):
@@ -60,6 +74,24 @@ class AnalysisRequest:
 
 QualityReader = Callable[[Scene, BaseGeometry, float, int], QualityShares]
 Renderer = Callable[..., RenderedLayer]
+
+
+@dataclass(frozen=True)
+class _Prepared:
+    request: AnalysisRequest
+    target: Any
+    area: BaseGeometry
+    scene: Scene | None
+    analysis_id: str
+
+
+@dataclass
+class _Job:
+    future: Future
+    started: float
+    started_at: str
+    scene: Scene | None
+    finished: float | None = None
 
 
 def _default_quality(scene: Scene, area: BaseGeometry, bright: float, size: int) -> QualityShares:
@@ -96,6 +128,9 @@ class AnalysisService:
         quality_reader: QualityReader = _default_quality,
         true_color: Renderer = render_true_color,
         quality_mask: Renderer = render_quality_mask,
+        weather: WeatherSource | None = None,
+        structures: OsmStructures | None = None,
+        ports: Sequence[PortLike] = (),
     ) -> None:
         self.repository = repository
         self.catalog = catalog
@@ -105,8 +140,27 @@ class AnalysisService:
         self.quality_reader = quality_reader
         self.true_color = true_color
         self.quality_mask = quality_mask
+        self.weather = weather
+        self.structures = structures
+        self.ports = list(ports)
+        self.wait_seconds = WAIT_SECONDS
         self._scene_cache: dict[tuple, tuple[float, list[Scene]]] = {}
         self._lock = threading.Lock()
+        self._jobs: dict[str, _Job] = {}
+        self._executor: ThreadPoolExecutor | None = None
+
+    def _annotate(self, zones: list[dict], area: BaseGeometry) -> list[str]:
+        if not zones:
+            return []
+        structures: list = []
+        messages = []
+        if self.structures is not None:
+            try:
+                structures = self.structures.around(area.bounds)
+            except (OSError, ValueError) as error:
+                messages.append(f"сооружения OpenStreetMap не загружены: {error}")
+        annotate(zones, structures, self.ports)
+        return messages
 
     @property
     def config(self):
@@ -145,6 +199,13 @@ class AnalysisService:
             raise AppError("Дата в будущем: снимков ещё нет")
         if request.target and self.config.target(request.target) is None:
             raise AppError(f"Нет целевой величины «{request.target}»")
+        max_pixels = getattr(self.detector, "max_pixels", None)
+        if max_pixels and bbox_pixels(request.bbox) > max_pixels:
+            side = oversize_side_km(max_pixels)
+            raise AppError(
+                f"Район больше {side}×{side} км для детектора — "
+                "в «Мониторинге» выберите «вид карты» и приблизьте карту"
+            )
 
     def _pick_scene(self, request: AnalysisRequest, area: BaseGeometry) -> Scene | None:
         collection = self.config.analysis.collection
@@ -175,17 +236,62 @@ class AnalysisService:
 
         return sorted(scenes, key=rank)[0]
 
-    def analysis_id(self, request: AnalysisRequest, scene: Scene | None, target: str) -> str:
+    def models(self) -> dict[str, str | None]:
+        return {
+            "detector": getattr(self.detector, "fingerprint", self.detector.name),
+            "concentration": getattr(
+                self.concentration_model, "fingerprint", self.concentration_model.name
+            ),
+        }
+
+    def _digest(
+        self,
+        bbox: list[float] | tuple[float, ...],
+        day: str,
+        window_days: int,
+        scene_id: str | None,
+        target: str,
+    ) -> str:
+        models = self.models()
         canonical = {
-            "bbox": [round(value, 5) for value in request.bbox],
-            "date": request.date.isoformat(),
-            "window_days": request.window_days,
-            "scene_id": scene.id if scene else None,
+            "bbox": [round(value, 5) for value in bbox],
+            "date": day,
+            "window_days": window_days,
+            "scene_id": scene_id,
             "target": target,
             "pipeline": PIPELINE_VERSION,
+            "models": [models["detector"], models["concentration"]],
         }
         digest = hashlib.sha256(json.dumps(canonical, sort_keys=True).encode()).hexdigest()
         return digest[:16]
+
+    def analysis_id(self, request: AnalysisRequest, scene: Scene | None, target: str) -> str:
+        return self._digest(
+            request.bbox,
+            request.date.isoformat(),
+            request.window_days,
+            scene.id if scene else None,
+            target,
+        )
+
+    def is_stale(self, result: dict[str, Any]) -> bool:
+        request = result.get("request") or {}
+        scene = result.get("scene")
+        try:
+            current = self._digest(
+                request["bbox"],
+                request["date"],
+                request["window_days"],
+                scene["id"] if scene else None,
+                request["target"],
+            )
+        except (KeyError, TypeError):
+            return True
+        return current != result.get("id")
+
+    def _read(self, path: Path) -> dict[str, Any]:
+        result = json.loads(path.read_text(encoding="utf-8"))
+        return {**result, "stale": self.is_stale(result)}
 
     def _folder(self, analysis_id: str) -> Path:
         if not ANALYSIS_ID.match(analysis_id):
@@ -196,7 +302,16 @@ class AnalysisService:
         path = self._folder(analysis_id) / RESULT_FILE
         if not path.exists():
             raise NotFoundError("Нет такого анализа")
-        return json.loads(path.read_text(encoding="utf-8"))
+        return self._read(path)
+
+    def pixel(self, analysis_id: str, lon: float, lat: float) -> dict[str, Any]:
+        result = self.get(analysis_id)
+        path = self._folder(analysis_id) / PIXELS_FILE
+        if not path.exists():
+            raise NotFoundError(
+                "Значений пикселей нет: детекция не запускалась или район больше 4 млн пикселей"
+            )
+        return read_pixel(path, result["detection"].get("zones", []), lon, lat)
 
     def layer_path(self, analysis_id: str, name: str) -> Path:
         path = self._folder(analysis_id) / name
@@ -215,7 +330,7 @@ class AnalysisService:
             return []
         items = []
         for path in self.storage_dir.glob(f"*/{RESULT_FILE}"):
-            result = json.loads(path.read_text(encoding="utf-8"))
+            result = self._read(path)
             request = result["request"]
             day = dt.date.fromisoformat(request["date"])
             statuses = {result["status"]["status"], result["concentration"]["status"]}
@@ -239,9 +354,12 @@ class AnalysisService:
                         "label": result["concentration"]["label"],
                     },
                     "observations": len(result["observations"]),
+                    "zones": len(result["detection"].get("zones") or []),
+                    "stale": result["stale"],
                 }
             )
-        return sorted(items, key=lambda item: item["computed_at"], reverse=True)
+        items.sort(key=lambda item: item["computed_at"], reverse=True)
+        return sorted(items, key=lambda item: item["stale"])
 
     def _observations(self, area: BaseGeometry, day: dt.date, window: int) -> list[dict]:
         data = self.repository.data()
@@ -275,19 +393,94 @@ class AnalysisService:
             reasons.append("мало воды в районе")
         return not reasons, reasons
 
-    def run(self, request: AnalysisRequest) -> dict[str, Any]:
+    def _prepare(self, request: AnalysisRequest) -> _Prepared:
         self.validate(request)
         config = self.config
         target = config.target(request.target) if request.target else config.primary_target
         area = box(*request.bbox)
         scene = self._pick_scene(request, area)
-        analysis_id = self.analysis_id(request, scene, target.key)
-        folder = self._folder(analysis_id)
-        if (folder / RESULT_FILE).exists():
-            return self.get(analysis_id)
+        return _Prepared(request, target, area, scene, self.analysis_id(request, scene, target.key))
 
+    def _saved(self, analysis_id: str) -> dict[str, Any] | None:
+        path = self._folder(analysis_id) / RESULT_FILE
+        if not path.exists():
+            return None
+        result = self._read(path)
+        return None if result.get("retryable") else result
+
+    def _job(self, prepared: _Prepared) -> _Job:
+        analysis_id = prepared.analysis_id
+        with self._lock:
+            job = self._jobs.get(analysis_id)
+            if job is not None and job.finished is not None:
+                self._jobs.pop(analysis_id, None)
+                if time.monotonic() - job.finished < FAILURE_KEEP_SECONDS:
+                    return job
+                job = None
+            if job is not None:
+                return job
+            if self._executor is None:
+                self._executor = ThreadPoolExecutor(WORKERS, "littora-analysis")
+            future = self._executor.submit(self._compute, prepared)
+            job = _Job(
+                future,
+                time.monotonic(),
+                dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
+                prepared.scene,
+            )
+            self._jobs[analysis_id] = job
+        future.add_done_callback(lambda done: self._settle(analysis_id, done))
+        return job
+
+    def _settle(self, analysis_id: str, future: Future) -> None:
+        with self._lock:
+            job = self._jobs.get(analysis_id)
+            if job is None or job.future is not future:
+                return
+            if future.exception() is None:
+                self._jobs.pop(analysis_id, None)
+            else:
+                job.finished = time.monotonic()
+
+    def run(self, request: AnalysisRequest) -> dict[str, Any]:
+        prepared = self._prepare(request)
+        return self._saved(prepared.analysis_id) or self._job(prepared).future.result()
+
+    def submit(self, request: AnalysisRequest, wait_seconds: float | None = None) -> dict[str, Any]:
+        prepared = self._prepare(request)
+        saved = self._saved(prepared.analysis_id)
+        if saved is not None:
+            return saved
+        job = self._job(prepared)
+        try:
+            return job.future.result(
+                timeout=self.wait_seconds if wait_seconds is None else wait_seconds
+            )
+        except FutureTimeout:
+            return {
+                "id": prepared.analysis_id,
+                "state": "running",
+                "started_at": job.started_at,
+                "elapsed_s": round(time.monotonic() - job.started),
+                "scene": _scene_summary(job.scene) if job.scene else None,
+            }
+
+    def _compute(self, prepared: _Prepared) -> dict[str, Any]:
+        saved = self._saved(prepared.analysis_id)
+        if saved is not None:
+            return saved
+        request, target, area, scene = (
+            prepared.request,
+            prepared.target,
+            prepared.area,
+            prepared.scene,
+        )
+        config = self.config
+        analysis_id = prepared.analysis_id
+        folder = self._folder(analysis_id)
         folder.mkdir(parents=True, exist_ok=True)
         messages: list[str] = []
+        retryable = False
         quality_payload = None
         layers: dict[str, Any] = {}
         detection = DetectionOutcome(
@@ -295,6 +488,8 @@ class AnalysisService:
             reason=f"нет снимков Sentinel-2 в окне ±{request.window_days} сут",
         )
         concentration = None
+        timings: dict[str, float] = {}
+        started = time.perf_counter()
         if scene is not None:
             try:
                 quality = self.quality_reader(
@@ -314,8 +509,25 @@ class AnalysisService:
                     "image": {"file": IMAGE_FILE, "corners": image.corners},
                     "mask": {"file": MASK_FILE, "corners": mask.corners},
                 }
+                timings["quality_and_image_s"] = round(time.perf_counter() - started, 2)
                 if usable:
                     detection = self.detector.detect(scene, area)
+                    step = time.perf_counter()
+                    messages.extend(self._annotate(detection.zones, area))
+                    timings.update(detection.timings)
+                    timings["structures_s"] = round(time.perf_counter() - step, 2)
+                    if detection.layer is not None:
+                        (folder / PROBABILITY_FILE).write_bytes(detection.layer.png)
+                        layers["probability"] = {
+                            "file": PROBABILITY_FILE,
+                            "corners": detection.layer.corners,
+                        }
+                    if detection.pixels is not None:
+                        (folder / PIXELS_FILE).write_bytes(detection.pixels)
+                    for key, extra in detection.extra_layers.items():
+                        name = f"{key}.png"
+                        (folder / name).write_bytes(extra.png)
+                        layers[key] = {"file": name, "corners": extra.corners}
                 else:
                     detection = DetectionOutcome(
                         status=ResultStatus.INSUFFICIENT_DATA,
@@ -323,10 +535,13 @@ class AnalysisService:
                     )
             except RasterError as error:
                 messages.append(str(error))
+                retryable = isinstance(error, RasterReadError)
                 detection = DetectionOutcome(
                     status=ResultStatus.INSUFFICIENT_DATA, reason=f"снимок не читается: {error}"
                 )
-            concentration = self.concentration_model.estimate(scene, area, detection)
+            concentration = self.concentration_model.estimate(
+                scene, area, detection, EstimateContext(target.key, request.date)
+            )
         overall = (
             detection.status
             if detection.status in (ResultStatus.DETECTED, ResultStatus.NOT_DETECTED)
@@ -338,6 +553,8 @@ class AnalysisService:
         result = {
             "id": analysis_id,
             "pipeline_version": PIPELINE_VERSION,
+            "retryable": retryable or detection.retryable,
+            "models": self.models(),
             "computed_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
             "request": {
                 "aoi_id": request.aoi_id,
@@ -359,11 +576,13 @@ class AnalysisService:
             "scene": _scene_summary(scene) if scene else None,
             "quality": quality_payload,
             "layers": layers,
+            "timings": {**timings, "total_s": round(time.perf_counter() - started, 2)},
             "status": _status(overall),
             "detection": {
                 **_status(detection.status),
                 "reason": detection.reason,
                 "model": detection.model,
+                "threshold": detection.threshold,
                 "zones": detection.zones,
             },
             "concentration": {
@@ -373,6 +592,8 @@ class AnalysisService:
                 "value": concentration.value if concentration else None,
                 "lower": concentration.lower if concentration else None,
                 "upper": concentration.upper if concentration else None,
+                "profile": concentration.profile if concentration else None,
+                "coverage": concentration.coverage if concentration else None,
                 "unit": UNIT,
                 "value_kind": ValueKind.MODEL_ESTIMATE.value,
             },
@@ -382,4 +603,22 @@ class AnalysisService:
         (folder / RESULT_FILE).write_text(
             json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8"
         )
-        return result
+        return {**result, "stale": False}
+
+    def conditions(self, analysis_id: str) -> dict[str, Any]:
+        result = self.get(analysis_id)
+        scene = result.get("scene")
+        if not scene:
+            raise NotFoundError("У анализа нет снимка — условий съёмки нет")
+        path = self._folder(analysis_id) / CONDITIONS_FILE
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+        if self.weather is None:
+            raise NotImplementedYetError("Источник погоды не подключён")
+        center = shape(result["area"]).centroid
+        moment = dt.datetime.fromisoformat(scene["acquired_at"].replace("Z", "+00:00"))
+        reading = self.weather.at(center.x, center.y, moment)
+        payload = {"analysis_id": analysis_id, "acquired_at": scene["acquired_at"], **reading}
+        if payload.pop("complete", False):
+            path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+        return payload

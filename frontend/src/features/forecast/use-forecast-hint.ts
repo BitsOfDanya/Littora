@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
+import { useDriftState } from "@/data/forecast";
 import { useStatusHintStore } from "@/features/shell/status-hint-store";
+import { useWorkspaceStore } from "@/state/workspace-store";
 
 export const EMPTY_FORECAST_HINT = "Выберите пятно, чтобы построить прогноз";
 
@@ -21,4 +23,10 @@ export function useForecastEmptyHint(active: boolean): void {
     },
     [],
   );
+}
+
+export function useForecastPickHint(): boolean {
+  const hasSelection = useWorkspaceStore((state) => state.selectedCandidateId !== null);
+  const drift = useDriftState().status;
+  return !hasSelection && (drift === "demo" || drift === "ready");
 }

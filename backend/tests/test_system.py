@@ -1,6 +1,10 @@
+from pathlib import Path
+
 from fastapi.testclient import TestClient
 
 from app.core.capabilities import SERVICE_CAPABILITIES, CapabilityKey
+from app.core.config import Settings
+from app.main import create_app
 from tests.conftest import TEST_ORIGIN
 
 
@@ -16,9 +20,11 @@ def test_health_reports_ok(client: TestClient) -> None:
 
 
 def test_meta_marks_service_capabilities_available_and_models_planned(
-    client: TestClient,
+    tmp_path: Path, settings: Settings
 ) -> None:
-    response = client.get("/api/v1/meta")
+    local = settings.model_copy(update={"reports_dir": tmp_path})
+    with TestClient(create_app(local)) as client:
+        response = client.get("/api/v1/meta")
 
     assert response.status_code == 200
     body = response.json()
@@ -26,10 +32,13 @@ def test_meta_marks_service_capabilities_available_and_models_planned(
     statuses = {item["key"]: item["status"] for item in body["capabilities"]}
     assert set(statuses) == {key.value for key in CapabilityKey}
     assert {key for key, status in statuses.items() if status == "available"} == {
-        key.value for key in SERVICE_CAPABILITIES
+        key.value
+        for key in SERVICE_CAPABILITIES
+        | {CapabilityKey.DRIFT_FORECAST, CapabilityKey.SURVEY_PLANNING}
     }
     assert statuses["debris_detection"] == "planned"
     assert statuses["concentration_model"] == "planned"
+    assert statuses["model_evaluation"] == "planned"
 
 
 def test_request_id_is_echoed_or_generated(client: TestClient) -> None:

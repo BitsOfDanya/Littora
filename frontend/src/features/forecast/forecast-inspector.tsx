@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useCallback, useMemo } from "react";
 import { findAoi } from "@/config/aois";
 import { WORKSPACE_MODES } from "@/config/modes";
-import type { BeachSegmentRisk } from "@/data/forecast";
+import type { DriftState } from "@/data/drift";
+import { type BeachSegmentRisk, useDriftScenario, useDriftState } from "@/data/forecast";
 import { fitAoi, fitTo } from "@/features/map/camera";
 import { useMainMap } from "@/features/map/use-main-map";
 import type { Crumb } from "@/features/inspector/parts/breadcrumbs";
@@ -20,6 +21,7 @@ import { Button, buttonClasses } from "@/ui/button";
 import { IconArrowRight, IconDownload } from "@/ui/icons";
 import { PlannedState, PlannedTag } from "@/ui/planned";
 import { boundsOf } from "./drift-math";
+import { DriftStatePanel } from "./drift-state";
 import { chooseHorizon } from "./forecast-hotkeys";
 import { horizonRow, RAIL_T0_ID } from "./forecast-model";
 import { HorizonSeg } from "./horizon-seg";
@@ -82,6 +84,7 @@ function ReadyInspector({
   selected: Extract<SelectedForecast, { status: "ready" }>;
 }) {
   const { candidate, forecast, run, isDemo } = selected;
+  const scenario = useDriftScenario();
   const map = useMainMap();
   const horizonH = useWorkspaceStore((state) => state.forecastHorizonH);
   const clearSelection = useWorkspaceStore((state) => state.clearSelection);
@@ -120,7 +123,7 @@ function ReadyInspector({
             <span className="font-mono">{formatUtcDateTime(run.runAt)}</span> · ансамбль{" "}
             {run.ensembleSize}
           </p>
-          <HorizonSeg value={horizonH} onChange={chooseHorizon} className="pt-1" />
+          <HorizonSeg value={horizonH} onChange={chooseHorizon} graded={isDemo} className="pt-1" />
         </>
       }
       nav={<JumpNav targets={JUMP_TARGETS} />}
@@ -134,19 +137,28 @@ function ReadyInspector({
             size="lg"
             disabled
             icon={<IconDownload size={14} />}
-            title="Экспорт GeoJSON появится с возможностью drift_forecast"
+            title={
+              isDemo
+                ? "Экспорт GeoJSON появится с возможностью drift_forecast"
+                : "Выгрузка сценария дрейфа в GeoJSON пока не подключена"
+            }
           >
             GeoJSON
           </Button>
-          <PlannedTag capability="drift_forecast" className="self-center" />
+          {isDemo ? <PlannedTag capability="drift_forecast" className="self-center" /> : null}
         </>
       }
     >
       <PositionSection forecast={forecast} run={run} row={row} isDemo={isDemo} />
-      <HorizonsSection forecast={forecast} horizonH={horizonH} onChoose={chooseHorizon} />
+      <HorizonsSection
+        forecast={forecast}
+        horizonH={horizonH}
+        isDemo={isDemo}
+        onChoose={chooseHorizon}
+      />
       <BeachingSection forecast={forecast} run={run} onFocus={focusRisk} />
-      <SourceSection forecast={forecast} />
-      <ConditionsSection run={run} isDemo={isDemo} />
+      <SourceSection forecast={forecast} isDemo={isDemo} />
+      <ConditionsSection run={run} isDemo={isDemo} scenario={isDemo ? null : scenario} />
     </InspectorFrame>
   );
 }
@@ -174,7 +186,7 @@ function PlannedInspector({ candidateId }: { candidateId: string }) {
           title="Прогноз дрейфа — не подключено"
           capability="drift_forecast"
           status={status}
-          requirement="поля течений CMEMS, ветер GFS и выбранное пятно."
+          requirement="зоны детектора из анализа района; ветер, волны и течения Open-Meteo."
           action={
             status === "error" ? (
               <Button onClick={() => void meta.refetch()}>Повторить</Button>
@@ -191,7 +203,7 @@ function PlannedInspector({ candidateId }: { candidateId: string }) {
   );
 }
 
-function MissingInspector({ candidateId }: { candidateId: string }) {
+function PendingInspector({ candidateId, drift }: { candidateId: string; drift: DriftState }) {
   const clearSelection = useWorkspaceStore((state) => state.clearSelection);
   const crumbs = useCrumbs(candidateId, null, () => undefined);
   return (
@@ -207,24 +219,61 @@ function MissingInspector({ candidateId }: { candidateId: string }) {
         </h2>
       }
     >
-      <p className="p-4 text-[13px] text-text-secondary">
-        Для этого пятна прогноз ещё не рассчитан. Выберите другое пятно или вернитесь позже.
-      </p>
+      <DriftStatePanel state={drift} />
     </InspectorFrame>
   );
 }
 
+function missingText(drift: DriftState): string {
+  if (drift.status !== "ready")
+    return "Для этого пятна прогноз ещё не рассчитан. Выберите другое пятно или вернитесь позже.";
+  const { computed, total } = drift.scenario.zones;
+  if (computed >= total) return "Для этой зоны сценарий дрейфа не рассчитан. Выберите другую зону.";
+  return `Сценарий дрейфа рассчитан для ${computed} зон с наибольшей вероятностью из ${total}; эта зона в расчёт не вошла. Выберите другую зону.`;
+}
+
+function MissingInspector({ candidateId, drift }: { candidateId: string; drift: DriftState }) {
+  const clearSelection = useWorkspaceStore((state) => state.clearSelection);
+  const crumbs = useCrumbs(candidateId, null, () => undefined);
+  return (
+    <InspectorFrame
+      label={`Прогноз дрейфа ${candidateId}`}
+      eyebrow="Прогноз дрейфа"
+      crumbs={crumbs}
+      onClose={clearSelection}
+      selectionRule
+      header={
+        <h2 className="font-mono text-[17px] leading-[22px] font-semibold text-text-primary">
+          {candidateId}
+        </h2>
+      }
+    >
+      <p className="p-4 text-[13px] text-text-secondary">{missingText(drift)}</p>
+    </InspectorFrame>
+  );
+}
+
+const QUIET_DRIFT: readonly DriftState["status"][] = ["demo", "planned", "ready"];
+
 export function ForecastInspector() {
   const selected = useSelectedForecast();
-  if (selected.status === "idle") return null;
+  const drift = useDriftState();
+  if (selected.status === "idle")
+    return QUIET_DRIFT.includes(drift.status) ? null : (
+      <ShellSlot region="inspector">
+        <DriftStatePanel state={drift} />
+      </ShellSlot>
+    );
   return (
     <ShellSlot region="inspector">
       {selected.status === "ready" ? (
         <ReadyInspector selected={selected} />
       ) : selected.status === "planned" ? (
         <PlannedInspector candidateId={selected.candidateId} />
+      ) : selected.status === "pending" ? (
+        <PendingInspector candidateId={selected.candidateId} drift={selected.drift} />
       ) : (
-        <MissingInspector candidateId={selected.candidateId} />
+        <MissingInspector candidateId={selected.candidateId} drift={selected.drift} />
       )}
     </ShellSlot>
   );

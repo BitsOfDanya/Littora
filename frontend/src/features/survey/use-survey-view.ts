@@ -1,7 +1,12 @@
 "use client";
 
 import { useMemo } from "react";
-import { type SurveyPlan, useSurveyPlan } from "@/data/survey";
+import {
+  type SurveyPlan,
+  type SurveyPlanMeta,
+  type SurveyState,
+  useSurveySource,
+} from "@/data/survey";
 import type { LngLat } from "@/domain/geo";
 import {
   buildRoute,
@@ -19,6 +24,7 @@ import { useSurveyUiStore } from "./survey-ui-store";
 export type SurveyView = {
   plan: SurveyPlan;
   isDemo: boolean;
+  meta: SurveyPlanMeta | null;
   ranked: readonly RankedTarget[];
   dates: readonly string[];
   departureDate: string;
@@ -47,17 +53,31 @@ export function computeSurveyView(
       etaIso(departure, stop, plan.speedKn, plan.dwellMin),
     ]),
   );
-  return { plan, isDemo, ranked, dates, departureDate, departure, drift, route, eta };
+  return {
+    plan,
+    isDemo,
+    meta: plan.meta ?? null,
+    ranked,
+    dates,
+    departureDate,
+    departure,
+    drift,
+    route,
+    eta,
+  };
 }
 
 export function useSurveyView(): SurveyView | null {
-  const sourced = useSurveyPlan();
+  const sourced = useSurveySource().plan;
   const chosenDate = useSurveyUiStore((state) => state.departureDate);
+  const plan = sourced.origin === "none" ? null : sourced.data;
+  const isDemo = sourced.origin === "demo";
   return useMemo(
-    () =>
-      sourced.origin === "none"
-        ? null
-        : computeSurveyView(sourced.data, sourced.origin === "demo", chosenDate),
-    [sourced, chosenDate],
+    () => (plan ? computeSurveyView(plan, isDemo, chosenDate) : null),
+    [plan, isDemo, chosenDate],
   );
+}
+
+export function useSurveyState(): SurveyState {
+  return useSurveySource().state;
 }

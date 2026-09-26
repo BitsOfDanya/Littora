@@ -1,0 +1,20 @@
+{
+  "key": "emblas2016-russia",
+  "title": "EMBLAS-II 2016: плавающий макромусор на российских трансектах (JOSS RF и NPMS RF-III)",
+  "license": "не указана",
+  "source": "https://emblasproject.org",
+  "retrieved": "2026-09-26",
+  "bytes": 12955550,
+  "files": [
+    {
+      "name": "EMBLAS-II_NPMS_JOSS_2016_ScReport_ISBN-978-617-7953-60-8-2.pdf",
+      "bytes": 12953007,
+      "md5": "504e2217a8dc85b0bca569af40418623"
+    },
+    {
+      "name": "emblas2016_russia_transects_derived.csv",
+      "bytes": 2543,
+      "md5": "ec7c2fc8ec175c36ed3b8b01ec9d49fc"
+    }
+  ]
+}

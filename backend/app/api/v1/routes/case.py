@@ -12,6 +12,8 @@ from app.core.errors import NotFoundError
 router = APIRouter(tags=["case"])
 
 Decision = Literal["accepted", "rejected"]
+PairDecisionFilter = Literal["accepted", "candidate", "not_evaluated", "rejected"]
+EventDecisionFilter = Literal["accepted", "candidate", "not_evaluated", "rejected", "not_used"]
 
 
 def _data_or_404(repository: RepositoryDep):
@@ -66,7 +68,7 @@ def read_observations(
 def read_pairs(
     repository: RepositoryDep,
     event_id: Annotated[str | None, Query(max_length=80)] = None,
-    decision: Literal["accepted", "candidate", "rejected"] | None = None,
+    decision: PairDecisionFilter | None = None,
     target: Annotated[str | None, Query(max_length=60)] = None,
 ) -> dict[str, Any]:
     rows = repository.registry()["pairs"]
@@ -83,7 +85,7 @@ def read_pairs(
 @router.get("/events")
 def read_events(
     repository: RepositoryDep,
-    decision: Literal["accepted", "candidate", "rejected", "not_used"] | None = None,
+    decision: EventDecisionFilter | None = None,
     target: Annotated[str | None, Query(max_length=60)] = None,
 ) -> dict[str, Any]:
     events = repository.registry()["events"]

@@ -6,6 +6,7 @@ import styles from "./report.module.css";
 type ReportSectionProps = {
   id: SectionId;
   index: number;
+  lede?: string;
   aside?: ReactNode;
   children: ReactNode;
   className?: string;
@@ -13,7 +14,7 @@ type ReportSectionProps = {
 
 export const sectionDomId = (id: SectionId) => `models-${id}`;
 
-export function ReportSection({ id, index, aside, children, className }: ReportSectionProps) {
+export function ReportSection({ id, index, lede, aside, children, className }: ReportSectionProps) {
   const domId = sectionDomId(id);
   const copy = SECTION_COPY[id];
   return (
@@ -40,7 +41,9 @@ export function ReportSection({ id, index, aside, children, className }: ReportS
               </h2>
               {aside}
             </div>
-            <p className="max-w-[70ch] text-[13px] leading-5 text-text-secondary">{copy.lede}</p>
+            <p className="max-w-[70ch] text-[13px] leading-5 text-text-secondary">
+              {lede ?? copy.lede}
+            </p>
           </div>
         </div>
       </header>

@@ -1,0 +1,16 @@
+{
+ "run": "raunet__marida_mixed__common",
+ "scene_id": "S2A_37TDK_20250710_0_L2A",
+ "collection": "sentinel-2-l2a",
+ "bbox": [
+  37.799906,
+  44.698026999999996,
+  37.844215000000005,
+  44.722958000000006
+ ],
+ "threshold": 0.15921302139759064,
+ "tta": true,
+ "pixels": 100748,
+ "detected_pixels": 101,
+ "zones": 15
+}

@@ -37,11 +37,11 @@ export function ThemeSeg() {
               className={cn(
                 "inline-flex items-center gap-1.5 rounded-[1px] px-1.5 text-[12px] text-text-secondary transition-colors duration-[var(--t-2)] hover:bg-surface-raised hover:text-text-primary",
                 selected &&
-                  "bg-surface-raised font-semibold text-text-primary shadow-[inset_0_0_0_1px_var(--text-primary)] xl:px-2",
+                  "bg-surface-raised font-semibold text-text-primary shadow-[inset_0_0_0_1px_var(--text-primary)] min-[1600px]:px-2",
               )}
             >
               <Icon size={14} />
-              {selected ? <span className="hidden xl:inline">{label}</span> : null}
+              {selected ? <span className="hidden min-[1600px]:inline">{label}</span> : null}
             </button>
           );
         })}

@@ -15,6 +15,7 @@ export type PrCurvePoint = {
 
 export type ConfusionMatrix = {
   labels: readonly string[];
+  predicted?: readonly string[];
   counts: readonly (readonly number[])[];
 };
 

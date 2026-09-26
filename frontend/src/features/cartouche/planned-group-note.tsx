@@ -21,7 +21,7 @@ const GROUP_PLANS: Partial<Record<LayerGroupId, GroupPlan>> = {
     title: "Прогноз дрейфа — не подключено",
     capability: "drift_forecast",
     body: "Частицы течений, облака вероятности на +6…+72\u202Fч и обратный дрейф к вероятному источнику.",
-    requirement: "поля течений CMEMS, ветер GFS и выбранное пятно.",
+    requirement: "зоны детектора из анализа района; ветер, волны и течения Open-Meteo.",
   },
   survey: {
     title: "Планирование обследований — не подключено",

@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from enum import StrEnum
 
-from app.case.concentration import ConcentrationCheck, check_record
+from app.case.concentration import CheckStatus, ConcentrationCheck, check_record
 from app.case.config import CaseConfig
 from app.case.records import CaseRecord
 
@@ -15,6 +15,7 @@ class SelectionReason(StrEnum):
     PROFILE_NOT_TARGETED = "profile_not_targeted"
     SCOPE_MISMATCH = "scope_mismatch"
     NO_CONCENTRATION = "no_concentration"
+    CONCENTRATION_MISMATCH = "concentration_mismatch"
     EXCLUDED_FLAG = "excluded_flag"
 
 
@@ -27,6 +28,7 @@ REASON_LABELS: dict[SelectionReason, str] = {
     SelectionReason.PROFILE_NOT_TARGETED: "профиль измерения не входит ни в одну целевую величину",
     SelectionReason.SCOPE_MISMATCH: "совокупность не совпадает с целевой величиной профиля",
     SelectionReason.NO_CONCENTRATION: "нет подтверждённой суммарной оценки концентрации",
+    SelectionReason.CONCENTRATION_MISMATCH: "N/A расходится с опубликованной концентрацией",
     SelectionReason.EXCLUDED_FLAG: "запись исключена по флагу качества",
 }
 
@@ -64,6 +66,10 @@ def select_record(record: CaseRecord, config: CaseConfig) -> Selection:
         return Selection(record, None, SelectionReason.SCOPE_MISMATCH, check, detail)
     if record.published_concentration is None:
         return Selection(record, target.key, SelectionReason.NO_CONCENTRATION, check)
+    if rules.reject_on_mismatch and check.status is CheckStatus.MISMATCH:
+        relative = check.relative_difference
+        detail = "" if relative is None else f"расхождение {relative * 100:.1f} %"
+        return Selection(record, target.key, SelectionReason.CONCENTRATION_MISMATCH, check, detail)
     excluded = [flag for flag in record.flags if flag in rules.exclude_flags]
     if excluded:
         detail = ", ".join(excluded)

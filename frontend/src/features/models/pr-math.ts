@@ -1,3 +1,4 @@
+import type { ModelEvaluation } from "@/data/models";
 import type { PrCurvePoint } from "@/domain/model";
 
 export type PrPoint = { precision: number; recall: number };
@@ -55,4 +56,8 @@ export function isoF1Curve(level: number, steps = 48): PrPoint[] {
 
 export function snapThreshold(value: number, step = 0.01): number {
   return Math.round(value / step) * step;
+}
+
+export function curveOf(model: ModelEvaluation | null): readonly PrCurvePoint[] | null {
+  return model && model.prCurve.length ? model.prCurve : null;
 }

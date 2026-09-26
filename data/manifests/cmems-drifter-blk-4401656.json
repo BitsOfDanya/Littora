@@ -1,0 +1,30 @@
+{
+  "key": "cmems-drifter-blk-4401656",
+  "title": "Copernicus Marine: дрифтер SVP-B WMO 4401656 в Чёрном море, 2026",
+  "license": "Copernicus Marine",
+  "source": "https://doi.org/10.48670/moi-00033",
+  "retrieved": "2026-09-26",
+  "bytes": 385187,
+  "files": [
+    {
+      "name": "GL_TS_DB_4401656_202601.nc",
+      "bytes": 104467,
+      "md5": "5c6f4c6265539241b9476a5e10018a5d"
+    },
+    {
+      "name": "GL_TS_DB_4401656_202602.nc",
+      "bytes": 105446,
+      "md5": "dc3cab29f56dbdcf4fc7475ebf9a1bbd"
+    },
+    {
+      "name": "GL_TS_DB_4401656_202603.nc",
+      "bytes": 106420,
+      "md5": "b6e70e543a540e5678e213c92aa110d5"
+    },
+    {
+      "name": "GL_TS_DB_4401656_202604.nc",
+      "bytes": 68854,
+      "md5": "6b661e6d34d9ff98121ce6826982667e"
+    }
+  ]
+}

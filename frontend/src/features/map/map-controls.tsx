@@ -23,6 +23,8 @@ import { fitAoi } from "./camera";
 import { resetNorth, zoomBy } from "./camera-motion";
 import { useIsPhoneWidth } from "./furniture/use-frame-width";
 import { useMapFurnitureVisible } from "./furniture/use-furniture-visible";
+import { usePixelProbeStore } from "./probe/pixel-probe";
+import { useRulerStore } from "./ruler/ruler-store";
 import { useMapViewStore } from "./state/map-view-store";
 import { useMainMap } from "./use-main-map";
 
@@ -90,6 +92,10 @@ function useMapToolActions() {
   const map = useMainMap();
   const aoiId = useWorkspaceStore((state) => state.aoiId);
   const toggleLayer = useMapLayersStore((state) => state.toggleLayer);
+  const toggleRuler = useRulerStore((state) => state.toggle);
+  const deactivateRuler = useRulerStore((state) => state.deactivate);
+  const toggleProbe = usePixelProbeStore((state) => state.toggle);
+  const setProbe = usePixelProbeStore((state) => state.setActive);
   return {
     zoomIn: () => map && zoomBy(map, 1),
     zoomOut: () => map && zoomBy(map, -1),
@@ -99,6 +105,14 @@ function useMapToolActions() {
     },
     northUp: () => map && resetNorth(map),
     toggleGraticule: () => toggleLayer("graticule"),
+    toggleRuler: () => {
+      setProbe(false);
+      toggleRuler();
+    },
+    toggleProbe: () => {
+      deactivateRuler();
+      toggleProbe();
+    },
   };
 }
 
@@ -109,6 +123,8 @@ function useMapToolHotkeys(actions: ReturnType<typeof useMapToolActions>, enable
   useHotkey("KeyF", actions.fitArea, { enabled });
   useHotkey("KeyN", actions.northUp, { enabled });
   useHotkey("KeyG", actions.toggleGraticule, { enabled });
+  useHotkey("KeyR", actions.toggleRuler, { enabled });
+  useHotkey("KeyI", actions.toggleProbe, { enabled });
 }
 
 type MapControlsProps = {
@@ -120,6 +136,8 @@ export function MapControls({ onOpenLayers }: MapControlsProps) {
   const phone = useIsPhoneWidth();
   const bearing = useMapViewStore((state) => state.bearing);
   const graticuleOn = useLayerVisible("graticule");
+  const rulerOn = useRulerStore((state) => state.active);
+  const probeOn = usePixelProbeStore((state) => state.active);
   const actions = useMapToolActions();
   const modalOpen = useShellUiStore((state) => state.shortcutSheetOpen);
 
@@ -174,14 +192,21 @@ export function MapControls({ onOpenLayers }: MapControlsProps) {
             <IconGraticule />
           </Tool>
           <Tool
-            label="Пиксель под курсором"
+            label="Лупа: значения пикселя"
             shortcut="I"
             large={false}
-            plannedReason="план: появится с каталогом сцен"
+            pressed={probeOn}
+            onPress={actions.toggleProbe}
           >
             <IconProbe />
           </Tool>
-          <Tool label="Линейка" shortcut="R" large={false} plannedReason="план">
+          <Tool
+            label="Линейка"
+            shortcut="R"
+            large={false}
+            pressed={rulerOn}
+            onPress={actions.toggleRuler}
+          >
             <IconRuler />
           </Tool>
         </ToolGroup>

@@ -1,8 +1,9 @@
 "use client";
 
 import { type KeyboardEvent, useEffect, useState } from "react";
+import type { DriftState } from "@/data/drift";
 import type { BeachSegmentRisk, DriftForecastDetail, ForecastRun } from "@/data/forecast";
-import { useForecastRun } from "@/data/forecast";
+import { useDriftState, useForecastRun } from "@/data/forecast";
 import { FORECAST_HORIZONS_H, type ForecastHorizonH } from "@/domain/forecast";
 import { DemoAction } from "@/features/cartouche/planned-group-note";
 import { formatUtcDateTime } from "@/lib/format/time";
@@ -20,9 +21,12 @@ import {
   horizonLabel,
   RELIABILITY_LIMIT_H,
   RELIABILITY_WORD,
+  reliabilityHint,
   shiftIso,
+  UNRATED_RELIABILITY,
 } from "./drift-math";
-import { formatProbability } from "./forecast-copy";
+import { DriftStateAction, ScenarioTag } from "./drift-state";
+import { driftStateCopy, formatProbability, SCENARIO_NOTE, upperFirst } from "./forecast-copy";
 import { chooseHorizon, stepHorizonBy } from "./forecast-hotkeys";
 import { RAIL_T0_ID } from "./forecast-model";
 import { useForecastUiStore } from "./forecast-ui-store";
@@ -100,6 +104,7 @@ type ControlProps = {
   run: ForecastRun | null;
   isDemo: boolean;
   now: number;
+  drift: DriftState;
 };
 
 function ParticlesButton({ disabled }: { disabled?: boolean }) {
@@ -138,7 +143,40 @@ function PlayButton({ disabled }: { disabled?: boolean }) {
   );
 }
 
-function ControlBlock({ horizonH, run, isDemo, now }: ControlProps) {
+function DriftStateBlock({ drift }: { drift: DriftState }) {
+  const copy = driftStateCopy(drift);
+  if (!copy)
+    return (
+      <>
+        <p className="text-[13px] leading-4 text-text-primary">Прогноз не подключён</p>
+        <p className="font-mono text-[11px] leading-[14px] text-text-tertiary">
+          drift_forecast: planned
+        </p>
+        <div className="[&_button]:h-6 [&_button]:px-2 [&_button]:text-[12px]">
+          <DemoAction />
+        </div>
+      </>
+    );
+  return (
+    <>
+      <p className="truncate text-[13px] leading-4 text-text-primary">{copy.title}</p>
+      <p
+        className={cn(
+          "truncate text-[11px] leading-[14px] text-text-tertiary",
+          drift.status === "failed" && "text-state-alarm",
+        )}
+        title={copy.detail}
+      >
+        {copy.detail}
+      </p>
+      <div className="flex items-center gap-1.5">
+        <DriftStateAction state={drift} size="sm" />
+      </div>
+    </>
+  );
+}
+
+function ControlBlock({ horizonH, run, isDemo, now, drift }: ControlProps) {
   const index = FORECAST_HORIZONS_H.indexOf(horizonH);
   return (
     <div className="flex min-w-0 flex-col justify-center gap-1 border-r border-line-hairline px-3 py-1.5">
@@ -147,7 +185,11 @@ function ControlBlock({ horizonH, run, isDemo, now }: ControlProps) {
         <span className="hidden text-[11px] leading-[14px] text-text-tertiary min-[1600px]:inline">
           от снимка T₀
         </span>
-        {isDemo ? <DemoTag className="ml-auto" /> : null}
+        {isDemo ? (
+          <DemoTag className="ml-auto" />
+        ) : run ? (
+          <ScenarioTag className="ml-auto" />
+        ) : null}
       </div>
       {run ? (
         <>
@@ -187,15 +229,7 @@ function ControlBlock({ horizonH, run, isDemo, now }: ControlProps) {
           </div>
         </>
       ) : (
-        <>
-          <p className="text-[13px] leading-4 text-text-primary">Прогноз не подключён</p>
-          <p className="font-mono text-[11px] leading-[14px] text-text-tertiary">
-            drift_forecast: planned
-          </p>
-          <div className="[&_button]:h-6 [&_button]:px-2 [&_button]:text-[12px]">
-            <DemoAction />
-          </div>
-        </>
+        <DriftStateBlock drift={drift} />
       )}
     </div>
   );
@@ -205,10 +239,12 @@ function HorizonChips({
   horizonH,
   width,
   disabled,
+  graded,
 }: {
   horizonH: ForecastHorizonH;
   width: number;
   disabled: boolean;
+  graded: boolean;
 }) {
   const offsets = chipOffsets(width);
   const handleKey = (event: KeyboardEvent<HTMLButtonElement>) => {
@@ -243,7 +279,7 @@ function HorizonChips({
             disabled={disabled}
             onClick={() => chooseHorizon(hour)}
             onKeyDown={handleKey}
-            title={`+${hour} ч · цель от снимка T₀ · надёжность ${RELIABILITY_WORD[hour <= 24 ? "high" : hour <= 48 ? "medium" : "low"]}`}
+            title={`+${hour} ч · цель от снимка T₀ · ${reliabilityHint(hour, graded)}`}
             style={{ left: `calc(${at(hour)} + ${offsets[hour]}px)`, width: CHIP_WIDTH_PX }}
             className={cn(
               "absolute top-1/2 h-5 -translate-x-1/2 -translate-y-1/2 rounded-[var(--radius-ctl)] border font-mono text-[11px] leading-none transition-colors duration-[var(--t-2)]",
@@ -262,7 +298,7 @@ function HorizonChips({
   );
 }
 
-function ReliabilityBand() {
+function ReliabilityBand({ graded }: { graded: boolean }) {
   const bands = [
     { from: 0, to: RELIABILITY_LIMIT_H.high, word: RELIABILITY_WORD.high, alpha: 0.46 },
     {
@@ -277,7 +313,11 @@ function ReliabilityBand() {
     <div
       className="relative h-full"
       role="img"
-      aria-label="Надёжность: высокая до +24 ч, средняя до +48 ч, дальше низкая — ориентир"
+      aria-label={
+        graded
+          ? "Надёжность: высокая до +24 ч, средняя до +48 ч, дальше низкая — ориентир"
+          : `${UNRATED_RELIABILITY}: ${SCENARIO_NOTE}`
+      }
     >
       <span
         className="absolute inset-y-0 flex items-center overflow-hidden pl-1 text-[11px] whitespace-nowrap text-text-tertiary"
@@ -285,19 +325,29 @@ function ReliabilityBand() {
       >
         обратный дрейф — откуда пришло
       </span>
-      {bands.map((band) => (
+      {graded ? (
+        bands.map((band) => (
+          <span
+            key={band.word}
+            title={`Надёжность ${band.word}`}
+            className="absolute inset-y-px flex items-center overflow-hidden border-l border-surface-panel px-1 text-[11px] leading-none whitespace-nowrap text-text-primary"
+            style={{
+              ...span(band.from, band.to),
+              backgroundColor: `color-mix(in srgb, var(--text-secondary) ${Math.round(band.alpha * 100)}%, transparent)`,
+            }}
+          >
+            {band.word}
+          </span>
+        ))
+      ) : (
         <span
-          key={band.word}
-          title={`Надёжность ${band.word}`}
-          className="absolute inset-y-px flex items-center overflow-hidden border-l border-surface-panel px-1 text-[11px] leading-none whitespace-nowrap text-text-primary"
-          style={{
-            ...span(band.from, band.to),
-            backgroundColor: `color-mix(in srgb, var(--text-secondary) ${Math.round(band.alpha * 100)}%, transparent)`,
-          }}
+          title={`${upperFirst(UNRATED_RELIABILITY)}: ${SCENARIO_NOTE}`}
+          className="absolute inset-y-px flex items-center overflow-hidden border-l border-line-control px-1 text-[11px] leading-none whitespace-nowrap text-text-tertiary"
+          style={span(0, AXIS_TO_H)}
         >
-          {band.word}
+          не оценена — {SCENARIO_NOTE}
         </span>
-      ))}
+      )}
     </div>
   );
 }
@@ -357,13 +407,24 @@ type TracksProps = {
   forecast: DriftForecastDetail | null;
   run: ForecastRun | null;
   isDemo: boolean;
+  graded: boolean;
   now: number;
   idleNote: string | null;
+  offlineNote: string;
 };
 
 const LABEL_CLASS = "self-center pr-2 text-[11px] leading-[14px] text-text-tertiary";
 
-function Tracks({ horizonH, forecast, run, isDemo, now, idleNote }: TracksProps) {
+function Tracks({
+  horizonH,
+  forecast,
+  run,
+  isDemo,
+  graded,
+  now,
+  idleNote,
+  offlineNote,
+}: TracksProps) {
   const [trackRef, width] = useTrackWidth();
   const nowHours = run ? (now - Date.parse(run.t0)) / 3_600_000 : null;
   const nowInside = nowHours !== null && nowHours >= AXIS_FROM_H && nowHours <= AXIS_TO_H;
@@ -421,8 +482,8 @@ function Tracks({ horizonH, forecast, run, isDemo, now, idleNote }: TracksProps)
             T₀ снимок
           </span>
         </div>
-        <HorizonChips horizonH={horizonH} width={width} disabled={!run} />
-        <ReliabilityBand />
+        <HorizonChips horizonH={horizonH} width={width} disabled={!run} graded={graded} />
+        <ReliabilityBand graded={graded} />
         {forecast ? (
           <RiskMarks forecast={forecast} />
         ) : (
@@ -470,7 +531,7 @@ function Tracks({ horizonH, forecast, run, isDemo, now, idleNote }: TracksProps)
           </>
         ) : (
           <span className="font-serif text-[13px] leading-4 text-text-tertiary italic">
-            прогноз не подключён
+            {offlineNote}
           </span>
         )}
       </div>
@@ -482,21 +543,30 @@ export function HorizonRail() {
   const horizonH = useWorkspaceStore((state) => state.forecastHorizonH);
   const sourcedRun = useForecastRun();
   const selected = useSelectedForecast();
+  const drift = useDriftState();
   const now = useNow();
   const run = sourcedRun.origin === "none" ? null : sourcedRun.data;
   const isDemo = sourcedRun.origin === "demo";
   const forecast = selected.status === "ready" ? selected.forecast : null;
+  const copy = driftStateCopy(drift);
+  const idleNote = run
+    ? isDemo
+      ? "Выберите пятно, чтобы построить прогноз"
+      : `Выберите зону детектора · ${SCENARIO_NOTE}`
+    : (copy?.title ?? "прогноз не подключён");
 
   return (
     <div className="grid h-full min-h-0 grid-cols-[var(--control-w)_minmax(0,1fr)]">
-      <ControlBlock horizonH={horizonH} run={run} isDemo={isDemo} now={now} />
+      <ControlBlock horizonH={horizonH} run={run} isDemo={isDemo} now={now} drift={drift} />
       <Tracks
         horizonH={horizonH}
         forecast={forecast}
         run={run}
         isDemo={isDemo}
+        graded={sourcedRun.origin !== "api"}
         now={now}
-        idleNote={run ? "Выберите пятно, чтобы построить прогноз" : "прогноз не подключён"}
+        idleNote={idleNote}
+        offlineNote={copy ? "сценарий дрейфа" : "прогноз не подключён"}
       />
     </div>
   );

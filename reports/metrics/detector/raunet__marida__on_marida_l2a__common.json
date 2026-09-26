@@ -1,0 +1,537 @@
+{
+ "name": "raunet__marida__on_marida_l2a__common",
+ "code_sha256": "ef64d9739211799ad46210a250a790b733d3ed4d976edec8bd900b70a67f02ec",
+ "config": {
+  "source_run": "raunet__marida",
+  "data": "marida_l2a",
+  "split": "common"
+ },
+ "config_file": null,
+ "config_sha256": null,
+ "data": "marida_l2a",
+ "threshold": 0.7059804797172546,
+ "threshold_source": "fixed",
+ "val": {
+  "threshold": 0.7059804797172546,
+  "pixels": 213080,
+  "positives": 1068,
+  "tp": 809,
+  "fp": 43,
+  "fn": 259,
+  "tn": 211969,
+  "precision": 0.9495305164319249,
+  "recall": 0.7574906367041199,
+  "f1": 0.8427083333333333,
+  "iou": 0.7281728172817282,
+  "pr_auc": 0.8901205143120395,
+  "false_positives_by_class": {
+   "natural_organic_material": {
+    "pixels": 92,
+    "false_positives": 41,
+    "false_positive_rate": 0.44565217391304346
+   },
+   "mixed_water": {
+    "pixels": 94,
+    "false_positives": 2,
+    "false_positive_rate": 0.02127659574468085
+   },
+   "dense_sargassum": {
+    "pixels": 1167,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "sparse_sargassum": {
+    "pixels": 385,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "ship": {
+    "pixels": 1340,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "clouds": {
+    "pixels": 19262,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "marine_water": {
+    "pixels": 18824,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "sediment_laden_water": {
+    "pixels": 125565,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "foam": {
+    "pixels": 369,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "turbid_water": {
+    "pixels": 38566,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "shallow_water": {
+    "pixels": 1011,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "waves": {
+    "pixels": 987,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "cloud_shadows": {
+    "pixels": 2404,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "wakes": {
+    "pixels": 1946,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   }
+  },
+  "by_group": {
+   "11-6-18_16PCC": {
+    "pixels": 29232,
+    "positives": 43,
+    "tp": 43,
+    "fp": 5,
+    "fn": 0,
+    "tn": 29184,
+    "precision": 0.8958333333333334,
+    "recall": 1.0,
+    "f1": 0.945054945054945,
+    "iou": 0.8958333333333334
+   },
+   "12-1-17_16PEC": {
+    "pixels": 7681,
+    "positives": 3,
+    "tp": 0,
+    "fp": 0,
+    "fn": 3,
+    "tn": 7678,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "14-3-20_18QYF": {
+    "pixels": 628,
+    "positives": 231,
+    "tp": 162,
+    "fp": 0,
+    "fn": 69,
+    "tn": 397,
+    "precision": 1.0,
+    "recall": 0.7012987012987013,
+    "f1": 0.8244274809160306,
+    "iou": 0.7012987012987013
+   },
+   "18-1-18_48PZC": {
+    "pixels": 4902,
+    "positives": 9,
+    "tp": 2,
+    "fp": 0,
+    "fn": 7,
+    "tn": 4893,
+    "precision": 1.0,
+    "recall": 0.2222222222222222,
+    "f1": 0.3636363636363636,
+    "iou": 0.2222222222222222
+   },
+   "18-9-20_16PCC": {
+    "pixels": 75640,
+    "positives": 376,
+    "tp": 274,
+    "fp": 24,
+    "fn": 102,
+    "tn": 75240,
+    "precision": 0.9194630872483222,
+    "recall": 0.7287234042553191,
+    "f1": 0.8130563798219583,
+    "iou": 0.685
+   },
+   "19-9-18_16PCC": {
+    "pixels": 31610,
+    "positives": 49,
+    "tp": 39,
+    "fp": 6,
+    "fn": 10,
+    "tn": 31555,
+    "precision": 0.8666666666666667,
+    "recall": 0.7959183673469388,
+    "f1": 0.8297872340425533,
+    "iou": 0.7090909090909091
+   },
+   "21-2-18_16PCC": {
+    "pixels": 4279,
+    "positives": 5,
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "tn": 4274,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "iou": 1.0
+   },
+   "24-3-20_18QYF": {
+    "pixels": 94,
+    "positives": 0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "tn": 94,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "28-9-20_16PDC": {
+    "pixels": 54548,
+    "positives": 0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "tn": 54548,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "29-12-20_18QYF": {
+    "pixels": 1965,
+    "positives": 245,
+    "tp": 192,
+    "fp": 1,
+    "fn": 53,
+    "tn": 1719,
+    "precision": 0.9948186528497409,
+    "recall": 0.7836734693877551,
+    "f1": 0.8767123287671232,
+    "iou": 0.7804878048780488
+   },
+   "29-8-17_51RVQ": {
+    "pixels": 580,
+    "positives": 17,
+    "tp": 10,
+    "fp": 0,
+    "fn": 7,
+    "tn": 563,
+    "precision": 1.0,
+    "recall": 0.5882352941176471,
+    "f1": 0.7407407407407407,
+    "iou": 0.5882352941176471
+   },
+   "7-3-20_18QYG": {
+    "pixels": 1921,
+    "positives": 90,
+    "tp": 82,
+    "fp": 7,
+    "fn": 8,
+    "tn": 1824,
+    "precision": 0.9213483146067416,
+    "recall": 0.9111111111111111,
+    "f1": 0.9162011173184358,
+    "iou": 0.845360824742268
+   }
+  }
+ },
+ "test": {
+  "threshold": 0.7059804797172546,
+  "pixels": 180209,
+  "positives": 299,
+  "tp": 204,
+  "fp": 8,
+  "fn": 95,
+  "tn": 179902,
+  "precision": 0.9622641509433962,
+  "recall": 0.6822742474916388,
+  "f1": 0.7984344422700588,
+  "iou": 0.6644951140065146,
+  "pr_auc": 0.9287684993046543,
+  "false_positives_by_class": {
+   "ship": {
+    "pixels": 1163,
+    "false_positives": 5,
+    "false_positive_rate": 0.004299226139294927
+   },
+   "natural_organic_material": {
+    "pixels": 8,
+    "false_positives": 3,
+    "false_positive_rate": 0.375
+   },
+   "dense_sargassum": {
+    "pixels": 750,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "sparse_sargassum": {
+    "pixels": 824,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "clouds": {
+    "pixels": 24862,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "marine_water": {
+    "pixels": 18869,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "sediment_laden_water": {
+    "pixels": 93017,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "foam": {
+    "pixels": 357,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "turbid_water": {
+    "pixels": 31679,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "shallow_water": {
+    "pixels": 1872,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "waves": {
+    "pixels": 1865,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "cloud_shadows": {
+    "pixels": 3058,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "wakes": {
+    "pixels": 1525,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "mixed_water": {
+    "pixels": 61,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   }
+  },
+  "by_group": {
+   "12-12-20_16PCC": {
+    "pixels": 9261,
+    "positives": 27,
+    "tp": 8,
+    "fp": 0,
+    "fn": 19,
+    "tn": 9234,
+    "precision": 1.0,
+    "recall": 0.2962962962962963,
+    "f1": 0.45714285714285713,
+    "iou": 0.2962962962962963
+   },
+   "14-11-18_48PZC": {
+    "pixels": 2263,
+    "positives": 13,
+    "tp": 12,
+    "fp": 2,
+    "fn": 1,
+    "tn": 2248,
+    "precision": 0.8571428571428571,
+    "recall": 0.9230769230769231,
+    "f1": 0.888888888888889,
+    "iou": 0.8
+   },
+   "14-9-18_16PCC": {
+    "pixels": 81835,
+    "positives": 19,
+    "tp": 19,
+    "fp": 0,
+    "fn": 0,
+    "tn": 81816,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "iou": 1.0
+   },
+   "15-11-20_16PCC": {
+    "pixels": 10811,
+    "positives": 6,
+    "tp": 2,
+    "fp": 2,
+    "fn": 4,
+    "tn": 10803,
+    "precision": 0.5,
+    "recall": 0.3333333333333333,
+    "f1": 0.4,
+    "iou": 0.25
+   },
+   "16-2-18_16PEC": {
+    "pixels": 25838,
+    "positives": 8,
+    "tp": 4,
+    "fp": 0,
+    "fn": 4,
+    "tn": 25830,
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1": 0.6666666666666666,
+    "iou": 0.5
+   },
+   "18-5-19_51PTS": {
+    "pixels": 38,
+    "positives": 10,
+    "tp": 9,
+    "fp": 0,
+    "fn": 1,
+    "tn": 28,
+    "precision": 1.0,
+    "recall": 0.9,
+    "f1": 0.9473684210526316,
+    "iou": 0.9
+   },
+   "19-9-18_16PDC": {
+    "pixels": 29848,
+    "positives": 22,
+    "tp": 9,
+    "fp": 0,
+    "fn": 13,
+    "tn": 29826,
+    "precision": 1.0,
+    "recall": 0.4090909090909091,
+    "f1": 0.5806451612903226,
+    "iou": 0.4090909090909091
+   },
+   "22-12-20_18QYF": {
+    "pixels": 124,
+    "positives": 30,
+    "tp": 5,
+    "fp": 0,
+    "fn": 25,
+    "tn": 94,
+    "precision": 1.0,
+    "recall": 0.16666666666666666,
+    "f1": 0.2857142857142857,
+    "iou": 0.16666666666666666
+   },
+   "27-1-19_16PCC": {
+    "pixels": 1454,
+    "positives": 54,
+    "tp": 53,
+    "fp": 1,
+    "fn": 1,
+    "tn": 1399,
+    "precision": 0.9814814814814815,
+    "recall": 0.9814814814814815,
+    "f1": 0.9814814814814815,
+    "iou": 0.9636363636363636
+   },
+   "27-1-19_16QED": {
+    "pixels": 7614,
+    "positives": 0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "tn": 7614,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "28-9-20_16PCC": {
+    "pixels": 630,
+    "positives": 30,
+    "tp": 23,
+    "fp": 3,
+    "fn": 7,
+    "tn": 597,
+    "precision": 0.8846153846153846,
+    "recall": 0.7666666666666667,
+    "f1": 0.8214285714285715,
+    "iou": 0.696969696969697
+   },
+   "30-8-18_16PCC": {
+    "pixels": 8558,
+    "positives": 39,
+    "tp": 34,
+    "fp": 0,
+    "fn": 5,
+    "tn": 8519,
+    "precision": 1.0,
+    "recall": 0.8717948717948718,
+    "f1": 0.9315068493150686,
+    "iou": 0.8717948717948718
+   },
+   "4-3-18_50LLR": {
+    "pixels": 1935,
+    "positives": 41,
+    "tp": 26,
+    "fp": 0,
+    "fn": 15,
+    "tn": 1894,
+    "precision": 1.0,
+    "recall": 0.6341463414634146,
+    "f1": 0.7761194029850745,
+    "iou": 0.6341463414634146
+   }
+  }
+ },
+ "test_ci95_scene_bootstrap": {
+  "precision": [
+   0.9166666666666666,
+   0.9914911571954395
+  ],
+  "recall": [
+   0.48274322660098523,
+   0.8401832410886562
+  ],
+  "f1": [
+   0.6408219782036622,
+   0.8986621495920274
+  ],
+  "iou": [
+   0.47147770928258737,
+   0.815973214285714
+  ]
+ },
+ "val_ci95_scene_bootstrap": {
+  "precision": [
+   0.9096374427599697,
+   0.9876858623711807
+  ],
+  "recall": [
+   0.7149364261022898,
+   0.8315688506270436
+  ],
+  "f1": [
+   0.8142226876211576,
+   0.883883284457478
+  ],
+  "iou": [
+   0.6866573339121173,
+   0.7919272972545236
+  ]
+ },
+ "test_unlabeled_alarms": {
+  "unlabeled_valid_km2": 2023.024,
+  "alarm_pixels": 957,
+  "alarm_share": 4.730541065149783e-05,
+  "alarm_pixels_per_100km2": 47.30541065149782,
+  "definition": "срабатывания на неразмеченной валидной воде дальше 5 пикс. от размеченного мусора"
+ },
+ "frozen_threshold_from": "raunet__marida",
+ "tta": {
+  "used": true
+ }
+}

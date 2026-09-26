@@ -14,6 +14,8 @@ export type LegendKind =
   | "footprint-line"
   | "analysis-area"
   | "observation-marks"
+  | "probability-ramp"
+  | "zone-outline"
   | "aoi-line"
   | "graticule"
   | "labels"
@@ -40,6 +42,8 @@ export type LayerId =
   | "scene-footprint"
   | "analysis-area"
   | "field-observations"
+  | "debris-probability"
+  | "detector-zones"
   | "aoi-boundary"
   | "graticule"
   | "labels"
@@ -69,6 +73,7 @@ export type LayerDefinition = {
   legend: LegendKind;
   plannedReason?: string;
   hotkey?: string;
+  demoOnly?: boolean;
 };
 
 export const MAP_MODES: readonly MapModeId[] = ["monitor", "timeline", "forecast", "survey"];
@@ -86,9 +91,9 @@ export const LAYER_GROUP_LABELS: Record<LayerGroupId, string> = {
 
 const ALL_MAP_MODES = MAP_MODES;
 const SCENE_REASON = "Нужен каталог сцен Sentinel-2 L2A — пока показана подложка.";
-const COMPOSITE_REASON =
-  "Сейчас строится только RGB-снимок даты; композиты и индексы — следующий этап.";
-const FORECAST_REASON = "Нужны поля течений CMEMS, ветер GFS и выбранное пятно.";
+const COMPOSITE_REASON = "Композиты и индексы строятся при анализе района вместе с детекцией.";
+const FORECAST_REASON =
+  "Нужны модуль дрейфа на сервере, зоны детектора и ветер, волны и течения Open-Meteo.";
 const SURVEY_REASON = "Появится с модулем планирования обследований.";
 
 export const LAYERS: readonly LayerDefinition[] = [
@@ -153,6 +158,26 @@ export const LAYERS: readonly LayerDefinition[] = [
     plannedReason: "Нужны данные кейса в data/case на сервере.",
   },
   {
+    id: "debris-probability",
+    label: "Вероятность мусора",
+    group: "results",
+    capability: "debris_detection",
+    hasDemo: false,
+    modes: ["monitor"],
+    legend: "probability-ramp",
+    plannedReason: "Появится с детектором: вероятность по пикселю 10\u202Fм.",
+  },
+  {
+    id: "detector-zones",
+    label: "Зоны детектора",
+    group: "results",
+    capability: "debris_detection",
+    hasDemo: false,
+    modes: ["monitor", "timeline", "forecast"],
+    legend: "zone-outline",
+    plannedReason: "Появятся с детектором: пиксели выше порога, собранные в зоны.",
+  },
+  {
     id: "coverage",
     label: "Доля покрытия пикселя",
     group: "results",
@@ -164,9 +189,10 @@ export const LAYERS: readonly LayerDefinition[] = [
   },
   {
     id: "candidates",
+    demoOnly: true,
     label: "Пятна-кандидаты",
     group: "results",
-    capability: "segmentation",
+    capability: "coverage_estimation",
     hasDemo: true,
     modes: ALL_MAP_MODES,
     legend: "confidence-lines",
@@ -174,9 +200,10 @@ export const LAYERS: readonly LayerDefinition[] = [
   },
   {
     id: "uncertainty",
+    demoOnly: true,
     label: "Неопределённость",
     group: "results",
-    capability: "debris_detection",
+    capability: "coverage_estimation",
     hasDemo: true,
     modes: ["monitor", "survey"],
     legend: "uncertainty-hatch",
@@ -184,9 +211,10 @@ export const LAYERS: readonly LayerDefinition[] = [
   },
   {
     id: "hotspots",
+    demoOnly: true,
     label: "Горячие точки",
     group: "results",
-    capability: "debris_detection",
+    capability: "coverage_estimation",
     hasDemo: true,
     modes: ["monitor"],
     legend: "hotspot-cells",
@@ -242,13 +270,14 @@ export const LAYERS: readonly LayerDefinition[] = [
   },
   {
     id: "change-delta",
+    demoOnly: true,
     label: "Δ покрытия A → B",
     group: "compare",
-    capability: "change_tracking",
+    capability: "coverage_estimation",
     hasDemo: false,
     modes: ["timeline"],
     legend: "delta-ramp",
-    plannedReason: "Нужна детекция по обеим датам A и B.",
+    plannedReason: "Нужна модель доли покрытия пикселя по обеим датам A и B.",
   },
   {
     id: "forecast-envelopes",
@@ -288,7 +317,7 @@ export const LAYERS: readonly LayerDefinition[] = [
     hasDemo: true,
     modes: ["forecast"],
     legend: "particles",
-    plannedReason: "Нужны поля течений CMEMS GLO-PHY.",
+    plannedReason: "Нужно поле течений SMOC из Open-Meteo Marine.",
     hotkey: "M",
   },
   {
@@ -348,6 +377,8 @@ export const LEGACY_LAYER_ALIASES: Record<LegacyLayerId, LayerId> = {
 export const DEFAULT_VISIBLE_LAYERS: readonly LayerId[] = [
   "analysis-area",
   "field-observations",
+  "debris-probability",
+  "detector-zones",
   "coverage",
   "candidates",
   "hotspots",

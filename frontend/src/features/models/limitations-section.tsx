@@ -1,9 +1,9 @@
 import { LIMITATIONS } from "./copy";
 import { ReportSection } from "./report-section";
 
-export function LimitationsSection() {
+export function LimitationsSection({ index = 5 }: { index?: number }) {
   return (
-    <ReportSection id="limits" index={5}>
+    <ReportSection id="limits" index={index}>
       <ul className="grid grid-cols-12 gap-x-8 border-t border-text-primary">
         {LIMITATIONS.map((item) => (
           <li

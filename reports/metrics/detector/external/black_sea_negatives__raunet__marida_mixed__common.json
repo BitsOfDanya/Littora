@@ -1,0 +1,627 @@
+{
+ "run": "raunet__marida_mixed__common",
+ "labels_sha256": "7ad3a6427c9a9986521939f26bc0fc4350acadc8f7079649923dd2e877aa4734",
+ "collection": "sentinel-2-l2a",
+ "definition": "доля пикселей выше замороженного порога детектора внутри полигонов заведомо не мусора; порог и постобработка не подбирались на этих данных",
+ "by_class": {
+  "aquaculture": {
+   "polygons": 10,
+   "pixels": 140,
+   "area_km2": 0.014,
+   "alarm_pixels": 0,
+   "alarm_share": 0.0,
+   "polygons_with_alarm": 0,
+   "median_max_probability": 8.82355180920058e-07
+  },
+  "cloud": {
+   "polygons": 8,
+   "pixels": 203317,
+   "area_km2": 20.3317,
+   "alarm_pixels": 0,
+   "alarm_share": 0.0,
+   "polygons_with_alarm": 0,
+   "median_max_probability": 0.0
+  },
+  "river_plume": {
+   "polygons": 2,
+   "pixels": 149972,
+   "area_km2": 14.9972,
+   "alarm_pixels": 0,
+   "alarm_share": 0.0,
+   "polygons_with_alarm": 0,
+   "median_max_probability": 0.004837022311903638
+  },
+  "ship": {
+   "polygons": 7,
+   "pixels": 455,
+   "area_km2": 0.0455,
+   "alarm_pixels": 1,
+   "alarm_share": 0.002197802197802198,
+   "polygons_with_alarm": 1,
+   "median_max_probability": 2.4861899873940274e-05
+  },
+  "slick": {
+   "polygons": 5,
+   "pixels": 7772,
+   "area_km2": 0.7772,
+   "alarm_pixels": 0,
+   "alarm_share": 0.0,
+   "polygons_with_alarm": 0,
+   "median_max_probability": 1.178872139462328e-06
+  },
+  "turbid_front": {
+   "polygons": 3,
+   "pixels": 102021,
+   "area_km2": 10.2021,
+   "alarm_pixels": 0,
+   "alarm_share": 0.0,
+   "polygons_with_alarm": 0,
+   "median_max_probability": 5.830463123857044e-06
+  },
+  "water": {
+   "polygons": 10,
+   "pixels": 25050,
+   "area_km2": 2.505,
+   "alarm_pixels": 0,
+   "alarm_share": 0.0,
+   "polygons_with_alarm": 0,
+   "median_max_probability": 2.071150447591208e-05
+  }
+ },
+ "scenes": [
+  {
+   "aoi": "kerch_channel",
+   "run": "raunet__marida_mixed__common",
+   "scene_id": "S2A_36TYR_20260807_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    36.529967,
+    45.292204999999996,
+    36.605651,
+    45.341014
+   ],
+   "threshold": 0.15921302139759064,
+   "tta": true,
+   "pixels": 352830,
+   "detected_pixels": 0,
+   "zones": 0
+  },
+  {
+   "aoi": "kuban_plume",
+   "run": "raunet__marida_mixed__common",
+   "scene_id": "S2C_37TCL_20260825_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    37.31402,
+    45.351157,
+    37.455368,
+    45.413475000000005
+   ],
+   "threshold": 0.15921302139759064,
+   "tta": true,
+   "pixels": 801515,
+   "detected_pixels": 10,
+   "zones": 3
+  },
+  {
+   "aoi": "novorossiysk",
+   "run": "raunet__marida_mixed__common",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    37.799906,
+    44.698026999999996,
+    37.844215000000005,
+    44.722958000000006
+   ],
+   "threshold": 0.15921302139759064,
+   "tta": true,
+   "pixels": 100748,
+   "detected_pixels": 101,
+   "zones": 15
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "run": "raunet__marida_mixed__common",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    37.773759999999996,
+    44.695009999999996,
+    37.885948,
+    44.764653
+   ],
+   "threshold": 0.15921302139759064,
+   "tta": true,
+   "pixels": 708300,
+   "detected_pixels": 350,
+   "zones": 63
+  },
+  {
+   "aoi": "sochi_adler",
+   "run": "raunet__marida_mixed__common",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    39.895030999999996,
+    43.400133,
+    39.934255,
+    43.444988
+   ],
+   "threshold": 0.15921302139759064,
+   "tta": true,
+   "pixels": 162972,
+   "detected_pixels": 0,
+   "zones": 0
+  },
+  {
+   "aoi": "sochi_offshore",
+   "run": "raunet__marida_mixed__common",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "collection": "sentinel-2-l2a",
+   "bbox": [
+    39.737392,
+    43.455301999999996,
+    39.827846,
+    43.518785
+   ],
+   "threshold": 0.15921302139759064,
+   "tta": true,
+   "pixels": 526907,
+   "detected_pixels": 0,
+   "zones": 0
+  }
+ ],
+ "polygons": [
+  {
+   "aoi": "kerch_channel",
+   "scene_id": "S2A_36TYR_20260807_0_L2A",
+   "class": "turbid_front",
+   "pixels": 28920,
+   "alarm_pixels": 0,
+   "max_probability": 2.4043953089858405e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "kerch_channel",
+   "scene_id": "S2A_36TYR_20260807_0_L2A",
+   "class": "turbid_front",
+   "pixels": 46900,
+   "alarm_pixels": 0,
+   "max_probability": 5.830463123857044e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "kerch_channel",
+   "scene_id": "S2A_36TYR_20260807_0_L2A",
+   "class": "turbid_front",
+   "pixels": 26201,
+   "alarm_pixels": 0,
+   "max_probability": 5.418467935669469e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "kerch_channel",
+   "scene_id": "S2A_36TYR_20260807_0_L2A",
+   "class": "water",
+   "pixels": 2025,
+   "alarm_pixels": 0,
+   "max_probability": 2.071150447591208e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "kerch_channel",
+   "scene_id": "S2A_36TYR_20260807_0_L2A",
+   "class": "water",
+   "pixels": 2025,
+   "alarm_pixels": 0,
+   "max_probability": 2.071150447591208e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "kuban_plume",
+   "scene_id": "S2C_37TCL_20260825_0_L2A",
+   "class": "river_plume",
+   "pixels": 145751,
+   "alarm_pixels": 0,
+   "max_probability": 0.009670468047261238,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "kuban_plume",
+   "scene_id": "S2C_37TCL_20260825_0_L2A",
+   "class": "water",
+   "pixels": 2500,
+   "alarm_pixels": 0,
+   "max_probability": 0.001707892632111907,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "kuban_plume",
+   "scene_id": "S2C_37TCL_20260825_0_L2A",
+   "class": "water",
+   "pixels": 2500,
+   "alarm_pixels": 0,
+   "max_probability": 0.001041818642988801,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "ship",
+   "pixels": 90,
+   "alarm_pixels": 0,
+   "max_probability": 0.006028937641531229,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "ship",
+   "pixels": 320,
+   "alarm_pixels": 0,
+   "max_probability": 0.04991994425654411,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "ship",
+   "pixels": 9,
+   "alarm_pixels": 1,
+   "max_probability": 0.7753546237945557,
+   "any_alarm": true,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "ship",
+   "pixels": 9,
+   "alarm_pixels": 0,
+   "max_probability": 1.2113640877942089e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "ship",
+   "pixels": 9,
+   "alarm_pixels": 0,
+   "max_probability": 1.4756265045434702e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "ship",
+   "pixels": 9,
+   "alarm_pixels": 0,
+   "max_probability": 1.9890878320438787e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "ship",
+   "pixels": 9,
+   "alarm_pixels": 0,
+   "max_probability": 2.4861899873940274e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "water",
+   "pixels": 2500,
+   "alarm_pixels": 0,
+   "max_probability": 7.571173773612827e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk",
+   "scene_id": "S2A_37TDK_20250710_0_L2A",
+   "class": "water",
+   "pixels": 2500,
+   "alarm_pixels": 0,
+   "max_probability": 0.00023881002562120557,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "class": "cloud",
+   "pixels": 122751,
+   "alarm_pixels": 0,
+   "max_probability": 1.0142523933609482e-05,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "class": "cloud",
+   "pixels": 25060,
+   "alarm_pixels": 0,
+   "max_probability": 0.0,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "class": "cloud",
+   "pixels": 13143,
+   "alarm_pixels": 0,
+   "max_probability": 0.0,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "class": "cloud",
+   "pixels": 11235,
+   "alarm_pixels": 0,
+   "max_probability": 0.0,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "class": "cloud",
+   "pixels": 11225,
+   "alarm_pixels": 0,
+   "max_probability": 0.0,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "class": "cloud",
+   "pixels": 7466,
+   "alarm_pixels": 0,
+   "max_probability": 0.0,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "class": "cloud",
+   "pixels": 6623,
+   "alarm_pixels": 0,
+   "max_probability": 5.537224296858767e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "novorossiysk_cloud",
+   "scene_id": "S2A_37TDK_20241120_0_L2A",
+   "class": "cloud",
+   "pixels": 5814,
+   "alarm_pixels": 0,
+   "max_probability": 0.0,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_adler",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "river_plume",
+   "pixels": 4221,
+   "alarm_pixels": 0,
+   "max_probability": 3.576576546038268e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_adler",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "water",
+   "pixels": 1600,
+   "alarm_pixels": 0,
+   "max_probability": 9.362640412291512e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_adler",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "water",
+   "pixels": 1600,
+   "alarm_pixels": 0,
+   "max_probability": 9.362640412291512e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 17,
+   "alarm_pixels": 0,
+   "max_probability": 7.724854071966547e-07,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 16,
+   "alarm_pixels": 0,
+   "max_probability": 1.0706851298891706e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 18,
+   "alarm_pixels": 0,
+   "max_probability": 7.54911411604553e-07,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 16,
+   "alarm_pixels": 0,
+   "max_probability": 8.414425565206329e-07,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 16,
+   "alarm_pixels": 0,
+   "max_probability": 1.0937347951767151e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 17,
+   "alarm_pixels": 0,
+   "max_probability": 9.232678053194832e-07,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 4,
+   "alarm_pixels": 0,
+   "max_probability": 4.969811016053427e-07,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 2,
+   "alarm_pixels": 0,
+   "max_probability": 2.603224515951297e-07,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 17,
+   "alarm_pixels": 0,
+   "max_probability": 1.095155198527209e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "aquaculture",
+   "pixels": 17,
+   "alarm_pixels": 0,
+   "max_probability": 1.8433290733810281e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "water",
+   "pixels": 3600,
+   "alarm_pixels": 0,
+   "max_probability": 1.0136975561181316e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "water",
+   "pixels": 4200,
+   "alarm_pixels": 0,
+   "max_probability": 1.0039810831585783e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "slick",
+   "pixels": 1225,
+   "alarm_pixels": 0,
+   "max_probability": 1.0264200227538822e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "slick",
+   "pixels": 1225,
+   "alarm_pixels": 0,
+   "max_probability": 1.178872139462328e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "slick",
+   "pixels": 1718,
+   "alarm_pixels": 0,
+   "max_probability": 1.4056743111723335e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "slick",
+   "pixels": 2025,
+   "alarm_pixels": 0,
+   "max_probability": 1.948378667293582e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  },
+  {
+   "aoi": "sochi_offshore",
+   "scene_id": "S2C_37TEJ_20250608_0_L2A",
+   "class": "slick",
+   "pixels": 1579,
+   "alarm_pixels": 0,
+   "max_probability": 1.0469071867191815e-06,
+   "any_alarm": false,
+   "threshold": 0.15921302139759064
+  }
+ ]
+}

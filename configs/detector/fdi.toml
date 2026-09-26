@@ -1,0 +1,10 @@
+name = "fdi_threshold"
+data = "marida_l2a"
+split = "common"
+seed = 42
+
+[model]
+kind = "fdi"
+
+[labels]
+max_confidence_code = 3

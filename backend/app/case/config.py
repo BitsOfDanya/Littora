@@ -27,6 +27,7 @@ class SelectionRules:
     record_type: str
     category_scopes: tuple[str, ...]
     exclude_flags: tuple[str, ...]
+    reject_on_mismatch: bool = False
 
 
 @dataclass(frozen=True)
@@ -39,6 +40,7 @@ class ConcentrationRules:
 class PairingRules:
     catalog: str
     sentinel2: str
+    sentinel2_fallback: str
     landsat: str
     sentinel2_start: dt.date
     window_days: int
@@ -46,8 +48,8 @@ class PairingRules:
     max_tile_cloud: float
     max_time_shift_hours: float
     unknown_time_max_days: int
-    unknown_time_uncertainty_hours: float
-    point_buffer_m: float
+    daylight_bound: bool
+    unknown_extent_buffer_m: float
     min_strip_width_m: float
     max_footprint_nodata: float
     max_footprint_cloud: float
@@ -120,6 +122,7 @@ def parse_case_config(raw: dict) -> CaseConfig:
             record_type=selection["record_type"],
             category_scopes=tuple(selection["category_scopes"]),
             exclude_flags=tuple(selection.get("exclude_flags", [])),
+            reject_on_mismatch=bool(selection.get("reject_on_mismatch", False)),
         ),
         targets=targets,
         concentration=ConcentrationRules(**raw["concentration"]),

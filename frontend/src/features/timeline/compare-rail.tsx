@@ -18,10 +18,12 @@ import {
   isUsable,
   MOSAIC_YEARS,
   railWindow,
+  reachesNow,
 } from "./compare-model";
 import { SideLetter } from "./compare-pickers";
 import { CompareTracks, EmptyTracks } from "./compare-tracks";
 import { useCompareViewStore } from "./compare-view-store";
+import { liveSeries } from "./live-model";
 import { type CompareActions, useCompareActions, useCompareData } from "./use-compare";
 import { useTogglePlayback } from "./use-playback";
 
@@ -156,15 +158,23 @@ function ControlBlock() {
 }
 
 function Tracks() {
-  const { scenes, histories, pair, isDemo, hasCatalog } = useCompareData();
+  const { scenes, histories, pair, isDemo, hasCatalog, passes, live } = useCompareData();
   const actions = useCompareActions(scenes, pair);
   const selectedId = useWorkspaceStore((state) => state.selectedCandidateId);
   const [now] = useState(() => Date.now());
-  const window = useMemo(() => railWindow(scenes, now), [scenes, now]);
+  const window = useMemo(
+    () => railWindow(scenes, now, 3, isDemo || reachesNow(scenes, now)),
+    [scenes, now, isDemo],
+  );
   const history = histories.find((entry) => entry.candidateId === selectedId);
   const series = useMemo(
-    () => (history ? coverageSeries(history, scenes) : areaSeries(histories, scenes)),
-    [history, histories, scenes],
+    () =>
+      !isDemo
+        ? liveSeries(scenes, passes)
+        : history
+          ? coverageSeries(history, scenes)
+          : areaSeries(histories, scenes),
+    [isDemo, history, histories, scenes, passes],
   );
   const seriesPoints = useMemo(
     () =>
@@ -194,8 +204,17 @@ function Tracks() {
       window={window}
       now={now}
       series={seriesPoints}
-      seriesLabel={history ? `Покрытие ${history.candidateId}, %` : "Площадь по району, км²"}
-      seriesUnit={history ? "%" : "км²"}
+      seriesLabel={
+        !isDemo
+          ? "Площадь зон детектора, м²"
+          : history
+            ? `Покрытие ${history.candidateId}, %`
+            : "Площадь по району, км²"
+      }
+      seriesUnit={!isDemo ? "м²" : history ? "%" : "км²"}
+      seriesEmpty={
+        !isDemo && live.status === "ready" ? "Проанализированных пролётов пока нет" : undefined
+      }
       isDemo={isDemo}
       onPick={actions.setSide}
     />

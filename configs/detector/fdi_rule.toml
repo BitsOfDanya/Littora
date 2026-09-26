@@ -1,0 +1,10 @@
+name = "fdi_rule"
+data = "marida_l2a"
+split = "common"
+seed = 42
+
+[model]
+kind = "fdi_rule"
+
+[labels]
+max_confidence_code = 3

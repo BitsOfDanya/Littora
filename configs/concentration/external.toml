@@ -1,0 +1,21 @@
+seed = 42
+inner_splits = 4
+bootstrap = 2000
+jobs = 4
+report_name = "external"
+features_cache = "data/interim/concentration/external_features.parquet"
+forward_split = "2023-01-01"
+site_radius_km = 0.5
+baselines = ["median", "site_climatology", "idw_k5"]
+models = ["ridge_log", "tweedie_glm", "gp_matern", "random_forest", "catboost"]
+
+[feature_sets]
+spatial = ["spatial"]
+spatial_season = ["spatial", "season"]
+spatial_weather = ["spatial", "weather"]
+season_weather = ["season", "weather"]
+context = ["season", "geography", "weather"]
+all = ["spatial", "season", "geography", "weather"]
+
+[transfer]
+feature_sets = ["season_weather", "context", "all"]

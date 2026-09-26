@@ -1,0 +1,17 @@
+name = "rf_pixel"
+data = "marida_l2a"
+split = "common"
+seed = 42
+
+[features]
+indices = true
+local = true
+
+[labels]
+max_confidence_code = 3
+
+[model]
+kind = "random_forest"
+n_estimators = 400
+min_samples_leaf = 2
+max_features = "sqrt"

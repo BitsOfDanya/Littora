@@ -1,0 +1,2581 @@
+{
+ "type": "FeatureCollection",
+ "name": "littora-ports",
+ "source": "World Port Index, NGA Pub 150 (UpdatedPub150.csv)",
+ "features": [
+  {
+   "type": "Feature",
+   "id": "wpi-28300",
+   "properties": {
+    "id": "wpi-28300",
+    "name": "Выборг",
+    "name_en": "Vyborg",
+    "country": "Russia",
+    "sea": "Финский залив",
+    "harbor_size": "Medium",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUVYG",
+    "wpi": 28300
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.75,
+     60.7167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-28310",
+   "properties": {
+    "id": "wpi-28310",
+    "name": "Высоцк",
+    "name_en": "Gavan Vysotsk",
+    "country": "Russia",
+    "sea": "Финский залив",
+    "harbor_size": "Small",
+    "harbor_type": "Canal or Lake",
+    "unlocode": "RUVYS",
+    "wpi": 28310
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.5667,
+     60.6167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-28360",
+   "properties": {
+    "id": "wpi-28360",
+    "name": "Приморск",
+    "name_en": "Primorsk",
+    "country": "Russia",
+    "sea": "Финский залив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "RUPRI",
+    "wpi": 28360
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.6333,
+     60.3667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-28370",
+   "properties": {
+    "id": "wpi-28370",
+    "name": "Санкт-Петербург",
+    "name_en": "Sankt-Peterburg",
+    "country": "Russia",
+    "sea": "Финский залив",
+    "harbor_size": "Large",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RULED",
+    "wpi": 28370
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.3,
+     59.9333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-28390",
+   "properties": {
+    "id": "wpi-28390",
+    "name": "Ломоносов",
+    "name_en": "Lomonosov",
+    "country": "Russia",
+    "sea": "Финский залив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RULOM",
+    "wpi": 28390
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.7667,
+     59.9167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-28400",
+   "properties": {
+    "id": "wpi-28400",
+    "name": "Кронштадт",
+    "name_en": "Kronshtadt",
+    "country": "Russia",
+    "sea": "Финский залив",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUKDT",
+    "wpi": 28400
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.7833,
+     59.9833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-28410",
+   "properties": {
+    "id": "wpi-28410",
+    "name": "Усть-Луга",
+    "name_en": "Ust Luga",
+    "country": "Russia",
+    "sea": "Финский залив",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUULU",
+    "wpi": 28410
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3167,
+     59.6667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-28680",
+   "properties": {
+    "id": "wpi-28680",
+    "name": "Балтийск",
+    "name_en": "Baltiysk",
+    "country": "Russia",
+    "sea": "Балтийское море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUBLT",
+    "wpi": 28680
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     19.9,
+     54.6333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-28690",
+   "properties": {
+    "id": "wpi-28690",
+    "name": "Калининград",
+    "name_en": "Kaliningrad",
+    "country": "Russia",
+    "sea": "Балтийское море",
+    "harbor_size": "Medium",
+    "harbor_type": "River (Basins)",
+    "unlocode": "RUKGD",
+    "wpi": 28690
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     20.4833,
+     54.7
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43500",
+   "properties": {
+    "id": "wpi-43500",
+    "name": "Бургас",
+    "name_en": "Burgas",
+    "country": "Bulgaria",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "BGBOJ",
+    "wpi": 43500
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.4833,
+     42.4833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43510",
+   "properties": {
+    "id": "wpi-43510",
+    "name": "Варна",
+    "name_en": "Varna",
+    "country": "Bulgaria",
+    "sea": "Чёрное море",
+    "harbor_size": "Large",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "BGVAR",
+    "wpi": 43510
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.9667,
+     43.1833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43550",
+   "properties": {
+    "id": "wpi-43550",
+    "name": "Мангалия",
+    "name_en": "Mangalia",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "ROMAG",
+    "wpi": 43550
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.5833,
+     43.8167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43558",
+   "properties": {
+    "id": "wpi-43558",
+    "name": "Басараби",
+    "name_en": "Basarabi",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "ROBAB",
+    "wpi": 43558
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.4333,
+     44.1667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43560",
+   "properties": {
+    "id": "wpi-43560",
+    "name": "Констанца",
+    "name_en": "Constanta",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Medium",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "ROCND",
+    "wpi": 43560
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.65,
+     44.1667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43562",
+   "properties": {
+    "id": "wpi-43562",
+    "name": "Меджидия",
+    "name_en": "Medgidia",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Canal or Lake",
+    "unlocode": "ROMED",
+    "wpi": 43562
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.2667,
+     44.25
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43565",
+   "properties": {
+    "id": "wpi-43565",
+    "name": "Канал Дунай — Чёрное море",
+    "name_en": "Danube-Black Sea Canal",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Medium",
+    "harbor_type": "Canal or Lake",
+    "unlocode": null,
+    "wpi": 43565
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.1833,
+     44.2667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43566",
+   "properties": {
+    "id": "wpi-43566",
+    "name": "Чернаводэ",
+    "name_en": "Cernavoda",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "ROCEV",
+    "wpi": 43566
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.05,
+     44.3333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43568",
+   "properties": {
+    "id": "wpi-43568",
+    "name": "Мидия",
+    "name_en": "Midia",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "ROMID",
+    "wpi": 43568
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.6667,
+     44.35
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43570",
+   "properties": {
+    "id": "wpi-43570",
+    "name": "Сулина",
+    "name_en": "Sulina",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "ROSUL",
+    "wpi": 43570
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.6667,
+     45.1667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43572",
+   "properties": {
+    "id": "wpi-43572",
+    "name": "Тулча",
+    "name_en": "Tulcea",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "ROTCE",
+    "wpi": 43572
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.8167,
+     45.1667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43590",
+   "properties": {
+    "id": "wpi-43590",
+    "name": "Брэила",
+    "name_en": "Braila",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "ROBRA",
+    "wpi": 43590
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     27.9833,
+     45.25
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43600",
+   "properties": {
+    "id": "wpi-43600",
+    "name": "Галац",
+    "name_en": "Galati",
+    "country": "Romania",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "ROGAL",
+    "wpi": 43600
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.0833,
+     45.4167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43625",
+   "properties": {
+    "id": "wpi-43625",
+    "name": "Измаил",
+    "name_en": "Izmayil",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "UAIZM",
+    "wpi": 43625
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.85,
+     45.3333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43645",
+   "properties": {
+    "id": "wpi-43645",
+    "name": "Черноморск",
+    "name_en": "Illichivsk",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Large",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "UAILK",
+    "wpi": 43645
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.65,
+     46.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43650",
+   "properties": {
+    "id": "wpi-43650",
+    "name": "Одесса",
+    "name_en": "Odesa",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Large",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "UAODS",
+    "wpi": 43650
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.7333,
+     46.4833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43655",
+   "properties": {
+    "id": "wpi-43655",
+    "name": "Южный",
+    "name_en": "Yuzhnyy",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "River (Basins)",
+    "unlocode": "UAYZE",
+    "wpi": 43655
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.0167,
+     46.6
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43670",
+   "properties": {
+    "id": "wpi-43670",
+    "name": "Николаев",
+    "name_en": "Mykolayiv",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "River (Basins)",
+    "unlocode": "UANLV",
+    "wpi": 43670
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.9833,
+     46.95
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43673",
+   "properties": {
+    "id": "wpi-43673",
+    "name": "Октябрьск",
+    "name_en": "Port Oktyabrsk",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "UAOCT",
+    "wpi": 43673
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.9333,
+     46.8333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43677",
+   "properties": {
+    "id": "wpi-43677",
+    "name": "Днепро-Бугский порт",
+    "name_en": "Dnipro-Buzkyy",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": null,
+    "wpi": 43677
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.8833,
+     46.7333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43680",
+   "properties": {
+    "id": "wpi-43680",
+    "name": "Херсон",
+    "name_en": "Kherson",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "UAKHE",
+    "wpi": 43680
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.6,
+     46.6167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43700",
+   "properties": {
+    "id": "wpi-43700",
+    "name": "Белгород-Днестровский",
+    "name_en": "Belgorod-Dnestrovsky",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "UABGD",
+    "wpi": 43700
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     30.3764,
+     46.1819
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43710",
+   "properties": {
+    "id": "wpi-43710",
+    "name": "Скадовск",
+    "name_en": "Skadovs'k",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "UASKD",
+    "wpi": 43710
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.9167,
+     46.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43720",
+   "properties": {
+    "id": "wpi-43720",
+    "name": "Хорлы",
+    "name_en": "Khorly",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 43720
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.2833,
+     46.0833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43745",
+   "properties": {
+    "id": "wpi-43745",
+    "name": "Черноморское",
+    "name_en": "Chornomors Ke",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "UAILK",
+    "wpi": 43745
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.7,
+     45.5167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43747",
+   "properties": {
+    "id": "wpi-43747",
+    "name": "Усть-Дунайск",
+    "name_en": "Ust-Dunaisk",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "UAUDY",
+    "wpi": 43747
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     29.7,
+     45.4667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43750",
+   "properties": {
+    "id": "wpi-43750",
+    "name": "Евпатория",
+    "name_en": "Yevpatoriya",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "UAZKA",
+    "wpi": 43750
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.3833,
+     45.2
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43760",
+   "properties": {
+    "id": "wpi-43760",
+    "name": "Севастополь",
+    "name_en": "Sevastopol",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Large",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "UASVP",
+    "wpi": 43760
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.5333,
+     44.6167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43780",
+   "properties": {
+    "id": "wpi-43780",
+    "name": "Балаклава",
+    "name_en": "Balaklava",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 43780
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.6,
+     44.5
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43790",
+   "properties": {
+    "id": "wpi-43790",
+    "name": "Ялта",
+    "name_en": "Yalta",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "UAYAL",
+    "wpi": 43790
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.1667,
+     44.4833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43810",
+   "properties": {
+    "id": "wpi-43810",
+    "name": "Алушта",
+    "name_en": "Alushta",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": null,
+    "wpi": 43810
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.4167,
+     44.6833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43835",
+   "properties": {
+    "id": "wpi-43835",
+    "name": "Судак",
+    "name_en": "Sudak",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 43835
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.9833,
+     44.85
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43850",
+   "properties": {
+    "id": "wpi-43850",
+    "name": "Феодосия",
+    "name_en": "Feodosiya",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "UAFEO",
+    "wpi": 43850
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.4333,
+     45.0167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43900",
+   "properties": {
+    "id": "wpi-43900",
+    "name": "Керчь",
+    "name_en": "Kerch",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "UAKEH",
+    "wpi": 43900
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.4833,
+     45.35
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43925",
+   "properties": {
+    "id": "wpi-43925",
+    "name": "Рени",
+    "name_en": "Reni",
+    "country": "Ukraine",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "UARNI",
+    "wpi": 43925
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     28.3,
+     45.4333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43940",
+   "properties": {
+    "id": "wpi-43940",
+    "name": "Геническ",
+    "name_en": "Henichesk",
+    "country": "Ukraine",
+    "sea": "Азовское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 43940
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.8167,
+     46.1667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-43950",
+   "properties": {
+    "id": "wpi-43950",
+    "name": "Кирилловка",
+    "name_en": "Kyrylivka",
+    "country": "Ukraine",
+    "sea": "Азовское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": null,
+    "wpi": 43950
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.3667,
+     46.35
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44000",
+   "properties": {
+    "id": "wpi-44000",
+    "name": "Бердянск",
+    "name_en": "Berdyansk",
+    "country": "Ukraine",
+    "sea": "Азовское море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "UAERD",
+    "wpi": 44000
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.7833,
+     46.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44010",
+   "properties": {
+    "id": "wpi-44010",
+    "name": "Мариуполь",
+    "name_en": "Mariupol",
+    "country": "Ukraine",
+    "sea": "Азовское море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "UAMPW",
+    "wpi": 44010
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.5667,
+     47.0833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44060",
+   "properties": {
+    "id": "wpi-44060",
+    "name": "Таганрог",
+    "name_en": "Taganrog",
+    "country": "Russia",
+    "sea": "Азовское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUTAG",
+    "wpi": 44060
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     38.95,
+     47.2
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44070",
+   "properties": {
+    "id": "wpi-44070",
+    "name": "Ростов-на-Дону",
+    "name_en": "Rostov-Na-Donu",
+    "country": "Russia",
+    "sea": "Азовское море",
+    "harbor_size": "Small",
+    "harbor_type": "River (Basins)",
+    "unlocode": "RURND",
+    "wpi": 44070
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     39.7167,
+     47.1667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44080",
+   "properties": {
+    "id": "wpi-44080",
+    "name": "Азов",
+    "name_en": "Azov",
+    "country": "Russia",
+    "sea": "Азовское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUAZO",
+    "wpi": 44080
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     39.4333,
+     47.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44090",
+   "properties": {
+    "id": "wpi-44090",
+    "name": "Ейск",
+    "name_en": "Yeysk",
+    "country": "Russia",
+    "sea": "Азовское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUYEY",
+    "wpi": 44090
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     38.2667,
+     46.7333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44140",
+   "properties": {
+    "id": "wpi-44140",
+    "name": "Темрюк",
+    "name_en": "Temryuk",
+    "country": "Russia",
+    "sea": "Азовское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUTMR",
+    "wpi": 44140
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.35,
+     45.35
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44180",
+   "properties": {
+    "id": "wpi-44180",
+    "name": "Анапа",
+    "name_en": "Anapa",
+    "country": "Russia",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "RUAAQ",
+    "wpi": 44180
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.3167,
+     44.8833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44200",
+   "properties": {
+    "id": "wpi-44200",
+    "name": "Новороссийск",
+    "name_en": "Novorossiysk",
+    "country": "Russia",
+    "sea": "Чёрное море",
+    "harbor_size": "Large",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUNVS",
+    "wpi": 44200
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.7833,
+     44.7167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44210",
+   "properties": {
+    "id": "wpi-44210",
+    "name": "Геленджик",
+    "name_en": "Gelendzhik",
+    "country": "Russia",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUGDZ",
+    "wpi": 44210
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     38.0667,
+     44.55
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44230",
+   "properties": {
+    "id": "wpi-44230",
+    "name": "Туапсе",
+    "name_en": "Tuapse",
+    "country": "Russia",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUTUA",
+    "wpi": 44230
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     39.0667,
+     44.1
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44240",
+   "properties": {
+    "id": "wpi-44240",
+    "name": "Сочи",
+    "name_en": "Sochi",
+    "country": "Russia",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUAER",
+    "wpi": 44240
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     39.7333,
+     43.5833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44270",
+   "properties": {
+    "id": "wpi-44270",
+    "name": "Адлер",
+    "name_en": "Adler",
+    "country": "Russia",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": null,
+    "wpi": 44270
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     39.9333,
+     43.4333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44320",
+   "properties": {
+    "id": "wpi-44320",
+    "name": "Сухум",
+    "name_en": "Sokhumi",
+    "country": "Georgia",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "GEABK",
+    "wpi": 44320
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     40.9833,
+     42.9833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44350",
+   "properties": {
+    "id": "wpi-44350",
+    "name": "Батуми",
+    "name_en": "Batumi",
+    "country": "Georgia",
+    "sea": "Чёрное море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "GEBUS",
+    "wpi": 44350
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     41.65,
+     41.65
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44370",
+   "properties": {
+    "id": "wpi-44370",
+    "name": "Хопа",
+    "name_en": "Hopa",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "TRHOP",
+    "wpi": 44370
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     41.4,
+     41.4167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44380",
+   "properties": {
+    "id": "wpi-44380",
+    "name": "Ризе",
+    "name_en": "Rize",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "TRRIZ",
+    "wpi": 44380
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     40.5167,
+     41.0667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44390",
+   "properties": {
+    "id": "wpi-44390",
+    "name": "Трабзон",
+    "name_en": "Trabzon",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "TRTZX",
+    "wpi": 44390
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     39.7667,
+     41.0167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44410",
+   "properties": {
+    "id": "wpi-44410",
+    "name": "Гиресун",
+    "name_en": "Giresun",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "TRGIR",
+    "wpi": 44410
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     38.4,
+     40.9333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44420",
+   "properties": {
+    "id": "wpi-44420",
+    "name": "Орду",
+    "name_en": "Ordu",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "TRORD",
+    "wpi": 44420
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     37.8833,
+     41.0
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44450",
+   "properties": {
+    "id": "wpi-44450",
+    "name": "Самсун",
+    "name_en": "Samsun",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Large",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "TRSSX",
+    "wpi": 44450
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     36.35,
+     41.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44460",
+   "properties": {
+    "id": "wpi-44460",
+    "name": "Синоп",
+    "name_en": "Sinop",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "TRSIC",
+    "wpi": 44460
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     35.1667,
+     42.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44480",
+   "properties": {
+    "id": "wpi-44480",
+    "name": "Инеболу",
+    "name_en": "Inebolu",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "TRINE",
+    "wpi": 44480
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.7667,
+     41.9833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44490",
+   "properties": {
+    "id": "wpi-44490",
+    "name": "Зонгулдак",
+    "name_en": "Zonguldak",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "TRZON",
+    "wpi": 44490
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.8167,
+     41.4667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-44500",
+   "properties": {
+    "id": "wpi-44500",
+    "name": "Эрегли",
+    "name_en": "Eregli",
+    "country": "Turkey",
+    "sea": "Чёрное море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "TRERE",
+    "wpi": 44500
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     31.45,
+     41.3
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60540",
+   "properties": {
+    "id": "wpi-60540",
+    "name": "Посьет",
+    "name_en": "Pos'yet",
+    "country": "Russia",
+    "sea": "Японское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUPSE",
+    "wpi": 60540
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     130.8,
+     42.65
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60582",
+   "properties": {
+    "id": "wpi-60582",
+    "name": "Зарубино",
+    "name_en": "Zarubino",
+    "country": "Russia",
+    "sea": "Японское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUZAR",
+    "wpi": 60582
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     131.0833,
+     42.6333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60610",
+   "properties": {
+    "id": "wpi-60610",
+    "name": "Владивосток",
+    "name_en": "Vladivostok",
+    "country": "Russia",
+    "sea": "Японское море",
+    "harbor_size": "Large",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUVVO",
+    "wpi": 60610
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     131.8883,
+     43.1089
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60670",
+   "properties": {
+    "id": "wpi-60670",
+    "name": "Суходол",
+    "name_en": "Sukhodol",
+    "country": "Russia",
+    "sea": "Японское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": null,
+    "wpi": 60670
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     132.3183,
+     43.2283
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60720",
+   "properties": {
+    "id": "wpi-60720",
+    "name": "Бухта Гайдамак",
+    "name_en": "Bukhta Gaydamak",
+    "country": "Russia",
+    "sea": "Японское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 60720
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     132.6833,
+     42.8667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60725",
+   "properties": {
+    "id": "wpi-60725",
+    "name": "Восточный",
+    "name_en": "Vostochnyy",
+    "country": "Russia",
+    "sea": "Японское море",
+    "harbor_size": "Medium",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUVYP",
+    "wpi": 60725
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     133.0833,
+     42.75
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60730",
+   "properties": {
+    "id": "wpi-60730",
+    "name": "Находка",
+    "name_en": "Nakhodka",
+    "country": "Russia",
+    "sea": "Японское море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUNJK",
+    "wpi": 60730
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     132.8833,
+     42.8
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60795",
+   "properties": {
+    "id": "wpi-60795",
+    "name": "Советская Гавань",
+    "name_en": "Sovetskaya Gavan",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUSOG",
+    "wpi": 60795
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     140.2681,
+     48.9736
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60800",
+   "properties": {
+    "id": "wpi-60800",
+    "name": "Ванино",
+    "name_en": "Bukhta Vanino",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUVNN",
+    "wpi": 60800
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     140.2833,
+     49.0833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60810",
+   "properties": {
+    "id": "wpi-60810",
+    "name": "Де-Кастри",
+    "name_en": "De Kastri",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Medium",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUDKA",
+    "wpi": 60810
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     140.7833,
+     51.4667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60820",
+   "properties": {
+    "id": "wpi-60820",
+    "name": "Николаевск-на-Амуре",
+    "name_en": "Nikolayevsk Na Amur",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUNIA",
+    "wpi": 60820
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     140.7333,
+     53.1333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60860",
+   "properties": {
+    "id": "wpi-60860",
+    "name": "Оха",
+    "name_en": "Okha",
+    "country": "Russia",
+    "sea": "Охотское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUOKA",
+    "wpi": 60860
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     143.0,
+     53.55
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60880",
+   "properties": {
+    "id": "wpi-60880",
+    "name": "Поронайск",
+    "name_en": "Poronaysk",
+    "country": "Russia",
+    "sea": "Охотское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "RUPRN",
+    "wpi": 60880
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     143.1333,
+     49.2167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60920",
+   "properties": {
+    "id": "wpi-60920",
+    "name": "Корсаков",
+    "name_en": "Korsakov",
+    "country": "Russia",
+    "sea": "Охотское море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUKOR",
+    "wpi": 60920
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     142.7667,
+     46.6167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60930",
+   "properties": {
+    "id": "wpi-60930",
+    "name": "Невельск",
+    "name_en": "Nevelsk",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUNEV",
+    "wpi": 60930
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     141.8667,
+     46.6667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60940",
+   "properties": {
+    "id": "wpi-60940",
+    "name": "Холмск",
+    "name_en": "Kholmsk",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RUKHO",
+    "wpi": 60940
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     142.05,
+     47.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60980",
+   "properties": {
+    "id": "wpi-60980",
+    "name": "Углегорск",
+    "name_en": "Uglegorsk",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "RUUGL",
+    "wpi": 60980
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     142.0333,
+     49.0833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60981",
+   "properties": {
+    "id": "wpi-60981",
+    "name": "Шахтёрск",
+    "name_en": "Shakhtersk",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUSHA",
+    "wpi": 60981
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     142.0667,
+     49.1667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-60990",
+   "properties": {
+    "id": "wpi-60990",
+    "name": "Лесогорск",
+    "name_en": "Lesogorsk",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "RULES",
+    "wpi": 60990
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     142.1333,
+     49.45
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-61020",
+   "properties": {
+    "id": "wpi-61020",
+    "name": "Мыс Рогатый (Октябрьский)",
+    "name_en": "Mys Rogatyy Oktyabrskiy",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "RUOKT",
+    "wpi": 61020
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     142.1,
+     50.7333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-61040",
+   "properties": {
+    "id": "wpi-61040",
+    "name": "Александровск-Сахалинский",
+    "name_en": "Aleksandrovsk -Sakhalinskiy",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Small",
+    "harbor_type": "Open Roadstead",
+    "unlocode": "RUSAK",
+    "wpi": 61040
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     142.1333,
+     50.9
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-61045",
+   "properties": {
+    "id": "wpi-61045",
+    "name": "Лазарев",
+    "name_en": "Lazarev",
+    "country": "Russia",
+    "sea": "Татарский пролив",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Breakwater)",
+    "unlocode": "RULAZ",
+    "wpi": 61045
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     141.5167,
+     52.2167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-61060",
+   "properties": {
+    "id": "wpi-61060",
+    "name": "Москальво",
+    "name_en": "Moskal Vo",
+    "country": "Russia",
+    "sea": "Охотское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUMVO",
+    "wpi": 61060
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     142.5,
+     53.5833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-61090",
+   "properties": {
+    "id": "wpi-61090",
+    "name": "Шикотан",
+    "name_en": "Shakotan",
+    "country": "Russia",
+    "sea": "Тихий океан",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 61090
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     146.8333,
+     43.8667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62535",
+   "properties": {
+    "id": "wpi-62535",
+    "name": "Славянка",
+    "name_en": "Slavyanka",
+    "country": "Russia",
+    "sea": "Японское море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUSKA",
+    "wpi": 62535
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     131.3833,
+     42.8667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62540",
+   "properties": {
+    "id": "wpi-62540",
+    "name": "Охотск",
+    "name_en": "Okhotsk Iy Reyd",
+    "country": "Russia",
+    "sea": "Охотское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUOHO",
+    "wpi": 62540
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     143.2,
+     59.3667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62550",
+   "properties": {
+    "id": "wpi-62550",
+    "name": "Магадан, бухта Нагаева",
+    "name_en": "Bukhta Nagayeva (Magadan)",
+    "country": "Russia",
+    "sea": "Охотское море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUMAG",
+    "wpi": 62550
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     150.7167,
+     59.5667
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62600",
+   "properties": {
+    "id": "wpi-62600",
+    "name": "Петропавловск-Камчатский",
+    "name_en": "Petropavlovsk",
+    "country": "Russia",
+    "sea": "Тихий океан",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUPKC",
+    "wpi": 62600
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     158.65,
+     53.05
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62630",
+   "properties": {
+    "id": "wpi-62630",
+    "name": "Никольское",
+    "name_en": "Nikol Skoye",
+    "country": "Russia",
+    "sea": "Тихий океан",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 62630
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     165.9833,
+     55.2
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62635",
+   "properties": {
+    "id": "wpi-62635",
+    "name": "Беринговский",
+    "name_en": "Port Beringovsky",
+    "country": "Russia",
+    "sea": "Анадырский залив",
+    "harbor_size": null,
+    "harbor_type": null,
+    "unlocode": "RUBER",
+    "wpi": 62635
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     179.3675,
+     63.0631
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62640",
+   "properties": {
+    "id": "wpi-62640",
+    "name": "Провидения",
+    "name_en": "Provideniya",
+    "country": "Russia",
+    "sea": "Анадырский залив",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUPVS",
+    "wpi": 62640
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -173.2275,
+     64.4211
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62670",
+   "properties": {
+    "id": "wpi-62670",
+    "name": "Тикси",
+    "name_en": "Tiksi",
+    "country": "Russia",
+    "sea": "море Лаптевых",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUIKS",
+    "wpi": 62670
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     128.8906,
+     71.6444
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62680",
+   "properties": {
+    "id": "wpi-62680",
+    "name": "Певек",
+    "name_en": "Pevek",
+    "country": "Russia",
+    "sea": "Восточно-Сибирское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUPWE",
+    "wpi": 62680
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     170.3,
+     69.7167
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62695",
+   "properties": {
+    "id": "wpi-62695",
+    "name": "Диксон",
+    "name_en": "Port Dikson",
+    "country": "Russia",
+    "sea": "Карское море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUDKS",
+    "wpi": 62695
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     80.5061,
+     73.5064
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62720",
+   "properties": {
+    "id": "wpi-62720",
+    "name": "Дудинка",
+    "name_en": "Dudinka",
+    "country": "Russia",
+    "sea": "Карское море",
+    "harbor_size": "Medium",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUDUD",
+    "wpi": 62720
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.1667,
+     69.4
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62730",
+   "properties": {
+    "id": "wpi-62730",
+    "name": "Игарка",
+    "name_en": "Igarka",
+    "country": "Russia",
+    "sea": "Карское море",
+    "harbor_size": "Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUIAA",
+    "wpi": 62730
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     86.5889,
+     67.4583
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62775",
+   "properties": {
+    "id": "wpi-62775",
+    "name": "Мезень",
+    "name_en": "Mezen",
+    "country": "Russia",
+    "sea": "Белое море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUMEZ",
+    "wpi": 62775
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     44.1833,
+     65.8333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62800",
+   "properties": {
+    "id": "wpi-62800",
+    "name": "Архангельск",
+    "name_en": "Arkhangels'k",
+    "country": "Russia",
+    "sea": "Белое море",
+    "harbor_size": "Medium",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUARH",
+    "wpi": 62800
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     40.5217,
+     64.5297
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62810",
+   "properties": {
+    "id": "wpi-62810",
+    "name": "Северодвинск",
+    "name_en": "Severodvinsk",
+    "country": "Russia",
+    "sea": "Белое море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUSEW",
+    "wpi": 62810
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     39.7731,
+     64.5772
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62840",
+   "properties": {
+    "id": "wpi-62840",
+    "name": "Рабочеостровск",
+    "name_en": "Rabocheostrovsk",
+    "country": "Russia",
+    "sea": "Белое море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 62840
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.7953,
+     64.9917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62890",
+   "properties": {
+    "id": "wpi-62890",
+    "name": "Кандалакша",
+    "name_en": "Kandalaksha",
+    "country": "Russia",
+    "sea": "Белое море",
+    "harbor_size": "Very Small",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUKAN",
+    "wpi": 62890
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.4167,
+     67.1333
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62894",
+   "properties": {
+    "id": "wpi-62894",
+    "name": "Витино",
+    "name_en": "Vitino",
+    "country": "Russia",
+    "sea": "Белое море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUVIT",
+    "wpi": 62894
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     32.3167,
+     67.0833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62900",
+   "properties": {
+    "id": "wpi-62900",
+    "name": "Большая Пирья Губа",
+    "name_en": "Bolshaya Piryu Guba",
+    "country": "Russia",
+    "sea": "Белое море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 62900
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     34.3614,
+     66.6731
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62910",
+   "properties": {
+    "id": "wpi-62910",
+    "name": "Островной (Гремиха)",
+    "name_en": "Ostrovnoy Gremikha",
+    "country": "Russia",
+    "sea": "Баренцево море",
+    "harbor_size": "Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": "RUGRH",
+    "wpi": 62910
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     39.5256,
+     68.0583
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62950",
+   "properties": {
+    "id": "wpi-62950",
+    "name": "Мурманск",
+    "name_en": "Murmansk",
+    "country": "Russia",
+    "sea": "Баренцево море",
+    "harbor_size": "Large",
+    "harbor_type": "River (Natural)",
+    "unlocode": "RUMMK",
+    "wpi": 62950
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.05,
+     68.9833
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "wpi-62970",
+   "properties": {
+    "id": "wpi-62970",
+    "name": "Мыс Абрам",
+    "name_en": "Mys Abram",
+    "country": "Russia",
+    "sea": "Баренцево море",
+    "harbor_size": "Very Small",
+    "harbor_type": "Coastal (Natural)",
+    "unlocode": null,
+    "wpi": 62970
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     33.0333,
+     68.9833
+    ]
+   }
+  }
+ ]
+}

@@ -5,16 +5,21 @@ import {
   areaSeries,
   compassPoint,
   coverageSeries,
+  defaultPairIds,
   deltaKindOf,
   displacementBetween,
   intervalOf,
   nearestUsablePair,
   nextDividerPosition,
   objectDynamics,
+  railWindow,
+  reachesNow,
   resolvePair,
   sideTotals,
   stepIndex,
 } from "./compare-model";
+
+const DAY = 86_400_000;
 
 function scene(day: number, usability: SceneUsability, cloudCover = 0.1): SceneSummary {
   const date = `2026-09-${String(day).padStart(2, "0")}T16:05:00Z`;
@@ -178,5 +183,43 @@ describe("divider keys", () => {
     expect(nextDividerPosition(0.1, "decrease", true)).toBe(0);
     expect(nextDividerPosition(0.3, "end")).toBe(1);
     expect(nextDividerPosition(0.3, "start")).toBe(0);
+  });
+});
+
+describe("rail window", () => {
+  const passes = [scene(2, "usable"), scene(12, "usable")];
+  const first = Date.parse(passes[0].acquiredAt);
+  const last = Date.parse(passes[1].acquiredAt);
+
+  it("stretches to now for recent passes", () => {
+    const now = last + 5 * DAY;
+    expect(reachesNow(passes, now)).toBe(true);
+    expect(railWindow(passes, now).end).toBe(now + 3 * DAY);
+  });
+
+  it("stays on the period when the passes are long past", () => {
+    const now = last + 400 * DAY;
+    expect(reachesNow(passes, now)).toBe(false);
+    expect(railWindow(passes, now, 3, false)).toEqual({
+      start: first - 3 * DAY,
+      end: last + 3 * DAY,
+    });
+  });
+});
+
+describe("default pair", () => {
+  it("takes the last two usable passes without analyses", () => {
+    expect(defaultPairIds(SCENES)).toEqual({ beforeSceneId: "S16", afterSceneId: "S26" });
+  });
+
+  it("prefers the last two passes with comparable detections", () => {
+    expect(defaultPairIds(SCENES, new Set(["S1", "S6", "S21"]))).toEqual({
+      beforeSceneId: "S6",
+      afterSceneId: "S21",
+    });
+    expect(defaultPairIds(SCENES, new Set(["S6"]))).toEqual({
+      beforeSceneId: "S16",
+      afterSceneId: "S26",
+    });
   });
 });

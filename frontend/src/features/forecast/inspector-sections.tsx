@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import type { DriftScenario } from "@/data/drift";
 import type { BeachSegmentRisk, DriftForecastDetail, ForecastRun } from "@/data/forecast";
 import type { ForecastHorizonH } from "@/domain/forecast";
 import { Readout, ReadoutGrid } from "@/features/inspector/parts/readout-grid";
@@ -19,6 +20,7 @@ import {
   type Reliability,
   RELIABILITY_WORD,
   shiftIso,
+  UNRATED_RELIABILITY,
 } from "./drift-math";
 import {
   formatAxes,
@@ -28,6 +30,8 @@ import {
   formatKm2,
   formatProbability,
   formatWindow,
+  SCENARIO_NOTE,
+  upperFirst,
 } from "./forecast-copy";
 import { type HorizonRow, horizonRows } from "./forecast-model";
 
@@ -141,7 +145,7 @@ export function PositionSection({
       <p className="text-[11px] leading-4 text-text-tertiary">
         {isDemo
           ? "Источник: фикстура demo/forecast · поле течений синтетическое · модель дрейфа не подключена"
-          : `Источник: прогон ${formatUtcDateTime(run.runAt)} · ${run.model}`}
+          : `${upperFirst(SCENARIO_NOTE)} · прогон ${formatUtcDateTime(run.runAt)} · ${run.model}`}
       </p>
     </PanelSection>
   );
@@ -152,10 +156,12 @@ const TABLE_HEAD = ["Гор.", "Смещение", "Курс", "Облако, к
 export function HorizonsSection({
   forecast,
   horizonH,
+  isDemo,
   onChoose,
 }: {
   forecast: DriftForecastDetail;
   horizonH: ForecastHorizonH;
+  isDemo: boolean;
   onChoose: (horizonH: ForecastHorizonH) => void;
 }) {
   const rows = horizonRows(forecast);
@@ -222,10 +228,16 @@ export function HorizonsSection({
                 </td>
                 <td className="pr-1.5 text-right">{formatProbability(row.beachedShare)}</td>
                 <td className="font-sans">
-                  <span className="inline-flex items-center gap-1.5 text-text-secondary">
-                    <ReliabilityBars reliability={row.reliability} />
-                    {row.reliability === "low" ? "низкая" : RELIABILITY_WORD[row.reliability]}
-                  </span>
+                  {isDemo ? (
+                    <span className="inline-flex items-center gap-1.5 text-text-secondary">
+                      <ReliabilityBars reliability={row.reliability} />
+                      {row.reliability === "low" ? "низкая" : RELIABILITY_WORD[row.reliability]}
+                    </span>
+                  ) : (
+                    <span className="text-text-tertiary" title={upperFirst(UNRATED_RELIABILITY)}>
+                      —
+                    </span>
+                  )}
                 </td>
               </tr>
             );
@@ -233,8 +245,12 @@ export function HorizonsSection({
         </tbody>
       </table>
       <p className="text-[11px] leading-4 text-text-tertiary">
-        Смещение и курс — медианы от центра пятна на T₀; облако — эллипс 90{NNBSP}% ансамбля; выброс
-        — доля траекторий, достигших берега к этому сроку. Низкая надёжность — только ориентир.
+        Смещение и курс — медианы от центра {isDemo ? "пятна" : "зоны"} на T₀;{" "}
+        {isDemo
+          ? `облако — эллипс 90${NNBSP}% ансамбля`
+          : `облако — область 90${NNBSP}%, разброс подобран по трекам дрифтеров и предметов мусора; за пределами области данных оно помечено`}
+        ; выброс — доля траекторий, достигших берега к этому сроку.{" "}
+        {isDemo ? "Низкая надёжность — только ориентир." : `${upperFirst(UNRATED_RELIABILITY)}.`}
       </p>
     </PanelSection>
   );
@@ -302,7 +318,14 @@ export function BeachingSection({
   );
 }
 
-export function SourceSection({ forecast }: { forecast: DriftForecastDetail }) {
+export function SourceSection({
+  forecast,
+  isDemo,
+}: {
+  forecast: DriftForecastDetail;
+  isDemo: boolean;
+}) {
+  const hindcastH = forecast.hindcastPath.length - 1;
   return (
     <PanelSection
       id={SECTION_IDS.source}
@@ -310,53 +333,104 @@ export function SourceSection({ forecast }: { forecast: DriftForecastDetail }) {
       title="Вероятный источник"
       aside={
         <span className="font-mono text-[11px] text-text-tertiary">
-          обратный дрейф {horizonLabel(-(forecast.hindcastPath.length - 1))}
+          обратный дрейф {horizonLabel(-hindcastH)}
         </span>
       }
     >
-      <ol className="flex flex-col">
-        {forecast.sources.map((source) => (
-          <li
-            key={source.id}
-            className={cn(
-              "flex min-h-7 items-center gap-3 border-b border-line-hairline last:border-b-0",
-              !source.position && "text-text-secondary",
-            )}
-          >
-            <span className="min-w-0 flex-1 text-[13px] leading-4">{source.name}</span>
-            <span aria-hidden className="h-1.5 w-16 bg-surface-sunken">
-              <span
-                className="block h-full bg-text-secondary"
-                style={{ width: `${Math.round(source.probability.value * 100)}%` }}
-              />
-            </span>
-            <span className="w-28 text-right font-mono text-[12px] whitespace-nowrap">
-              {formatEstimate(source.probability)}
-            </span>
-          </li>
-        ))}
-      </ol>
-      <p className="text-[11px] leading-4 text-text-tertiary">
-        Доля обратных траекторий, пришедших к устью (радиус 5{NNBSP}км) за 48{NNBSP}ч. Это не
-        установление виновника, а подсказка для проверки.
-      </p>
+      {forecast.sources.length ? (
+        <ol className="flex flex-col">
+          {forecast.sources.map((source) => (
+            <li
+              key={source.id}
+              className={cn(
+                "flex min-h-7 items-center gap-3 border-b border-line-hairline last:border-b-0",
+                !source.position && "text-text-secondary",
+              )}
+            >
+              <span className="min-w-0 flex-1 text-[13px] leading-4">{source.name}</span>
+              <span aria-hidden className="h-1.5 w-16 bg-surface-sunken">
+                <span
+                  className="block h-full bg-text-secondary"
+                  style={{ width: `${Math.round(source.probability.value * 100)}%` }}
+                />
+              </span>
+              <span className="w-28 text-right font-mono text-[12px] whitespace-nowrap">
+                {formatEstimate(source.probability)}
+              </span>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p className="text-[12px] text-text-secondary">
+          Источник не определён за {hindcastH}
+          {NNBSP}ч обратного дрейфа.
+        </p>
+      )}
+      {isDemo ? (
+        <p className="text-[11px] leading-4 text-text-tertiary">
+          Доля обратных траекторий, пришедших к устью (радиус 5{NNBSP}км) за {hindcastH}
+          {NNBSP}ч. Это не установление виновника, а подсказка для проверки.
+        </p>
+      ) : (
+        <p className="text-[11px] leading-4 text-text-tertiary">
+          Доля обратных траекторий, вошедших в район порта или устья за {hindcastH}
+          {NNBSP}ч; район, где зона уже находится на T₀, источником не считается. Это не
+          установление виновника, а подсказка для проверки.
+        </p>
+      )}
     </PanelSection>
   );
 }
 
-export function ConditionsSection({ run, isDemo }: { run: ForecastRun; isDemo: boolean }) {
-  const rows: readonly [string, string][] = [
+function windageText(ratios: readonly number[]): string {
+  const percents = ratios.map((ratio) => {
+    const value = Math.round(ratio * 1_000) / 10;
+    return formatNumber(value, Number.isInteger(value) ? 0 : 1);
+  });
+  return `${percents.join(" · ")}${NNBSP}% — варианты ансамбля`;
+}
+
+function conditionRows(run: ForecastRun, scenario: DriftScenario | null): [string, string][] {
+  if (!scenario)
+    return [
+      ["Течения", run.currents],
+      ["Ветер", run.wind],
+      ["Парусность", `${formatNumber(run.windageRatio * 100)}${NNBSP}%`],
+      ["Ансамбль", `${formatNumber(run.ensembleSize)} частиц`],
+      ["Модель", run.model],
+    ];
+  return [
     ["Течения", run.currents],
     ["Ветер", run.wind],
-    ["Парусность", `${formatNumber(run.windageRatio * 100)}${NNBSP}%`],
-    ["Ансамбль", `${formatNumber(run.ensembleSize)} частиц`],
+    ["Волны", scenario.waves ?? "нет данных о волнах — стоксов дрейф не учтён"],
+    [
+      "Парусность",
+      windageText(scenario.windageRatios.length ? scenario.windageRatios : [run.windageRatio]),
+    ],
+    ["Ансамбль", `${formatNumber(run.ensembleSize)} частиц на зону`],
     ["Модель", run.model],
   ];
+}
+
+export function ConditionsSection({
+  run,
+  isDemo,
+  scenario,
+}: {
+  run: ForecastRun;
+  isDemo: boolean;
+  scenario: DriftScenario | null;
+}) {
+  const rows = conditionRows(run, scenario);
   return (
     <PanelSection id={SECTION_IDS.conditions} index="05" title="Условия расчёта">
       <KeyValueList>
         {rows.map(([label, value]) => (
-          <KeyValue key={label} label={label} tag={<PlannedTag capability="drift_forecast" />}>
+          <KeyValue
+            key={label}
+            label={label}
+            tag={scenario ? undefined : <PlannedTag capability="drift_forecast" />}
+          >
             {value}
           </KeyValue>
         ))}
@@ -367,6 +441,26 @@ export function ConditionsSection({ run, isDemo }: { run: ForecastRun; isDemo: b
           {NNBSP}м/с с {formatNumber(run.windFromDeg)}° — не расчёт {run.model}. Поле течений и
           частицы — синтетические, для макета.
         </p>
+      ) : null}
+      {scenario ? (
+        <div className="flex flex-col gap-1 text-[11px] leading-4 text-text-tertiary">
+          <p>
+            <span className="font-medium text-text-secondary">{upperFirst(SCENARIO_NOTE)}.</span>{" "}
+            {upperFirst(scenario.reason)}.
+          </p>
+          <p>
+            Ветер у зон в среднем за T₀…+{scenario.hours}
+            {NNBSP}ч: {formatNumber(run.windSpeedMs, 1)}
+            {NNBSP}м/с с {formatNumber(run.windFromDeg)}°.
+          </p>
+          {scenario.messages.length ? (
+            <ul className="flex list-disc flex-col gap-0.5 pl-4">
+              {scenario.messages.map((message) => (
+                <li key={message}>{upperFirst(message)}</li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
       ) : null}
     </PanelSection>
   );

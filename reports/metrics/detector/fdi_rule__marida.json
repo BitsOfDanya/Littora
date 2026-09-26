@@ -1,0 +1,526 @@
+{
+ "name": "fdi_rule__marida",
+ "config": {
+  "name": "fdi_rule",
+  "data": "marida",
+  "split": "official",
+  "seed": 42,
+  "model": {
+   "kind": "fdi_rule"
+  },
+  "labels": {
+   "min_confidence": 3
+  }
+ },
+ "config_file": "configs/detector/fdi_rule.toml",
+ "config_sha256": "a69479fbd1f02a0782b2f6550b04fd901052cb061ace908f6d80dc0a0de73015",
+ "data": "marida",
+ "threshold": 0.7707959413528442,
+ "threshold_source": "val_max_f1",
+ "val": {
+  "threshold": 0.7707959413528442,
+  "pixels": 213102,
+  "positives": 1075,
+  "tp": 312,
+  "fp": 956,
+  "fn": 763,
+  "tn": 211071,
+  "precision": 0.24605678233438485,
+  "recall": 0.29023255813953486,
+  "f1": 0.2663252240717029,
+  "iou": 0.1536189069423929,
+  "pr_auc": 0.057043389353124,
+  "false_positives_by_class": {
+   "sediment_laden_water": {
+    "pixels": 125565,
+    "false_positives": 724,
+    "false_positive_rate": 0.0033974340925941567
+   },
+   "turbid_water": {
+    "pixels": 38566,
+    "false_positives": 90,
+    "false_positive_rate": 0.0004223329673114283
+   },
+   "ship": {
+    "pixels": 1340,
+    "false_positives": 68,
+    "false_positive_rate": 0.0003190960197464125
+   },
+   "natural_organic_material": {
+    "pixels": 92,
+    "false_positives": 26,
+    "false_positive_rate": 0.00012200730166774596
+   },
+   "sparse_sargassum": {
+    "pixels": 385,
+    "false_positives": 25,
+    "false_positive_rate": 0.00011731471314206342
+   },
+   "wakes": {
+    "pixels": 1946,
+    "false_positives": 12,
+    "false_positive_rate": 5.6311062308190444e-05
+   },
+   "mixed_water": {
+    "pixels": 94,
+    "false_positives": 8,
+    "false_positive_rate": 3.7540708205460296e-05
+   },
+   "foam": {
+    "pixels": 369,
+    "false_positives": 2,
+    "false_positive_rate": 9.385177051365074e-06
+   },
+   "marine_water": {
+    "pixels": 18839,
+    "false_positives": 1,
+    "false_positive_rate": 4.692588525682537e-06
+   },
+   "dense_sargassum": {
+    "pixels": 1167,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "clouds": {
+    "pixels": 19262,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "shallow_water": {
+    "pixels": 1011,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "waves": {
+    "pixels": 987,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "cloud_shadows": {
+    "pixels": 2404,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   }
+  },
+  "by_group": {
+   "11-6-18_16PCC": {
+    "pixels": 29232,
+    "positives": 43,
+    "tp": 1,
+    "fp": 2,
+    "fn": 42,
+    "tn": 29187,
+    "precision": 0.3333333333333333,
+    "recall": 0.023255813953488372,
+    "f1": 0.04347826086956522,
+    "iou": 0.022222222222222223
+   },
+   "12-1-17_16PEC": {
+    "pixels": 7681,
+    "positives": 3,
+    "tp": 0,
+    "fp": 5,
+    "fn": 3,
+    "tn": 7673,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "14-3-20_18QYF": {
+    "pixels": 628,
+    "positives": 231,
+    "tp": 64,
+    "fp": 13,
+    "fn": 167,
+    "tn": 384,
+    "precision": 0.8311688311688312,
+    "recall": 0.27705627705627706,
+    "f1": 0.4155844155844156,
+    "iou": 0.26229508196721313
+   },
+   "18-1-18_48PZC": {
+    "pixels": 4902,
+    "positives": 9,
+    "tp": 0,
+    "fp": 0,
+    "fn": 9,
+    "tn": 4893,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "18-9-20_16PCC": {
+    "pixels": 75662,
+    "positives": 383,
+    "tp": 173,
+    "fp": 172,
+    "fn": 210,
+    "tn": 75107,
+    "precision": 0.5014492753623189,
+    "recall": 0.4516971279373368,
+    "f1": 0.47527472527472525,
+    "iou": 0.3117117117117117
+   },
+   "19-9-18_16PCC": {
+    "pixels": 31610,
+    "positives": 49,
+    "tp": 24,
+    "fp": 25,
+    "fn": 25,
+    "tn": 31536,
+    "precision": 0.4897959183673469,
+    "recall": 0.4897959183673469,
+    "f1": 0.4897959183673469,
+    "iou": 0.32432432432432434
+   },
+   "21-2-18_16PCC": {
+    "pixels": 4279,
+    "positives": 5,
+    "tp": 4,
+    "fp": 252,
+    "fn": 1,
+    "tn": 4022,
+    "precision": 0.015625,
+    "recall": 0.8,
+    "f1": 0.03065134099616858,
+    "iou": 0.01556420233463035
+   },
+   "24-3-20_18QYF": {
+    "pixels": 94,
+    "positives": 0,
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "tn": 93,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "28-9-20_16PDC": {
+    "pixels": 54548,
+    "positives": 0,
+    "tp": 0,
+    "fp": 481,
+    "fn": 0,
+    "tn": 54067,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "29-12-20_18QYF": {
+    "pixels": 1965,
+    "positives": 245,
+    "tp": 41,
+    "fp": 2,
+    "fn": 204,
+    "tn": 1718,
+    "precision": 0.9534883720930233,
+    "recall": 0.1673469387755102,
+    "f1": 0.2847222222222222,
+    "iou": 0.1659919028340081
+   },
+   "29-8-17_51RVQ": {
+    "pixels": 580,
+    "positives": 17,
+    "tp": 0,
+    "fp": 0,
+    "fn": 17,
+    "tn": 563,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "7-3-20_18QYG": {
+    "pixels": 1921,
+    "positives": 90,
+    "tp": 5,
+    "fp": 3,
+    "fn": 85,
+    "tn": 1828,
+    "precision": 0.625,
+    "recall": 0.05555555555555555,
+    "f1": 0.10204081632653061,
+    "iou": 0.053763440860215055
+   }
+  }
+ },
+ "test": {
+  "threshold": 0.7707959413528442,
+  "pixels": 194863,
+  "positives": 381,
+  "tp": 130,
+  "fp": 145,
+  "fn": 251,
+  "tn": 194337,
+  "precision": 0.4727272727272727,
+  "recall": 0.34120734908136485,
+  "f1": 0.39634146341463417,
+  "iou": 0.24714828897338403,
+  "pr_auc": 0.3141946530821795,
+  "false_positives_by_class": {
+   "cloud_shadows": {
+    "pixels": 3649,
+    "false_positives": 44,
+    "false_positive_rate": 0.00022579966437958975
+   },
+   "ship": {
+    "pixels": 1174,
+    "false_positives": 39,
+    "false_positive_rate": 0.00020014061160918183
+   },
+   "sediment_laden_water": {
+    "pixels": 93037,
+    "false_positives": 20,
+    "false_positive_rate": 0.0001026362110816317
+   },
+   "sparse_sargassum": {
+    "pixels": 881,
+    "false_positives": 13,
+    "false_positive_rate": 6.671353720306061e-05
+   },
+   "natural_organic_material": {
+    "pixels": 49,
+    "false_positives": 8,
+    "false_positive_rate": 4.105448443265269e-05
+   },
+   "mixed_water": {
+    "pixels": 92,
+    "false_positives": 6,
+    "false_positive_rate": 3.0790863324489515e-05
+   },
+   "foam": {
+    "pixels": 387,
+    "false_positives": 5,
+    "false_positive_rate": 2.5659052770407926e-05
+   },
+   "wakes": {
+    "pixels": 1570,
+    "false_positives": 5,
+    "false_positive_rate": 2.5659052770407926e-05
+   },
+   "shallow_water": {
+    "pixels": 2506,
+    "false_positives": 3,
+    "false_positive_rate": 1.5395431662244758e-05
+   },
+   "marine_water": {
+    "pixels": 23443,
+    "false_positives": 1,
+    "false_positive_rate": 5.131810554081586e-06
+   },
+   "waves": {
+    "pixels": 1865,
+    "false_positives": 1,
+    "false_positive_rate": 5.131810554081586e-06
+   },
+   "dense_sargassum": {
+    "pixels": 760,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "clouds": {
+    "pixels": 32843,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   },
+   "turbid_water": {
+    "pixels": 32226,
+    "false_positives": 0,
+    "false_positive_rate": 0.0
+   }
+  },
+  "by_group": {
+   "12-12-20_16PCC": {
+    "pixels": 9261,
+    "positives": 27,
+    "tp": 19,
+    "fp": 0,
+    "fn": 8,
+    "tn": 9234,
+    "precision": 1.0,
+    "recall": 0.7037037037037037,
+    "f1": 0.8260869565217391,
+    "iou": 0.7037037037037037
+   },
+   "14-11-18_48PZC": {
+    "pixels": 2263,
+    "positives": 13,
+    "tp": 3,
+    "fp": 0,
+    "fn": 10,
+    "tn": 2250,
+    "precision": 1.0,
+    "recall": 0.23076923076923078,
+    "f1": 0.375,
+    "iou": 0.23076923076923078
+   },
+   "14-9-18_16PCC": {
+    "pixels": 81835,
+    "positives": 19,
+    "tp": 7,
+    "fp": 54,
+    "fn": 12,
+    "tn": 81762,
+    "precision": 0.11475409836065574,
+    "recall": 0.3684210526315789,
+    "f1": 0.175,
+    "iou": 0.0958904109589041
+   },
+   "15-11-20_16PCC": {
+    "pixels": 10811,
+    "positives": 6,
+    "tp": 3,
+    "fp": 9,
+    "fn": 3,
+    "tn": 10796,
+    "precision": 0.25,
+    "recall": 0.5,
+    "f1": 0.3333333333333333,
+    "iou": 0.2
+   },
+   "16-2-18_16PEC": {
+    "pixels": 25838,
+    "positives": 8,
+    "tp": 0,
+    "fp": 3,
+    "fn": 8,
+    "tn": 25827,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "17-7-16_51PTS": {
+    "pixels": 72,
+    "positives": 28,
+    "tp": 0,
+    "fp": 0,
+    "fn": 28,
+    "tn": 44,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "18-5-19_51PTS": {
+    "pixels": 38,
+    "positives": 10,
+    "tp": 0,
+    "fp": 0,
+    "fn": 10,
+    "tn": 28,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "19-9-18_16PDC": {
+    "pixels": 29848,
+    "positives": 22,
+    "tp": 3,
+    "fp": 0,
+    "fn": 19,
+    "tn": 29826,
+    "precision": 1.0,
+    "recall": 0.13636363636363635,
+    "f1": 0.24000000000000002,
+    "iou": 0.13636363636363635
+   },
+   "22-12-20_18QYF": {
+    "pixels": 124,
+    "positives": 30,
+    "tp": 11,
+    "fp": 1,
+    "fn": 19,
+    "tn": 93,
+    "precision": 0.9166666666666666,
+    "recall": 0.36666666666666664,
+    "f1": 0.5238095238095238,
+    "iou": 0.3548387096774194
+   },
+   "27-1-19_16PCC": {
+    "pixels": 1454,
+    "positives": 54,
+    "tp": 25,
+    "fp": 13,
+    "fn": 29,
+    "tn": 1387,
+    "precision": 0.6578947368421053,
+    "recall": 0.46296296296296297,
+    "f1": 0.5434782608695652,
+    "iou": 0.373134328358209
+   },
+   "27-1-19_16QED": {
+    "pixels": 7614,
+    "positives": 0,
+    "tp": 0,
+    "fp": 7,
+    "fn": 0,
+    "tn": 7607,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "iou": 0.0
+   },
+   "28-9-20_16PCC": {
+    "pixels": 630,
+    "positives": 30,
+    "tp": 4,
+    "fp": 5,
+    "fn": 26,
+    "tn": 595,
+    "precision": 0.4444444444444444,
+    "recall": 0.13333333333333333,
+    "f1": 0.20512820512820512,
+    "iou": 0.11428571428571428
+   },
+   "3-11-16_16PDC": {
+    "pixels": 14582,
+    "positives": 54,
+    "tp": 13,
+    "fp": 25,
+    "fn": 41,
+    "tn": 14503,
+    "precision": 0.34210526315789475,
+    "recall": 0.24074074074074073,
+    "f1": 0.2826086956521739,
+    "iou": 0.16455696202531644
+   },
+   "30-8-18_16PCC": {
+    "pixels": 8558,
+    "positives": 39,
+    "tp": 16,
+    "fp": 22,
+    "fn": 23,
+    "tn": 8497,
+    "precision": 0.42105263157894735,
+    "recall": 0.41025641025641024,
+    "f1": 0.4155844155844156,
+    "iou": 0.26229508196721313
+   },
+   "4-3-18_50LLR": {
+    "pixels": 1935,
+    "positives": 41,
+    "tp": 26,
+    "fp": 6,
+    "fn": 15,
+    "tn": 1888,
+    "precision": 0.8125,
+    "recall": 0.6341463414634146,
+    "f1": 0.7123287671232876,
+    "iou": 0.5531914893617021
+   }
+  }
+ },
+ "rule": {
+  "f1": 0.2663252240717029,
+  "ndvi_max": 0.1,
+  "blue_max": 0.05,
+  "threshold": 0.7707959413528442
+ }
+}

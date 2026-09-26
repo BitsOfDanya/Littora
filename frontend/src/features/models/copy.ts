@@ -6,8 +6,12 @@ export const REPORT_COPY = {
   demoTag: "ДЕМО-МЕТРИКИ",
   sample: "тестовая выборка MARIDA · демо",
   pdf: "Отчёт PDF",
-  pdfWhy: "Отчёт PDF появится вместе с возможностью model_evaluation",
+  pdfWhy: "Выгрузка отчёта доступна, когда подключена оценка моделей",
+  pdfHow: "Откроет печатную версию отчёта; сохраните её как PDF через печать",
   note: "ниже макет отчёта на демо-метриках",
+  apiNote: "метрики из артефактов оценки на сервере",
+  loading: "Загружаем отчёт оценки…",
+  errorTitle: "Отчёт оценки не загружен",
   plannedTitle: "Оценка моделей — не подключено",
   plannedBody:
     "Метрики F1, IoU, Precision и Recall по классам, матрица ошибок, PR-кривая и сравнение моделей появятся после первого прогона оценки.",
@@ -16,7 +20,17 @@ export const REPORT_COPY = {
   retry: "Повторить",
 } as const;
 
-export type SectionId = "summary" | "compare" | "threshold" | "datasets" | "limits" | "pipeline";
+export type SectionId =
+  | "summary"
+  | "compare"
+  | "threshold"
+  | "checks"
+  | "concentration"
+  | "pairs"
+  | "drift"
+  | "datasets"
+  | "limits"
+  | "pipeline";
 
 export const SECTION_COPY: Record<SectionId, { title: string; lede: string }> = {
   summary: {
@@ -31,6 +45,22 @@ export const SECTION_COPY: Record<SectionId, { title: string; lede: string }> = 
     title: "Порог и ошибки",
     lede: "Главные путаницы — с саргассумом и пеной: они же в разделе «Почему это может быть не мусор» у каждого пятна.",
   },
+  checks: {
+    title: "Проверки вне обучения",
+    lede: "Порог заморожен: на этих данных ничего не подбиралось. Другая обработка снимков, новые регионы, фон Чёрного моря и мишени с известным пластиком.",
+  },
+  concentration: {
+    title: "Концентрация, шт./км²",
+    lede: "Кросс-валидация по дням съёмки против медианы профиля. Модель идёт в сервис, только если её выигрыш над медианой значим.",
+  },
+  pairs: {
+    title: "Судно и спутник в один день",
+    lede: "Принятые пары реестра: полевое измерение с судна и снимок Sentinel-2 той же даты. По каждой паре — что насчитало судно и что увидел детектор на том же участке.",
+  },
+  drift: {
+    title: "Сценарий дрейфа",
+    lede: "Ансамбль частиц на течениях, волнах и ветре Open-Meteo. Это сценарий, а не проверенный прогноз: сверка с дрифтерами — ниже.",
+  },
   datasets: {
     title: "Данные для обучения и проверки",
     lede: "Открытые наборы с разметкой Sentinel-2; факты и лицензии — настоящие.",
@@ -43,6 +73,13 @@ export const SECTION_COPY: Record<SectionId, { title: string; lede: string }> = 
     title: "Конвейер",
     lede: "Как будут считаться метрики этого отчёта, когда оценка будет подключена.",
   },
+};
+
+export const API_LEDE: Partial<Record<SectionId, string>> = {
+  summary:
+    "Метрики сервисной модели по классу «морской мусор» на пиксельном уровне, с 95-процентными интервалами.",
+  compare:
+    "Метрики — на одном и том же test; строки упорядочены по F1 на валидации, по ней выбиралась модель. Сервисная модель выделена.",
 };
 
 export const METRIC_ORDER: readonly MetricKey[] = ["f1", "iou", "precision", "recall"];
@@ -59,6 +96,7 @@ export const TABLE_HEADS = {
   architecture: "Архитектура",
   threshold: "Порог",
   bands: "Входные каналы",
+  valF1: "F1 val",
 } as const;
 
 export const MATRIX_CLASSES = ["Мусор", "Саргассум", "Пена", "Судно/след", "Вода"] as const;
@@ -69,6 +107,8 @@ export const MATRIX_COPY = {
   grouping:
     "Классы MARIDA сведены в пять групп: саргассум — плотный и редкий; судно/след — суда и кильватерные следы; вода — все типы воды.",
   empty: "Матрица появится после прогона оценки",
+  apiGrouping:
+    "Строки — классы разметки MARIDA по группам: саргассум — плотный и редкий; судно/след — суда и кильватер; вода — все типы воды. Столбцы — ответ детектора при рабочем пороге.",
 } as const;
 
 export const PR_COPY = {
@@ -78,6 +118,7 @@ export const PR_COPY = {
   threshold: "Порог",
   reset: "Рабочий",
   empty: "Кривая появится после прогона оценки",
+  missing: "Кривая в артефактах оценки не сохранена",
   hint: "Щелчок или перетаскивание по графику — выбрать порог · ← → на ползунке",
   legendCurve: "кривая модели",
   legendOperating: "рабочий порог",

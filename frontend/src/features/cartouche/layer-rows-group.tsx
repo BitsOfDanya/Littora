@@ -60,7 +60,9 @@ export function LayerRowsGroup({
   const ground = useGround();
   const visible = useMapLayersStore((state) => state.visible);
   const extrasFor = useRowExtras();
-  const layers = layersInGroup(mode, group);
+  const layers = layersInGroup(mode, group).filter(
+    (layer) => !(layer.demoOnly && truthOf(layer) === "planned"),
+  );
   const available = layers.filter((layer) => truthOf(layer) !== "planned");
   const rows = showAll || showPlanned ? layers : available;
   const allDemo = available.length > 0 && available.every((layer) => truthOf(layer) === "demo");

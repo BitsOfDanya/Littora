@@ -7,7 +7,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
     LITTORA_DATA_DIR=/data \
     LITTORA_REPORTS_DIR=/reports \
-    LITTORA_STORAGE_DIR=/storage
+    LITTORA_STORAGE_DIR=/storage \
+    LITTORA_MODELS_DIR=/models
 
 WORKDIR /app
 
@@ -30,4 +31,4 @@ EXPOSE 8000
 HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=6 \
   CMD ["python", "-c", "import sys, urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=2).status == 200 else 1)"]
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]

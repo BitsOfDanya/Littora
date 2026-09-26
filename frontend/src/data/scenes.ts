@@ -30,10 +30,8 @@ const isoDay = (time: number) => new Date(time).toISOString().slice(0, 10);
 export function sceneQueryFor(aoiId: string, now: number): SceneQuery | null {
   const aoi = findAoi(aoiId);
   if (!aoi) return null;
-  const [dateFrom, dateTo] = aoi.survey?.period ?? [
-    isoDay(now - RECENT_DAYS * DAY_MS),
-    isoDay(now),
-  ];
+  const [dateFrom, dateTo] = aoi.survey?.period ??
+    aoi.reference?.period ?? [isoDay(now - RECENT_DAYS * DAY_MS), isoDay(now)];
   return { aoiId: aoi.id, bbox: aoi.bbox, dateFrom, dateTo };
 }
 

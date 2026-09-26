@@ -11,7 +11,11 @@ services:
       LITTORA_CORS_ORIGINS: ${LITTORA_CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
     volumes:
       - ./data/case:/data/case:ro
+      - ./data/aoi:/data/aoi:ro
+      - ./data/validation:/data/validation:ro
       - ./reports:/reports:ro
+      - ./models/detector/service:/models/detector/service:ro
+      - ./models/concentration/service:/models/concentration/service:ro
       - analyses:/storage
     ports:
       - "${LITTORA_BACKEND_PORT:-8000}:8000"

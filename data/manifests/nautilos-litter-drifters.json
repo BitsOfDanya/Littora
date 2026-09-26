@@ -1,0 +1,15 @@
+{
+  "key": "nautilos-litter-drifters",
+  "title": "NAUTILOS: дрифтеры из настоящего мусора, Лигурийское и Тирренское моря (CNR-ISMAR)",
+  "license": "CC-BY-4.0",
+  "source": "https://data-nautilos-h2020.eu/erddap/tabledap/mini_drifter.html",
+  "retrieved": "2026-09-26",
+  "bytes": 404142,
+  "files": [
+    {
+      "name": "mini_drifter.csv",
+      "bytes": 404142,
+      "md5": "16de3c0efb5909777f7d11d023984e27"
+    }
+  ]
+}

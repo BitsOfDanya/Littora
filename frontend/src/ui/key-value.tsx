@@ -16,7 +16,7 @@ type KeyValueProps = {
 export function KeyValue({ label, children, unit, hint, tag }: KeyValueProps) {
   return (
     <div className="flex min-h-7 items-baseline gap-3 border-b border-line-hairline py-1 last:border-b-0">
-      <dt className="flex min-w-0 flex-1 items-center gap-1.5 text-[12px] text-text-secondary">
+      <dt className="flex min-w-fit flex-1 items-center gap-1.5 text-[12px] text-text-secondary">
         {label}
         {tag}
       </dt>

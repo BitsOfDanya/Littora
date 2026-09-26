@@ -20,11 +20,12 @@ import { IconArrowRight, IconSwap } from "@/ui/icons";
 import { Kbd } from "@/ui/kbd";
 import { PlannedState } from "@/ui/planned";
 import { intervalText } from "./compare-format";
-import { COMPARE_HONESTY_NOTE } from "./compare-method-box";
+import { COMPARE_HONESTY_NOTE, useCompareHonestyNote } from "./compare-method-box";
 import { dayMonth, intervalOf, MOSAIC_YEARS, objectRows, sideTotals } from "./compare-model";
 import { ObjectDynamicsBody } from "./compare-object";
 import { ComparePickers, MosaicPair } from "./compare-pickers";
 import { AreaSummary, ObjectDeltas } from "./compare-summary";
+import { LiveChange, LivePassList, LiveState, LiveSummary } from "./live-sections";
 import { RAIL_B_PASS_ID } from "./compare-tracks";
 import { useCompareActions, useCompareData } from "./use-compare";
 
@@ -59,8 +60,9 @@ function scrollInspectorTop(): void {
 
 function HonestyNote() {
   const phone = useIsPhoneWidth();
+  const note = useCompareHonestyNote();
   if (!phone) return null;
-  return <p className="text-[12px] leading-4 text-text-tertiary">{COMPARE_HONESTY_NOTE}</p>;
+  return <p className="text-[12px] leading-4 text-text-tertiary">{note}</p>;
 }
 
 function Footer({ onSwap, canSwap }: { onSwap: () => void; canSwap: boolean }) {
@@ -133,7 +135,7 @@ function PlannedPanel() {
 
 function ComparePanel() {
   const root = useRootCrumb();
-  const { scenes, histories, candidates, pair, isDemo } = useCompareData();
+  const { scenes, histories, candidates, pair, isDemo, live, passes } = useCompareData();
   const actions = useCompareActions(scenes, pair);
   const selectedId = useWorkspaceStore((state) => state.selectedCandidateId);
   const selectCandidate = useWorkspaceStore((state) => state.selectCandidate);
@@ -190,6 +192,20 @@ function ComparePanel() {
           pair={pair}
           actions={actions}
         />
+      ) : !isDemo && live.status === "ready" ? (
+        <>
+          <LiveSummary pair={pair} passes={passes} timeline={live.timeline} />
+          <LiveChange pair={pair} passes={passes} />
+          <LivePassList
+            scenes={scenes}
+            pair={pair}
+            passes={passes}
+            timeline={live.timeline}
+            actions={actions}
+          />
+        </>
+      ) : !isDemo && (live.status === "loading" || live.status === "error") ? (
+        <LiveState live={live} />
       ) : (
         <>
           <AreaSummary

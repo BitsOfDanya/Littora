@@ -1,11 +1,13 @@
 "use client";
 
-import { useForecastRun } from "@/data/forecast";
+import { useDriftState, useForecastRun } from "@/data/forecast";
 import { FORECAST_HORIZONS_H } from "@/domain/forecast";
 import { useWorkspaceStore } from "@/state/workspace-store";
 import { DemoTag } from "@/ui/demo-mark";
 import { StepperStrip } from "@/ui/stepper-strip";
 import { horizonLabel, shiftIso } from "./drift-math";
+import { DriftStateAction, ScenarioTag } from "./drift-state";
+import { driftStateCopy } from "./forecast-copy";
 import { chooseHorizon } from "./forecast-hotkeys";
 
 function shortTarget(iso: string): string {
@@ -15,6 +17,8 @@ function shortTarget(iso: string): string {
 export function HorizonStepper() {
   const horizonH = useWorkspaceStore((state) => state.forecastHorizonH);
   const run = useForecastRun();
+  const drift = useDriftState();
+  const copy = driftStateCopy(drift);
   const index = FORECAST_HORIZONS_H.indexOf(horizonH);
   const ready = run.origin !== "none";
 
@@ -35,7 +39,12 @@ export function HorizonStepper() {
           <span className="font-mono text-[12px] text-text-secondary">
             цель {shortTarget(shiftIso(run.data.t0, horizonH))}
           </span>
-          {run.origin === "demo" ? <DemoTag /> : null}
+          {run.origin === "demo" ? <DemoTag /> : <ScenarioTag />}
+        </>
+      ) : copy ? (
+        <>
+          <span className="text-[12px] text-text-secondary">{copy.title}</span>
+          <DriftStateAction state={drift} size="sm" />
         </>
       ) : (
         <span className="text-[12px] text-text-secondary">

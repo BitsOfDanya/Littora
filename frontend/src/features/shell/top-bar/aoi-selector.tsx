@@ -99,7 +99,10 @@ export function AoiSelector() {
   };
 
   return (
-    <div ref={containerRef} className="relative h-full min-w-0 max-md:flex-1 md:shrink-0">
+    <div
+      ref={containerRef}
+      className="relative h-full min-w-0 max-md:flex-1 md:max-w-[300px] md:shrink-0"
+    >
       <button
         ref={triggerRef}
         type="button"

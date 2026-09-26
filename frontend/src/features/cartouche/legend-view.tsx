@@ -1,6 +1,7 @@
 "use client";
 
 import type { MapModeId } from "@/config/layers";
+import { useForecastPickHint } from "@/features/forecast/use-forecast-hint";
 import { useAnalysisStore } from "@/state/analysis-store";
 import { useWorkspaceStore } from "@/state/workspace-store";
 import { Button } from "@/ui/button";
@@ -18,7 +19,7 @@ type ViewProps = { mode: MapModeId; showAll: boolean; density: RowDensity };
 function ForecastGroup({ mode, showAll, density }: ViewProps) {
   const truthOf = useLayerTruth();
   const demoActive = useDemoActive();
-  const hasSelection = useWorkspaceStore((state) => state.selectedCandidateId !== null);
+  const pick = useForecastPickHint();
   return (
     <LayerRowsGroup
       mode={mode}
@@ -27,7 +28,7 @@ function ForecastGroup({ mode, showAll, density }: ViewProps) {
       showAll={showAll}
       density={density}
       plannedNote={<PlannedGroupNote group="forecast" />}
-      lead={hasSelection ? null : <LegendNote>Выберите пятно, чтобы построить прогноз</LegendNote>}
+      lead={pick ? <LegendNote>Выберите пятно, чтобы построить прогноз</LegendNote> : null}
       footnote={demoActive ? "Поле течений и частицы — синтетические, для макета" : undefined}
     />
   );

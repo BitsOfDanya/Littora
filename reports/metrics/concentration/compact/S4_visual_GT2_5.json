@@ -1,0 +1,1955 @@
+{
+ "profile": "S4_visual_GT2_5",
+ "target_key": "litter-visual",
+ "events": 33,
+ "survey_days": 12,
+ "research": {
+  "role": "shortlist",
+  "selection": "шорт-лист вариантов составлен после разведочных прогонов на тех же данных (оптимистично)"
+ },
+ "validation": {
+  "outer": "10 повторов случайного разбиения дней съёмки на 5 фолдов, seed [42, повтор]",
+  "inner": "случайное разбиение дней съёмки обучающей части на 4 фолдов, seed [42, повтор, фолд]",
+  "difference": "кластерный бутстрэп по дням съёмки, 2000 выборок, 95 % ДИ разницы вложенная CV − медиана",
+  "service_gate": "каждый координатный кандидат отдельно против медианы: те же повторы CV по дням съёмки, кластерный бутстрэп по дням, 97.5% ДИ (Бонферрони на 2); выдаётся кандидат с наименьшей MAE, у которого верхняя граница ДИ разницы MAE < 0, иначе медиана",
+  "spatial_check": "KMeans по координатам, 5 блоков",
+  "repetitions": 10
+ },
+ "nested": {
+  "mae": {
+   "mean": 202.4436246396038,
+   "sd": 26.1927240038058
+  },
+  "rmse": {
+   "mean": 254.95261774968458,
+   "sd": 25.600143255515956
+  },
+  "medae": 173.30203701599743,
+  "bias": 41.06942027874636,
+  "mae_log1p": 0.7598337287191486,
+  "spearman": 0.13329196423829756,
+  "coverage": {
+   "mean": 0.7424242424242424,
+   "sd": 0.06738214173801177
+  },
+  "target_coverage": 0.8,
+  "median_width": {
+   "mean": 938.1100239796708,
+   "sd": 299.9506830788503
+  },
+  "selection": "шорт-лист вариантов составлен после разведочных прогонов на тех же данных (оптимистично)"
+ },
+ "baseline": {
+  "mae": {
+   "mean": 188.09245454545456,
+   "sd": 9.970596966377295
+  },
+  "rmse": {
+   "mean": 252.44914683357788,
+   "sd": 8.008837582701926
+  },
+  "medae": 147.744,
+  "bias": -57.868787878787884,
+  "mae_log1p": 0.7474979253130221,
+  "spearman": -0.4276776036867428,
+  "coverage": {
+   "mean": 0.796969696969697,
+   "sd": 0.03513641844631535
+  },
+  "median_width": {
+   "mean": 801.7248956737063,
+   "sd": 66.82172512801893
+  }
+ },
+ "difference_vs_median": {
+  "mae": {
+   "mean": 14.35117009414921,
+   "confidence": 0.95,
+   "ci": [
+    -33.62651516393404,
+    55.7242478072866
+   ],
+   "relative": 0.07629848910648938,
+   "relative_ci": [
+    -0.1377917240726829,
+    0.3304399562850967
+   ]
+  },
+  "rmse": {
+   "mean": 2.5034709161067497,
+   "confidence": 0.95,
+   "ci": [
+    -58.05981795678223,
+    53.91008320282259
+   ],
+   "relative": 0.009916733518442482,
+   "relative_ci": [
+    -0.1806523716657275,
+    0.2675050672071365
+   ]
+  }
+ },
+ "gain_over_median": false,
+ "selected_in_folds": {
+  "idw_k5": 20,
+  "ensemble|all": 5,
+  "catboost|spatial_geography_no_season": 5,
+  "nearest_neighbour": 4,
+  "ensemble|spatial": 3,
+  "random_forest|spatial_geography_no_season": 2,
+  "median": 2,
+  "ensemble|spatial_season": 2,
+  "mean": 2,
+  "random_forest|spatial_weather_no_season": 1,
+  "gp_matern|spatial_season": 1,
+  "tweedie_glm|spatial": 1,
+  "gp_matern|spatial": 1,
+  "catboost|spatial_weather_no_season": 1
+ },
+ "service": {
+  "options": [
+   "median",
+   "idw_k5",
+   "tweedie_glm|spatial"
+  ],
+  "features": [
+   "x_km",
+   "y_km"
+  ],
+  "rule": "каждый координатный кандидат отдельно против медианы: те же повторы CV по дням съёмки, кластерный бутстрэп по дням, 97.5% ДИ (Бонферрони на 2); выдаётся кандидат с наименьшей MAE, у которого верхняя граница ДИ разницы MAE < 0, иначе медиана",
+  "confidence": 0.975,
+  "candidates": {
+   "idw_k5": {
+    "mae": {
+     "mean": 160.22699710554267,
+     "sd": 13.58971569829909
+    },
+    "rmse": {
+     "mean": 214.9802700934536,
+     "sd": 15.653276695793958
+    },
+    "medae": 115.31351129484804,
+    "bias": 17.79952983653726,
+    "mae_log1p": 0.6013956190839042,
+    "spearman": 0.4269385026737968,
+    "coverage": {
+     "mean": 0.8333333333333333,
+     "sd": 0.035712463696290275
+    },
+    "median_width": {
+     "mean": 848.2069289236879,
+     "sd": 120.83169023587863
+    },
+    "difference_vs_median": {
+     "mae": {
+      "mean": -27.865457439911893,
+      "confidence": 0.975,
+      "ci": [
+       -89.64099039780788,
+       48.057865354435236
+      ],
+      "relative": -0.14814766231453433,
+      "relative_ci": [
+       -0.4133575118114603,
+       0.2650102830339472
+      ]
+     },
+     "rmse": {
+      "mean": -37.46887674012427,
+      "confidence": 0.975,
+      "ci": [
+       -117.42854649972817,
+       54.67675577196294
+      ],
+      "relative": -0.14842148294058166,
+      "relative_ci": [
+       -0.3796665038448509,
+       0.27054162017229566
+      ]
+     }
+    },
+    "passes": false
+   },
+   "tweedie_glm|spatial": {
+    "mae": {
+     "mean": 213.50636765837112,
+     "sd": 14.597683070292781
+    },
+    "rmse": {
+     "mean": 266.1853810987951,
+     "sd": 16.422348220716405
+    },
+    "medae": 179.8962556790959,
+    "bias": 4.171288745533743,
+    "mae_log1p": 0.8581597386010665,
+    "spearman": -0.36497326203208563,
+    "coverage": {
+     "mean": 0.7878787878787878,
+     "sd": 0.06850838366793198
+    },
+    "median_width": {
+     "mean": 1319.0973871090027,
+     "sd": 224.094504958334
+    },
+    "difference_vs_median": {
+     "mae": {
+      "mean": 25.413913112916617,
+      "confidence": 0.975,
+      "ci": [
+       -9.29891823587875,
+       57.08042313022469
+      ],
+      "relative": 0.1351139426317342,
+      "relative_ci": [
+       -0.04043827236351039,
+       0.32322149585578613
+      ]
+     },
+     "rmse": {
+      "mean": 13.736234265217234,
+      "confidence": 0.975,
+      "ci": [
+       -22.01068404775243,
+       51.61722217390195
+      ],
+      "relative": 0.05441188626504876,
+      "relative_ci": [
+       -0.07444459466987044,
+       0.2546386242095896
+      ]
+     }
+    },
+    "passes": false
+   }
+  },
+  "deployed_model": "median",
+  "gain_over_median": false,
+  "selection": "если шлюз прошли несколько кандидатов, берётся наименьшая MAE на тех же фолдах: оценка выданной модели слегка оптимистична",
+  "baseline": {
+   "mae": {
+    "mean": 188.09245454545456,
+    "sd": 9.970596966377295
+   },
+   "rmse": {
+    "mean": 252.44914683357788,
+    "sd": 8.008837582701926
+   },
+   "medae": 147.744,
+   "bias": -57.868787878787884,
+   "mae_log1p": 0.7474979253130221,
+   "spearman": -0.4276776036867428,
+   "coverage": {
+    "mean": 0.796969696969697,
+    "sd": 0.03513641844631535
+   },
+   "median_width": {
+    "mean": 801.7248956737063,
+    "sd": 66.82172512801893
+   }
+  },
+  "deployed": {
+   "mae": {
+    "mean": 188.09245454545456,
+    "sd": 9.970596966377295
+   },
+   "rmse": {
+    "mean": 252.44914683357788,
+    "sd": 8.008837582701926
+   },
+   "coverage": {
+    "mean": 0.796969696969697,
+    "sd": 0.03513641844631535
+   },
+   "median_width": {
+    "mean": 801.7248956737063,
+    "sd": 66.82172512801893
+   }
+  },
+  "log_quantile": 1.2754315653768948,
+  "quantile_definition": "медиана по повторам конформного квантиля остатков log1p внешней CV выданной модели",
+  "coverage": {
+   "nominal": 0.8,
+   "empirical": 0.796969696969697,
+   "empirical_sd": 0.03513641844631535,
+   "model": "median",
+   "definition": "доля событий внутри интервала на внешних фолдах; квантиль строился по остаткам log1p внутренней CV той же модели на обучающей части — то же правило, что у выданной модели"
+  },
+  "repetitions": 10,
+  "nested_procedure": {
+   "selection": "исследовательская метрика: вложенный выбор среди координатных вариантов на внутренних фолдах; в сервис идёт одна модель по правилу service.rule, а не эта процедура",
+   "nested": {
+    "mae": {
+     "mean": 178.800124355654,
+     "sd": 19.66998253452555
+    },
+    "rmse": {
+     "mean": 235.0235474383422,
+     "sd": 23.08906973678314
+    },
+    "medae": 152.8568263021336,
+    "bias": 17.436860277880715,
+    "mae_log1p": 0.6989582263501315,
+    "spearman": 0.2464135109093082,
+    "coverage": {
+     "mean": 0.7545454545454546,
+     "sd": 0.07063488378604886
+    },
+    "target_coverage": 0.8,
+    "median_width": {
+     "mean": 847.2814495034957,
+     "sd": 250.50303875511756
+    }
+   },
+   "baseline": {
+    "mae": {
+     "mean": 188.09245454545456,
+     "sd": 9.970596966377295
+    },
+    "rmse": {
+     "mean": 252.44914683357788,
+     "sd": 8.008837582701926
+    },
+    "medae": 147.744,
+    "bias": -57.868787878787884,
+    "mae_log1p": 0.7474979253130221,
+    "spearman": -0.4276776036867428,
+    "coverage": {
+     "mean": 0.796969696969697,
+     "sd": 0.03513641844631535
+    },
+    "median_width": {
+     "mean": 801.7248956737063,
+     "sd": 66.82172512801893
+    }
+   },
+   "difference_vs_median": {
+    "mae": {
+     "mean": -9.29233018980051,
+     "confidence": 0.95,
+     "ci": [
+      -50.741080561481965,
+      42.20489859672346
+     ],
+     "relative": -0.049402992864633594,
+     "relative_ci": [
+      -0.2337495154519191,
+      0.23708610104099087
+     ]
+    },
+    "rmse": {
+     "mean": -17.42559939523568,
+     "confidence": 0.95,
+     "ci": [
+      -76.33561704634563,
+      50.516098929153316
+     ],
+     "relative": -0.06902617661339597,
+     "relative_ci": [
+      -0.2518456260972573,
+      0.23911276129982761
+     ]
+    }
+   },
+   "gain_over_median": false,
+   "selected_in_folds": {
+    "idw_k5": 38,
+    "median": 9,
+    "tweedie_glm|spatial": 3
+   },
+   "repetitions": [
+    {
+     "repetition": 0,
+     "nested_mae": 164.6100957393391,
+     "nested_rmse": 232.8174000405312,
+     "nested_coverage": 0.7878787878787878,
+     "baseline_mae": 199.20515151515153,
+     "baseline_rmse": 261.1033995403261,
+     "baseline_coverage": 0.7575757575757576,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 180.139,
+       "test_events": 12,
+       "log_quantile": 1.1469
+      },
+      {
+       "fold": 1,
+       "selected": "idw_k5",
+       "inner_mae": 131.018,
+       "test_events": 5,
+       "log_quantile": 0.846
+      },
+      {
+       "fold": 2,
+       "selected": "idw_k5",
+       "inner_mae": 172.432,
+       "test_events": 9,
+       "log_quantile": 1.0335
+      },
+      {
+       "fold": 3,
+       "selected": "idw_k5",
+       "inner_mae": 160.274,
+       "test_events": 3,
+       "log_quantile": 1.1616
+      },
+      {
+       "fold": 4,
+       "selected": "idw_k5",
+       "inner_mae": 158.404,
+       "test_events": 4,
+       "log_quantile": 1.0336
+      }
+     ]
+    },
+    {
+     "repetition": 1,
+     "nested_mae": 166.57721168067988,
+     "nested_rmse": 224.96210191408238,
+     "nested_coverage": 0.7878787878787878,
+     "baseline_mae": 197.1590909090909,
+     "baseline_rmse": 259.73600359234223,
+     "baseline_coverage": 0.7878787878787878,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 126.746,
+       "test_events": 5,
+       "log_quantile": 0.9116
+      },
+      {
+       "fold": 1,
+       "selected": "idw_k5",
+       "inner_mae": 170.217,
+       "test_events": 10,
+       "log_quantile": 1.3377
+      },
+      {
+       "fold": 2,
+       "selected": "idw_k5",
+       "inner_mae": 181.604,
+       "test_events": 9,
+       "log_quantile": 0.9639
+      },
+      {
+       "fold": 3,
+       "selected": "median",
+       "inner_mae": 185.652,
+       "test_events": 4,
+       "log_quantile": 1.2479
+      },
+      {
+       "fold": 4,
+       "selected": "idw_k5",
+       "inner_mae": 132.803,
+       "test_events": 5,
+       "log_quantile": 0.846
+      }
+     ]
+    },
+    {
+     "repetition": 2,
+     "nested_mae": 177.34368595948197,
+     "nested_rmse": 234.26688412817404,
+     "nested_coverage": 0.7272727272727273,
+     "baseline_mae": 178.97909090909093,
+     "baseline_rmse": 243.60153312823022,
+     "baseline_coverage": 0.7878787878787878,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 185.411,
+       "test_events": 12,
+       "log_quantile": 1.3
+      },
+      {
+       "fold": 1,
+       "selected": "idw_k5",
+       "inner_mae": 153.534,
+       "test_events": 6,
+       "log_quantile": 1.1616
+      },
+      {
+       "fold": 2,
+       "selected": "median",
+       "inner_mae": 167.871,
+       "test_events": 8,
+       "log_quantile": 1.0861
+      },
+      {
+       "fold": 3,
+       "selected": "idw_k5",
+       "inner_mae": 141.512,
+       "test_events": 2,
+       "log_quantile": 1.0554
+      },
+      {
+       "fold": 4,
+       "selected": "idw_k5",
+       "inner_mae": 159.878,
+       "test_events": 5,
+       "log_quantile": 0.846
+      }
+     ]
+    },
+    {
+     "repetition": 3,
+     "nested_mae": 162.94282863053655,
+     "nested_rmse": 231.82655748960414,
+     "nested_coverage": 0.8181818181818182,
+     "baseline_mae": 181.15030303030304,
+     "baseline_rmse": 244.33504573793252,
+     "baseline_coverage": 0.8181818181818182,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 177.323,
+       "test_events": 5,
+       "log_quantile": 1.2905
+      },
+      {
+       "fold": 1,
+       "selected": "idw_k5",
+       "inner_mae": 142.991,
+       "test_events": 11,
+       "log_quantile": 0.8414
+      },
+      {
+       "fold": 2,
+       "selected": "median",
+       "inner_mae": 170.934,
+       "test_events": 4,
+       "log_quantile": 1.1353
+      },
+      {
+       "fold": 3,
+       "selected": "idw_k5",
+       "inner_mae": 168.448,
+       "test_events": 9,
+       "log_quantile": 0.9129
+      },
+      {
+       "fold": 4,
+       "selected": "idw_k5",
+       "inner_mae": 154.187,
+       "test_events": 4,
+       "log_quantile": 1.1638
+      }
+     ]
+    },
+    {
+     "repetition": 4,
+     "nested_mae": 188.6451367294563,
+     "nested_rmse": 222.64165455440076,
+     "nested_coverage": 0.7575757575757576,
+     "baseline_mae": 197.8427272727273,
+     "baseline_rmse": 254.66436568252902,
+     "baseline_coverage": 0.8484848484848485,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 151.934,
+       "test_events": 4,
+       "log_quantile": 1.3071
+      },
+      {
+       "fold": 1,
+       "selected": "median",
+       "inner_mae": 250.38,
+       "test_events": 16,
+       "log_quantile": 1.5173
+      },
+      {
+       "fold": 2,
+       "selected": "idw_k5",
+       "inner_mae": 169.775,
+       "test_events": 4,
+       "log_quantile": 0.8101
+      },
+      {
+       "fold": 3,
+       "selected": "idw_k5",
+       "inner_mae": 162.748,
+       "test_events": 3,
+       "log_quantile": 1.0557
+      },
+      {
+       "fold": 4,
+       "selected": "idw_k5",
+       "inner_mae": 162.499,
+       "test_events": 6,
+       "log_quantile": 0.942
+      }
+     ]
+    },
+    {
+     "repetition": 5,
+     "nested_mae": 144.12320510290576,
+     "nested_rmse": 189.23585411785777,
+     "nested_coverage": 0.8181818181818182,
+     "baseline_mae": 174.82939393939392,
+     "baseline_rmse": 243.04935987335676,
+     "baseline_coverage": 0.8484848484848485,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 205.776,
+       "test_events": 13,
+       "log_quantile": 1.1469
+      },
+      {
+       "fold": 1,
+       "selected": "idw_k5",
+       "inner_mae": 152.467,
+       "test_events": 6,
+       "log_quantile": 1.2534
+      },
+      {
+       "fold": 2,
+       "selected": "idw_k5",
+       "inner_mae": 172.442,
+       "test_events": 9,
+       "log_quantile": 0.8576
+      },
+      {
+       "fold": 3,
+       "selected": "idw_k5",
+       "inner_mae": 144.193,
+       "test_events": 3,
+       "log_quantile": 0.942
+      },
+      {
+       "fold": 4,
+       "selected": "median",
+       "inner_mae": 184.736,
+       "test_events": 2,
+       "log_quantile": 1.3393
+      }
+     ]
+    },
+    {
+     "repetition": 6,
+     "nested_mae": 207.62467160704406,
+     "nested_rmse": 270.4604930968295,
+     "nested_coverage": 0.6666666666666666,
+     "baseline_mae": 183.6260606060606,
+     "baseline_rmse": 251.49766353514374,
+     "baseline_coverage": 0.7575757575757576,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 290.11,
+       "test_events": 12,
+       "log_quantile": 1.8263
+      },
+      {
+       "fold": 1,
+       "selected": "tweedie_glm|spatial",
+       "inner_mae": 144.846,
+       "test_events": 5,
+       "log_quantile": 1.2398
+      },
+      {
+       "fold": 2,
+       "selected": "idw_k5",
+       "inner_mae": 172.013,
+       "test_events": 4,
+       "log_quantile": 0.8359
+      },
+      {
+       "fold": 3,
+       "selected": "idw_k5",
+       "inner_mae": 164.28,
+       "test_events": 4,
+       "log_quantile": 1.0376
+      },
+      {
+       "fold": 4,
+       "selected": "median",
+       "inner_mae": 195.054,
+       "test_events": 8,
+       "log_quantile": 1.0372
+      }
+     ]
+    },
+    {
+     "repetition": 7,
+     "nested_mae": 196.75916192807293,
+     "nested_rmse": 256.6863696347818,
+     "nested_coverage": 0.7575757575757576,
+     "baseline_mae": 184.17606060606062,
+     "baseline_rmse": 251.3195940551803,
+     "baseline_coverage": 0.8181818181818182,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 133.768,
+       "test_events": 5,
+       "log_quantile": 1.0554
+      },
+      {
+       "fold": 1,
+       "selected": "tweedie_glm|spatial",
+       "inner_mae": 153.767,
+       "test_events": 6,
+       "log_quantile": 1.3615
+      },
+      {
+       "fold": 2,
+       "selected": "idw_k5",
+       "inner_mae": 137.839,
+       "test_events": 3,
+       "log_quantile": 0.8617
+      },
+      {
+       "fold": 3,
+       "selected": "median",
+       "inner_mae": 194.187,
+       "test_events": 10,
+       "log_quantile": 1.1305
+      },
+      {
+       "fold": 4,
+       "selected": "idw_k5",
+       "inner_mae": 211.545,
+       "test_events": 9,
+       "log_quantile": 1.378
+      }
+     ]
+    },
+    {
+     "repetition": 8,
+     "nested_mae": 179.99297096494618,
+     "nested_rmse": 226.9855002780089,
+     "nested_coverage": 0.8181818181818182,
+     "baseline_mae": 181.45909090909092,
+     "baseline_rmse": 248.7375187914872,
+     "baseline_coverage": 0.7575757575757576,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "idw_k5",
+       "inner_mae": 140.037,
+       "test_events": 4,
+       "log_quantile": 1.0149
+      },
+      {
+       "fold": 1,
+       "selected": "idw_k5",
+       "inner_mae": 163.693,
+       "test_events": 13,
+       "log_quantile": 1.0944
+      },
+      {
+       "fold": 2,
+       "selected": "median",
+       "inner_mae": 206.374,
+       "test_events": 5,
+       "log_quantile": 1.4468
+      },
+      {
+       "fold": 3,
+       "selected": "idw_k5",
+       "inner_mae": 173.665,
+       "test_events": 8,
+       "log_quantile": 1.3305
+      },
+      {
+       "fold": 4,
+       "selected": "idw_k5",
+       "inner_mae": 168.529,
+       "test_events": 3,
+       "log_quantile": 1.0554
+      }
+     ]
+    },
+    {
+     "repetition": 9,
+     "nested_mae": 199.38227521407728,
+     "nested_rmse": 260.3526591291516,
+     "nested_coverage": 0.6060606060606061,
+     "baseline_mae": 202.49757575757576,
+     "baseline_rmse": 266.4469843992507,
+     "baseline_coverage": 0.7878787878787878,
+     "folds": [
+      {
+       "fold": 0,
+       "selected": "tweedie_glm|spatial",
+       "inner_mae": 172.427,
+       "test_events": 6,
+       "log_quantile": 1.2031
+      },
+      {
+       "fold": 1,
+       "selected": "idw_k5",
+       "inner_mae": 162.485,
+       "test_events": 11,
+       "log_quantile": 1.4146
+      },
+      {
+       "fold": 2,
+       "selected": "idw_k5",
+       "inner_mae": 124.351,
+       "test_events": 3,
+       "log_quantile": 0.8722
+      },
+      {
+       "fold": 3,
+       "selected": "median",
+       "inner_mae": 196.819,
+       "test_events": 9,
+       "log_quantile": 1.1025
+      },
+      {
+       "fold": 4,
+       "selected": "idw_k5",
+       "inner_mae": 196.488,
+       "test_events": 4,
+       "log_quantile": 1.1616
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "season_check": {
+  "scheme": "первые 70% дней съёмки по времени → остальные дни",
+  "selection": "в группах «с сезоном» и «без сезона» вариант выбран по внутренней CV по дням съёмки (фолдов: 4) только на первых днях; выбранный вариант обучен на первых днях и один раз оценён на отложенном блоке",
+  "train_days": [
+   "2024-06-02",
+   "2024-06-11"
+  ],
+  "test_days": [
+   "2024-06-14",
+   "2024-06-18"
+  ],
+  "train_events": 25,
+  "test_events": 8,
+  "median": {
+   "mae": 139.4575,
+   "rmse": 166.78993419868002
+  },
+  "with_season": {
+   "selected": "ensemble|spatial_season",
+   "candidates": 7,
+   "inner_mae": 202.6800827725236,
+   "holdout_mae": 216.5433343653336,
+   "holdout_rmse": 235.87055226407043
+  },
+  "without_season": {
+   "selected": "gp_matern|spatial",
+   "candidates": 17,
+   "inner_mae": 173.45268645005774,
+   "holdout_mae": 142.60192084632013,
+   "holdout_rmse": 185.86095369210847
+  },
+  "season_holds_up": false,
+  "holdout_minimum": {
+   "selection": "минимум по вариантам на самом отложенном блоке: выбор на тесте (оптимистично)",
+   "with_season_mae": 123.57013463893907,
+   "without_season_mae": 119.08091160706289
+  },
+  "options": {
+   "tweedie_glm|spatial_season": {
+    "season": true,
+    "inner_mae": 238.41102667051373,
+    "holdout_mae": 3553.6693462605863,
+    "holdout_rmse": 4359.689270087734
+   },
+   "tweedie_glm|all": {
+    "season": true,
+    "inner_mae": 1097.768327816683,
+    "holdout_mae": 4056.1524263657802,
+    "holdout_rmse": 5410.153921364434
+   },
+   "gp_matern|spatial_season": {
+    "season": true,
+    "inner_mae": 205.70770527502668,
+    "holdout_mae": 142.6018688709372,
+    "holdout_rmse": 185.86080050920052
+   },
+   "random_forest|all": {
+    "season": true,
+    "inner_mae": 230.5546278167293,
+    "holdout_mae": 123.57013463893907,
+    "holdout_rmse": 149.2977025856975
+   },
+   "catboost|all": {
+    "season": true,
+    "inner_mae": 233.52186722145504,
+    "holdout_mae": 130.2924756654274,
+    "holdout_rmse": 168.16559844112086
+   },
+   "ensemble|spatial_season": {
+    "season": true,
+    "inner_mae": 202.6800827725236,
+    "holdout_mae": 216.5433343653336,
+    "holdout_rmse": 235.87055226407043
+   },
+   "ensemble|all": {
+    "season": true,
+    "inner_mae": 257.92887315235504,
+    "holdout_mae": 194.24639072004192,
+    "holdout_rmse": 222.2637331698742
+   },
+   "median": {
+    "season": false,
+    "inner_mae": 192.58120000000002,
+    "holdout_mae": 139.4575,
+    "holdout_rmse": 166.78993419868002
+   },
+   "mean": {
+    "season": false,
+    "inner_mae": 212.74326968169086,
+    "holdout_mae": 139.4575,
+    "holdout_rmse": 163.79659933588366
+   },
+   "nearest_neighbour": {
+    "season": false,
+    "inner_mae": 247.44240000000002,
+    "holdout_mae": 194.28125,
+    "holdout_rmse": 249.1549044520296
+   },
+   "idw_k5": {
+    "season": false,
+    "inner_mae": 212.18521491056023,
+    "holdout_mae": 129.91206014173275,
+    "holdout_rmse": 161.39078694787918
+   },
+   "tweedie_glm|spatial": {
+    "season": false,
+    "inner_mae": 226.81394607125003,
+    "holdout_mae": 191.34210151800522,
+    "holdout_rmse": 229.21334138309697
+   },
+   "tweedie_glm|spatial_geography_no_season": {
+    "season": false,
+    "inner_mae": 479.15708245668014,
+    "holdout_mae": 151.72793421250742,
+    "holdout_rmse": 177.17996195997821
+   },
+   "tweedie_glm|spatial_weather_no_season": {
+    "season": false,
+    "inner_mae": 688.0179608799795,
+    "holdout_mae": 163.87155475156587,
+    "holdout_rmse": 217.62625171513923
+   },
+   "gp_matern|spatial": {
+    "season": false,
+    "inner_mae": 173.45268645005774,
+    "holdout_mae": 142.60192084632013,
+    "holdout_rmse": 185.86095369210847
+   },
+   "random_forest|spatial_geography_no_season": {
+    "season": false,
+    "inner_mae": 215.47736767642596,
+    "holdout_mae": 123.31563000559018,
+    "holdout_rmse": 144.4772908370829
+   },
+   "random_forest|spatial_weather_no_season": {
+    "season": false,
+    "inner_mae": 227.59288813474285,
+    "holdout_mae": 140.906240099471,
+    "holdout_rmse": 167.04463634098508
+   },
+   "catboost|spatial_geography_no_season": {
+    "season": false,
+    "inner_mae": 212.22758531617885,
+    "holdout_mae": 127.93725135247232,
+    "holdout_rmse": 167.86621710127181
+   },
+   "catboost|spatial_weather_no_season": {
+    "season": false,
+    "inner_mae": 237.1417362753622,
+    "holdout_mae": 139.87991778224819,
+    "holdout_rmse": 173.0776909980584
+   },
+   "ensemble|spatial": {
+    "season": false,
+    "inner_mae": 189.27949923112584,
+    "holdout_mae": 145.9740004468473,
+    "holdout_rmse": 184.43871250122882
+   },
+   "tweedie_glm|all-season": {
+    "season": false,
+    "inner_mae": 810.4887201741928,
+    "holdout_mae": 696.1485810948948,
+    "holdout_rmse": 1011.4094233831989
+   },
+   "random_forest|all-season": {
+    "season": false,
+    "inner_mae": 228.7181524012841,
+    "holdout_mae": 119.08091160706289,
+    "holdout_rmse": 144.11736446580008
+   },
+   "catboost|all-season": {
+    "season": false,
+    "inner_mae": 235.83439121866235,
+    "holdout_mae": 134.16864190013786,
+    "holdout_rmse": 169.20419019407723
+   },
+   "ensemble|all-season": {
+    "season": false,
+    "inner_mae": 234.52071009058704,
+    "holdout_mae": 130.6848023198003,
+    "holdout_rmse": 147.32955499421251
+   }
+  },
+  "used_for_service": false
+ },
+ "best_config": {
+  "selection": "выбор на тех же фолдах (оптимистично)",
+  "label": "catboost|spatial_geography_no_season",
+  "features": [
+   "x_km",
+   "y_km",
+   "coast_km",
+   "river_weighted_log",
+   "river_total_500km_log",
+   "river_nearest_km"
+  ],
+  "mae": {
+   "mean": 160.19304789941094,
+   "sd": 8.155854916351629
+  },
+  "rmse": {
+   "mean": 215.49994983806465,
+   "sd": 11.531736171539448
+  },
+  "medae": 115.3596921168016,
+  "bias": -15.730537173453502,
+  "mae_log1p": 0.6381911338593671,
+  "spearman": 0.3324915948735391
+ },
+ "baselines": {
+  "median": {
+   "mae": {
+    "mean": 188.09245454545456,
+    "sd": 9.970596966377295
+   },
+   "rmse": {
+    "mean": 252.44914683357788,
+    "sd": 8.008837582701926
+   },
+   "medae": 147.744,
+   "bias": -57.868787878787884,
+   "mae_log1p": 0.7474979253130221,
+   "spearman": -0.4276776036867428
+  },
+  "mean": {
+   "mae": {
+    "mean": 194.76329427193338,
+    "sd": 6.245606163880916
+   },
+   "rmse": {
+    "mean": 246.39180812171745,
+    "sd": 6.8984345998926155
+   },
+   "medae": 171.223394111476,
+   "bias": 9.242563309687515,
+   "mae_log1p": 0.7547440928841678,
+   "spearman": -0.48742354902976376
+  },
+  "nearest_neighbour": {
+   "mae": {
+    "mean": 237.27878787878785,
+    "sd": 19.752352094471007
+   },
+   "rmse": {
+    "mean": 296.21964390728147,
+    "sd": 14.074322577462954
+   },
+   "medae": 213.04399999999995,
+   "bias": 135.86199999999997,
+   "mae_log1p": 0.7791210488432443,
+   "spearman": 0.41161396238326314
+  },
+  "idw_k5": {
+   "mae": {
+    "mean": 160.22699710554267,
+    "sd": 13.58971569829909
+   },
+   "rmse": {
+    "mean": 214.9802700934536,
+    "sd": 15.653276695793958
+   },
+   "medae": 115.31351129484804,
+   "bias": 17.79952983653726,
+   "mae_log1p": 0.6013956190839042,
+   "spearman": 0.4269385026737968
+  }
+ },
+ "spatial_blocks": {
+  "median": {
+   "n": 33,
+   "mae": 183.14439393939392,
+   "rmse": 250.71967788354846,
+   "medae": 140.905,
+   "bias": -67.28136363636364,
+   "mae_log1p": 0.7271588273490105,
+   "spearman": -0.4132701245439714
+  },
+  "idw_k5": {
+   "n": 33,
+   "mae": 181.83478564330517,
+   "rmse": 269.25448596561563,
+   "medae": 139.43198216269798,
+   "bias": -69.01283971235473,
+   "mae_log1p": 0.7773289880904705,
+   "spearman": 0.08522727272727273
+  },
+  "catboost|spatial_geography_no_season": {
+   "n": 33,
+   "mae": 170.38767879072424,
+   "rmse": 252.40081684654442,
+   "medae": 110.3889280982012,
+   "bias": -67.09146770580416,
+   "mae_log1p": 0.6856173491506523,
+   "spearman": 0.0726604279209458
+  }
+ },
+ "top_configs": {
+  "selection": "выбор на тех же фолдах (оптимистично)",
+  "configs": {
+   "catboost|spatial_geography_no_season": {
+    "mae": {
+     "mean": 160.19304789941094,
+     "sd": 8.155854916351629
+    },
+    "rmse": {
+     "mean": 215.49994983806465,
+     "sd": 11.531736171539448
+    },
+    "medae": 115.3596921168016,
+    "bias": -15.730537173453502,
+    "mae_log1p": 0.6381911338593671,
+    "spearman": 0.3324915948735391
+   },
+   "idw_k5": {
+    "mae": {
+     "mean": 160.22699710554267,
+     "sd": 13.58971569829909
+    },
+    "rmse": {
+     "mean": 214.9802700934536,
+     "sd": 15.653276695793958
+    },
+    "medae": 115.31351129484804,
+    "bias": 17.79952983653726,
+    "mae_log1p": 0.6013956190839042,
+    "spearman": 0.4269385026737968
+   },
+   "ensemble|spatial": {
+    "mae": {
+     "mean": 168.83104045967997,
+     "sd": 7.23868930667025
+    },
+    "rmse": {
+     "mean": 218.57268779860811,
+     "sd": 7.959180498305657
+    },
+    "medae": 130.6327170313677,
+    "bias": -15.96132621784299,
+    "mae_log1p": 0.6745677505726189,
+    "spearman": 0.28539438502673803
+   },
+   "ensemble|all": {
+    "mae": {
+     "mean": 172.60328234635853,
+     "sd": 6.28108816307562
+    },
+    "rmse": {
+     "mean": 225.23922826119602,
+     "sd": 10.70285494085187
+    },
+    "medae": 135.04658470195804,
+    "bias": -18.13261598907819,
+    "mae_log1p": 0.680867826806953,
+    "spearman": 0.22155748663101602
+   },
+   "random_forest|spatial_geography_no_season": {
+    "mae": {
+     "mean": 174.50008072871776,
+     "sd": 6.32203629300466
+    },
+    "rmse": {
+     "mean": 226.94086439397014,
+     "sd": 8.473452501478569
+    },
+    "medae": 138.32677908425455,
+    "bias": -41.47865280791255,
+    "mae_log1p": 0.7128306093804004,
+    "spearman": 0.241614642272943
+   },
+   "ensemble|spatial_season": {
+    "mae": {
+     "mean": 176.1869296172283,
+     "sd": 10.869734849242718
+    },
+    "rmse": {
+     "mean": 230.59907500570233,
+     "sd": 12.495009089645224
+    },
+    "medae": 134.40827201919848,
+    "bias": -35.71159898774206,
+    "mae_log1p": 0.7184472221850543,
+    "spearman": 0.08362299465240643
+   },
+   "gp_matern|spatial": {
+    "mae": {
+     "mean": 176.88675635409402,
+     "sd": 7.867683075475327
+    },
+    "rmse": {
+     "mean": 237.58809233978636,
+     "sd": 10.949875015780728
+    },
+    "medae": 146.49104919506593,
+    "bias": -40.536833080253906,
+    "mae_log1p": 0.7137302107185144,
+    "spearman": -0.10987277764239622
+   },
+   "gp_matern|spatial_season": {
+    "mae": {
+     "mean": 184.10883853534088,
+     "sd": 9.064162889954458
+    },
+    "rmse": {
+     "mean": 246.77409465578717,
+     "sd": 12.983680489359056
+    },
+    "medae": 152.31630160171218,
+    "bias": -42.95440258270577,
+    "mae_log1p": 0.7418813417499102,
+    "spearman": -0.2403747347504223
+   },
+   "median": {
+    "mae": {
+     "mean": 188.09245454545456,
+     "sd": 9.970596966377295
+    },
+    "rmse": {
+     "mean": 252.44914683357788,
+     "sd": 8.008837582701926
+    },
+    "medae": 147.744,
+    "bias": -57.868787878787884,
+    "mae_log1p": 0.7474979253130221,
+    "spearman": -0.4276776036867428
+   },
+   "catboost|spatial_weather_no_season": {
+    "mae": {
+     "mean": 191.12133435947456,
+     "sd": 7.759229897141358
+    },
+    "rmse": {
+     "mean": 245.39448608128743,
+     "sd": 11.072882472144391
+    },
+    "medae": 152.25110447622552,
+    "bias": -56.92573641932427,
+    "mae_log1p": 0.780874704401133,
+    "spearman": -0.07117701676442925
+   }
+  }
+ },
+ "ablation": {
+  "selection": "выбор на тех же фолдах (оптимистично)",
+  "feature_sets": {
+   "spatial": {
+    "best_model": "ensemble",
+    "mae": 168.83104045967997
+   },
+   "spatial_season": {
+    "best_model": "ensemble",
+    "mae": 176.1869296172283
+   },
+   "spatial_geography_no_season": {
+    "best_model": "catboost",
+    "mae": 160.19304789941094
+   },
+   "spatial_weather_no_season": {
+    "best_model": "catboost",
+    "mae": 191.12133435947456
+   },
+   "all": {
+    "best_model": "ensemble",
+    "mae": 172.60328234635853
+   }
+  }
+ },
+ "leakage_check": {
+  "checked": [
+   "coast_km",
+   "doy_cos",
+   "doy_sin",
+   "river_nearest_km",
+   "river_total_500km_log",
+   "river_weighted_log",
+   "wave_24h",
+   "wave_now",
+   "wind_24h",
+   "wind_72h",
+   "wind_max_72h",
+   "wind_now",
+   "x_km",
+   "y_km"
+  ],
+  "blocked_in_case_data": [
+   "concentration",
+   "concentration_basis",
+   "concentration_g_km2",
+   "concentration_items_km2",
+   "concentration_unit_orig",
+   "concentration_value_orig",
+   "datetime_start_iso",
+   "density_numerator_items",
+   "event_id",
+   "items_count",
+   "lat_end",
+   "lat_start",
+   "lon_end",
+   "lon_start",
+   "parent_concentration_items_km2",
+   "parent_sample_id",
+   "platform",
+   "provenance",
+   "reported_concentration_g_km2",
+   "reported_concentration_items_km2",
+   "sample_id",
+   "sampled_area_km2",
+   "sea_state_beaufort",
+   "source_doi",
+   "source_event_id",
+   "source_id",
+   "source_object_filtered_items",
+   "source_reported_total_items",
+   "source_row_refs",
+   "source_short",
+   "target_key",
+   "time_end_utc",
+   "time_start_utc",
+   "transect_length_km",
+   "transect_width_m",
+   "wind_speed_kn",
+   "zero_scope"
+  ],
+  "provenance": {
+   "coast_km": {
+    "group": "geography",
+    "case_columns": [
+     "latitude",
+     "longitude"
+    ],
+    "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+    "service_input": "центр района запроса"
+   },
+   "doy_cos": {
+    "group": "season",
+    "case_columns": [
+     "date_utc"
+    ],
+    "external": null,
+    "service_input": "дата снимка или запроса"
+   },
+   "doy_sin": {
+    "group": "season",
+    "case_columns": [
+     "date_utc"
+    ],
+    "external": null,
+    "service_input": "дата снимка или запроса"
+   },
+   "river_nearest_km": {
+    "group": "geography",
+    "case_columns": [
+     "latitude",
+     "longitude"
+    ],
+    "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+    "service_input": "центр района запроса"
+   },
+   "river_total_500km_log": {
+    "group": "geography",
+    "case_columns": [
+     "latitude",
+     "longitude"
+    ],
+    "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+    "service_input": "центр района запроса"
+   },
+   "river_weighted_log": {
+    "group": "geography",
+    "case_columns": [
+     "latitude",
+     "longitude"
+    ],
+    "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+    "service_input": "центр района запроса"
+   },
+   "wave_24h": {
+    "group": "weather",
+    "case_columns": [
+     "latitude",
+     "longitude",
+     "date_utc",
+     "time_start_utc",
+     "time_end_utc"
+    ],
+    "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+    "service_input": "центр района и время снимка"
+   },
+   "wave_now": {
+    "group": "weather",
+    "case_columns": [
+     "latitude",
+     "longitude",
+     "date_utc",
+     "time_start_utc",
+     "time_end_utc"
+    ],
+    "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+    "service_input": "центр района и время снимка"
+   },
+   "wind_24h": {
+    "group": "weather",
+    "case_columns": [
+     "latitude",
+     "longitude",
+     "date_utc",
+     "time_start_utc",
+     "time_end_utc"
+    ],
+    "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+    "service_input": "центр района и время снимка"
+   },
+   "wind_72h": {
+    "group": "weather",
+    "case_columns": [
+     "latitude",
+     "longitude",
+     "date_utc",
+     "time_start_utc",
+     "time_end_utc"
+    ],
+    "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+    "service_input": "центр района и время снимка"
+   },
+   "wind_max_72h": {
+    "group": "weather",
+    "case_columns": [
+     "latitude",
+     "longitude",
+     "date_utc",
+     "time_start_utc",
+     "time_end_utc"
+    ],
+    "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+    "service_input": "центр района и время снимка"
+   },
+   "wind_now": {
+    "group": "weather",
+    "case_columns": [
+     "latitude",
+     "longitude",
+     "date_utc",
+     "time_start_utc",
+     "time_end_utc"
+    ],
+    "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+    "service_input": "центр района и время снимка"
+   },
+   "x_km": {
+    "group": "spatial",
+    "case_columns": [
+     "latitude",
+     "longitude"
+    ],
+    "external": null,
+    "service_input": "центр района запроса"
+   },
+   "y_km": {
+    "group": "spatial",
+    "case_columns": [
+     "latitude",
+     "longitude"
+    ],
+    "external": null,
+    "service_input": "центр района запроса"
+   }
+  },
+  "allowed_time_source": {
+   "observed_at": "observed_at — середина интервала time_start_utc…time_end_utc, без времени — date_utc 12:00 UTC. Это момент наблюдения, по нему берётся ветер и волнение за 72 ч до него. Значение не зависит от числа предметов, площади и концентрации; в сервисе его заменяет время снимка. В аудите time_* помечены survey_only как параметры рейса; как метка времени для погодных признаков они допущены явно, сами в модель не подаются."
+  }
+ },
+ "repetitions": [
+  {
+   "repetition": 0,
+   "nested_mae": 168.20796326060326,
+   "nested_rmse": 220.20325226692202,
+   "nested_coverage": 0.7272727272727273,
+   "baseline_mae": 199.20515151515153,
+   "baseline_rmse": 261.1033995403261,
+   "baseline_coverage": 0.7575757575757576,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "ensemble|all",
+     "inner_mae": 154.757,
+     "test_events": 12,
+     "log_quantile": 1.1268
+    },
+    {
+     "fold": 1,
+     "selected": "idw_k5",
+     "inner_mae": 131.018,
+     "test_events": 5,
+     "log_quantile": 0.846
+    },
+    {
+     "fold": 2,
+     "selected": "random_forest|spatial_geography_no_season",
+     "inner_mae": 169.589,
+     "test_events": 9,
+     "log_quantile": 1.0682
+    },
+    {
+     "fold": 3,
+     "selected": "ensemble|all",
+     "inner_mae": 159.303,
+     "test_events": 3,
+     "log_quantile": 1.1067
+    },
+    {
+     "fold": 4,
+     "selected": "idw_k5",
+     "inner_mae": 158.404,
+     "test_events": 4,
+     "log_quantile": 1.0336
+    }
+   ]
+  },
+  {
+   "repetition": 1,
+   "nested_mae": 182.15618871219755,
+   "nested_rmse": 231.53658891206422,
+   "nested_coverage": 0.7272727272727273,
+   "baseline_mae": 197.1590909090909,
+   "baseline_rmse": 259.73600359234223,
+   "baseline_coverage": 0.7878787878787878,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "idw_k5",
+     "inner_mae": 126.746,
+     "test_events": 5,
+     "log_quantile": 0.9116
+    },
+    {
+     "fold": 1,
+     "selected": "idw_k5",
+     "inner_mae": 170.217,
+     "test_events": 10,
+     "log_quantile": 1.3377
+    },
+    {
+     "fold": 2,
+     "selected": "random_forest|spatial_weather_no_season",
+     "inner_mae": 174.239,
+     "test_events": 9,
+     "log_quantile": 1.0394
+    },
+    {
+     "fold": 3,
+     "selected": "gp_matern|spatial_season",
+     "inner_mae": 175.256,
+     "test_events": 4,
+     "log_quantile": 1.2422
+    },
+    {
+     "fold": 4,
+     "selected": "idw_k5",
+     "inner_mae": 132.803,
+     "test_events": 5,
+     "log_quantile": 0.846
+    }
+   ]
+  },
+  {
+   "repetition": 2,
+   "nested_mae": 242.46523455736053,
+   "nested_rmse": 288.95518302011516,
+   "nested_coverage": 0.696969696969697,
+   "baseline_mae": 178.97909090909093,
+   "baseline_rmse": 243.60153312823022,
+   "baseline_coverage": 0.7878787878787878,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "nearest_neighbour",
+     "inner_mae": 159.279,
+     "test_events": 12,
+     "log_quantile": 1.3949
+    },
+    {
+     "fold": 1,
+     "selected": "idw_k5",
+     "inner_mae": 153.534,
+     "test_events": 6,
+     "log_quantile": 1.1616
+    },
+    {
+     "fold": 2,
+     "selected": "median",
+     "inner_mae": 167.871,
+     "test_events": 8,
+     "log_quantile": 1.0861
+    },
+    {
+     "fold": 3,
+     "selected": "idw_k5",
+     "inner_mae": 141.512,
+     "test_events": 2,
+     "log_quantile": 1.0554
+    },
+    {
+     "fold": 4,
+     "selected": "ensemble|spatial_season",
+     "inner_mae": 159.181,
+     "test_events": 5,
+     "log_quantile": 1.1709
+    }
+   ]
+  },
+  {
+   "repetition": 3,
+   "nested_mae": 173.25221322293262,
+   "nested_rmse": 245.72419790865683,
+   "nested_coverage": 0.7878787878787878,
+   "baseline_mae": 181.15030303030304,
+   "baseline_rmse": 244.33504573793252,
+   "baseline_coverage": 0.8181818181818182,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "random_forest|spatial_geography_no_season",
+     "inner_mae": 174.461,
+     "test_events": 5,
+     "log_quantile": 1.1362
+    },
+    {
+     "fold": 1,
+     "selected": "idw_k5",
+     "inner_mae": 142.991,
+     "test_events": 11,
+     "log_quantile": 0.8414
+    },
+    {
+     "fold": 2,
+     "selected": "catboost|spatial_geography_no_season",
+     "inner_mae": 169.586,
+     "test_events": 4,
+     "log_quantile": 1.2286
+    },
+    {
+     "fold": 3,
+     "selected": "catboost|spatial_geography_no_season",
+     "inner_mae": 167.526,
+     "test_events": 9,
+     "log_quantile": 1.0557
+    },
+    {
+     "fold": 4,
+     "selected": "idw_k5",
+     "inner_mae": 154.187,
+     "test_events": 4,
+     "log_quantile": 1.1638
+    }
+   ]
+  },
+  {
+   "repetition": 4,
+   "nested_mae": 188.3748358877956,
+   "nested_rmse": 223.43192794494558,
+   "nested_coverage": 0.7878787878787878,
+   "baseline_mae": 197.8427272727273,
+   "baseline_rmse": 254.66436568252902,
+   "baseline_coverage": 0.8484848484848485,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "idw_k5",
+     "inner_mae": 151.934,
+     "test_events": 4,
+     "log_quantile": 1.3071
+    },
+    {
+     "fold": 1,
+     "selected": "mean",
+     "inner_mae": 248.634,
+     "test_events": 16,
+     "log_quantile": 1.4975
+    },
+    {
+     "fold": 2,
+     "selected": "ensemble|all",
+     "inner_mae": 156.372,
+     "test_events": 4,
+     "log_quantile": 0.9359
+    },
+    {
+     "fold": 3,
+     "selected": "idw_k5",
+     "inner_mae": 162.748,
+     "test_events": 3,
+     "log_quantile": 1.0557
+    },
+    {
+     "fold": 4,
+     "selected": "ensemble|spatial",
+     "inner_mae": 160.684,
+     "test_events": 6,
+     "log_quantile": 1.1401
+    }
+   ]
+  },
+  {
+   "repetition": 5,
+   "nested_mae": 198.04961864044176,
+   "nested_rmse": 241.60343376871518,
+   "nested_coverage": 0.8484848484848485,
+   "baseline_mae": 174.82939393939392,
+   "baseline_rmse": 243.04935987335676,
+   "baseline_coverage": 0.8484848484848485,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "nearest_neighbour",
+     "inner_mae": 195.848,
+     "test_events": 13,
+     "log_quantile": 1.6327
+    },
+    {
+     "fold": 1,
+     "selected": "idw_k5",
+     "inner_mae": 152.467,
+     "test_events": 6,
+     "log_quantile": 1.2534
+    },
+    {
+     "fold": 2,
+     "selected": "idw_k5",
+     "inner_mae": 172.442,
+     "test_events": 9,
+     "log_quantile": 0.8576
+    },
+    {
+     "fold": 3,
+     "selected": "idw_k5",
+     "inner_mae": 144.193,
+     "test_events": 3,
+     "log_quantile": 0.942
+    },
+    {
+     "fold": 4,
+     "selected": "median",
+     "inner_mae": 184.736,
+     "test_events": 2,
+     "log_quantile": 1.3393
+    }
+   ]
+  },
+  {
+   "repetition": 6,
+   "nested_mae": 225.08204814532905,
+   "nested_rmse": 279.5608516273443,
+   "nested_coverage": 0.6060606060606061,
+   "baseline_mae": 183.6260606060606,
+   "baseline_rmse": 251.49766353514374,
+   "baseline_coverage": 0.7575757575757576,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "ensemble|all",
+     "inner_mae": 219.578,
+     "test_events": 12,
+     "log_quantile": 1.2324
+    },
+    {
+     "fold": 1,
+     "selected": "ensemble|spatial",
+     "inner_mae": 142.051,
+     "test_events": 5,
+     "log_quantile": 1.2126
+    },
+    {
+     "fold": 2,
+     "selected": "idw_k5",
+     "inner_mae": 172.013,
+     "test_events": 4,
+     "log_quantile": 0.8359
+    },
+    {
+     "fold": 3,
+     "selected": "idw_k5",
+     "inner_mae": 164.28,
+     "test_events": 4,
+     "log_quantile": 1.0376
+    },
+    {
+     "fold": 4,
+     "selected": "mean",
+     "inner_mae": 189.316,
+     "test_events": 8,
+     "log_quantile": 0.9689
+    }
+   ]
+  },
+  {
+   "repetition": 7,
+   "nested_mae": 201.18024023532325,
+   "nested_rmse": 264.92528328003436,
+   "nested_coverage": 0.7575757575757576,
+   "baseline_mae": 184.17606060606062,
+   "baseline_rmse": 251.3195940551803,
+   "baseline_coverage": 0.8181818181818182,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "idw_k5",
+     "inner_mae": 133.768,
+     "test_events": 5,
+     "log_quantile": 1.0554
+    },
+    {
+     "fold": 1,
+     "selected": "tweedie_glm|spatial",
+     "inner_mae": 153.767,
+     "test_events": 6,
+     "log_quantile": 1.3615
+    },
+    {
+     "fold": 2,
+     "selected": "idw_k5",
+     "inner_mae": 137.839,
+     "test_events": 3,
+     "log_quantile": 0.8617
+    },
+    {
+     "fold": 3,
+     "selected": "gp_matern|spatial",
+     "inner_mae": 175.427,
+     "test_events": 10,
+     "log_quantile": 1.1532
+    },
+    {
+     "fold": 4,
+     "selected": "ensemble|all",
+     "inner_mae": 193.374,
+     "test_events": 9,
+     "log_quantile": 1.178
+    }
+   ]
+  },
+  {
+   "repetition": 8,
+   "nested_mae": 239.77705423435089,
+   "nested_rmse": 282.72502418167204,
+   "nested_coverage": 0.7878787878787878,
+   "baseline_mae": 181.45909090909092,
+   "baseline_rmse": 248.7375187914872,
+   "baseline_coverage": 0.7575757575757576,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "idw_k5",
+     "inner_mae": 140.037,
+     "test_events": 4,
+     "log_quantile": 1.0149
+    },
+    {
+     "fold": 1,
+     "selected": "nearest_neighbour",
+     "inner_mae": 153.49,
+     "test_events": 13,
+     "log_quantile": 1.1127
+    },
+    {
+     "fold": 2,
+     "selected": "ensemble|spatial",
+     "inner_mae": 189.831,
+     "test_events": 5,
+     "log_quantile": 1.3256
+    },
+    {
+     "fold": 3,
+     "selected": "idw_k5",
+     "inner_mae": 173.665,
+     "test_events": 8,
+     "log_quantile": 1.3305
+    },
+    {
+     "fold": 4,
+     "selected": "ensemble|spatial_season",
+     "inner_mae": 154.528,
+     "test_events": 3,
+     "log_quantile": 1.125
+    }
+   ]
+  },
+  {
+   "repetition": 9,
+   "nested_mae": 205.89084949970314,
+   "nested_rmse": 270.86043458637647,
+   "nested_coverage": 0.696969696969697,
+   "baseline_mae": 202.49757575757576,
+   "baseline_rmse": 266.4469843992507,
+   "baseline_coverage": 0.7878787878787878,
+   "folds": [
+    {
+     "fold": 0,
+     "selected": "nearest_neighbour",
+     "inner_mae": 167.654,
+     "test_events": 6,
+     "log_quantile": 1.3949
+    },
+    {
+     "fold": 1,
+     "selected": "catboost|spatial_geography_no_season",
+     "inner_mae": 158.75,
+     "test_events": 11,
+     "log_quantile": 1.4885
+    },
+    {
+     "fold": 2,
+     "selected": "catboost|spatial_geography_no_season",
+     "inner_mae": 119.824,
+     "test_events": 3,
+     "log_quantile": 0.7819
+    },
+    {
+     "fold": 3,
+     "selected": "catboost|spatial_weather_no_season",
+     "inner_mae": 181.118,
+     "test_events": 9,
+     "log_quantile": 1.0529
+    },
+    {
+     "fold": 4,
+     "selected": "catboost|spatial_geography_no_season",
+     "inner_mae": 171.322,
+     "test_events": 4,
+     "log_quantile": 1.2339
+    }
+   ]
+  }
+ ]
+}

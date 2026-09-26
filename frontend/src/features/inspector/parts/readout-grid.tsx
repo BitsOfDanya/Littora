@@ -18,6 +18,7 @@ type ReadoutProps = {
   glyph?: ReactNode;
   valueFont?: "mono" | "sans";
   tone?: "primary" | "secondary";
+  className?: string;
 };
 
 export function Readout({
@@ -29,9 +30,15 @@ export function Readout({
   glyph,
   valueFont = "mono",
   tone = "primary",
+  className,
 }: ReadoutProps) {
   return (
-    <div className="@container flex min-h-[76px] min-w-0 flex-col gap-0.5 border-r border-b border-line-hairline px-3 py-2">
+    <div
+      className={cn(
+        "@container flex min-h-[76px] min-w-0 flex-col gap-0.5 border-r border-b border-line-hairline px-3 py-2",
+        className,
+      )}
+    >
       <span className="text-[12px] leading-4 text-text-secondary">{label}</span>
       <span className="flex min-w-0 flex-wrap items-baseline gap-x-1.5">
         {glyph ? <span className="self-center">{glyph}</span> : null}

@@ -90,6 +90,12 @@ export function reliabilityOf(horizonH: number): Reliability {
   return "low";
 }
 
+export const UNRATED_RELIABILITY = "надёжность сценария не оценена";
+
+export function reliabilityHint(horizonH: number, graded: boolean): string {
+  return graded ? `надёжность ${RELIABILITY_WORD[reliabilityOf(horizonH)]}` : UNRATED_RELIABILITY;
+}
+
 export const CAUTION_FROM_H = 48;
 
 export function horizonLabel(hours: number): string {

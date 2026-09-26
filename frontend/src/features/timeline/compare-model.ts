@@ -35,8 +35,16 @@ function indexOfScene(scenes: readonly SceneSummary[], id: string | null): numbe
 
 export function defaultPairIds(
   scenes: readonly SceneSummary[],
+  comparable: ReadonlySet<string> = new Set(),
 ): { beforeSceneId: string; afterSceneId: string } | null {
   if (scenes.length < 2) return null;
+  const analysed = scenes.filter((scene) => comparable.has(scene.id));
+  if (analysed.length >= 2) {
+    return {
+      beforeSceneId: analysed[analysed.length - 2].id,
+      afterSceneId: analysed[analysed.length - 1].id,
+    };
+  }
   const usable = scenes.filter(isUsable);
   if (usable.length >= 2) {
     return {
@@ -329,10 +337,22 @@ export function nextDividerPosition(
 
 export type TimeWindow = { start: number; end: number };
 
-export function railWindow(scenes: readonly SceneSummary[], now: number, padDays = 3): TimeWindow {
+const NOW_REACH_DAYS = 60;
+
+export function reachesNow(scenes: readonly SceneSummary[], now: number): boolean {
+  const last = scenes.at(-1);
+  return !last || now - Date.parse(last.acquiredAt) <= NOW_REACH_DAYS * DAY_MS;
+}
+
+export function railWindow(
+  scenes: readonly SceneSummary[],
+  now: number,
+  padDays = 3,
+  includeNow = true,
+): TimeWindow {
   const times = scenes.map((scene) => Date.parse(scene.acquiredAt));
   const first = times.length ? Math.min(...times) : now - 30 * DAY_MS;
-  const last = times.length ? Math.max(...times, now) : now;
+  const last = times.length ? Math.max(...times, ...(includeNow ? [now] : [])) : now;
   return { start: first - padDays * DAY_MS, end: last + padDays * DAY_MS };
 }
 

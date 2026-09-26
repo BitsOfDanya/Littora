@@ -129,9 +129,9 @@ function DatasetRow({ entry }: { entry: DatasetEntry }) {
   );
 }
 
-export function DatasetsSection() {
+export function DatasetsSection({ index = 4 }: { index?: number }) {
   return (
-    <ReportSection id="datasets" index={4}>
+    <ReportSection id="datasets" index={index}>
       <div
         aria-hidden
         className="hidden grid-cols-12 gap-x-6 border-b border-text-primary pb-2 text-[12px] leading-4 font-medium text-text-secondary @4xl:grid"

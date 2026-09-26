@@ -17,10 +17,14 @@ function cellStyle(share: number): CSSProperties {
 type ConfusionMatrixProps = {
   model: ModelEvaluation | null;
   classes: readonly string[];
+  note?: string;
 };
 
-export function ConfusionMatrix({ model, classes }: ConfusionMatrixProps) {
+export function ConfusionMatrix({ model, classes, note }: ConfusionMatrixProps) {
   const shares = model ? rowNormalise(model.confusion.counts) : null;
+  const columns = model?.confusion.predicted ?? classes;
+  const correct = (row: number, col: number) =>
+    columns.includes(classes[row]) ? columns[col] === classes[row] : col === columns.length - 1;
   return (
     <div className="flex flex-col">
       <table className="-mx-[3px] w-[calc(100%+6px)] table-fixed border-separate border-spacing-[3px]">
@@ -29,7 +33,7 @@ export function ConfusionMatrix({ model, classes }: ConfusionMatrixProps) {
         </caption>
         <colgroup>
           <col className="w-[88px] max-sm:w-[76px]" />
-          {classes.map((label) => (
+          {columns.map((label) => (
             <col key={label} />
           ))}
         </colgroup>
@@ -40,7 +44,7 @@ export function ConfusionMatrix({ model, classes }: ConfusionMatrixProps) {
             </td>
             <th
               scope="colgroup"
-              colSpan={classes.length}
+              colSpan={columns.length}
               className="pb-0.5 text-left text-[11px] leading-[14px] font-normal text-text-tertiary"
             >
               прогноз →
@@ -48,7 +52,7 @@ export function ConfusionMatrix({ model, classes }: ConfusionMatrixProps) {
           </tr>
           <tr>
             <td />
-            {classes.map((label) => (
+            {columns.map((label) => (
               <th
                 key={label}
                 scope="col"
@@ -68,7 +72,7 @@ export function ConfusionMatrix({ model, classes }: ConfusionMatrixProps) {
               >
                 {label}
               </th>
-              {classes.map((column, col) => {
+              {columns.map((column, col) => {
                 const share = shares?.[row]?.[col] ?? null;
                 return (
                   <td
@@ -77,8 +81,8 @@ export function ConfusionMatrix({ model, classes }: ConfusionMatrixProps) {
                     className={cn(
                       "h-10 text-center font-mono text-[12px] leading-4 max-sm:h-9",
                       share === null && "bg-surface-sunken text-text-tertiary",
-                      row === col && styles.diagonal,
-                      row === col && "font-semibold",
+                      correct(row, col) && styles.diagonal,
+                      correct(row, col) && "font-semibold",
                     )}
                   >
                     {share === null ? DASH : formatShare(share)}
@@ -89,7 +93,9 @@ export function ConfusionMatrix({ model, classes }: ConfusionMatrixProps) {
           ))}
         </tbody>
       </table>
-      <p className="mt-1.5 text-[12px] leading-4 text-text-tertiary">{MATRIX_COPY.grouping}</p>
+      <p className="mt-1.5 text-[12px] leading-4 text-text-tertiary">
+        {note ?? MATRIX_COPY.grouping}
+      </p>
     </div>
   );
 }

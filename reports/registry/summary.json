@@ -1,27 +1,48 @@
 {
  "unit": "шт./км²",
- "primary_target": "litter-visual",
+ "primary_target": "plastic-visual",
+ "selection_rules": {
+  "record_type": "transect_density",
+  "category_scopes": [
+   "plastic_category",
+   "fisheries_litter_category"
+  ],
+  "exclude_flags": [],
+  "reject_on_mismatch": false
+ },
  "targets": [
   {
    "key": "litter-visual",
-   "primary": true,
+   "primary": false,
    "title": "Плавающий макромусор, визуальный учёт с судна",
    "records": 74,
    "events": 74,
    "profiles": [
     "S3_visual_GT2",
     "S4_visual_GT2_5"
-   ]
+   ],
+   "concentration_checks": {
+    "match": 36,
+    "published_only": 33,
+    "rounding": 5
+   },
+   "verifiable_records": 41,
+   "verifiable_share": 0.5541
   },
   {
    "key": "plastic-visual",
-   "primary": false,
+   "primary": true,
    "title": "Суммарный пластик, визуальный учёт с судна",
    "records": 63,
    "events": 63,
    "profiles": [
     "S2_visual_GT2"
-   ]
+   ],
+   "concentration_checks": {
+    "match": 63
+   },
+   "verifiable_records": 63,
+   "verifiable_share": 1.0
   },
   {
    "key": "plastic-trawl",
@@ -31,7 +52,12 @@
    "events": 83,
    "profiles": [
     "S1_trawl_5_to_50"
-   ]
+   ],
+   "concentration_checks": {
+    "published_only": 83
+   },
+   "verifiable_records": 0,
+   "verifiable_share": 0.0
   }
  ],
  "records": 935,
@@ -47,11 +73,56 @@
   "published_only": 116,
   "rounding": 6
  },
- "generated": "2026-09-25",
+ "provenance": {
+  "dataset": "macroplastic_marine_samples.csv",
+  "dataset_sha256": "30ce0a65e3880b833b5dfe3bc6f528ee5f5af14a0d22f25995f4ef8af585a764",
+  "dataset_rows": 935,
+  "config": "case.toml",
+  "config_sha256": "1b78e22016b3b0cdfb4178985f334c52159a24519ed55ab2510bdbe56d0bc75b",
+  "catalog": "https://earth-search.aws.element84.com/v1",
+  "collections": [
+   "sentinel-2-c1-l2a",
+   "sentinel-2-l2a",
+   "landsat-c2-l2"
+  ],
+  "code_version": "0.1.0",
+  "code_fingerprint": {
+   "sha256": "c75b5577b4dac0a893e003c74f2819be91a6c09d0e72129b48e005fb487da6d6",
+   "files": [
+    "__init__.py",
+    "case/__init__.py",
+    "case/__main__.py",
+    "case/cli.py",
+    "case/concentration.py",
+    "case/config.py",
+    "case/data.py",
+    "case/geometry.py",
+    "case/pairing.py",
+    "case/records.py",
+    "case/registry.py",
+    "case/selection.py",
+    "case/solar.py",
+    "core/__init__.py",
+    "core/config.py",
+    "earth/__init__.py",
+    "earth/catalog.py",
+    "earth/raster.py"
+   ]
+  },
+  "runtime": {
+   "python": "3.12.2",
+   "numpy": "2.5.3",
+   "shapely": "2.1.2",
+   "rasterio": "1.5.1",
+   "geos": "3.13.1",
+   "gdal": "3.12.4"
+  }
+ },
  "catalog": "https://earth-search.aws.element84.com/v1",
  "pairing_rules": {
   "catalog": "https://earth-search.aws.element84.com/v1",
   "sentinel2": "sentinel-2-c1-l2a",
+  "sentinel2_fallback": "sentinel-2-l2a",
   "landsat": "landsat-c2-l2",
   "sentinel2_start": "2015-06-27",
   "window_days": 3,
@@ -59,8 +130,8 @@
   "max_tile_cloud": 40.0,
   "max_time_shift_hours": 12.0,
   "unknown_time_max_days": 0,
-  "unknown_time_uncertainty_hours": 12.0,
-  "point_buffer_m": 2000.0,
+  "daylight_bound": true,
+  "unknown_extent_buffer_m": 6000.0,
   "min_strip_width_m": 100.0,
   "max_footprint_nodata": 0.05,
   "max_footprint_cloud": 0.1,
@@ -70,105 +141,383 @@
   "drift_speed_ms": 0.2
  },
  "events": {
-  "accepted": 9,
+  "accepted": 7,
   "candidate": 1,
   "not_used": 98,
-  "rejected": 210
+  "rejected": 212
  },
  "event_reasons": {
-  "accepted": 9,
+  "accepted": 7,
   "before_mission": 55,
+  "footprint_cloud": 2,
   "no_scene_in_window": 17,
   "no_target": 98,
   "not_acquired": 83,
-  "partial_coverage": 2,
   "quality_unverified": 1,
-  "tile_cloud": 7,
+  "tile_cloud": 9,
   "time_shift": 46
  },
+ "event_reasons_by_source": {
+  "S1_GPGP2018": {
+   "no_target": 98,
+   "not_acquired": 83
+  },
+  "S2_SARGASSO_MSM41": {
+   "before_mission": 51,
+   "no_scene_in_window": 10,
+   "time_shift": 2
+  },
+  "S3_SE_NORTH_SEA": {
+   "before_mission": 4,
+   "no_scene_in_window": 7,
+   "tile_cloud": 7,
+   "time_shift": 23
+  },
+  "S4_BLACK_SEA_DOORS3": {
+   "accepted": 7,
+   "footprint_cloud": 2,
+   "quality_unverified": 1,
+   "tile_cloud": 2,
+   "time_shift": 21
+  }
+ },
+ "event_reasons_by_target": {
+  "litter-visual": {
+   "accepted": 7,
+   "before_mission": 4,
+   "footprint_cloud": 2,
+   "no_scene_in_window": 7,
+   "quality_unverified": 1,
+   "tile_cloud": 9,
+   "time_shift": 44
+  },
+  "plastic-trawl": {
+   "not_acquired": 83
+  },
+  "plastic-visual": {
+   "before_mission": 51,
+   "no_scene_in_window": 10,
+   "time_shift": 2
+  }
+ },
+ "scene_candidates": 230,
+ "tile_duplicates": 78,
+ "scene_passes": 152,
  "pairs": {
-  "accepted": 11,
+  "accepted": 7,
   "candidate": 3,
-  "rejected": 193
+  "rejected": 142
  },
  "pair_reasons": {
-  "accepted": 11,
-  "partial_coverage": 6,
+  "accepted": 7,
+  "footprint_cloud": 2,
   "quality_unverified": 3,
-  "tile_cloud": 17,
-  "time_shift": 170
+  "tile_cloud": 11,
+  "time_shift": 129
+ },
+ "pair_collections": {
+  "landsat-c2-l2": 84,
+  "sentinel-2-c1-l2a": 68
+ },
+ "time_offset_hours": {
+  "time_known": {
+   "measure": "abs_shift",
+   "all_pairs": {
+    "n": 45,
+    "min": 0.85,
+    "q1": 19.62,
+    "median": 28.83,
+    "q3": 53.32,
+    "max": 78.19
+   },
+   "accepted_pairs": null,
+   "bins_all_pairs": {
+    "0-3 h": 2,
+    "3-6 h": 3,
+    "6-12 h": 2,
+    "12-24 h": 11,
+    "1-3 d": 23,
+    "> 3 d": 4
+   }
+  },
+  "daylight_bounded": {
+   "measure": "upper_bound",
+   "all_pairs": {
+    "n": 107,
+    "min": 8.46,
+    "q1": 30.61,
+    "median": 54.29,
+    "q3": 78.28,
+    "max": 80.86
+   },
+   "accepted_pairs": {
+    "n": 7,
+    "min": 8.46,
+    "q1": 8.53,
+    "median": 8.6,
+    "q3": 8.62,
+    "max": 8.63
+   },
+   "bins_all_pairs": {
+    "0-3 h": 0,
+    "3-6 h": 0,
+    "6-12 h": 16,
+    "12-24 h": 0,
+    "1-3 d": 60,
+    "> 3 d": 31
+   }
+  },
+  "day_only": {
+   "measure": "upper_bound",
+   "all_pairs": null,
+   "accepted_pairs": null,
+   "bins_all_pairs": {
+    "0-3 h": 0,
+    "3-6 h": 0,
+    "6-12 h": 0,
+    "12-24 h": 0,
+    "1-3 d": 0,
+    "> 3 d": 0
+   }
+  }
+ },
+ "sync_accepted_events": {
+  "daylight_bounded": 7
+ },
+ "quality": {
+  "evaluated_pairs": 9,
+  "pixels": {
+   "n": 9,
+   "min": 281261.0,
+   "q1": 281321.0,
+   "median": 281351.0,
+   "q3": 281587.0,
+   "max": 281674.0
+  },
+  "water": {
+   "n": 9,
+   "min": 0.6772,
+   "q1": 1.0,
+   "median": 1.0,
+   "q3": 1.0,
+   "max": 1.0
+  },
+  "cloud": {
+   "n": 9,
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 0.0,
+   "q3": 0.0,
+   "max": 0.145
+  },
+  "shadow": {
+   "n": 9,
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 0.0,
+   "q3": 0.0,
+   "max": 0.0244
+  },
+  "nodata": {
+   "n": 9,
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 0.0,
+   "q3": 0.0,
+   "max": 0.0
+  },
+  "land": {
+   "n": 9,
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 0.0,
+   "q3": 0.0,
+   "max": 0.1412
+  },
+  "other": {
+   "n": 9,
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 0.0,
+   "q3": 0.0,
+   "max": 0.0122
+  },
+  "bright_water": {
+   "n": 9,
+   "min": 0.0,
+   "q1": 0.0,
+   "median": 0.0,
+   "q3": 0.0004,
+   "max": 0.0603
+  }
  },
  "accepted_pairs": [
   {
    "event_id": "S4:DOORS3:T1",
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "sample_ids": [
+    "MPL-0904"
+   ],
+   "target_keys": [
+    "litter-visual"
+   ],
    "scene_id": "S2A_T35TQJ_20240602T084613_L2A",
+   "collection": "sentinel-2-c1-l2a",
    "platform": "S2A",
+   "tile": "35TQJ",
+   "pass_id": "S2A_R107_20240602",
+   "scene_datetime": "2024-06-02T08:58:16.484000Z",
    "shift_days": 0,
    "shift_hours": null,
+   "time_uncertainty_hours": 8.63,
+   "sync": "daylight_bounded",
+   "footprint_kind": "point",
+   "footprint_radius_m": 6000.0,
+   "coverage_fraction": 1.0,
    "water": 1.0
   },
   {
    "event_id": "S4:DOORS3:T18",
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "sample_ids": [
+    "MPL-0921"
+   ],
+   "target_keys": [
+    "litter-visual"
+   ],
    "scene_id": "S2B_T37TFG_20240605T081237_L2A",
+   "collection": "sentinel-2-c1-l2a",
    "platform": "S2B",
+   "tile": "37TFG",
+   "pass_id": "S2B_R078_20240605",
+   "scene_datetime": "2024-06-05T08:18:24.671000Z",
    "shift_days": 0,
    "shift_hours": null,
+   "time_uncertainty_hours": 8.47,
+   "sync": "daylight_bounded",
+   "footprint_kind": "point",
+   "footprint_radius_m": 6000.0,
+   "coverage_fraction": 1.0,
    "water": 1.0
   },
   {
    "event_id": "S4:DOORS3:T19",
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "sample_ids": [
+    "MPL-0920"
+   ],
+   "target_keys": [
+    "litter-visual"
+   ],
    "scene_id": "S2B_T37TFG_20240605T081237_L2A",
+   "collection": "sentinel-2-c1-l2a",
    "platform": "S2B",
+   "tile": "37TFG",
+   "pass_id": "S2B_R078_20240605",
+   "scene_datetime": "2024-06-05T08:18:24.671000Z",
    "shift_days": 0,
    "shift_hours": null,
+   "time_uncertainty_hours": 8.46,
+   "sync": "daylight_bounded",
+   "footprint_kind": "point",
+   "footprint_radius_m": 6000.0,
+   "coverage_fraction": 1.0,
    "water": 1.0
   },
   {
    "event_id": "S4:DOORS3:T2",
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "sample_ids": [
+    "MPL-0903"
+   ],
+   "target_keys": [
+    "litter-visual"
+   ],
    "scene_id": "S2A_T35TQJ_20240602T084613_L2A",
+   "collection": "sentinel-2-c1-l2a",
    "platform": "S2A",
+   "tile": "35TQJ",
+   "pass_id": "S2A_R107_20240602",
+   "scene_datetime": "2024-06-02T08:58:16.484000Z",
    "shift_days": 0,
    "shift_hours": null,
+   "time_uncertainty_hours": 8.62,
+   "sync": "daylight_bounded",
+   "footprint_kind": "point",
+   "footprint_radius_m": 6000.0,
+   "coverage_fraction": 1.0,
    "water": 1.0
   },
   {
-   "event_id": "S4:DOORS3:T20",
-   "scene_id": "S2A_T37TGG_20240607T080029_L2A",
-   "platform": "S2A",
-   "shift_days": 0,
-   "shift_hours": null,
-   "water": 0.9962242416485345
-  },
-  {
-   "event_id": "S4:DOORS3:T21",
-   "scene_id": "S2A_T37TGG_20240607T080029_L2A",
-   "platform": "S2A",
-   "shift_days": 0,
-   "shift_hours": null,
-   "water": 0.9664139717877362
-  },
-  {
    "event_id": "S4:DOORS3:T30",
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "sample_ids": [
+    "MPL-0934"
+   ],
+   "target_keys": [
+    "litter-visual"
+   ],
    "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "collection": "sentinel-2-c1-l2a",
    "platform": "S2B",
+   "tile": "36TUN",
+   "pass_id": "S2B_R107_20240617",
+   "scene_datetime": "2024-06-17T08:58:25.997000Z",
    "shift_days": 0,
    "shift_hours": null,
+   "time_uncertainty_hours": 8.59,
+   "sync": "daylight_bounded",
+   "footprint_kind": "point",
+   "footprint_radius_m": 6000.0,
+   "coverage_fraction": 1.0,
    "water": 1.0
   },
   {
    "event_id": "S4:DOORS3:T31",
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "sample_ids": [
+    "MPL-0933"
+   ],
+   "target_keys": [
+    "litter-visual"
+   ],
    "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "collection": "sentinel-2-c1-l2a",
    "platform": "S2B",
+   "tile": "36TUN",
+   "pass_id": "S2B_R107_20240617",
+   "scene_datetime": "2024-06-17T08:58:25.997000Z",
    "shift_days": 0,
    "shift_hours": null,
+   "time_uncertainty_hours": 8.6,
+   "sync": "daylight_bounded",
+   "footprint_kind": "point",
+   "footprint_radius_m": 6000.0,
+   "coverage_fraction": 1.0,
    "water": 1.0
   },
   {
    "event_id": "S4:DOORS3:T32",
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "sample_ids": [
+    "MPL-0932"
+   ],
+   "target_keys": [
+    "litter-visual"
+   ],
    "scene_id": "S2B_T36TUN_20240617T085403_L2A",
+   "collection": "sentinel-2-c1-l2a",
    "platform": "S2B",
+   "tile": "36TUN",
+   "pass_id": "S2B_R107_20240617",
+   "scene_datetime": "2024-06-17T08:58:25.997000Z",
    "shift_days": 0,
    "shift_hours": null,
+   "time_uncertainty_hours": 8.62,
+   "sync": "daylight_bounded",
+   "footprint_kind": "point",
+   "footprint_radius_m": 6000.0,
+   "coverage_fraction": 1.0,
    "water": 1.0
   }
  ]

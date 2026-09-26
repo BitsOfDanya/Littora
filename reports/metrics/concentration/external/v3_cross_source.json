@@ -1,0 +1,2389 @@
+{
+ "v3_doors_to_burgas": {
+  "design": "v3_doors_to_burgas",
+  "title": "V3: перенос doors → burgas",
+  "test_rows": 84,
+  "test_groups": 11,
+  "folds": 1,
+  "notes": [
+   "уровень плотности зависит от метода (ширина полосы, наблюдатель, судно); перенос уровня между источниками ожидаемо не работает — смотрим Spearman",
+   "группы бутстрэпа: кампании Бургаса или дни DOORS в тестовом источнике"
+  ],
+  "spearman_note": "spearman — по всем тестовым строкам сразу, смешивает фолды: у предсказания, постоянного внутри фолда (медиана), он отражает смену обучающей выборки, а не ранжирование; spearman_within_folds — среднее по фолдам (внутри отложенной кампании или трансекты)",
+  "baselines": {
+   "median": {
+    "n": 84,
+    "mae": 383.3619047619048,
+    "rmse": 710.6860191593553,
+    "medae": 224.92,
+    "bias": -178.00857142857143,
+    "mae_log1p": 2.361517373461327,
+    "spearman": null,
+    "spearman_within_folds": {
+     "mean": null,
+     "folds_defined": 0,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 4.322292244569965,
+     "median_ratio": 1.5197297297297296,
+     "mean_ratio": 0.5582130827867398
+    },
+    "ci95": {
+     "mae": [
+      220.381893939394,
+      610.9814318181817
+     ],
+     "rmse": [
+      288.0120937948435,
+      1080.5398991524182
+     ],
+     "mae_log1p": [
+      1.6290882078076994,
+      3.167157282428447
+     ],
+     "bias": [
+      -460.192784090909,
+      52.175397727272724
+     ],
+     "spearman": null
+    }
+   },
+   "idw_k5": {
+    "n": 84,
+    "mae": 400.29520440612475,
+    "rmse": 696.3586754034831,
+    "medae": 295.34405041583693,
+    "bias": -107.09952432610537,
+    "mae_log1p": 2.426680607732542,
+    "spearman": -0.23975321547659872,
+    "spearman_within_folds": {
+     "mean": -0.23975321547659872,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 5.678919603159854,
+     "median_ratio": 1.9996561745610009,
+     "mean_ratio": 0.7341972450690523
+    },
+    "ci95": {
+     "mae": [
+      254.4416196353549,
+      607.7005356680664
+     ],
+     "rmse": [
+      307.20888166920855,
+      1052.4621733461581
+     ],
+     "mae_log1p": [
+      1.6228421161047464,
+      3.318204952021738
+     ],
+     "bias": [
+      -389.2896247876226,
+      123.08429763475928
+     ],
+     "spearman": [
+      -0.381607067353374,
+      -0.09468290499198609
+     ]
+    }
+   }
+  },
+  "nested": {
+   "n": 84,
+   "mae": 400.29520440612475,
+   "rmse": 696.3586754034831,
+   "medae": 295.34405041583693,
+   "bias": -107.09952432610537,
+   "mae_log1p": 2.426680607732542,
+   "spearman": -0.23975321547659872,
+   "spearman_within_folds": {
+    "mean": -0.23975321547659872,
+    "folds_defined": 1,
+    "folds": 1
+   },
+   "level": {
+    "geometric_ratio": 5.678919603159854,
+    "median_ratio": 1.9996561745610009,
+    "mean_ratio": 0.7341972450690523
+   },
+   "ci95": {
+    "mae": [
+     254.4416196353549,
+     607.7005356680664
+    ],
+    "rmse": [
+     307.20888166920855,
+     1052.4621733461581
+    ],
+    "mae_log1p": [
+     1.6228421161047464,
+     3.318204952021738
+    ],
+    "bias": [
+     -389.2896247876226,
+     123.08429763475928
+    ],
+    "spearman": [
+     -0.381607067353374,
+     -0.09468290499198609
+    ]
+   },
+   "selection": "вариант (модель|набор признаков или базовая линия) выбран по MAE внутренней CV на обучающей части, группы внутренней CV не пересекаются с тестом",
+   "selected": [
+    "idw_k5"
+   ]
+  },
+  "folds_detail": [
+   {
+    "fold": "doors->burgas",
+    "selected": "idw_k5",
+    "inner_mae": 186.12149137523159,
+    "train_rows": 33,
+    "test_rows": 84
+   }
+  ],
+  "difference": {
+   "nested_minus_median": {
+    "mae": {
+     "mean": 16.933299644219858,
+     "confidence": 0.95,
+     "ci": [
+      -6.708363053377154,
+      40.33728805362299
+     ],
+     "relative": 0.04417053294519872,
+     "relative_ci": [
+      -0.01355545721449176,
+      0.1668856839616234
+     ]
+    },
+    "rmse": {
+     "mean": -14.32734375587222,
+     "confidence": 0.95,
+     "ci": [
+      -29.16421100644255,
+      19.82034493269462
+     ],
+     "relative": -0.02015987844086129,
+     "relative_ci": [
+      -0.037630502692996226,
+      0.06878166155980048
+     ]
+    },
+    "model_better": false
+   },
+   "nested_minus_idw_k5": {
+    "mae": {
+     "mean": 0.0,
+     "confidence": 0.95,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "relative": 0.0,
+     "relative_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "rmse": {
+     "mean": 0.0,
+     "confidence": 0.95,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "relative": 0.0,
+     "relative_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "model_better": false
+   }
+  },
+  "pools": {
+   "selection": "вложенный выбор по внутренней CV внутри подмножества вариантов: models_only — только модели зоопарка без базовых линий; with_weather / without_weather — с погодными признаками и без них (без погоды входят и базовые линии)",
+   "models_only": {
+    "n": 84,
+    "mae": 406.5442100049991,
+    "rmse": 694.8046013618788,
+    "medae": 268.4330523243197,
+    "bias": -95.37648099589396,
+    "mae_log1p": 2.4461214809009597,
+    "spearman": -0.17507932028023443,
+    "spearman_within_folds": {
+     "mean": -0.17507932028023443,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 5.881637951528382,
+     "median_ratio": 2.111562279365221,
+     "mean_ratio": 0.7632918394003694
+    },
+    "ci95": {
+     "mae": [
+      263.48252404319265,
+      606.2494373234548
+     ],
+     "rmse": [
+      318.63300196315265,
+      1043.7949589772584
+     ],
+     "mae_log1p": [
+      1.6202815455303508,
+      3.3631296468480976
+     ],
+     "bias": [
+      -373.9065492759613,
+      140.0756508852863
+     ],
+     "spearman": [
+      -0.541108910820317,
+      0.21092216870473807
+     ]
+    },
+    "selected": [
+     "random_forest|all"
+    ]
+   },
+   "with_weather": {
+    "n": 84,
+    "mae": 406.5442100049991,
+    "rmse": 694.8046013618788,
+    "medae": 268.4330523243197,
+    "bias": -95.37648099589396,
+    "mae_log1p": 2.4461214809009597,
+    "spearman": -0.17507932028023443,
+    "spearman_within_folds": {
+     "mean": -0.17507932028023443,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 5.881637951528382,
+     "median_ratio": 2.111562279365221,
+     "mean_ratio": 0.7632918394003694
+    },
+    "ci95": {
+     "mae": [
+      263.48252404319265,
+      606.2494373234548
+     ],
+     "rmse": [
+      318.63300196315265,
+      1043.7949589772584
+     ],
+     "mae_log1p": [
+      1.6202815455303508,
+      3.3631296468480976
+     ],
+     "bias": [
+      -373.9065492759613,
+      140.0756508852863
+     ],
+     "spearman": [
+      -0.541108910820317,
+      0.21092216870473807
+     ]
+    },
+    "selected": [
+     "random_forest|all"
+    ]
+   },
+   "without_weather": {
+    "n": 84,
+    "mae": 400.29520440612475,
+    "rmse": 696.3586754034831,
+    "medae": 295.34405041583693,
+    "bias": -107.09952432610537,
+    "mae_log1p": 2.426680607732542,
+    "spearman": -0.23975321547659872,
+    "spearman_within_folds": {
+     "mean": -0.23975321547659872,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 5.678919603159854,
+     "median_ratio": 1.9996561745610009,
+     "mean_ratio": 0.7341972450690523
+    },
+    "ci95": {
+     "mae": [
+      254.4416196353549,
+      607.7005356680664
+     ],
+     "rmse": [
+      307.20888166920855,
+      1052.4621733461581
+     ],
+     "mae_log1p": [
+      1.6228421161047464,
+      3.318204952021738
+     ],
+     "bias": [
+      -389.2896247876226,
+      123.08429763475928
+     ],
+     "spearman": [
+      -0.381607067353374,
+      -0.09468290499198609
+     ]
+    },
+    "selected": [
+     "idw_k5"
+    ]
+   },
+   "differences": {
+    "models_only_minus_median": {
+     "mae": {
+      "mean": 23.182305243093992,
+      "confidence": 0.95,
+      "ci": [
+       -8.401638281630785,
+       54.89161410217031
+      ],
+      "relative": 0.06047107173440161,
+      "relative_ci": [
+       -0.015931047282335586,
+       0.22478212209612022
+      ]
+     },
+     "rmse": {
+      "mean": -15.881417797476502,
+      "confidence": 0.95,
+      "ci": [
+       -37.34300117437624,
+       31.405741915594405
+      ],
+      "relative": -0.022346602253780164,
+      "relative_ci": [
+       -0.03889642605167173,
+       0.10045309628330389
+      ]
+     },
+     "model_better": false
+    },
+    "models_only_minus_idw_k5": {
+     "mae": {
+      "mean": 6.249005598874135,
+      "confidence": 0.95,
+      "ci": [
+       -3.306680620370423,
+       16.578557020539396
+      ],
+      "relative": 0.015610992912455986,
+      "relative_ci": [
+       -0.0064694283413530805,
+       0.055342613181268985
+      ]
+     },
+     "rmse": {
+      "mean": -1.5540740416042809,
+      "confidence": 0.95,
+      "ci": [
+       -9.826518823124607,
+       13.141229574021619
+      ],
+      "relative": -0.0022317149143059383,
+      "relative_ci": [
+       -0.009689914229315904,
+       0.03829813314939304
+      ]
+     },
+     "model_better": false
+    },
+    "with_weather_minus_without_weather": {
+     "mae": {
+      "mean": 6.249005598874135,
+      "confidence": 0.95,
+      "ci": [
+       -3.306680620370423,
+       16.578557020539396
+      ],
+      "relative": 0.015610992912455986,
+      "relative_ci": [
+       -0.0064694283413530805,
+       0.055342613181268985
+      ]
+     },
+     "rmse": {
+      "mean": -1.5540740416042809,
+      "confidence": 0.95,
+      "ci": [
+       -9.826518823124607,
+       13.141229574021619
+      ],
+      "relative": -0.0022317149143059383,
+      "relative_ci": [
+       -0.009689914229315904,
+       0.03829813314939304
+      ]
+     },
+     "model_better": false
+    }
+   }
+  },
+  "options": {
+   "selection": "справочно: выбор лучшего варианта по этим числам был бы выбором на тесте",
+   "metrics": {
+    "median": {
+     "n": 84,
+     "mae": 383.3619047619048,
+     "rmse": 710.6860191593553,
+     "medae": 224.92,
+     "bias": -178.00857142857143,
+     "mae_log1p": 2.361517373461327,
+     "spearman": null
+    },
+    "idw_k5": {
+     "n": 84,
+     "mae": 400.29520440612475,
+     "rmse": 696.3586754034831,
+     "medae": 295.34405041583693,
+     "bias": -107.09952432610537,
+     "mae_log1p": 2.426680607732542,
+     "spearman": -0.23975321547659872
+    },
+    "ridge_log|season_weather": {
+     "n": 84,
+     "mae": 762.0308898394456,
+     "rmse": 1005.6269325161353,
+     "medae": 488.4469599218125,
+     "bias": 484.8570149943771,
+     "mae_log1p": 2.8793615996210398,
+     "spearman": 0.012575026525570326
+    },
+    "ridge_log|context": {
+     "n": 84,
+     "mae": 1496.4204548903372,
+     "rmse": 2520.1458177142285,
+     "medae": 675.7023560905222,
+     "bias": 1255.472542738303,
+     "mae_log1p": 3.117850316892001,
+     "spearman": -0.10339872800261296
+    },
+    "ridge_log|all": {
+     "n": 84,
+     "mae": 510.8750731349713,
+     "rmse": 743.9352789200848,
+     "medae": 324.1889120660887,
+     "bias": 49.02426766498741,
+     "mae_log1p": 2.588349679122217,
+     "spearman": -0.1281571848769941
+    },
+    "tweedie_glm|season_weather": {
+     "n": 84,
+     "mae": 60491.18092907504,
+     "rmse": 106233.51600401354,
+     "medae": 4407.6268662623215,
+     "bias": 60473.90900913185,
+     "mae_log1p": 5.14202184177877,
+     "spearman": -0.06883822874439972
+    },
+    "tweedie_glm|context": {
+     "n": 84,
+     "mae": 9974.486927907987,
+     "rmse": 26030.499663741408,
+     "medae": 891.4130940015255,
+     "bias": 9663.286624235196,
+     "mae_log1p": 3.6852742607965205,
+     "spearman": -0.14873604362621984
+    },
+    "tweedie_glm|all": {
+     "n": 84,
+     "mae": 2203.4043411852003,
+     "rmse": 4700.426174296508,
+     "medae": 616.4866572627889,
+     "bias": 1863.2823041257896,
+     "mae_log1p": 3.097102855836291,
+     "spearman": -0.11203587782282326
+    },
+    "gp_matern|season_weather": {
+     "n": 84,
+     "mae": 381.34779259762865,
+     "rmse": 713.4765572444104,
+     "medae": 214.0867555857716,
+     "bias": -188.84181584279983,
+     "mae_log1p": 2.352398230579471,
+     "spearman": null
+    },
+    "gp_matern|context": {
+     "n": 84,
+     "mae": 381.34779259762865,
+     "rmse": 713.4765572444104,
+     "medae": 214.0867555857716,
+     "bias": -188.84181584279983,
+     "mae_log1p": 2.352398230579471,
+     "spearman": null
+    },
+    "gp_matern|all": {
+     "n": 84,
+     "mae": 381.5521770253203,
+     "rmse": 713.5154639812652,
+     "medae": 214.02201285176554,
+     "bias": -188.6186983912316,
+     "mae_log1p": 2.3533215584485134,
+     "spearman": 0.04438081867306649
+    },
+    "random_forest|season_weather": {
+     "n": 84,
+     "mae": 398.4948259197761,
+     "rmse": 708.3368946263702,
+     "medae": 239.8803643705425,
+     "bias": -146.46276427731058,
+     "mae_log1p": 2.4208409232695645,
+     "spearman": -0.14270425365841147
+    },
+    "random_forest|context": {
+     "n": 84,
+     "mae": 405.50844693809233,
+     "rmse": 693.9736511975402,
+     "medae": 266.6583749924113,
+     "bias": -97.43210920053586,
+     "mae_log1p": 2.441648070174889,
+     "spearman": -0.13385008577160232
+    },
+    "random_forest|all": {
+     "n": 84,
+     "mae": 406.5442100049991,
+     "rmse": 694.8046013618788,
+     "medae": 268.4330523243197,
+     "bias": -95.37648099589396,
+     "mae_log1p": 2.4461214809009597,
+     "spearman": -0.17507932028023443
+    },
+    "catboost|season_weather": {
+     "n": 84,
+     "mae": 383.6627548819208,
+     "rmse": 709.0998614687423,
+     "medae": 195.42222506494608,
+     "bias": -161.46786184162656,
+     "mae_log1p": 2.3508713872705247,
+     "spearman": 0.12449832623276498
+    },
+    "catboost|context": {
+     "n": 84,
+     "mae": 381.2476685677792,
+     "rmse": 714.3380826083642,
+     "medae": 215.74788512174993,
+     "bias": -193.7811605345271,
+     "mae_log1p": 2.3483274946629957,
+     "spearman": -0.10178093893731861
+    },
+    "catboost|all": {
+     "n": 84,
+     "mae": 385.6850460397728,
+     "rmse": 715.9545978701375,
+     "medae": 208.5514055786161,
+     "bias": -190.5563730775635,
+     "mae_log1p": 2.3707016512081176,
+     "spearman": -0.20253550126676698
+    }
+   }
+  },
+  "leakage_check": {
+   "checked": [
+    "coast_km",
+    "doy_cos",
+    "doy_sin",
+    "river_nearest_km",
+    "river_total_500km_log",
+    "river_weighted_log",
+    "wave_24h",
+    "wave_now",
+    "wind_24h",
+    "wind_72h",
+    "wind_max_72h",
+    "wind_now",
+    "x_km",
+    "y_km"
+   ],
+   "blocked_in_case_data": [
+    "concentration",
+    "concentration_basis",
+    "concentration_g_km2",
+    "concentration_items_km2",
+    "concentration_unit_orig",
+    "concentration_value_orig",
+    "datetime_start_iso",
+    "density_numerator_items",
+    "event_id",
+    "items_count",
+    "lat_end",
+    "lat_start",
+    "lon_end",
+    "lon_start",
+    "parent_concentration_items_km2",
+    "parent_sample_id",
+    "platform",
+    "provenance",
+    "reported_concentration_g_km2",
+    "reported_concentration_items_km2",
+    "sample_id",
+    "sampled_area_km2",
+    "sea_state_beaufort",
+    "source_doi",
+    "source_event_id",
+    "source_id",
+    "source_object_filtered_items",
+    "source_reported_total_items",
+    "source_row_refs",
+    "source_short",
+    "target_key",
+    "time_end_utc",
+    "time_start_utc",
+    "transect_length_km",
+    "transect_width_m",
+    "wind_speed_kn",
+    "zero_scope"
+   ],
+   "provenance": {
+    "coast_km": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "doy_cos": {
+     "group": "season",
+     "case_columns": [
+      "date_utc"
+     ],
+     "external": null,
+     "service_input": "дата снимка или запроса"
+    },
+    "doy_sin": {
+     "group": "season",
+     "case_columns": [
+      "date_utc"
+     ],
+     "external": null,
+     "service_input": "дата снимка или запроса"
+    },
+    "river_nearest_km": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "river_total_500km_log": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "river_weighted_log": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "wave_24h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wave_now": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_24h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_72h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_max_72h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_now": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "x_km": {
+     "group": "spatial",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": null,
+     "service_input": "центр района запроса"
+    },
+    "y_km": {
+     "group": "spatial",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": null,
+     "service_input": "центр района запроса"
+    }
+   },
+   "allowed_time_source": {
+    "observed_at": "observed_at — середина интервала time_start_utc…time_end_utc, без времени — date_utc 12:00 UTC. Это момент наблюдения, по нему берётся ветер и волнение за 72 ч до него. Значение не зависит от числа предметов, площади и концентрации; в сервисе его заменяет время снимка. В аудите time_* помечены survey_only как параметры рейса; как метка времени для погодных признаков они допущены явно, сами в модель не подаются."
+   },
+   "design_columns": {}
+  },
+  "options_count": 17
+ },
+ "v3_burgas_to_doors": {
+  "design": "v3_burgas_to_doors",
+  "title": "V3: перенос burgas → doors",
+  "test_rows": 33,
+  "test_groups": 12,
+  "folds": 1,
+  "notes": [
+   "уровень плотности зависит от метода (ширина полосы, наблюдатель, судно); перенос уровня между источниками ожидаемо не работает — смотрим Spearman",
+   "группы бутстрэпа: кампании Бургаса или дни DOORS в тестовом источнике"
+  ],
+  "spearman_note": "spearman — по всем тестовым строкам сразу, смешивает фолды: у предсказания, постоянного внутри фолда (медиана), он отражает смену обучающей выборки, а не ранжирование; spearman_within_folds — среднее по фолдам (внутри отложенной кампании или трансекты)",
+  "baselines": {
+   "median": {
+    "n": 33,
+    "mae": 183.45878787878786,
+    "rmse": 269.4153071622571,
+    "medae": 99.03,
+    "bias": -142.4509090909091,
+    "mae_log1p": 0.7476393890490759,
+    "spearman": null,
+    "spearman_within_folds": {
+     "mean": null,
+     "folds_defined": 0,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 0.6927437237788555,
+     "median_ratio": 0.6580117375066691,
+     "mean_ratio": 0.5095525452587825
+    },
+    "ci95": {
+     "mae": [
+      127.22119375000001,
+      283.2919233333333
+     ],
+     "rmse": [
+      182.8841219364437,
+      390.74231070660255
+     ],
+     "mae_log1p": [
+      0.6446153814459372,
+      0.9469157534321417
+     ],
+     "bias": [
+      -259.31282363636365,
+      -56.941031521739134
+     ],
+     "spearman": null
+    }
+   },
+   "idw_k5": {
+    "n": 33,
+    "mae": 191.43995679257054,
+    "rmse": 270.14163759023114,
+    "medae": 101.6087686617254,
+    "bias": -134.91426027121108,
+    "mae_log1p": 0.9225228892007514,
+    "spearman": 0.11120499009299242,
+    "spearman_within_folds": {
+     "mean": 0.11120499009299242,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 0.641067307523174,
+     "median_ratio": 0.7511504920048258,
+     "mean_ratio": 0.5355006438317467
+    },
+    "ci95": {
+     "mae": [
+      137.64722130875336,
+      293.8618092111172
+     ],
+     "rmse": [
+      190.87181544180154,
+      393.00058728477995
+     ],
+     "mae_log1p": [
+      0.6667605268273163,
+      1.4258549108716285
+     ],
+     "bias": [
+      -260.3093340194083,
+      -43.621897865131935
+     ],
+     "spearman": [
+      -0.17473419596597958,
+      0.4375340156024626
+     ]
+    }
+   }
+  },
+  "nested": {
+   "n": 33,
+   "mae": 244.25879341307174,
+   "rmse": 334.397922415386,
+   "medae": 178.03255997196365,
+   "bias": -244.25879341307174,
+   "mae_log1p": 1.527702678161409,
+   "spearman": 0.03392663168860264,
+   "spearman_within_folds": {
+    "mean": 0.03392663168860264,
+    "folds_defined": 1,
+    "folds": 1
+   },
+   "level": {
+    "geometric_ratio": 0.21703369127499003,
+    "median_ratio": 0.21031734569647417,
+    "mean_ratio": 0.1590358791522307
+   },
+   "ci95": {
+    "mae": [
+     157.5770604937226,
+     361.14818605023487
+    ],
+    "rmse": [
+     240.5199437853877,
+     461.4385182488918
+    ],
+    "mae_log1p": [
+     1.0900406158553124,
+     1.9513158196440736
+    ],
+    "bias": [
+     -361.14818605023487,
+     -157.57706049372263
+    ],
+    "spearman": [
+     -0.3969379045705208,
+     0.4890442790298741
+    ]
+   },
+   "selection": "вариант (модель|набор признаков или базовая линия) выбран по MAE внутренней CV на обучающей части, группы внутренней CV не пересекаются с тестом",
+   "selected": [
+    "gp_matern|season_weather"
+   ]
+  },
+  "folds_detail": [
+   {
+    "fold": "burgas->doors",
+    "selected": "gp_matern|season_weather",
+    "inner_mae": 362.8675202419523,
+    "train_rows": 84,
+    "test_rows": 33
+   }
+  ],
+  "difference": {
+   "nested_minus_median": {
+    "mae": {
+     "mean": 60.80000553428383,
+     "confidence": 0.95,
+     "ci": [
+      21.465349215039762,
+      93.99458318214984
+     ],
+     "relative": 0.33140961104820277,
+     "relative_ci": [
+      0.1399553768376014,
+      0.5041866172416802
+     ]
+    },
+    "rmse": {
+     "mean": 64.98261525312893,
+     "confidence": 0.95,
+     "ci": [
+      46.77201409534006,
+      80.36792170124828
+     ],
+     "relative": 0.2411986755228898,
+     "relative_ci": [
+      0.16575162235232532,
+      0.3527414235536698
+     ]
+    },
+    "model_better": false
+   },
+   "nested_minus_idw_k5": {
+    "mae": {
+     "mean": 52.818836620501145,
+     "confidence": 0.95,
+     "ci": [
+      4.069944033970903,
+      97.01244885714776
+     ],
+     "relative": 0.2759028862387987,
+     "relative_ci": [
+      0.023738009366965806,
+      0.5141933080847497
+     ]
+    },
+    "rmse": {
+     "mean": 64.25628482515486,
+     "confidence": 0.95,
+     "ci": [
+      35.93057423590287,
+      86.16441489739641
+     ],
+     "relative": 0.23786146185514387,
+     "relative_ci": [
+      0.1415480676674242,
+      0.357367140916091
+     ]
+    },
+    "model_better": false
+   }
+  },
+  "pools": {
+   "selection": "вложенный выбор по внутренней CV внутри подмножества вариантов: models_only — только модели зоопарка без базовых линий; with_weather / without_weather — с погодными признаками и без них (без погоды входят и базовые линии)",
+   "models_only": {
+    "n": 33,
+    "mae": 244.25879341307174,
+    "rmse": 334.397922415386,
+    "medae": 178.03255997196365,
+    "bias": -244.25879341307174,
+    "mae_log1p": 1.527702678161409,
+    "spearman": 0.03392663168860264,
+    "spearman_within_folds": {
+     "mean": 0.03392663168860264,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 0.21703369127499003,
+     "median_ratio": 0.21031734569647417,
+     "mean_ratio": 0.1590358791522307
+    },
+    "ci95": {
+     "mae": [
+      157.5770604937226,
+      361.14818605023487
+     ],
+     "rmse": [
+      240.5199437853877,
+      461.4385182488918
+     ],
+     "mae_log1p": [
+      1.0900406158553124,
+      1.9513158196440736
+     ],
+     "bias": [
+      -361.14818605023487,
+      -157.57706049372263
+     ],
+     "spearman": [
+      -0.3969379045705208,
+      0.4890442790298741
+     ]
+    },
+    "selected": [
+     "gp_matern|season_weather"
+    ]
+   },
+   "with_weather": {
+    "n": 33,
+    "mae": 244.25879341307174,
+    "rmse": 334.397922415386,
+    "medae": 178.03255997196365,
+    "bias": -244.25879341307174,
+    "mae_log1p": 1.527702678161409,
+    "spearman": 0.03392663168860264,
+    "spearman_within_folds": {
+     "mean": 0.03392663168860264,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 0.21703369127499003,
+     "median_ratio": 0.21031734569647417,
+     "mean_ratio": 0.1590358791522307
+    },
+    "ci95": {
+     "mae": [
+      157.5770604937226,
+      361.14818605023487
+     ],
+     "rmse": [
+      240.5199437853877,
+      461.4385182488918
+     ],
+     "mae_log1p": [
+      1.0900406158553124,
+      1.9513158196440736
+     ],
+     "bias": [
+      -361.14818605023487,
+      -157.57706049372263
+     ],
+     "spearman": [
+      -0.3969379045705208,
+      0.4890442790298741
+     ]
+    },
+    "selected": [
+     "gp_matern|season_weather"
+    ]
+   },
+   "without_weather": {
+    "n": 33,
+    "mae": 183.45878787878786,
+    "rmse": 269.4153071622571,
+    "medae": 99.03,
+    "bias": -142.4509090909091,
+    "mae_log1p": 0.7476393890490759,
+    "spearman": null,
+    "spearman_within_folds": {
+     "mean": null,
+     "folds_defined": 0,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 0.6927437237788555,
+     "median_ratio": 0.6580117375066691,
+     "mean_ratio": 0.5095525452587825
+    },
+    "ci95": {
+     "mae": [
+      127.22119375000001,
+      283.2919233333333
+     ],
+     "rmse": [
+      182.8841219364437,
+      390.74231070660255
+     ],
+     "mae_log1p": [
+      0.6446153814459372,
+      0.9469157534321417
+     ],
+     "bias": [
+      -259.31282363636365,
+      -56.941031521739134
+     ],
+     "spearman": null
+    },
+    "selected": [
+     "median"
+    ]
+   },
+   "differences": {
+    "models_only_minus_median": {
+     "mae": {
+      "mean": 60.80000553428383,
+      "confidence": 0.95,
+      "ci": [
+       21.465349215039762,
+       93.99458318214984
+      ],
+      "relative": 0.33140961104820277,
+      "relative_ci": [
+       0.1399553768376014,
+       0.5041866172416802
+      ]
+     },
+     "rmse": {
+      "mean": 64.98261525312893,
+      "confidence": 0.95,
+      "ci": [
+       46.77201409534006,
+       80.36792170124828
+      ],
+      "relative": 0.2411986755228898,
+      "relative_ci": [
+       0.16575162235232532,
+       0.3527414235536698
+      ]
+     },
+     "model_better": false
+    },
+    "models_only_minus_idw_k5": {
+     "mae": {
+      "mean": 52.818836620501145,
+      "confidence": 0.95,
+      "ci": [
+       4.069944033970903,
+       97.01244885714776
+      ],
+      "relative": 0.2759028862387987,
+      "relative_ci": [
+       0.023738009366965806,
+       0.5141933080847497
+      ]
+     },
+     "rmse": {
+      "mean": 64.25628482515486,
+      "confidence": 0.95,
+      "ci": [
+       35.93057423590287,
+       86.16441489739641
+      ],
+      "relative": 0.23786146185514387,
+      "relative_ci": [
+       0.1415480676674242,
+       0.357367140916091
+      ]
+     },
+     "model_better": false
+    },
+    "with_weather_minus_without_weather": {
+     "mae": {
+      "mean": 60.80000553428383,
+      "confidence": 0.95,
+      "ci": [
+       21.465349215039762,
+       93.99458318214984
+      ],
+      "relative": 0.33140961104820277,
+      "relative_ci": [
+       0.1399553768376014,
+       0.5041866172416802
+      ]
+     },
+     "rmse": {
+      "mean": 64.98261525312893,
+      "confidence": 0.95,
+      "ci": [
+       46.77201409534006,
+       80.36792170124828
+      ],
+      "relative": 0.2411986755228898,
+      "relative_ci": [
+       0.16575162235232532,
+       0.3527414235536698
+      ]
+     },
+     "model_better": false
+    }
+   }
+  },
+  "options": {
+   "selection": "справочно: выбор лучшего варианта по этим числам был бы выбором на тесте",
+   "metrics": {
+    "median": {
+     "n": 33,
+     "mae": 183.45878787878786,
+     "rmse": 269.4153071622571,
+     "medae": 99.03,
+     "bias": -142.4509090909091,
+     "mae_log1p": 0.7476393890490759,
+     "spearman": null
+    },
+    "idw_k5": {
+     "n": 33,
+     "mae": 191.43995679257054,
+     "rmse": 270.14163759023114,
+     "medae": 101.6087686617254,
+     "bias": -134.91426027121108,
+     "mae_log1p": 0.9225228892007514,
+     "spearman": 0.11120499009299242
+    },
+    "ridge_log|season_weather": {
+     "n": 33,
+     "mae": 253.52372169170584,
+     "rmse": 343.9375458763312,
+     "medae": 206.2770907867636,
+     "bias": -182.29737742200302,
+     "mae_log1p": 1.5424608458579405,
+     "spearman": 0.13988468336630744
+    },
+    "ridge_log|context": {
+     "n": 33,
+     "mae": 2.0440208962592584e+32,
+     "rmse": 7.13161674008546e+32,
+     "medae": 5.031702117459615e+22,
+     "bias": 2.0440208962592584e+32,
+     "mae_log1p": 43.603985950081785,
+     "spearman": -0.4361631016042781
+    },
+    "ridge_log|all": {
+     "n": 33,
+     "mae": 2.277164631182295e+26,
+     "rmse": 8.175290478284727e+26,
+     "medae": 9.60414638611408e+16,
+     "bias": 2.277164631182295e+26,
+     "mae_log1p": 32.345285819379086,
+     "spearman": -0.4488636363636364
+    },
+    "tweedie_glm|season_weather": {
+     "n": 33,
+     "mae": 244.5319964925858,
+     "rmse": 383.9492808134825,
+     "medae": 159.8273844440495,
+     "bias": -9.93043504651206,
+     "mae_log1p": 0.8622067416898921,
+     "spearman": -0.20105289616447775
+    },
+    "tweedie_glm|context": {
+     "n": 33,
+     "mae": 2.6745126405818546e+22,
+     "rmse": 9.139206782782933e+22,
+     "medae": 3.6408817340619817e+19,
+     "bias": 2.6745126405818546e+22,
+     "mae_log1p": 30.79171415111914,
+     "spearman": -0.3379010695187166
+    },
+    "tweedie_glm|all": {
+     "n": 33,
+     "mae": 4.173316542266875e+24,
+     "rmse": 1.4423815764866485e+25,
+     "medae": 4.6676911935606473e+21,
+     "bias": 4.173316542266875e+24,
+     "mae_log1p": 34.092502969731264,
+     "spearman": -0.31951871657754016
+    },
+    "gp_matern|season_weather": {
+     "n": 33,
+     "mae": 244.25879341307174,
+     "rmse": 334.397922415386,
+     "medae": 178.03255997196365,
+     "bias": -244.25879341307174,
+     "mae_log1p": 1.527702678161409,
+     "spearman": 0.03392663168860264
+    },
+    "gp_matern|context": {
+     "n": 33,
+     "mae": 244.32312162513887,
+     "rmse": 334.455402468967,
+     "medae": 178.12061078019792,
+     "bias": -244.32312162513887,
+     "mae_log1p": 1.5300353689484225,
+     "spearman": 0.09525401069518717
+    },
+    "gp_matern|all": {
+     "n": 33,
+     "mae": 244.3229466858661,
+     "rmse": 334.45536006928546,
+     "medae": 178.11969042287672,
+     "bias": -244.3229466858661,
+     "mae_log1p": 1.5300322643262423,
+     "spearman": 0.026403743315508023
+    },
+    "random_forest|season_weather": {
+     "n": 33,
+     "mae": 218.54030202308778,
+     "rmse": 318.0847789319721,
+     "medae": 134.84117322377227,
+     "bias": -216.40425612605642,
+     "mae_log1p": 1.257066935732191,
+     "spearman": 0.10779644058693942
+    },
+    "random_forest|context": {
+     "n": 33,
+     "mae": 227.33403182228997,
+     "rmse": 321.84380299016453,
+     "medae": 154.87937318265926,
+     "bias": -227.33403182228997,
+     "mae_log1p": 1.353860679131766,
+     "spearman": 0.1891711229946524
+    },
+    "random_forest|all": {
+     "n": 33,
+     "mae": 223.78599116599904,
+     "rmse": 320.39352283753385,
+     "medae": 172.31982178721006,
+     "bias": -223.56164103449285,
+     "mae_log1p": 1.281838788653487,
+     "spearman": 0.13903743315508021
+    },
+    "catboost|season_weather": {
+     "n": 33,
+     "mae": 212.04152859574933,
+     "rmse": 311.6110055439935,
+     "medae": 120.14697737939403,
+     "bias": -198.09450716198927,
+     "mae_log1p": 1.1079979735311163,
+     "spearman": -0.12584607715033394
+    },
+    "catboost|context": {
+     "n": 33,
+     "mae": 226.83169556879983,
+     "rmse": 318.0116464976295,
+     "medae": 198.49260104662417,
+     "bias": -225.54005577437093,
+     "mae_log1p": 1.344552303762047,
+     "spearman": 0.2199197860962567
+    },
+    "catboost|all": {
+     "n": 33,
+     "mae": 214.77597790735638,
+     "rmse": 297.77211069526066,
+     "medae": 164.16679472116954,
+     "bias": -197.02573980448483,
+     "mae_log1p": 1.1696972506195222,
+     "spearman": 0.19351604278074866
+    }
+   }
+  },
+  "leakage_check": {
+   "checked": [
+    "coast_km",
+    "doy_cos",
+    "doy_sin",
+    "river_nearest_km",
+    "river_total_500km_log",
+    "river_weighted_log",
+    "wave_24h",
+    "wave_now",
+    "wind_24h",
+    "wind_72h",
+    "wind_max_72h",
+    "wind_now",
+    "x_km",
+    "y_km"
+   ],
+   "blocked_in_case_data": [
+    "concentration",
+    "concentration_basis",
+    "concentration_g_km2",
+    "concentration_items_km2",
+    "concentration_unit_orig",
+    "concentration_value_orig",
+    "datetime_start_iso",
+    "density_numerator_items",
+    "event_id",
+    "items_count",
+    "lat_end",
+    "lat_start",
+    "lon_end",
+    "lon_start",
+    "parent_concentration_items_km2",
+    "parent_sample_id",
+    "platform",
+    "provenance",
+    "reported_concentration_g_km2",
+    "reported_concentration_items_km2",
+    "sample_id",
+    "sampled_area_km2",
+    "sea_state_beaufort",
+    "source_doi",
+    "source_event_id",
+    "source_id",
+    "source_object_filtered_items",
+    "source_reported_total_items",
+    "source_row_refs",
+    "source_short",
+    "target_key",
+    "time_end_utc",
+    "time_start_utc",
+    "transect_length_km",
+    "transect_width_m",
+    "wind_speed_kn",
+    "zero_scope"
+   ],
+   "provenance": {
+    "coast_km": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "doy_cos": {
+     "group": "season",
+     "case_columns": [
+      "date_utc"
+     ],
+     "external": null,
+     "service_input": "дата снимка или запроса"
+    },
+    "doy_sin": {
+     "group": "season",
+     "case_columns": [
+      "date_utc"
+     ],
+     "external": null,
+     "service_input": "дата снимка или запроса"
+    },
+    "river_nearest_km": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "river_total_500km_log": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "river_weighted_log": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "wave_24h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wave_now": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_24h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_72h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_max_72h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_now": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "x_km": {
+     "group": "spatial",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": null,
+     "service_input": "центр района запроса"
+    },
+    "y_km": {
+     "group": "spatial",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": null,
+     "service_input": "центр района запроса"
+    }
+   },
+   "allowed_time_source": {
+    "observed_at": "observed_at — середина интервала time_start_utc…time_end_utc, без времени — date_utc 12:00 UTC. Это момент наблюдения, по нему берётся ветер и волнение за 72 ч до него. Значение не зависит от числа предметов, площади и концентрации; в сервисе его заменяет время снимка. В аудите time_* помечены survey_only как параметры рейса; как метка времени для погодных признаков они допущены явно, сами в модель не подаются."
+   },
+   "design_columns": {}
+  },
+  "options_count": 17
+ },
+ "v3_both_to_emblas": {
+  "design": "v3_both_to_emblas",
+  "title": "V3: Бургас + DOORS → EMBLAS 2016, российские воды (только внешний тест)",
+  "test_rows": 12,
+  "test_groups": 12,
+  "folds": 1,
+  "notes": [
+   "EMBLAS 2016 восстановлен по таблицам отчёта, привязка станций выведена; в обучение не входит",
+   "прогноз на уровне DOORS (source_doors = 1): судовые трансекты ближе к методу EMBLAS, но полоса EMBLAS 50 м (JOSS) и 20 м (NPMS) — уровень не переносится, смотрим Spearman",
+   "базовые линии обучены на DOORS; выбор варианта — по внутренней CV на DOORS (дни съёмки), модели обучены на обоих источниках с индикатором",
+   "бутстрэп по 12 трансектам EMBLAS: кампаний две, дней съёмки три; соседние трансекты одного дня считаются независимыми, поэтому ДИ оптимистичен",
+   "EMBLAS вне правила смены сервисной модели; выигрыш по MAE без Spearman > 0 означает сдвиг уровня, а не перенос ранжирования"
+  ],
+  "spearman_note": "spearman — по всем тестовым строкам сразу, смешивает фолды: у предсказания, постоянного внутри фолда (медиана), он отражает смену обучающей выборки, а не ранжирование; spearman_within_folds — среднее по фолдам (внутри отложенной кампании или трансекты)",
+  "baselines": {
+   "median": {
+    "n": 12,
+    "mae": 191.60833333333335,
+    "rmse": 193.57742266769299,
+    "medae": 200.87,
+    "bias": 170.495,
+    "mae_log1p": 2.4439500364803304,
+    "spearman": null,
+    "spearman_within_folds": {
+     "mean": null,
+     "folds_defined": 0,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 10.694801873425265,
+     "median_ratio": 9.352182952182952,
+     "mean_ratio": 4.132659623334864
+    },
+    "ci95": {
+     "mae": [
+      174.8127916666667,
+      206.09562499999998
+     ],
+     "rmse": [
+      177.66334670665964,
+      207.00293634109997
+     ],
+     "mae_log1p": [
+      1.6837671105325958,
+      3.3480643798731156
+     ],
+     "bias": [
+      111.03645833333331,
+      205.8539583333333
+     ],
+     "spearman": null
+    }
+   },
+   "idw_k5": {
+    "n": 12,
+    "mae": 84.96834046961673,
+    "rmse": 100.83098703259279,
+    "medae": 76.93377682284031,
+    "bias": 42.996599981986776,
+    "mae_log1p": 1.7473462084642246,
+    "spearman": -0.21716320518488735,
+    "spearman_within_folds": {
+     "mean": -0.21716320518488735,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 4.658048326160862,
+     "median_ratio": 4.097111635263864,
+     "mean_ratio": 1.7900156174917183
+    },
+    "ci95": {
+     "mae": [
+      60.286909368951676,
+      119.96180743357398
+     ],
+     "rmse": [
+      63.883349894387166,
+      143.1656044082848
+     ],
+     "mae_log1p": [
+      1.080252173462532,
+      2.565075005360061
+     ],
+     "bias": [
+      -16.26718507032908,
+      78.88573506276364
+     ],
+     "spearman": [
+      -0.8628647044464715,
+      0.5109957635601102
+     ]
+    }
+   }
+  },
+  "nested": {
+   "n": 12,
+   "mae": 84.96834046961673,
+   "rmse": 100.83098703259279,
+   "medae": 76.93377682284031,
+   "bias": 42.996599981986776,
+   "mae_log1p": 1.7473462084642246,
+   "spearman": -0.21716320518488735,
+   "spearman_within_folds": {
+    "mean": -0.21716320518488735,
+    "folds_defined": 1,
+    "folds": 1
+   },
+   "level": {
+    "geometric_ratio": 4.658048326160862,
+    "median_ratio": 4.097111635263864,
+    "mean_ratio": 1.7900156174917183
+   },
+   "ci95": {
+    "mae": [
+     60.286909368951676,
+     119.96180743357398
+    ],
+    "rmse": [
+     63.883349894387166,
+     143.1656044082848
+    ],
+    "mae_log1p": [
+     1.080252173462532,
+     2.565075005360061
+    ],
+    "bias": [
+     -16.26718507032908,
+     78.88573506276364
+    ],
+    "spearman": [
+     -0.8628647044464715,
+     0.5109957635601102
+    ]
+   },
+   "selection": "вариант (модель|набор признаков или базовая линия) выбран по MAE внутренней CV на обучающей части, группы внутренней CV не пересекаются с тестом",
+   "selected": [
+    "idw_k5"
+   ]
+  },
+  "folds_detail": [
+   {
+    "fold": "burgas+doors->emblas",
+    "selected": "idw_k5",
+    "inner_mae": 165.3637650001188,
+    "train_rows": 117,
+    "test_rows": 12
+   }
+  ],
+  "difference": {
+   "nested_minus_median": {
+    "mae": {
+     "mean": -106.63999286371659,
+     "confidence": 0.95,
+     "ci": [
+      -128.71098670764943,
+      -63.93455527711605
+     ],
+     "relative": -0.5565519568410382,
+     "relative_ci": [
+      -0.6802946492985397,
+      -0.34793896044350836
+     ]
+    },
+    "rmse": {
+     "mean": -92.7464356351002,
+     "confidence": 0.95,
+     "ci": [
+      -126.68692123916725,
+      -39.069328644322425
+     ],
+     "relative": -0.4791180415410039,
+     "relative_ci": [
+      -0.6635939719670189,
+      -0.2191223972540783
+     ]
+    },
+    "model_better": true
+   },
+   "nested_minus_idw_k5": {
+    "mae": {
+     "mean": 0.0,
+     "confidence": 0.95,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "relative": 0.0,
+     "relative_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "rmse": {
+     "mean": 0.0,
+     "confidence": 0.95,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "relative": 0.0,
+     "relative_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "model_better": false
+   }
+  },
+  "pools": {
+   "selection": "вложенный выбор по внутренней CV внутри подмножества вариантов: models_only — только модели зоопарка без базовых линий; with_weather / without_weather — с погодными признаками и без них (без погоды входят и базовые линии)",
+   "models_only": {
+    "n": 12,
+    "mae": 125.44185376530986,
+    "rmse": 148.4189706620569,
+    "medae": 114.42112340845547,
+    "bias": 70.42536848762225,
+    "mae_log1p": 2.0034180145035947,
+    "spearman": 0.01929824561403509,
+    "spearman_within_folds": {
+     "mean": 0.01929824561403509,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 4.917952092961374,
+     "median_ratio": 5.655211505299651,
+     "mean_ratio": 2.29398931534446
+    },
+    "ci95": {
+     "mae": [
+      84.503555405745,
+      172.02432642005908
+     ],
+     "rmse": [
+      99.16710555861654,
+      194.17684628215252
+     ],
+     "mae_log1p": [
+      1.484429573147971,
+      2.5410075929928615
+     ],
+     "bias": [
+      -10.803621721964596,
+      136.20226666494028
+     ],
+     "spearman": [
+      -0.8073543566362715,
+      0.667952738816961
+     ]
+    },
+    "selected": [
+     "catboost|context"
+    ]
+   },
+   "with_weather": {
+    "n": 12,
+    "mae": 125.44185376530986,
+    "rmse": 148.4189706620569,
+    "medae": 114.42112340845547,
+    "bias": 70.42536848762225,
+    "mae_log1p": 2.0034180145035947,
+    "spearman": 0.01929824561403509,
+    "spearman_within_folds": {
+     "mean": 0.01929824561403509,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 4.917952092961374,
+     "median_ratio": 5.655211505299651,
+     "mean_ratio": 2.29398931534446
+    },
+    "ci95": {
+     "mae": [
+      84.503555405745,
+      172.02432642005908
+     ],
+     "rmse": [
+      99.16710555861654,
+      194.17684628215252
+     ],
+     "mae_log1p": [
+      1.484429573147971,
+      2.5410075929928615
+     ],
+     "bias": [
+      -10.803621721964596,
+      136.20226666494028
+     ],
+     "spearman": [
+      -0.8073543566362715,
+      0.667952738816961
+     ]
+    },
+    "selected": [
+     "catboost|context"
+    ]
+   },
+   "without_weather": {
+    "n": 12,
+    "mae": 84.96834046961673,
+    "rmse": 100.83098703259279,
+    "medae": 76.93377682284031,
+    "bias": 42.996599981986776,
+    "mae_log1p": 1.7473462084642246,
+    "spearman": -0.21716320518488735,
+    "spearman_within_folds": {
+     "mean": -0.21716320518488735,
+     "folds_defined": 1,
+     "folds": 1
+    },
+    "level": {
+     "geometric_ratio": 4.658048326160862,
+     "median_ratio": 4.097111635263864,
+     "mean_ratio": 1.7900156174917183
+    },
+    "ci95": {
+     "mae": [
+      60.286909368951676,
+      119.96180743357398
+     ],
+     "rmse": [
+      63.883349894387166,
+      143.1656044082848
+     ],
+     "mae_log1p": [
+      1.080252173462532,
+      2.565075005360061
+     ],
+     "bias": [
+      -16.26718507032908,
+      78.88573506276364
+     ],
+     "spearman": [
+      -0.8628647044464715,
+      0.5109957635601102
+     ]
+    },
+    "selected": [
+     "idw_k5"
+    ]
+   },
+   "differences": {
+    "models_only_minus_median": {
+     "mae": {
+      "mean": -66.16647956802346,
+      "confidence": 0.95,
+      "ci": [
+       -115.36342163942321,
+       -8.882264948218152
+      ],
+      "relative": -0.3453215129892931,
+      "relative_ci": [
+       -0.5748106180038273,
+       -0.04830261764754342
+      ]
+     },
+     "rmse": {
+      "mean": -45.15845200563609,
+      "confidence": 0.95,
+      "ci": [
+       -100.32468864508714,
+       12.144002889908736
+      ],
+      "relative": -0.23328367215198384,
+      "relative_ci": [
+       -0.4990739973602494,
+       0.06702246144482052
+      ]
+     },
+     "model_better": true
+    },
+    "models_only_minus_idw_k5": {
+     "mae": {
+      "mean": 40.473513295693124,
+      "confidence": 0.95,
+      "ci": [
+       6.935295970444333,
+       72.07236794174007
+      ],
+      "relative": 0.476336398616209,
+      "relative_ci": [
+       0.0758687347149595,
+       0.9736187064978061
+      ]
+     },
+     "rmse": {
+      "mean": 47.587983629464105,
+      "confidence": 0.95,
+      "ci": [
+       19.291241885986153,
+       75.98203089792113
+      ],
+      "relative": 0.47195792712097207,
+      "relative_ci": [
+       0.19438434237774663,
+       1.0597393240283193
+      ]
+     },
+     "model_better": false
+    },
+    "with_weather_minus_without_weather": {
+     "mae": {
+      "mean": 40.473513295693124,
+      "confidence": 0.95,
+      "ci": [
+       6.935295970444333,
+       72.07236794174007
+      ],
+      "relative": 0.476336398616209,
+      "relative_ci": [
+       0.0758687347149595,
+       0.9736187064978061
+      ]
+     },
+     "rmse": {
+      "mean": 47.587983629464105,
+      "confidence": 0.95,
+      "ci": [
+       19.291241885986153,
+       75.98203089792113
+      ],
+      "relative": 0.47195792712097207,
+      "relative_ci": [
+       0.19438434237774663,
+       1.0597393240283193
+      ]
+     },
+     "model_better": false
+    }
+   }
+  },
+  "options": {
+   "selection": "справочно: выбор лучшего варианта по этим числам был бы выбором на тесте",
+   "metrics": {
+    "median": {
+     "n": 12,
+     "mae": 191.60833333333335,
+     "rmse": 193.57742266769299,
+     "medae": 200.87,
+     "bias": 170.495,
+     "mae_log1p": 2.4439500364803304,
+     "spearman": null
+    },
+    "idw_k5": {
+     "n": 12,
+     "mae": 84.96834046961673,
+     "rmse": 100.83098703259279,
+     "medae": 76.93377682284031,
+     "bias": 42.996599981986776,
+     "mae_log1p": 1.7473462084642246,
+     "spearman": -0.21716320518488735
+    },
+    "ridge_log|season_weather": {
+     "n": 12,
+     "mae": 107.60755459746008,
+     "rmse": 128.48053254550342,
+     "medae": 86.31612463709193,
+     "bias": 58.6148961874502,
+     "mae_log1p": 1.9085404252681826,
+     "spearman": -0.007029887833762037
+    },
+    "ridge_log|context": {
+     "n": 12,
+     "mae": 105.24785697132539,
+     "rmse": 133.08729465669794,
+     "medae": 91.69629542991981,
+     "bias": 53.356960819514995,
+     "mae_log1p": 1.846237955016828,
+     "spearman": -0.21366057284319562
+    },
+    "ridge_log|all": {
+     "n": 12,
+     "mae": 4115.1956619846815,
+     "rmse": 5195.759648090725,
+     "medae": 3902.411416311814,
+     "bias": 4115.1956619846815,
+     "mae_log1p": 4.726422952074272,
+     "spearman": -0.23117373455165427
+    },
+    "tweedie_glm|season_weather": {
+     "n": 12,
+     "mae": 170.15291974990762,
+     "rmse": 174.4063239802107,
+     "medae": 179.75981221369176,
+     "bias": 136.18392560457488,
+     "mae_log1p": 2.3288846762494013,
+     "spearman": -0.007029887833762037
+    },
+    "tweedie_glm|context": {
+     "n": 12,
+     "mae": 96.5586493035642,
+     "rmse": 114.90928561504458,
+     "medae": 92.51784311007673,
+     "bias": 51.281182124100106,
+     "mae_log1p": 1.8171482736032243,
+     "spearman": -0.23817899923503774
+    },
+    "tweedie_glm|all": {
+     "n": 12,
+     "mae": 815.2292843962492,
+     "rmse": 1029.9386274240192,
+     "medae": 744.8467832305615,
+     "bias": 815.2292843962492,
+     "mae_log1p": 3.362683802201317,
+     "spearman": -0.24868689626011295
+    },
+    "gp_matern|season_weather": {
+     "n": 12,
+     "mae": 113.32151152759717,
+     "rmse": 129.72424574224155,
+     "medae": 100.84488236378212,
+     "bias": 68.21255909754281,
+     "mae_log1p": 1.9574075431585696,
+     "spearman": 0.007029887833762037
+    },
+    "gp_matern|context": {
+     "n": 12,
+     "mae": 113.2975803938441,
+     "rmse": 129.70087422560502,
+     "medae": 100.80902368010175,
+     "bias": 68.18985936844103,
+     "mae_log1p": 1.9572463693169728,
+     "spearman": 0.03502632341691732
+    },
+    "gp_matern|all": {
+     "n": 12,
+     "mae": 113.29526759377518,
+     "rmse": 129.70190514535747,
+     "medae": 100.80326166025588,
+     "bias": 68.18561138172385,
+     "mae_log1p": 1.9572170715886432,
+     "spearman": 0.03502632341691732
+    },
+    "random_forest|season_weather": {
+     "n": 12,
+     "mae": 112.75821825774115,
+     "rmse": 137.40707603452583,
+     "medae": 91.54420660112002,
+     "bias": 59.39346441836065,
+     "mae_log1p": 1.9317278807319591,
+     "spearman": -0.09138854183890649
+    },
+    "random_forest|context": {
+     "n": 12,
+     "mae": 110.28583259638339,
+     "rmse": 134.25818665945715,
+     "medae": 88.6061664810869,
+     "bias": 52.66240851512746,
+     "mae_log1p": 1.934479425886601,
+     "spearman": -0.03152369107522559
+    },
+    "random_forest|all": {
+     "n": 12,
+     "mae": 106.65894089135038,
+     "rmse": 129.18334172883908,
+     "medae": 95.05140815144931,
+     "bias": 51.98338319794087,
+     "mae_log1p": 1.9017524474657226,
+     "spearman": -0.06842105263157895
+    },
+    "catboost|season_weather": {
+     "n": 12,
+     "mae": 127.60680612146687,
+     "rmse": 133.6684074752202,
+     "medae": 138.02616479922693,
+     "bias": 92.8780549108293,
+     "mae_log1p": 2.08564269396535,
+     "spearman": -0.15465753234276483
+    },
+    "catboost|context": {
+     "n": 12,
+     "mae": 125.44185376530986,
+     "rmse": 148.4189706620569,
+     "medae": 114.42112340845547,
+     "bias": 70.42536848762225,
+     "mae_log1p": 2.0034180145035947,
+     "spearman": 0.01929824561403509
+    },
+    "catboost|all": {
+     "n": 12,
+     "mae": 138.83287393145494,
+     "rmse": 155.07483373524667,
+     "medae": 158.3373936460453,
+     "bias": 93.5295482478597,
+     "mae_log1p": 2.0731238838394344,
+     "spearman": 0.2719298245614036
+    }
+   }
+  },
+  "leakage_check": {
+   "checked": [
+    "coast_km",
+    "doy_cos",
+    "doy_sin",
+    "river_nearest_km",
+    "river_total_500km_log",
+    "river_weighted_log",
+    "wave_24h",
+    "wave_now",
+    "wind_24h",
+    "wind_72h",
+    "wind_max_72h",
+    "wind_now",
+    "x_km",
+    "y_km"
+   ],
+   "blocked_in_case_data": [
+    "concentration",
+    "concentration_basis",
+    "concentration_g_km2",
+    "concentration_items_km2",
+    "concentration_unit_orig",
+    "concentration_value_orig",
+    "datetime_start_iso",
+    "density_numerator_items",
+    "event_id",
+    "items_count",
+    "lat_end",
+    "lat_start",
+    "lon_end",
+    "lon_start",
+    "parent_concentration_items_km2",
+    "parent_sample_id",
+    "platform",
+    "provenance",
+    "reported_concentration_g_km2",
+    "reported_concentration_items_km2",
+    "sample_id",
+    "sampled_area_km2",
+    "sea_state_beaufort",
+    "source_doi",
+    "source_event_id",
+    "source_id",
+    "source_object_filtered_items",
+    "source_reported_total_items",
+    "source_row_refs",
+    "source_short",
+    "target_key",
+    "time_end_utc",
+    "time_start_utc",
+    "transect_length_km",
+    "transect_width_m",
+    "wind_speed_kn",
+    "zero_scope"
+   ],
+   "provenance": {
+    "coast_km": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "doy_cos": {
+     "group": "season",
+     "case_columns": [
+      "date_utc"
+     ],
+     "external": null,
+     "service_input": "дата снимка или запроса"
+    },
+    "doy_sin": {
+     "group": "season",
+     "case_columns": [
+      "date_utc"
+     ],
+     "external": null,
+     "service_input": "дата снимка или запроса"
+    },
+    "river_nearest_km": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "river_total_500km_log": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "river_weighted_log": {
+     "group": "geography",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": "Natural Earth 10m coastline; Lebreton et al. 2017, PlasticRiverInputs",
+     "service_input": "центр района запроса"
+    },
+    "wave_24h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wave_now": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_24h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_72h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_max_72h": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "wind_now": {
+     "group": "weather",
+     "case_columns": [
+      "latitude",
+      "longitude",
+      "date_utc",
+      "time_start_utc",
+      "time_end_utc"
+     ],
+     "external": "Open-Meteo archive: ERA5 wind_speed_10m, ERA5-Ocean wave_height",
+     "service_input": "центр района и время снимка"
+    },
+    "x_km": {
+     "group": "spatial",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": null,
+     "service_input": "центр района запроса"
+    },
+    "y_km": {
+     "group": "spatial",
+     "case_columns": [
+      "latitude",
+      "longitude"
+     ],
+     "external": null,
+     "service_input": "центр района запроса"
+    }
+   },
+   "allowed_time_source": {
+    "observed_at": "observed_at — середина интервала time_start_utc…time_end_utc, без времени — date_utc 12:00 UTC. Это момент наблюдения, по нему берётся ветер и волнение за 72 ч до него. Значение не зависит от числа предметов, площади и концентрации; в сервисе его заменяет время снимка. В аудите time_* помечены survey_only как параметры рейса; как метка времени для погодных признаков они допущены явно, сами в модель не подаются."
+   },
+   "design_columns": {
+    "source_doors": "индикатор метода съёмки (фиксированный эффект источника): 0 — Бургас, полоса 6 м, лодка; 1 — судовые трансекты DOORS; известен до измерения, не зависит от концентрации"
+   }
+  },
+  "options_count": 17
+ }
+}

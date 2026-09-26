@@ -3,6 +3,7 @@
 import { PathStyleExtension, type PathStyleExtensionProps } from "@deck.gl/extensions";
 import { PathLayer, ScatterplotLayer, TextLayer } from "@deck.gl/layers";
 import { useMemo } from "react";
+import type { SurveyPort } from "@/data/survey";
 import type { LngLat } from "@/domain/geo";
 import { hexToRgba, type Rgba } from "@/features/map/color";
 import { UNDER_COASTLINE } from "@/features/map/deck/anchors";
@@ -13,8 +14,9 @@ import { useGround } from "@/features/map/use-map-palette";
 import { useStatusHintStore } from "@/features/shell/status-hint-store";
 import { useLayerVisible } from "@/state/map-layers-store";
 import { useWorkspaceStore } from "@/state/workspace-store";
-import { circlePath } from "./plan-model";
+import { circlePath, selectedTargetOf } from "./plan-model";
 import { hhmm } from "./survey-copy";
+import { useSurveyCamera } from "./use-survey-camera";
 import { type SurveyView, useSurveyView } from "./use-survey-view";
 
 type Path = { id: string; path: [number, number][] };
@@ -62,19 +64,66 @@ function useSurveyGeometry(view: SurveyView | null) {
   }, [view]);
 }
 
+function portLayers(
+  port: SurveyPort,
+  departure: string,
+  paper: Rgba,
+  mark: Rgba,
+  label: string,
+  halo: Rgba,
+) {
+  const position: [number, number] = [port.position[0], port.position[1]];
+  return [
+    new ScatterplotLayer<{ position: [number, number] }>({
+      id: "survey:port",
+      data: [{ position }],
+      getPosition: (entry) => entry.position,
+      getRadius: 5,
+      radiusUnits: "pixels",
+      stroked: true,
+      getFillColor: paper,
+      getLineColor: mark,
+      getLineWidth: 2,
+      lineWidthUnits: "pixels",
+    }),
+    new TextLayer<{ position: [number, number]; text: string }>({
+      id: "survey:port-label",
+      data: [{ position, text: `${port.name} · выход ${hhmm(departure)}` }],
+      getPosition: (entry) => entry.position,
+      getText: (entry) => entry.text,
+      characterSet: "auto",
+      getColor: hexToRgba(label),
+      getSize: 12,
+      getPixelOffset: [10, 0],
+      getTextAnchor: "start",
+      getAlignmentBaseline: "center",
+      fontFamily: "IBM Plex Sans, sans-serif",
+      outlineWidth: 3,
+      outlineColor: halo,
+      fontSettings: { sdf: true },
+    }),
+  ];
+}
+
 export function SurveyLayers() {
   const view = useSurveyView();
   const geometry = useSurveyGeometry(view);
+  useSurveyCamera(view);
   const ground = useGround();
   const showTargets = useLayerVisible("survey-targets");
   const showRoute = useLayerVisible("survey-route");
   const showRadius = useLayerVisible("search-radius");
-  const selectedId = useWorkspaceStore((state) => state.selectedTargetId);
+  const rawSelectedId = useWorkspaceStore((state) => state.selectedTargetId);
+  const zoneId = useWorkspaceStore((state) => state.selectedCandidateId);
+  const selectedId = view
+    ? selectedTargetOf(view.plan.targets, rawSelectedId, zoneId)
+    : rawSelectedId;
   const selectTarget = useWorkspaceStore((state) => state.selectTarget);
   const setHint = useStatusHintStore((state) => state.setHint);
 
   const layers = useMemo(() => {
     if (!geometry || !view) return [];
+    const port = view.plan.port;
     const mark = hexToRgba(SURVEY.ink[ground].mark);
     const paper = hexToRgba(SURVEY.ink[ground].ringFill, 240);
     const ink = GROUND_INK[ground];
@@ -120,39 +169,7 @@ export function SurveyLayers() {
           extensions: [new PathStyleExtension({ dash: true })],
           ...UNDER_COASTLINE,
         }),
-        new ScatterplotLayer<{ position: [number, number] }>({
-          id: "survey:port",
-          data: [{ position: [view.plan.port.position[0], view.plan.port.position[1]] }],
-          getPosition: (entry) => entry.position,
-          getRadius: 5,
-          radiusUnits: "pixels",
-          stroked: true,
-          getFillColor: paper,
-          getLineColor: mark,
-          getLineWidth: 2,
-          lineWidthUnits: "pixels",
-        }),
-        new TextLayer<{ position: [number, number]; text: string }>({
-          id: "survey:port-label",
-          data: [
-            {
-              position: [view.plan.port.position[0], view.plan.port.position[1]],
-              text: `${view.plan.port.name} · выход ${hhmm(view.departure)}`,
-            },
-          ],
-          getPosition: (entry) => entry.position,
-          getText: (entry) => entry.text,
-          characterSet: "auto",
-          getColor: hexToRgba(ink.label),
-          getSize: 12,
-          getPixelOffset: [10, 0],
-          getTextAnchor: "start",
-          getAlignmentBaseline: "center",
-          fontFamily: "IBM Plex Sans, sans-serif",
-          outlineWidth: 3,
-          outlineColor: halo,
-          fontSettings: { sdf: true },
-        }),
+        ...(port ? portLayers(port, view.departure, paper, mark, ink.label, halo) : []),
       );
     }
     if (showTargets) {

@@ -21,7 +21,14 @@ import { KeyValue, KeyValueList } from "@/ui/key-value";
 import { PanelSection } from "@/ui/section";
 import { Segmented } from "@/ui/segmented";
 import { formatDay } from "./format";
-import { useCaseTargets, useRequestPlan, useRunAnalysis, useSavedMatch } from "./use-analysis";
+import { RunProgress } from "./run-progress";
+import {
+  useAnalysisRunStart,
+  useCaseTargets,
+  useRequestPlan,
+  useRunAnalysis,
+  useSavedMatch,
+} from "./use-analysis";
 
 const AREA_OPTIONS = [
   { value: "aoi", label: "весь участок" },
@@ -102,20 +109,19 @@ function SurveyDates({ aoi }: { aoi: AreaOfInterest }) {
   );
 }
 
-function TargetPicker() {
+function TargetPicker({ fallback }: { fallback: string | undefined }) {
   const targets = useCaseTargets().data;
   const targetKey = useAnalysisStore((state) => state.targetKey);
   const setTarget = useAnalysisStore((state) => state.setTarget);
   if (!targets) return null;
+  const standard = fallback ?? targets.primary;
   return (
     <label className="flex flex-col gap-1 text-[12px] text-text-secondary">
       Целевая величина
       <select
         className={FIELD_CONTROL}
-        value={targetKey ?? targets.primary}
-        onChange={(event) =>
-          setTarget(event.target.value === targets.primary ? null : event.target.value)
-        }
+        value={targetKey ?? standard}
+        onChange={(event) => setTarget(event.target.value === standard ? null : event.target.value)}
       >
         {targets.targets.map((target) => (
           <option key={target.key} value={target.key}>
@@ -139,6 +145,8 @@ export function RequestSection({ analysis }: { analysis: Analysis | null }) {
   const setAnalysis = useAnalysisStore((state) => state.setAnalysis);
   const saved = useSavedMatch();
   const run = useRunAnalysis();
+  const runStart = useAnalysisRunStart();
+  const running = run.isPending || runStart !== null;
   const [problem, setProblem] = useState<string | null>(null);
 
   const onRun = () => {
@@ -152,7 +160,7 @@ export function RequestSection({ analysis }: { analysis: Analysis | null }) {
   };
 
   const error = problem ?? (run.isError ? describeApiError(run.error) : null);
-  const stale = analysis !== null && !run.isPending && isStale(analysis, scene, windowDays);
+  const stale = analysis !== null && !running && isStale(analysis, scene, windowDays);
 
   return (
     <PanelSection index="01" title="Запрос">
@@ -178,17 +186,18 @@ export function RequestSection({ analysis }: { analysis: Analysis | null }) {
           stretch
         />
       </div>
-      <TargetPicker />
+      <TargetPicker fallback={aoi?.survey?.target} />
       <div className="flex flex-col gap-1.5 pt-1">
         <Button
           variant="primary"
           size="lg"
-          busy={run.isPending}
-          disabled={run.isPending || !aoi}
+          busy={running}
+          disabled={running || !aoi}
           onClick={onRun}
         >
-          {run.isPending ? "Читаем снимок и маску…" : "Запустить анализ"}
+          {running ? "Читаем снимок и маску…" : "Запустить анализ"}
         </Button>
+        <RunProgress startedAt={runStart} />
         {error ? <p className="text-[12px] leading-4 text-state-alarm">{error}</p> : null}
         {stale ? (
           <div className="flex flex-col items-start gap-1.5">

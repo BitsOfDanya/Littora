@@ -1,0 +1,1499 @@
+{
+ "dataset": {
+  "file": "macroplastic_marine_samples.csv",
+  "sha256": "30ce0a65e3880b833b5dfe3bc6f528ee5f5af14a0d22f25995f4ef8af585a764",
+  "rows": 935,
+  "columns": 56,
+  "events": 318,
+  "sources": 4
+ },
+ "record_types": {
+  "transect_density": 598,
+  "item_observation": 337
+ },
+ "target_scopes": {
+  "object_context": 337,
+  "plastic_category": 321,
+  "total_plastic": 162,
+  "all_litter": 74,
+  "fisheries_litter_category": 41
+ },
+ "measurement_profiles": {
+  "S2_visual_GT2": 330,
+  "S3_visual_GT2": 222,
+  "S1_aerial_GT50": 97,
+  "S1_trawl_GT5_N": 94,
+  "S1_trawl_5_to_50": 83,
+  "S1_trawl_GT5_H": 70,
+  "S4_visual_GT2_5": 33,
+  "S1_trawl_GT5_F": 6
+ },
+ "size_classes": {
+  ">2 cm (macro)": 552,
+  ">5 cm (macro+mega)": 170,
+  ">50 cm (megaplastic)": 97,
+  "5-50 cm (macroplastic)": 83,
+  ">2.5 cm (macro)": 33
+ },
+ "materials": {
+  "plastic": 736,
+  "mixed (predominantly plastic)": 74,
+  "plastic (all polymers)": 63,
+  "plastic (fishing gear)": 41,
+  "expanded polystyrene (EPS)": 15,
+  "foamed plastic (including EPS)": 6
+ },
+ "sampling_methods": {
+  "mega trawl net (6 m x 1.5 m)": 253,
+  "ship-based visual transect, GPS fix at moment of sighting": 197,
+  "ship-based visual transect, position at moment of sighting": 140,
+  "ship-based visual transect, 10 m strip, items >2 cm": 133,
+  "ship-based visual transect (10 m strip), macrolitter >2 cm": 82,
+  "aerial RGB imagery mosaic (C-130 survey)": 81,
+  "ship-based visual transect, floating macro litter >2.5 cm": 33,
+  "RGB mosaic": 16
+ },
+ "quality_flags": {
+  "object_time_is_parent_interval": 337,
+  "author_area_replaces_endpoint_distance": 330,
+  "start_coordinate_corrected_to_midpoint": 170,
+  "source_object_row_not_reconstructed": 140,
+  "source_total_vs_object_count_conflict": 94,
+  "category_dictionary_corrected": 76,
+  "all_litter_not_plastic": 74,
+  "companion_count_differs_sum_float_items": 51,
+  "zero_only_for_defined_scope": 38,
+  "numerator_area_unavailable": 33,
+  "source_not_revalidated_in_repair": 33,
+  "object_row_match_ambiguous_or_unresolved": 29,
+  "size_filter_corrected": 29,
+  "interrupted_transect_summary_area": 23,
+  "summary_area_rounded_differs_from_segment_sum": 23
+ },
+ "zero_scope": {
+  "fisheries_litter_category;S3_visual_GT2;fisheries-related litter (nets, ropes, floats)": 35,
+  "plastic_category;S1_aerial_GT50;Unknown": 2,
+  "total_plastic;S1_aerial_GT50;total megaplastic": 1
+ },
+ "concentration": {
+  "density_rows": 598,
+  "present": 583,
+  "missing": 15,
+  "zeros": 38,
+  "item_rows_with_concentration": 0
+ },
+ "events_per_source": {
+  "S1_GPGP2018": 181,
+  "S2_SARGASSO_MSM41": 63,
+  "S3_SE_NORTH_SEA": 41,
+  "S4_BLACK_SEA_DOORS3": 33
+ },
+ "rows_per_event": {
+  "min": 1.0,
+  "q10": 1.0,
+  "q25": 1.0,
+  "median": 2.0,
+  "q75": 4.0,
+  "q90": 6.0,
+  "max": 15.0
+ },
+ "sources": [
+  {
+   "source_id": "S1_GPGP2018",
+   "rows": 350,
+   "events": 181,
+   "record_types": {
+    "transect_density": 350
+   },
+   "profiles": {
+    "S1_aerial_GT50": 97,
+    "S1_trawl_GT5_N": 94,
+    "S1_trawl_5_to_50": 83,
+    "S1_trawl_GT5_H": 70,
+    "S1_trawl_GT5_F": 6
+   },
+   "target_scopes": {
+    "plastic_category": 251,
+    "total_plastic": 99
+   },
+   "methods": {
+    "mega trawl net (6 m x 1.5 m)": 253,
+    "aerial RGB imagery mosaic (C-130 survey)": 81,
+    "RGB mosaic": 16
+   },
+   "size_classes": {
+    ">5 cm (macro+mega)": 170,
+    ">50 cm (megaplastic)": 97,
+    "5-50 cm (macroplastic)": 83
+   },
+   "license": [
+    "CC BY 4.0"
+   ],
+   "dates": [
+    "2015-07-25",
+    "2016-10-06"
+   ],
+   "survey_days": 26,
+   "bbox": [
+    -143.8428,
+    28.9871,
+    -128.79,
+    33.7888
+   ]
+  },
+  {
+   "source_id": "S2_SARGASSO_MSM41",
+   "rows": 330,
+   "events": 63,
+   "record_types": {
+    "item_observation": 197,
+    "transect_density": 133
+   },
+   "profiles": {
+    "S2_visual_GT2": 330
+   },
+   "target_scopes": {
+    "object_context": 197,
+    "plastic_category": 70,
+    "total_plastic": 63
+   },
+   "methods": {
+    "ship-based visual transect, GPS fix at moment of sighting": 197,
+    "ship-based visual transect, 10 m strip, items >2 cm": 133
+   },
+   "size_classes": {
+    ">2 cm (macro)": 330
+   },
+   "license": [
+    "CC BY 4.0"
+   ],
+   "dates": [
+    "2015-04-01",
+    "2015-04-26"
+   ],
+   "survey_days": 26,
+   "bbox": [
+    -70.0018,
+    22.5556,
+    -58.0118,
+    32.2351
+   ]
+  },
+  {
+   "source_id": "S3_SE_NORTH_SEA",
+   "rows": 222,
+   "events": 41,
+   "record_types": {
+    "item_observation": 140,
+    "transect_density": 82
+   },
+   "profiles": {
+    "S3_visual_GT2": 222
+   },
+   "target_scopes": {
+    "object_context": 140,
+    "all_litter": 41,
+    "fisheries_litter_category": 41
+   },
+   "methods": {
+    "ship-based visual transect, position at moment of sighting": 140,
+    "ship-based visual transect (10 m strip), macrolitter >2 cm": 82
+   },
+   "size_classes": {
+    ">2 cm (macro)": 222
+   },
+   "license": [
+    "CC BY 3.0"
+   ],
+   "dates": [
+    "2014-04-03",
+    "2016-04-10"
+   ],
+   "survey_days": 12,
+   "bbox": [
+    3.419,
+    53.692,
+    8.144,
+    55.878
+   ]
+  },
+  {
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "rows": 33,
+   "events": 33,
+   "record_types": {
+    "transect_density": 33
+   },
+   "profiles": {
+    "S4_visual_GT2_5": 33
+   },
+   "target_scopes": {
+    "all_litter": 33
+   },
+   "methods": {
+    "ship-based visual transect, floating macro litter >2.5 cm": 33
+   },
+   "size_classes": {
+    ">2.5 cm (macro)": 33
+   },
+   "license": [
+    "CC BY 4.0"
+   ],
+   "dates": [
+    "2024-06-02",
+    "2024-06-18"
+   ],
+   "survey_days": 12,
+   "bbox": [
+    29.2147,
+    41.5955,
+    41.6779,
+    43.6088
+   ]
+  }
+ ],
+ "profiles": [
+  {
+   "source_id": "S1_GPGP2018",
+   "measurement_profile": "S1_aerial_GT50",
+   "target_scope": "plastic_category",
+   "material": "plastic",
+   "size_class": ">50 cm (megaplastic)",
+   "rows": 81,
+   "events": 30,
+   "rows_per_event": 2.7,
+   "concentration_present": 81,
+   "concentration_missing": 0,
+   "zeros": 2,
+   "concentration_items_km2": {
+    "min": 0.0,
+    "q10": 0.096,
+    "q25": 0.278,
+    "median": 0.378,
+    "q75": 0.845,
+    "q90": 1.51,
+    "max": 5.113
+   },
+   "mean": 0.653,
+   "coefficient_of_variation": 1.134,
+   "sampled_area_km2": {
+    "min": 2.959,
+    "q10": 8.974,
+    "q25": 10.46,
+    "median": 10.627,
+    "q75": 10.72,
+    "q90": 10.792,
+    "max": 11.098
+   },
+   "dates": [
+    "2016-10-02",
+    "2016-10-06"
+   ],
+   "survey_days": 2,
+   "months": [
+    "2016-10"
+   ],
+   "bbox": [
+    -143.5612,
+    30.2332,
+    -135.0602,
+    33.4982
+   ],
+   "clusters_25km": 30,
+   "clusters_100km": 1,
+   "nearest_neighbour_km": {
+    "min": 0.0,
+    "q10": 0.0,
+    "q25": 0.0,
+    "median": 0.0,
+    "q75": 0.0,
+    "q90": 0.0,
+    "max": 36.38
+   },
+   "time_known": 0,
+   "position_roles": {
+    "mosaic_center": 81
+   },
+   "quality_flags": {
+    "source_total_vs_object_count_conflict": 79,
+    "size_filter_corrected": 29,
+    "zero_only_for_defined_scope": 2
+   },
+   "calculation_methods": {
+    "count objects with <50cm?=no in category / published sampling area; sum Mid weight kg *1000 / same area": 81
+   },
+   "satellite_pairing": {
+    "no_target": 30
+   }
+  },
+  {
+   "source_id": "S1_GPGP2018",
+   "measurement_profile": "S1_aerial_GT50",
+   "target_scope": "total_plastic",
+   "material": "plastic",
+   "size_class": ">50 cm (megaplastic)",
+   "rows": 16,
+   "events": 16,
+   "rows_per_event": 1.0,
+   "concentration_present": 1,
+   "concentration_missing": 15,
+   "zeros": 1,
+   "concentration_items_km2": {
+    "min": 0.0,
+    "q10": 0.0,
+    "q25": 0.0,
+    "median": 0.0,
+    "q75": 0.0,
+    "q90": 0.0,
+    "max": 0.0
+   },
+   "mean": 0.0,
+   "coefficient_of_variation": null,
+   "sampled_area_km2": {
+    "min": 2.959,
+    "q10": 10.424,
+    "q25": 10.56,
+    "median": 10.656,
+    "q75": 10.719,
+    "q90": 10.772,
+    "max": 10.952
+   },
+   "dates": [
+    "2016-10-02",
+    "2016-10-06"
+   ],
+   "survey_days": 2,
+   "months": [
+    "2016-10"
+   ],
+   "bbox": [
+    -143.5612,
+    30.2332,
+    -135.3724,
+    33.4982
+   ],
+   "clusters_25km": 16,
+   "clusters_100km": 2,
+   "nearest_neighbour_km": {
+    "min": 36.224,
+    "q10": 40.779,
+    "q25": 65.55,
+    "median": 73.64,
+    "q75": 74.804,
+    "q90": 80.673,
+    "max": 85.161
+   },
+   "time_known": 0,
+   "position_roles": {
+    "mosaic_center": 16
+   },
+   "quality_flags": {
+    "source_total_vs_object_count_conflict": 15,
+    "zero_only_for_defined_scope": 1
+   },
+   "calculation_methods": {
+    "published_midpoint_estimate; crosschecked against filtered object table": 16
+   },
+   "satellite_pairing": {
+    "no_target": 16
+   }
+  },
+  {
+   "source_id": "S1_GPGP2018",
+   "measurement_profile": "S1_trawl_5_to_50",
+   "target_scope": "total_plastic",
+   "material": "plastic",
+   "size_class": "5-50 cm (macroplastic)",
+   "rows": 83,
+   "events": 83,
+   "rows_per_event": 1.0,
+   "concentration_present": 83,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 58.417,
+    "q10": 157.876,
+    "q25": 346.497,
+    "median": 633.667,
+    "q75": 955.653,
+    "q90": 1412.176,
+    "max": 2209.12
+   },
+   "mean": 708.81,
+   "coefficient_of_variation": 0.71,
+   "sampled_area_km2": {
+    "min": 0.046,
+    "q10": 0.075,
+    "q25": 0.08,
+    "median": 0.089,
+    "q75": 0.098,
+    "q90": 0.106,
+    "max": 0.118
+   },
+   "dates": [
+    "2015-07-25",
+    "2015-08-18"
+   ],
+   "survey_days": 24,
+   "months": [
+    "2015-07",
+    "2015-08"
+   ],
+   "bbox": [
+    -143.8428,
+    28.9875,
+    -128.79,
+    33.7888
+   ],
+   "clusters_25km": 76,
+   "clusters_100km": 11,
+   "nearest_neighbour_km": {
+    "min": 0.128,
+    "q10": 0.396,
+    "q25": 42.91,
+    "median": 49.51,
+    "q75": 53.29,
+    "q90": 58.664,
+    "max": 498.792
+   },
+   "time_known": 83,
+   "position_roles": {
+    "transect_midpoint_arithmetic": 83
+   },
+   "quality_flags": {},
+   "calculation_methods": {
+    "published midpoint estimate, not forced to raw count/area": 83
+   },
+   "satellite_pairing": {
+    "not_acquired": 83
+   }
+  },
+  {
+   "source_id": "S1_GPGP2018",
+   "measurement_profile": "S1_trawl_GT5_F",
+   "target_scope": "plastic_category",
+   "material": "foamed plastic (including EPS)",
+   "size_class": ">5 cm (macro+mega)",
+   "rows": 6,
+   "events": 6,
+   "rows_per_event": 1.0,
+   "concentration_present": 6,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 8.804,
+    "q10": 8.98,
+    "q25": 9.596,
+    "median": 16.581,
+    "q75": 22.468,
+    "q90": 23.652,
+    "max": 24.762
+   },
+   "mean": 16.404,
+   "coefficient_of_variation": 0.458,
+   "sampled_area_km2": {
+    "min": 0.081,
+    "q10": 0.085,
+    "q25": 0.089,
+    "median": 0.091,
+    "q75": 0.105,
+    "q90": 0.111,
+    "max": 0.114
+   },
+   "dates": [
+    "2015-08-01",
+    "2015-08-17"
+   ],
+   "survey_days": 6,
+   "months": [
+    "2015-08"
+   ],
+   "bbox": [
+    -143.8428,
+    29.9896,
+    -135.4217,
+    32.9845
+   ],
+   "clusters_25km": 6,
+   "clusters_100km": 6,
+   "nearest_neighbour_km": {
+    "min": 137.927,
+    "q10": 137.927,
+    "q25": 142.023,
+    "median": 222.867,
+    "q75": 291.423,
+    "q90": 310.163,
+    "max": 328.902
+   },
+   "time_known": 6,
+   "position_roles": {
+    "transect_midpoint_arithmetic": 6
+   },
+   "quality_flags": {
+    "start_coordinate_corrected_to_midpoint": 6,
+    "category_dictionary_corrected": 6
+   },
+   "calculation_methods": {
+    "sum Number of particles / area for source size bins 5-10,10-50,50-100,>100; mass uses same rows": 6
+   },
+   "satellite_pairing": {
+    "no_target": 2,
+    "not_acquired": 4
+   }
+  },
+  {
+   "source_id": "S1_GPGP2018",
+   "measurement_profile": "S1_trawl_GT5_H",
+   "target_scope": "plastic_category",
+   "material": "plastic",
+   "size_class": ">5 cm (macro+mega)",
+   "rows": 70,
+   "events": 70,
+   "rows_per_event": 1.0,
+   "concentration_present": 70,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 21.821,
+    "q10": 108.135,
+    "q25": 214.025,
+    "median": 346.783,
+    "q75": 666.933,
+    "q90": 1039.535,
+    "max": 1425.12
+   },
+   "mean": 471.111,
+   "coefficient_of_variation": 0.749,
+   "sampled_area_km2": {
+    "min": 0.055,
+    "q10": 0.078,
+    "q25": 0.081,
+    "median": 0.088,
+    "q75": 0.096,
+    "q90": 0.106,
+    "max": 0.124
+   },
+   "dates": [
+    "2015-07-25",
+    "2015-08-17"
+   ],
+   "survey_days": 22,
+   "months": [
+    "2015-07",
+    "2015-08"
+   ],
+   "bbox": [
+    -143.299,
+    28.9871,
+    -128.79,
+    33.1896
+   ],
+   "clusters_25km": 46,
+   "clusters_100km": 17,
+   "nearest_neighbour_km": {
+    "min": 0.047,
+    "q10": 0.165,
+    "q25": 0.225,
+    "median": 0.456,
+    "q75": 50.226,
+    "q90": 56.914,
+    "max": 498.403
+   },
+   "time_known": 70,
+   "position_roles": {
+    "transect_midpoint_arithmetic": 70
+   },
+   "quality_flags": {
+    "start_coordinate_corrected_to_midpoint": 70,
+    "category_dictionary_corrected": 70
+   },
+   "calculation_methods": {
+    "sum Number of particles / area for source size bins 5-10,10-50,50-100,>100; mass uses same rows": 70
+   },
+   "satellite_pairing": {
+    "no_target": 32,
+    "not_acquired": 38
+   }
+  },
+  {
+   "source_id": "S1_GPGP2018",
+   "measurement_profile": "S1_trawl_GT5_N",
+   "target_scope": "plastic_category",
+   "material": "plastic",
+   "size_class": ">5 cm (macro+mega)",
+   "rows": 94,
+   "events": 94,
+   "rows_per_event": 1.0,
+   "concentration_present": 94,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 8.004,
+    "q10": 41.64,
+    "q25": 94.464,
+    "median": 203.712,
+    "q75": 382.317,
+    "q90": 648.824,
+    "max": 1745.148
+   },
+   "mean": 290.694,
+   "coefficient_of_variation": 1.003,
+   "sampled_area_km2": {
+    "min": 0.046,
+    "q10": 0.074,
+    "q25": 0.08,
+    "median": 0.089,
+    "q75": 0.099,
+    "q90": 0.111,
+    "max": 0.125
+   },
+   "dates": [
+    "2015-07-27",
+    "2015-08-18"
+   ],
+   "survey_days": 22,
+   "months": [
+    "2015-07",
+    "2015-08"
+   ],
+   "bbox": [
+    -143.8428,
+    28.9875,
+    -134.0371,
+    33.7888
+   ],
+   "clusters_25km": 56,
+   "clusters_100km": 18,
+   "nearest_neighbour_km": {
+    "min": 0.032,
+    "q10": 0.138,
+    "q25": 0.218,
+    "median": 0.396,
+    "q75": 1.44,
+    "q90": 50.602,
+    "max": 109.241
+   },
+   "time_known": 94,
+   "position_roles": {
+    "transect_midpoint_arithmetic": 94
+   },
+   "quality_flags": {
+    "start_coordinate_corrected_to_midpoint": 94
+   },
+   "calculation_methods": {
+    "sum Number of particles / area for source size bins 5-10,10-50,50-100,>100; mass uses same rows": 94
+   },
+   "satellite_pairing": {
+    "no_target": 41,
+    "not_acquired": 53
+   }
+  },
+  {
+   "source_id": "S2_SARGASSO_MSM41",
+   "measurement_profile": "S2_visual_GT2",
+   "target_scope": "plastic_category",
+   "material": "expanded polystyrene (EPS)",
+   "size_class": ">2 cm (macro)",
+   "rows": 7,
+   "events": 7,
+   "rows_per_event": 1.0,
+   "concentration_present": 7,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 4.205,
+    "q10": 4.245,
+    "q25": 4.287,
+    "median": 4.317,
+    "q75": 5.145,
+    "q90": 6.815,
+    "max": 8.175
+   },
+   "mean": 5.08,
+   "coefficient_of_variation": 0.294,
+   "sampled_area_km2": {
+    "min": 0.169,
+    "q10": 0.205,
+    "q25": 0.23,
+    "median": 0.233,
+    "q75": 0.236,
+    "q90": 0.241,
+    "max": 0.245
+   },
+   "dates": [
+    "2015-04-02",
+    "2015-04-22"
+   ],
+   "survey_days": 6,
+   "months": [
+    "2015-04"
+   ],
+   "bbox": [
+    -69.9777,
+    24.8201,
+    -59.817,
+    30.9973
+   ],
+   "clusters_25km": 7,
+   "clusters_100km": 7,
+   "nearest_neighbour_km": {
+    "min": 104.503,
+    "q10": 104.503,
+    "q25": 128.485,
+    "median": 287.335,
+    "q75": 353.165,
+    "q90": 465.183,
+    "max": 633.21
+   },
+   "time_known": 7,
+   "position_roles": {
+    "transect_midpoint_arithmetic": 7
+   },
+   "quality_flags": {
+    "author_area_replaces_endpoint_distance": 7
+   },
+   "calculation_methods": {
+    "sum Float items for selected material(s) / author-published area; summary area for interrupted transects": 7
+   },
+   "satellite_pairing": {
+    "before_mission": 5,
+    "time_shift": 2
+   }
+  },
+  {
+   "source_id": "S2_SARGASSO_MSM41",
+   "measurement_profile": "S2_visual_GT2",
+   "target_scope": "plastic_category",
+   "material": "plastic",
+   "size_class": ">2 cm (macro)",
+   "rows": 63,
+   "events": 63,
+   "rows_per_event": 1.0,
+   "concentration_present": 63,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 4.34,
+    "q10": 13.209,
+    "q25": 20.381,
+    "median": 36.092,
+    "q75": 76.419,
+    "q90": 100.29,
+    "max": 222.699
+   },
+   "mean": 52.754,
+   "coefficient_of_variation": 0.817,
+   "sampled_area_km2": {
+    "min": 0.092,
+    "q10": 0.129,
+    "q25": 0.181,
+    "median": 0.228,
+    "q75": 0.236,
+    "q90": 0.243,
+    "max": 0.255
+   },
+   "dates": [
+    "2015-04-01",
+    "2015-04-26"
+   ],
+   "survey_days": 26,
+   "months": [
+    "2015-04"
+   ],
+   "bbox": [
+    -70.0018,
+    22.5746,
+    -58.0118,
+    32.2328
+   ],
+   "clusters_25km": 61,
+   "clusters_100km": 22,
+   "nearest_neighbour_km": {
+    "min": 10.782,
+    "q10": 25.874,
+    "q25": 36.979,
+    "median": 45.674,
+    "q75": 54.142,
+    "q90": 71.335,
+    "max": 155.175
+   },
+   "time_known": 63,
+   "position_roles": {
+    "transect_midpoint_arithmetic": 63
+   },
+   "quality_flags": {
+    "author_area_replaces_endpoint_distance": 63,
+    "companion_count_differs_sum_float_items": 7,
+    "interrupted_transect_summary_area": 4,
+    "summary_area_rounded_differs_from_segment_sum": 4
+   },
+   "calculation_methods": {
+    "sum Float items for selected material(s) / author-published area; summary area for interrupted transects": 63
+   },
+   "satellite_pairing": {
+    "before_mission": 51,
+    "no_scene_in_window": 10,
+    "time_shift": 2
+   }
+  },
+  {
+   "source_id": "S2_SARGASSO_MSM41",
+   "measurement_profile": "S2_visual_GT2",
+   "target_scope": "total_plastic",
+   "material": "plastic (all polymers)",
+   "size_class": ">2 cm (macro)",
+   "rows": 63,
+   "events": 63,
+   "rows_per_event": 1.0,
+   "concentration_present": 63,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 4.34,
+    "q10": 13.844,
+    "q25": 20.536,
+    "median": 36.092,
+    "q75": 76.419,
+    "q90": 100.29,
+    "max": 222.699
+   },
+   "mean": 53.319,
+   "coefficient_of_variation": 0.811,
+   "sampled_area_km2": {
+    "min": 0.092,
+    "q10": 0.129,
+    "q25": 0.181,
+    "median": 0.228,
+    "q75": 0.236,
+    "q90": 0.243,
+    "max": 0.255
+   },
+   "dates": [
+    "2015-04-01",
+    "2015-04-26"
+   ],
+   "survey_days": 26,
+   "months": [
+    "2015-04"
+   ],
+   "bbox": [
+    -70.0018,
+    22.5746,
+    -58.0118,
+    32.2328
+   ],
+   "clusters_25km": 61,
+   "clusters_100km": 22,
+   "nearest_neighbour_km": {
+    "min": 10.782,
+    "q10": 25.874,
+    "q25": 36.979,
+    "median": 45.674,
+    "q75": 54.142,
+    "q90": 71.335,
+    "max": 155.175
+   },
+   "time_known": 63,
+   "position_roles": {
+    "transect_midpoint_arithmetic": 63
+   },
+   "quality_flags": {
+    "author_area_replaces_endpoint_distance": 63,
+    "companion_count_differs_sum_float_items": 7,
+    "interrupted_transect_summary_area": 4,
+    "summary_area_rounded_differs_from_segment_sum": 4
+   },
+   "calculation_methods": {
+    "sum Float items for selected material(s) / author-published area; summary area for interrupted transects": 63
+   },
+   "satellite_pairing": {
+    "before_mission": 51,
+    "no_scene_in_window": 10,
+    "time_shift": 2
+   }
+  },
+  {
+   "source_id": "S3_SE_NORTH_SEA",
+   "measurement_profile": "S3_visual_GT2",
+   "target_scope": "all_litter",
+   "material": "mixed (predominantly plastic)",
+   "size_class": ">2 cm (macro)",
+   "rows": 41,
+   "events": 41,
+   "rows_per_event": 1.0,
+   "concentration_present": 41,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 6.1,
+    "q10": 9.1,
+    "q25": 16.8,
+    "median": 29.5,
+    "q75": 34.2,
+    "q90": 52.3,
+    "max": 195.1
+   },
+   "mean": 34.702,
+   "coefficient_of_variation": 1.017,
+   "sampled_area_km2": {
+    "min": 0.052,
+    "q10": 0.079,
+    "q25": 0.11,
+    "median": 0.132,
+    "q75": 0.165,
+    "q90": 0.217,
+    "max": 0.305
+   },
+   "dates": [
+    "2014-04-03",
+    "2016-04-10"
+   ],
+   "survey_days": 12,
+   "months": [
+    "2014-04",
+    "2016-04"
+   ],
+   "bbox": [
+    3.419,
+    53.7,
+    8.14,
+    55.878
+   ],
+   "clusters_25km": 9,
+   "clusters_100km": 1,
+   "nearest_neighbour_km": {
+    "min": 2.6,
+    "q10": 6.574,
+    "q25": 8.904,
+    "median": 9.514,
+    "q75": 16.612,
+    "q90": 18.905,
+    "max": 28.801
+   },
+   "time_known": 41,
+   "position_roles": {
+    "published_transect_center": 41
+   },
+   "quality_flags": {
+    "all_litter_not_plastic": 41
+   },
+   "calculation_methods": {
+    "published concentration, source rounding retained": 41
+   },
+   "satellite_pairing": {
+    "before_mission": 4,
+    "no_scene_in_window": 7,
+    "tile_cloud": 7,
+    "time_shift": 23
+   }
+  },
+  {
+   "source_id": "S3_SE_NORTH_SEA",
+   "measurement_profile": "S3_visual_GT2",
+   "target_scope": "fisheries_litter_category",
+   "material": "plastic (fishing gear)",
+   "size_class": ">2 cm (macro)",
+   "rows": 41,
+   "events": 41,
+   "rows_per_event": 1.0,
+   "concentration_present": 41,
+   "concentration_missing": 0,
+   "zeros": 35,
+   "concentration_items_km2": {
+    "min": 0.0,
+    "q10": 0.0,
+    "q25": 0.0,
+    "median": 0.0,
+    "q75": 0.0,
+    "q90": 4.745,
+    "max": 13.247
+   },
+   "mean": 1.191,
+   "coefficient_of_variation": 2.639,
+   "sampled_area_km2": {
+    "min": 0.052,
+    "q10": 0.079,
+    "q25": 0.11,
+    "median": 0.132,
+    "q75": 0.165,
+    "q90": 0.217,
+    "max": 0.305
+   },
+   "dates": [
+    "2014-04-03",
+    "2016-04-10"
+   ],
+   "survey_days": 12,
+   "months": [
+    "2014-04",
+    "2016-04"
+   ],
+   "bbox": [
+    3.419,
+    53.7,
+    8.14,
+    55.878
+   ],
+   "clusters_25km": 9,
+   "clusters_100km": 1,
+   "nearest_neighbour_km": {
+    "min": 2.6,
+    "q10": 6.574,
+    "q25": 8.904,
+    "median": 9.514,
+    "q75": 16.612,
+    "q90": 18.905,
+    "max": 28.801
+   },
+   "time_known": 41,
+   "position_roles": {
+    "published_transect_center": 41
+   },
+   "quality_flags": {
+    "zero_only_for_defined_scope": 35
+   },
+   "calculation_methods": {
+    "published concentration, source rounding retained": 41
+   },
+   "satellite_pairing": {
+    "before_mission": 4,
+    "no_scene_in_window": 7,
+    "tile_cloud": 7,
+    "time_shift": 23
+   }
+  },
+  {
+   "source_id": "S4_BLACK_SEA_DOORS3",
+   "measurement_profile": "S4_visual_GT2_5",
+   "target_scope": "all_litter",
+   "material": "mixed (predominantly plastic)",
+   "size_class": ">2.5 cm (macro)",
+   "rows": 33,
+   "events": 33,
+   "rows_per_event": 1.0,
+   "concentration_present": 33,
+   "concentration_missing": 0,
+   "zeros": 0,
+   "concentration_items_km2": {
+    "min": 48.97,
+    "q10": 71.01,
+    "q25": 102.37,
+    "median": 224.92,
+    "q75": 356.56,
+    "q90": 597.874,
+    "max": 976.01
+   },
+   "mean": 290.451,
+   "coefficient_of_variation": 0.8,
+   "sampled_area_km2": null,
+   "dates": [
+    "2024-06-02",
+    "2024-06-18"
+   ],
+   "survey_days": 12,
+   "months": [
+    "2024-06"
+   ],
+   "bbox": [
+    29.2147,
+    41.5955,
+    41.6779,
+    43.6088
+   ],
+   "clusters_25km": 14,
+   "clusters_100km": 5,
+   "nearest_neighbour_km": {
+    "min": 2.393,
+    "q10": 7.851,
+    "q25": 15.129,
+    "median": 18.043,
+    "q75": 23.142,
+    "q90": 25.337,
+    "max": 43.251
+   },
+   "time_known": 0,
+   "position_roles": {
+    "reported_transect_center": 33
+   },
+   "quality_flags": {
+    "all_litter_not_plastic": 33,
+    "numerator_area_unavailable": 33,
+    "source_not_revalidated_in_repair": 33
+   },
+   "calculation_methods": {
+    "retained reported all-litter density; numerator/area not reconstructed": 33
+   },
+   "satellite_pairing": {
+    "accepted": 7,
+    "footprint_cloud": 2,
+    "quality_unverified": 1,
+    "tile_cloud": 2,
+    "time_shift": 21
+   }
+  }
+ ],
+ "leakage": {
+  "target": "concentration_items_km2",
+  "roles": {
+   "identifier": [
+    "sample_id",
+    "source_short",
+    "source_doi",
+    "source_event_id",
+    "event_id",
+    "provenance",
+    "source_row_refs"
+   ],
+   "profile_descriptor": [
+    "source_id",
+    "source_license",
+    "region",
+    "sea_area",
+    "record_type",
+    "sampling_method",
+    "litter_category",
+    "litter_item_type",
+    "material",
+    "size_class",
+    "optical_missions_available",
+    "notes",
+    "source_category_code",
+    "position_role",
+    "target_scope",
+    "quality_flags",
+    "calculation_method",
+    "measurement_profile",
+    "missions_calendar_eligible"
+   ],
+   "survey_only": [
+    "platform",
+    "lat_start",
+    "lon_start",
+    "lat_end",
+    "lon_end",
+    "time_start_utc",
+    "time_end_utc",
+    "datetime_start_iso",
+    "transect_length_km",
+    "transect_width_m",
+    "sampled_area_km2",
+    "sea_state_beaufort",
+    "wind_speed_kn"
+   ],
+   "allowed_predictor": [
+    "latitude",
+    "longitude",
+    "date_utc"
+   ],
+   "forbidden_leakage": [
+    "items_count",
+    "concentration_value_orig",
+    "concentration_unit_orig",
+    "concentration_g_km2",
+    "concentration_basis",
+    "parent_sample_id",
+    "zero_scope",
+    "reported_concentration_items_km2",
+    "reported_concentration_g_km2",
+    "parent_concentration_items_km2",
+    "density_numerator_items",
+    "source_reported_total_items",
+    "source_object_filtered_items"
+   ],
+   "target": [
+    "concentration_items_km2"
+   ]
+  },
+  "columns": {
+   "sample_id": {
+    "role": "identifier"
+   },
+   "source_id": {
+    "role": "profile_descriptor"
+   },
+   "source_short": {
+    "role": "identifier"
+   },
+   "source_doi": {
+    "role": "identifier"
+   },
+   "source_license": {
+    "role": "profile_descriptor"
+   },
+   "region": {
+    "role": "profile_descriptor"
+   },
+   "sea_area": {
+    "role": "profile_descriptor"
+   },
+   "record_type": {
+    "role": "profile_descriptor"
+   },
+   "sampling_method": {
+    "role": "profile_descriptor"
+   },
+   "platform": {
+    "role": "survey_only"
+   },
+   "latitude": {
+    "role": "allowed_predictor",
+    "evidence": {
+     "rows": 583,
+     "equal_share": 0.0,
+     "spearman": -0.207
+    }
+   },
+   "longitude": {
+    "role": "allowed_predictor",
+    "evidence": {
+     "rows": 583,
+     "equal_share": 0.0,
+     "spearman": -0.259
+    }
+   },
+   "lat_start": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 550,
+     "equal_share": 0.0,
+     "spearman": -0.262
+    }
+   },
+   "lon_start": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 550,
+     "equal_share": 0.0,
+     "spearman": -0.35
+    }
+   },
+   "lat_end": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 468,
+     "equal_share": 0.0,
+     "spearman": -0.031
+    }
+   },
+   "lon_end": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 468,
+     "equal_share": 0.0,
+     "spearman": -0.697
+    }
+   },
+   "date_utc": {
+    "role": "allowed_predictor"
+   },
+   "time_start_utc": {
+    "role": "survey_only"
+   },
+   "time_end_utc": {
+    "role": "survey_only"
+   },
+   "datetime_start_iso": {
+    "role": "survey_only"
+   },
+   "litter_category": {
+    "role": "profile_descriptor"
+   },
+   "litter_item_type": {
+    "role": "profile_descriptor"
+   },
+   "material": {
+    "role": "profile_descriptor"
+   },
+   "size_class": {
+    "role": "profile_descriptor"
+   },
+   "items_count": {
+    "role": "forbidden_leakage",
+    "evidence": {
+     "rows": 467,
+     "equal_share": 0.081,
+     "spearman": 0.879,
+     "ratio_to_area": {
+      "rows": 467,
+      "reproduces_target_within_1pct": 1.0
+     }
+    },
+    "rule": "name"
+   },
+   "concentration_value_orig": {
+    "role": "forbidden_leakage",
+    "evidence": {
+     "rows": 583,
+     "equal_share": 0.616,
+     "spearman": 0.978
+    },
+    "rule": "name"
+   },
+   "concentration_unit_orig": {
+    "role": "forbidden_leakage",
+    "rule": "name"
+   },
+   "concentration_items_km2": {
+    "role": "target",
+    "rule": "name"
+   },
+   "concentration_g_km2": {
+    "role": "forbidden_leakage",
+    "evidence": {
+     "rows": 335,
+     "equal_share": 0.009,
+     "spearman": 0.72
+    },
+    "rule": "name"
+   },
+   "concentration_basis": {
+    "role": "forbidden_leakage",
+    "rule": "name"
+   },
+   "transect_length_km": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 468,
+     "equal_share": 0.0,
+     "spearman": -0.227
+    }
+   },
+   "transect_width_m": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 468,
+     "equal_share": 0.0,
+     "spearman": -0.745
+    }
+   },
+   "sampled_area_km2": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 550,
+     "equal_share": 0.0,
+     "spearman": -0.7
+    }
+   },
+   "sea_state_beaufort": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 253,
+     "equal_share": 0.0,
+     "spearman": 0.012
+    }
+   },
+   "wind_speed_kn": {
+    "role": "survey_only",
+    "evidence": {
+     "rows": 250,
+     "equal_share": 0.0,
+     "spearman": 0.065
+    }
+   },
+   "optical_missions_available": {
+    "role": "profile_descriptor"
+   },
+   "notes": {
+    "role": "profile_descriptor"
+   },
+   "source_event_id": {
+    "role": "identifier"
+   },
+   "event_id": {
+    "role": "identifier"
+   },
+   "parent_sample_id": {
+    "role": "forbidden_leakage",
+    "rule": "name"
+   },
+   "source_category_code": {
+    "role": "profile_descriptor"
+   },
+   "position_role": {
+    "role": "profile_descriptor"
+   },
+   "target_scope": {
+    "role": "profile_descriptor"
+   },
+   "quality_flags": {
+    "role": "profile_descriptor"
+   },
+   "provenance": {
+    "role": "identifier"
+   },
+   "calculation_method": {
+    "role": "profile_descriptor"
+   },
+   "measurement_profile": {
+    "role": "profile_descriptor"
+   },
+   "zero_scope": {
+    "role": "forbidden_leakage",
+    "rule": "name"
+   },
+   "reported_concentration_items_km2": {
+    "role": "forbidden_leakage",
+    "evidence": {
+     "rows": 583,
+     "equal_share": 0.616,
+     "spearman": 1.0
+    },
+    "rule": "name"
+   },
+   "reported_concentration_g_km2": {
+    "role": "forbidden_leakage",
+    "evidence": {
+     "rows": 335,
+     "equal_share": 0.003,
+     "spearman": 0.707
+    },
+    "rule": "name"
+   },
+   "parent_concentration_items_km2": {
+    "role": "forbidden_leakage",
+    "rule": "name"
+   },
+   "density_numerator_items": {
+    "role": "forbidden_leakage",
+    "evidence": {
+     "rows": 467,
+     "equal_share": 0.081,
+     "spearman": 0.879,
+     "ratio_to_area": {
+      "rows": 467,
+      "reproduces_target_within_1pct": 1.0
+     }
+    },
+    "rule": "name"
+   },
+   "source_reported_total_items": {
+    "role": "forbidden_leakage",
+    "evidence": {
+     "rows": 215,
+     "equal_share": 0.005,
+     "spearman": -0.148,
+     "ratio_to_area": {
+      "rows": 215,
+      "reproduces_target_within_1pct": 0.493
+     }
+    },
+    "rule": "name"
+   },
+   "source_object_filtered_items": {
+    "role": "forbidden_leakage",
+    "evidence": {
+     "rows": 215,
+     "equal_share": 0.005,
+     "spearman": -0.11
+    },
+    "rule": "name"
+   },
+   "source_row_refs": {
+    "role": "identifier"
+   },
+   "missions_calendar_eligible": {
+    "role": "profile_descriptor"
+   }
+  }
+ }
+}

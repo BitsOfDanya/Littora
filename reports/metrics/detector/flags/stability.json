@@ -1,0 +1,117 @@
+{
+ "name": "stability__raunet__marida_mixed__common",
+ "run": "raunet__marida_mixed__common",
+ "code_sha256": "4815b72b8f2bb5e9ac184a78e5bcab920d994ce244b8120d506e2bea01366bc2",
+ "data_variant": "marida_l2a",
+ "split_name": "common",
+ "protocol": "каждый патч прогоняется сервисным ONNX в 8 видах (4 поворота × отражение), вид возвращается в исходную ориентацию; зона — связная область по исходному виду, как в сервисе (порог манифеста, маска моря, от min_pixels пикселей); согласие — средняя по пикселям зоны доля видов выше порога; зона считается мусором, если в ней есть пиксель класса 1, ложной — если в ней или в кольце 1 пикс. судно или след, либо в ней только другие размеченные классы; неразмеченные зоны в AUC не входят; порог флага — квантиль 0,05 согласия обломков val, группы по вероятности — терцили максимума вероятности зон val; test в выборе не участвует и оценён один раз; ДИ — бутстреп по сценам",
+ "views": 8,
+ "rule": {
+  "cutoff": 0.8486111111111111,
+  "quantile": 0.05,
+  "views": 8,
+  "flag": true
+ },
+ "fit": {
+  "part": "val",
+  "zones": {
+   "unlabeled": 1347,
+   "debris": 331,
+   "other_labeled": 15,
+   "ship": 1
+  },
+  "agreement_auc": 0.6959969788519638,
+  "agreement_auc_ci95": [
+   0.5859536415289256,
+   0.9666315459110474
+  ],
+  "probability_auc": 0.845166163141994,
+  "probability_auc_ci95": [
+   0.7187710115922148,
+   1.0
+  ],
+  "agreement_auc_within_probability": 0.6521133302368788,
+  "agreement_auc_within_probability_ci95": [
+   0.5897435897435898,
+   0.8032102119978493
+  ],
+  "flag_shares": {
+   "debris": {
+    "zones": 331,
+    "flagged": 17,
+    "share": 0.0513595166163142
+   },
+   "ship": {
+    "zones": 1,
+    "flagged": 1,
+    "share": 1.0
+   },
+   "other_labeled": {
+    "zones": 15,
+    "flagged": 3,
+    "share": 0.2
+   },
+   "unlabeled": {
+    "zones": 1347,
+    "flagged": 395,
+    "share": 0.29324424647364516
+   }
+  },
+  "gate": {
+   "rule": "флаг включается, если на val нижняя граница 95 % ДИ AUC согласия внутри групп по вероятности выше 0,5 и флаг отмечает ложные зоны хотя бы вдвое чаще, чем обломки",
+   "false_share": 0.25,
+   "debris_share": 0.0513595166163142,
+   "passed": true
+  },
+  "strata_edges": [
+   0.9542904694875082,
+   0.9986518224080404
+  ]
+ },
+ "test": {
+  "part": "test",
+  "zones": {
+   "unlabeled": 1210,
+   "debris": 157,
+   "ship": 7,
+   "other_labeled": 7
+  },
+  "agreement_auc": 0.6640127388535031,
+  "agreement_auc_ci95": [
+   0.46443204087896867,
+   0.8515395545314901
+  ],
+  "probability_auc": 0.9030937215650592,
+  "probability_auc_ci95": [
+   0.8386211957234684,
+   0.9690358937070334
+  ],
+  "agreement_auc_within_probability": 0.6133333333333333,
+  "agreement_auc_within_probability_ci95": [
+   0.43901031894934334,
+   0.8347580111656119
+  ],
+  "flag_shares": {
+   "debris": {
+    "zones": 157,
+    "flagged": 13,
+    "share": 0.08280254777070063
+   },
+   "ship": {
+    "zones": 7,
+    "flagged": 2,
+    "share": 0.2857142857142857
+   },
+   "other_labeled": {
+    "zones": 7,
+    "flagged": 4,
+    "share": 0.5714285714285714
+   },
+   "unlabeled": {
+    "zones": 1210,
+    "flagged": 452,
+    "share": 0.37355371900826445
+   }
+  }
+ }
+}

@@ -1,0 +1,7 @@
+{
+ "run": "raunet__marida_mixed__common",
+ "cutoff": 0.8486111111111111,
+ "views": 8,
+ "flag": true,
+ "source": "reports/metrics/detector/flags/stability.json"
+}

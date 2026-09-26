@@ -1,10 +1,17 @@
-import type { PlannedPass, SurveyPlan, SurveyPlanTarget, SurveyScoreWeights } from "@/data/survey";
+import type {
+  PlannedPass,
+  SurveyPlan,
+  SurveyPlanTarget,
+  SurveyScoreWeights,
+  SurveyTrack,
+} from "@/data/survey";
 import type { LngLat } from "@/domain/geo";
 import type { SurveyScoreComponent } from "@/domain/survey";
 import { offsetLngLat, toLocalMeters } from "@/lib/geo/local-metric";
 
 export const KNOT_KMH = 1.852;
 export const DAY_MS = 86_400_000;
+export const HOUR_MS = 3_600_000;
 const EARTH_RADIUS_KM = 6371.0088;
 
 export const SCORE_COMPONENTS: readonly SurveyScoreComponent[] = [
@@ -28,6 +35,24 @@ export function scoreOf(
 }
 
 export type RankedTarget = { target: SurveyPlanTarget; rank: number; score: number };
+
+export function resolveTargetId(
+  targets: readonly SurveyPlanTarget[],
+  selectedId: string | null,
+): string | null {
+  if (!selectedId || targets.some((target) => target.id === selectedId)) return selectedId;
+  return targets.find((target) => target.details?.zoneIds.includes(selectedId))?.id ?? selectedId;
+}
+
+export function selectedTargetOf(
+  targets: readonly SurveyPlanTarget[],
+  targetId: string | null,
+  zoneId: string | null,
+): string | null {
+  if (targetId) return resolveTargetId(targets, targetId);
+  if (!zoneId) return null;
+  return targets.find((target) => target.details?.zoneIds.includes(zoneId))?.id ?? null;
+}
 
 export function rankTargets(
   targets: readonly SurveyPlanTarget[],
@@ -75,7 +100,46 @@ export function destination(origin: LngLat, bearingDeg: number, distanceKm: numb
 
 export type DriftState = { position: LngLat; shiftKm: number; radiusKm: number; days: number };
 
+export function alongTrack(path: readonly LngLat[], hours: number): LngLat {
+  const last = path.length - 1;
+  const clamped = Math.min(Math.max(hours, 0), last);
+  const low = Math.min(Math.floor(clamped), last);
+  const high = Math.min(low + 1, last);
+  const t = clamped - low;
+  return [
+    path[low][0] + (path[high][0] - path[low][0]) * t,
+    path[low][1] + (path[high][1] - path[low][1]) * t,
+  ];
+}
+
+export function radiusAt(radii: SurveyTrack["radii"], hours: number, fallbackKm: number): number {
+  if (!radii.length) return fallbackKm;
+  if (hours <= radii[0].hour) return radii[0].km;
+  for (let index = 1; index < radii.length; index += 1) {
+    const before = radii[index - 1];
+    const after = radii[index];
+    if (hours <= after.hour) {
+      const span = after.hour - before.hour;
+      const t = span > 0 ? (hours - before.hour) / span : 0;
+      return before.km + (after.km - before.km) * t;
+    }
+  }
+  return radii[radii.length - 1].km;
+}
+
+function trackedDrift(target: SurveyPlanTarget, track: SurveyTrack, atIso: string): DriftState {
+  const hours = Math.max(0, (Date.parse(atIso) - Date.parse(target.observedAt)) / HOUR_MS);
+  const position = track.path.length ? alongTrack(track.path, hours) : target.observedPosition;
+  return {
+    position,
+    shiftKm: distanceKm(target.observedPosition, position),
+    radiusKm: radiusAt(track.radii, hours, target.searchRadius.baseKm),
+    days: hours / 24,
+  };
+}
+
 export function driftAt(target: SurveyPlanTarget, atIso: string): DriftState {
+  if (target.track) return trackedDrift(target, target.track, atIso);
   const days = elapsedDays(target.observedAt, atIso);
   const shiftKm = target.drift.kmPerDay * days;
   return {
@@ -106,6 +170,7 @@ export type RouteStopState = { targetId: string; visit: number; cumKm: number; v
 export type RouteState = { path: LngLat[]; stops: RouteStopState[]; totalKm: number };
 
 export function buildRoute(plan: SurveyPlan, positions: ReadonlyMap<string, LngLat>): RouteState {
+  if (!plan.port) return { path: [], stops: [], totalKm: 0 };
   const path: LngLat[] = [plan.port.berth];
   const stops: RouteStopState[] = [];
   let cumKm = 0;
@@ -221,4 +286,40 @@ export function bboxOf(points: readonly LngLat[]): [number, number, number, numb
     north = Math.max(north, lat);
   }
   return [west, south, east, north];
+}
+
+export type GpxPoint = { name: string; position: LngLat; note?: string };
+
+function escapeXml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function gpxCoordinates([lng, lat]: LngLat): string {
+  return `lat="${lat.toFixed(6)}" lon="${lng.toFixed(6)}"`;
+}
+
+export function toGpx(name: string, route: readonly GpxPoint[]): string {
+  const title = escapeXml(name);
+  const point = (tag: string, entry: GpxPoint) =>
+    `<${tag} ${gpxCoordinates(entry.position)}><name>${escapeXml(entry.name)}</name>${
+      entry.note ? `<desc>${escapeXml(entry.note)}</desc>` : ""
+    }</${tag}>`;
+  const waypoints = route.filter(
+    (entry, index) => route.findIndex((other) => other.name === entry.name) === index,
+  );
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<gpx version="1.1" creator="Littora" xmlns="http://www.topografix.com/GPX/1/1">',
+    `<metadata><name>${title}</name></metadata>`,
+    ...waypoints.map((entry) => point("wpt", entry)),
+    `<rte><name>${title}</name>`,
+    ...route.map((entry) => point("rtept", entry)),
+    "</rte>",
+    "</gpx>",
+    "",
+  ].join("\n");
 }

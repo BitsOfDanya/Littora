@@ -22,3 +22,4 @@ class ValueKind(StrEnum):
     MEASUREMENT = "measurement"
     MODEL_ESTIMATE = "model_estimate"
     REQUEST_AREA = "request_area"
+    SCENARIO = "scenario"

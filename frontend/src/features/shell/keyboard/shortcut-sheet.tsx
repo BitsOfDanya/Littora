@@ -127,7 +127,7 @@ export function ShortcutSheet() {
       <div className="flex max-h-[calc(100dvh-120px)] flex-col">
         <header className="flex items-center gap-3 border-b border-line-control px-5 pt-4 pb-3">
           <h2 id={titleId} className="font-serif text-[20px] leading-6 font-medium italic">
-            Клавиши
+            Как пользоваться и клавиши
           </h2>
           <span className="text-[12px] text-text-tertiary">
             по физическим клавишам — работают и в русской раскладке
@@ -143,6 +143,24 @@ export function ShortcutSheet() {
           </IconButton>
         </header>
         <PhoneStatusRow />
+        <ol className="flex list-decimal flex-col gap-1 border-b border-line-hairline py-3 pr-5 pl-9 text-[13px] leading-5 text-text-secondary">
+          <li>Выберите район сверху и дату снимка на ленте внизу карты.</li>
+          <li>
+            Нажмите «Анализ района»: сервис проверит облака, найдёт места, похожие на скопления
+            мусора, и оценит концентрацию по полевым данным.
+          </li>
+          <li>
+            Щёлкните зону на карте: вероятность, площадь, доля покрытия, признаки ложной зоны и
+            ближайшие измерения с судна.
+          </li>
+          <li>
+            Слои и композиты (RGB, ложные цвета, FDI, NDVI) — в панели слоёв; I — лупа по пикселю, R
+            — линейка.
+          </li>
+          <li>
+            Выгрузка GeoJSON и CSV — внизу панели анализа; точность моделей — в режиме «Модели».
+          </li>
+        </ol>
         <label className="flex h-12 shrink-0 items-center gap-3 border-b border-line-hairline px-5 focus-within:shadow-[inset_0_-2px_0_var(--focus-ring)]">
           <IconSearch className="shrink-0 text-text-tertiary" />
           <span className="sr-only">Поиск по клавишам</span>

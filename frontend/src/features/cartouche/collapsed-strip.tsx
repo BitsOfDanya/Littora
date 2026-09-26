@@ -1,7 +1,7 @@
 "use client";
 
 import type { MapModeId } from "@/config/layers";
-import { useWorkspaceStore } from "@/state/workspace-store";
+import { useForecastPickHint } from "@/features/forecast/use-forecast-hint";
 import { Button } from "@/ui/button";
 import { IconChevronDown } from "@/ui/icons";
 import { Tooltip } from "@/ui/tooltip";
@@ -15,8 +15,8 @@ type CollapsedStripProps = {
 };
 
 function ForecastHint({ mode }: { mode: MapModeId }) {
-  const hasSelection = useWorkspaceStore((state) => state.selectedCandidateId !== null);
-  if (mode !== "forecast" || hasSelection) return null;
+  const pick = useForecastPickHint();
+  if (mode !== "forecast" || !pick) return null;
   return (
     <p className="px-2.5 pb-2 text-[12px] leading-4 text-text-secondary">
       Выберите пятно, чтобы построить прогноз

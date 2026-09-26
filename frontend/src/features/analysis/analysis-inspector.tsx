@@ -1,9 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import { findAoi } from "@/config/aois";
 import { useDemoActive } from "@/features/cartouche/use-layer-truth";
+import { upperFirst } from "@/features/forecast/forecast-copy";
 import { CopyButton } from "@/features/inspector/dossier/copy-button";
 import { InspectorFrame } from "@/features/inspector/parts/inspector-frame";
+import { useEscapeLayer } from "@/features/shell/keyboard/escape-stack";
 import { ShellSlot } from "@/features/shell/shell-slots";
 import { type Analysis, analysisFileUrl } from "@/lib/api/analyses";
 import { formatUtcDateTime } from "@/lib/format/time";
@@ -16,18 +19,29 @@ import { CONCENTRATION_UNIT, STATUS_TONES } from "./analysis-copy";
 import { HistorySection } from "./history-section";
 import { MeasurementsSection } from "./measurements-section";
 import { RequestSection } from "./request-section";
-import { PendingResult, ResultSection, SceneQualitySection } from "./result-sections";
+import { PendingResult, ResultSection, SceneQualitySection, STALE_NOTE } from "./result-sections";
 import {
+  useAnalysisZones,
   useCaseTargets,
   useCurrentAnalysis,
   useOpenSavedMatch,
+  useSelectedZone,
   useSurveySceneDefault,
 } from "./use-analysis";
+import { ZoneDossier } from "./zone-dossier";
 
-function PanelHeader({ aoiName, analysis }: { aoiName: string; analysis: Analysis | null }) {
+function PanelHeader({
+  aoiName,
+  aoiTarget,
+  analysis,
+}: {
+  aoiName: string;
+  aoiTarget: string | undefined;
+  analysis: Analysis | null;
+}) {
   const targets = useCaseTargets().data;
   const targetKey = useAnalysisStore((state) => state.targetKey);
-  const key = analysis?.target.key ?? targetKey ?? targets?.primary;
+  const key = analysis?.target.key ?? targetKey ?? aoiTarget ?? targets?.primary;
   const title = targets?.targets.find((target) => target.key === key)?.title;
   return (
     <div className="flex flex-col gap-1.5">
@@ -44,6 +58,11 @@ function PanelHeader({ aoiName, analysis }: { aoiName: string; analysis: Analysi
           <StatusTag tone={STATUS_TONES[analysis.concentration.status]}>
             {analysis.concentration.label}
           </StatusTag>
+          {analysis.stale ? (
+            <StatusTag tone="caution" title={upperFirst(STALE_NOTE)}>
+              прежняя модель
+            </StatusTag>
+          ) : null}
         </span>
       ) : null}
     </div>
@@ -103,7 +122,7 @@ function AnalysisPanel() {
       eyebrow="Анализ района · Sentinel-2 L2A"
       crumbs={[{ label: aoiName, serif: true }, { label: "Анализ" }]}
       onClose={() => setPanelOpen(false)}
-      header={<PanelHeader aoiName={aoiName} analysis={analysis} />}
+      header={<PanelHeader aoiName={aoiName} aoiTarget={aoi?.survey?.target} analysis={analysis} />}
       footer={analysis ? <ExportBar analysis={analysis} /> : undefined}
     >
       <RequestSection analysis={analysis} />
@@ -124,14 +143,37 @@ function AnalysisPanel() {
 export function AnalysisInspector() {
   const selectedCandidate = useWorkspaceStore((state) => state.selectedCandidateId);
   const panelOpen = useAnalysisStore((state) => state.panelOpen);
+  const selectZone = useAnalysisStore((state) => state.selectZone);
+  const selectCandidate = useWorkspaceStore((state) => state.selectCandidate);
   const demoActive = useDemoActive();
+  const selected = useSelectedZone();
+  const zones = useAnalysisZones();
+  const carried = zones?.zones.some((zone) => zone.id === selectedCandidate)
+    ? selectedCandidate
+    : null;
+
+  useEffect(() => {
+    if (!carried) return;
+    selectCandidate(null);
+    selectZone(carried);
+  }, [carried, selectCandidate, selectZone]);
   useSurveySceneDefault();
   useOpenSavedMatch();
+  useEscapeLayer(selected !== null && !selectedCandidate, () => selectZone(null));
 
   if (selectedCandidate || demoActive || !panelOpen) return null;
   return (
     <ShellSlot region="inspector">
-      <AnalysisPanel />
+      {selected ? (
+        <ZoneDossier
+          key={selected.zone.id}
+          analysis={selected.source.analysis}
+          zone={selected.zone}
+          total={selected.source.zones.length}
+        />
+      ) : (
+        <AnalysisPanel />
+      )}
     </ShellSlot>
   );
 }

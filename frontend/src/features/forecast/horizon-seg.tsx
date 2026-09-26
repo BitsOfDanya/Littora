@@ -3,12 +3,13 @@
 import type { KeyboardEvent } from "react";
 import { FORECAST_HORIZONS_H, type ForecastHorizonH } from "@/domain/forecast";
 import { cn } from "@/ui/cn";
-import { reliabilityOf, RELIABILITY_WORD } from "./drift-math";
+import { reliabilityHint } from "./drift-math";
 
 type HorizonSegProps = {
   value: ForecastHorizonH;
   onChange: (horizonH: ForecastHorizonH) => void;
   disabled?: boolean;
+  graded?: boolean;
   size?: "sm" | "md";
   label?: string;
   className?: string;
@@ -18,6 +19,7 @@ export function HorizonSeg({
   value,
   onChange,
   disabled,
+  graded = true,
   size = "sm",
   label = "Горизонт прогноза",
   className,
@@ -56,7 +58,7 @@ export function HorizonSeg({
               data-horizon={hour}
               tabIndex={selected ? 0 : -1}
               disabled={disabled}
-              title={`+${hour} ч · надёжность ${RELIABILITY_WORD[reliabilityOf(hour)]}`}
+              title={`+${hour} ч · ${reliabilityHint(hour, graded)}`}
               onClick={() => onChange(hour)}
               onKeyDown={handleKey}
               className={cn(

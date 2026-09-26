@@ -3,7 +3,12 @@
 import { useCallback, useMemo } from "react";
 import { useCandidates } from "@/data/candidates";
 import { useScenes } from "@/data/scenes";
-import { type CandidateHistory, useCandidateHistories } from "@/data/timeline";
+import {
+  type CandidateHistory,
+  type LiveTimeline,
+  useCandidateHistories,
+  useLiveTimeline,
+} from "@/data/timeline";
 import type { DebrisCandidate } from "@/domain/detection";
 import type { SceneSummary } from "@/domain/scene";
 import { useWorkspaceStore } from "@/state/workspace-store";
@@ -15,10 +20,12 @@ import {
   stepIndex,
   usableCount,
 } from "./compare-model";
+import type { LivePasses } from "./live-model";
 
 const NO_SCENES: readonly SceneSummary[] = [];
 const NO_HISTORIES: readonly CandidateHistory[] = [];
 const NO_CANDIDATES: readonly DebrisCandidate[] = [];
+const NO_PASSES: LivePasses = new Map();
 
 export type CompareData = {
   scenes: readonly SceneSummary[];
@@ -29,12 +36,15 @@ export type CompareData = {
   hasCatalog: boolean;
   usable: number;
   enoughUsable: boolean;
+  live: LiveTimeline;
+  passes: LivePasses;
 };
 
 export function useCompareData(): CompareData {
   const scenesSourced = useScenes();
   const historiesSourced = useCandidateHistories();
   const candidatesSourced = useCandidates();
+  const live = useLiveTimeline();
   const beforeId = useWorkspaceStore((state) => state.compare.beforeSceneId);
   const afterId = useWorkspaceStore((state) => state.compare.afterSceneId);
   const scenes = scenesSourced.origin === "none" ? NO_SCENES : scenesSourced.data;
@@ -51,6 +61,8 @@ export function useCompareData(): CompareData {
     hasCatalog: scenesSourced.origin !== "none",
     usable,
     enoughUsable: usable >= 2,
+    live,
+    passes: live.status === "ready" ? live.bySceneId : NO_PASSES,
   };
 }
 

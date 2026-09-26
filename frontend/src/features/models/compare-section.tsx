@@ -26,6 +26,15 @@ const CELL = "py-2.5 align-middle @max-4xl:py-0";
 const NARROW_LABEL = "text-[11px] leading-[14px] text-text-tertiary @4xl:hidden";
 
 function BandsCell({ inputs }: { inputs: readonly string[] | null }) {
+  if (inputs && !inputs.length)
+    return (
+      <span
+        title="Список входов в артефакте прогона не записан"
+        className="font-mono text-[13px] leading-[18px] text-text-tertiary"
+      >
+        {DASH}
+      </span>
+    );
   const extras = inputs ? inputs.filter((input) => !isBand(input)) : [];
   return (
     <span className="inline-flex items-end gap-1.5">
@@ -45,7 +54,7 @@ function BandsCell({ inputs }: { inputs: readonly string[] | null }) {
 function MetricCells({ model, emphasis }: { model: ModelEvaluation | null; emphasis: boolean }) {
   return METRIC_ORDER.map((key) => {
     const value = model?.metrics[key] ?? null;
-    const interval = model?.metricsCi95[key] ?? null;
+    const interval = model?.metricsCi95?.[key] ?? null;
     return (
       <td
         key={key}
@@ -77,20 +86,37 @@ function MetricCells({ model, emphasis }: { model: ModelEvaluation | null; empha
 const ROW =
   "border-b border-line-hairline @max-4xl:grid @max-4xl:grid-cols-2 @max-4xl:gap-x-4 @max-4xl:gap-y-2.5 @max-4xl:py-3 @max-4xl:pr-3 @max-4xl:pl-3 @2xl:@max-4xl:grid-cols-4";
 
+function ValidationCell({ value }: { value: number | null }) {
+  return (
+    <td className={cn(CELL, "@4xl:pl-4 @4xl:text-right")}>
+      <span className={NARROW_LABEL}>{TABLE_HEADS.valF1}</span>
+      <span className="block font-mono text-[13px] leading-[18px] text-text-secondary">
+        {formatShare(value)}
+      </span>
+    </td>
+  );
+}
+
+const hasCurve = (model: ModelEvaluation) => model.prCurve.length > 0;
+
 function ModelRow({
   model,
   selected,
+  showValidation,
   onSelect,
 }: {
   model: ModelEvaluation;
   selected: boolean;
+  showValidation: boolean;
   onSelect: () => void;
 }) {
   const hint = useReportHint();
+  const detail = hasCurve(model) ? "PR-кривая и матрица" : "рабочая точка и матрица";
+  const identity = [model.code, model.version].filter(Boolean).join(" · ");
   return (
     <tr
       onClick={onSelect}
-      onMouseEnter={() => hint.show(`${model.name} — щелчок: PR-кривая и матрица этой модели`)}
+      onMouseEnter={() => hint.show(`${model.name} — щелчок: ${detail} этой модели`)}
       onMouseLeave={hint.restore}
       className={cn(
         ROW,
@@ -119,8 +145,11 @@ function ModelRow({
               <StatusTag className="h-[18px] px-1.5 text-[11px]">в работе</StatusTag>
             ) : null}
           </span>
-          <span className="font-mono text-[11px] leading-4 text-text-tertiary">
-            {model.code} · {model.version}
+          <span
+            title={identity}
+            className="block w-0 min-w-full truncate font-mono text-[11px] leading-4 text-text-tertiary"
+          >
+            {identity}
           </span>
         </button>
       </th>
@@ -133,13 +162,20 @@ function ModelRow({
         {model.family}
       </td>
       <MetricCells model={model} emphasis={selected} />
+      {showValidation ? <ValidationCell value={model.valF1 ?? null} /> : null}
       <td className={cn(CELL, "@4xl:pl-4 @4xl:text-right")}>
         <span className={NARROW_LABEL}>{TABLE_HEADS.threshold}</span>
         <span className="block font-mono text-[13px] leading-[18px] text-text-secondary">
           {formatShare(model.threshold)}
         </span>
       </td>
-      <td className={cn(CELL, "@2xl:@max-4xl:col-span-3 @4xl:pr-3 @4xl:pl-5")}>
+      <td
+        className={cn(
+          CELL,
+          showValidation ? "@2xl:@max-4xl:col-span-2" : "@2xl:@max-4xl:col-span-3",
+          "@4xl:pr-3 @4xl:pl-5",
+        )}
+      >
         <span className={cn(NARROW_LABEL, "mb-1 block")}>{TABLE_HEADS.bands}</span>
         <BandsCell inputs={model.inputBands} />
       </td>
@@ -178,11 +214,22 @@ type CompareSectionProps = {
   selectedId: string | null;
   onSelect: (model: ModelEvaluation) => void;
   isDemo: boolean;
+  lede?: string;
+  note?: string | null;
 };
 
-export function CompareSection({ models, selectedId, onSelect, isDemo }: CompareSectionProps) {
+export function CompareSection({
+  models,
+  selectedId,
+  onSelect,
+  isDemo,
+  lede,
+  note,
+}: CompareSectionProps) {
+  const showValidation = models.some((model) => model.valF1 !== undefined && model.valF1 !== null);
+  const curves = models.some(hasCurve);
   return (
-    <ReportSection id="compare" index={2} aside={isDemo ? <DemoTag /> : null}>
+    <ReportSection id="compare" index={2} lede={lede} aside={isDemo ? <DemoTag /> : null}>
       <table className="w-full border-collapse @max-4xl:block">
         <caption className="sr-only">
           Сравнение моделей по классу «мусор»: F1, IoU, Precision, Recall с 95-процентными
@@ -201,6 +248,11 @@ export function CompareSection({ models, selectedId, onSelect, isDemo }: Compare
                 <span className="pr-[64px]">{METRIC_COPY[key].label}</span>
               </th>
             ))}
+            {showValidation ? (
+              <th scope="col" className={cn(HEAD, "pl-4 text-right whitespace-nowrap")}>
+                {TABLE_HEADS.valF1}
+              </th>
+            ) : null}
             <th scope="col" className={cn(HEAD, "pl-4 text-right")}>
               {TABLE_HEADS.threshold}
             </th>
@@ -216,6 +268,7 @@ export function CompareSection({ models, selectedId, onSelect, isDemo }: Compare
                 key={model.id}
                 model={model}
                 selected={model.id === selectedId}
+                showValidation={showValidation}
                 onSelect={() => onSelect(model)}
               />
             ))
@@ -241,8 +294,12 @@ export function CompareSection({ models, selectedId, onSelect, isDemo }: Compare
           выделенные ячейки — каналы на входе модели
         </span>
         {models.length ? (
-          <span>щелчок по строке — кривая и матрица этой модели в разделе 3</span>
+          <span>
+            щелчок по строке — {curves ? "кривая" : "рабочая точка"} и матрица этой модели в разделе
+            3
+          </span>
         ) : null}
+        {note ? <span>{note}</span> : null}
       </p>
     </ReportSection>
   );

@@ -1,8 +1,9 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useMutationState, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useMemo } from "react";
 import { findAoi } from "@/config/aois";
+import { useCandidates } from "@/data/candidates";
 import { useScenes } from "@/data/scenes";
 import type { AreaOfInterest } from "@/domain/aoi";
 import type { SceneSummary } from "@/domain/scene";
@@ -15,6 +16,7 @@ import {
   type AnalysisListItem,
   createAnalysis,
   getAnalysis,
+  getAnalysisConditions,
   listAnalyses,
 } from "@/lib/api/analyses";
 import { getCaseTargets } from "@/lib/api/case";
@@ -22,6 +24,7 @@ import { queryKeys } from "@/lib/query/query-keys";
 import { useAnalysisStore } from "@/state/analysis-store";
 import { useWorkspaceStore } from "@/state/workspace-store";
 import { roundBbox, sameBbox, spanTooLarge, visibleBounds } from "./area";
+import { findCurrentMatch, type RealZone, toRealZones } from "./zones";
 
 const HISTORY_STALE_MS = 30_000;
 
@@ -45,6 +48,46 @@ export function useCurrentAnalysis() {
   });
 }
 
+export type AnalysisZones = {
+  analysis: Analysis;
+  zones: readonly RealZone[];
+  threshold: number | null;
+};
+
+export function useAnalysisZones(): AnalysisZones | null {
+  const demo = useCandidates().origin === "demo";
+  const analysis = useCurrentAnalysis().data;
+  return useMemo(() => {
+    if (demo || !analysis || !analysis.detection.zones.length) return null;
+    return {
+      analysis,
+      zones: toRealZones(analysis.detection.zones),
+      threshold: analysis.detection.threshold ?? null,
+    };
+  }, [demo, analysis]);
+}
+
+export function useSelectedZone(): { zone: RealZone; source: AnalysisZones } | null {
+  const source = useAnalysisZones();
+  const zoneId = useAnalysisStore((state) => state.zoneId);
+  if (!source || !zoneId) return null;
+  const zone = source.zones.find((entry) => entry.id === zoneId);
+  return zone ? { zone, source } : null;
+}
+
+const CONDITIONS_RETRY_MS = 60_000;
+
+export function useAnalysisConditions(analysis: Analysis | null) {
+  const id = analysis?.scene ? analysis.id : null;
+  return useQuery({
+    queryKey: queryKeys.analyses.conditions(id ?? ""),
+    queryFn: ({ signal }) => getAnalysisConditions(id ?? "", signal),
+    enabled: id !== null,
+    staleTime: (query) => (query.state.data?.messages.length ? CONDITIONS_RETRY_MS : Infinity),
+    retry: false,
+  });
+}
+
 export function useAnalysisHistory(filters: AnalysisFilters) {
   return useQuery({
     queryKey: queryKeys.analyses.list(filters),
@@ -53,22 +96,34 @@ export function useAnalysisHistory(filters: AnalysisFilters) {
   });
 }
 
+const RUN_KEY = ["analyses", "run"] as const;
+
 export function useRunAnalysis() {
   const client = useQueryClient();
   const setAnalysis = useAnalysisStore((state) => state.setAnalysis);
   return useMutation({
+    mutationKey: RUN_KEY,
     mutationFn: createAnalysis,
     onSuccess: (analysis: Analysis) => {
       client.setQueryData(queryKeys.analyses.detail(analysis.id), analysis);
       void client.invalidateQueries({ queryKey: ["analyses", "list"] });
-      setAnalysis(analysis.id);
+      const aoiId = analysis.request.aoi_id;
+      if (aoiId === null || aoiId === useWorkspaceStore.getState().aoiId) setAnalysis(analysis.id);
     },
   });
 }
 
+export function useAnalysisRunStart(): number | null {
+  const starts = useMutationState({
+    filters: { mutationKey: RUN_KEY, status: "pending" },
+    select: (mutation) => mutation.state.submittedAt,
+  });
+  return starts.length ? Math.min(...starts) : null;
+}
+
 function requestDate(aoi: AreaOfInterest, scene: SceneSummary | null): string {
   if (scene) return scene.acquiredAt.slice(0, 10);
-  return aoi.survey?.dates[0] ?? new Date().toISOString().slice(0, 10);
+  return aoi.survey?.dates[0] ?? aoi.reference?.date ?? new Date().toISOString().slice(0, 10);
 }
 
 export function useRequestPlan() {
@@ -93,7 +148,7 @@ export function useRequestPlan() {
         aoi_id: aoi.id,
         aoi_name: aoi.name,
         scene_id: realScene?.id ?? null,
-        target: targetKey,
+        target: targetKey ?? aoi.survey?.target ?? null,
       },
     };
   }, [aoi, areaMode, map, realScene, windowDays, targetKey]);
@@ -128,7 +183,7 @@ export function useSavedMatch(): AnalysisListItem | null {
   return useMemo(() => {
     if (!key || !history.data) return null;
     const request = JSON.parse(key) as AnalysisCreate;
-    return history.data.find((item) => matchesRequest(item, request, primary)) ?? null;
+    return findCurrentMatch(history.data, (item) => matchesRequest(item, request, primary));
   }, [key, history.data, primary]);
 }
 
@@ -140,6 +195,44 @@ export function useOpenSavedMatch() {
   }, [match, setAnalysis]);
 }
 
+export function latestZonesAnalysis(
+  items: readonly AnalysisListItem[],
+  aoiId: string,
+): AnalysisListItem | null {
+  return (
+    items.find((item) => !item.stale && (item.zones ?? 0) > 0 && item.request.aoi_id === aoiId) ??
+    null
+  );
+}
+
+export function useAdoptSavedAnalysis() {
+  const demo = useWorkspaceStore((state) => state.demoFixtures);
+  const aoiId = useWorkspaceStore((state) => state.aoiId);
+  const analysisId = useAnalysisStore((state) => state.analysisId);
+  const setAnalysis = useAnalysisStore((state) => state.setAnalysis);
+  const history = useAnalysisHistory({ aoiId });
+  const pick = useMemo(
+    () => (history.data ? latestZonesAnalysis(history.data, aoiId) : null),
+    [history.data, aoiId],
+  );
+  useEffect(() => {
+    if (!demo && analysisId === null && pick) setAnalysis(pick.id);
+  }, [demo, analysisId, pick, setAnalysis]);
+}
+
+export function defaultScene(
+  scenes: readonly SceneSummary[],
+  surveyDay: string | null,
+): SceneSummary | undefined {
+  if (surveyDay) {
+    const sameDay = scenes.filter((scene) => scene.acquiredAt.startsWith(surveyDay));
+    return [...sameDay].sort(
+      (a, b) => (b.areaCoverage ?? 0) - (a.areaCoverage ?? 0) || a.cloudCover - b.cloudCover,
+    )[0];
+  }
+  return scenes.findLast((scene) => scene.usability === "usable");
+}
+
 export function useSurveySceneDefault() {
   const aoi = findAoi(useWorkspaceStore((state) => state.aoiId));
   const sceneId = useWorkspaceStore((state) => state.sceneId);
@@ -148,13 +241,9 @@ export function useSurveySceneDefault() {
   const list = scenes.origin === "api" ? scenes.data : null;
 
   useEffect(() => {
-    const surveyDay = aoi?.survey?.dates[0];
-    if (!list || !surveyDay) return;
+    if (!list || !aoi) return;
     if (sceneId && list.some((scene) => scene.id === sceneId)) return;
-    const sameDay = list.filter((scene) => scene.acquiredAt.startsWith(surveyDay));
-    const best = [...sameDay].sort(
-      (a, b) => (b.areaCoverage ?? 0) - (a.areaCoverage ?? 0) || a.cloudCover - b.cloudCover,
-    )[0];
+    const best = defaultScene(list, aoi.survey?.dates[0] ?? aoi.reference?.date ?? null);
     if (best) selectScene(best.id);
   }, [aoi, list, sceneId, selectScene]);
 }

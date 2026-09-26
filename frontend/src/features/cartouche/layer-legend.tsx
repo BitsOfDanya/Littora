@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import type { LegendKind } from "@/config/layers";
 import { BRIGHT_WATER, QUALITY_CLASSES } from "@/features/analysis/analysis-copy";
+import { ZONE_RAMP_CSS } from "@/features/analysis/zones";
 import { GROUND_INK } from "@/features/map/palette";
 import { BEACHING, DRIFT, type Ground, rampFor } from "@/features/map/ramps";
 import { SeverityGlyph } from "@/ui/indicators";
@@ -134,6 +135,47 @@ function AnalysisAreaLegend({ ground }: { ground: Ground }) {
   );
 }
 
+function ProbabilityLegend() {
+  return (
+    <>
+      <div
+        aria-hidden
+        className="h-2.5 w-full rounded-[1px] border border-line-hairline"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(255,236,179,0.1), rgba(255,214,102,0.5), rgba(255,160,60,0.75), rgba(235,90,50,0.9), rgba(200,30,60,1))",
+        }}
+      />
+      <div className="flex justify-between font-mono text-[11px] text-text-tertiary">
+        <span>¼ порога</span>
+        <span>порог</span>
+        <span>выше</span>
+      </div>
+      <LegendNote>вероятность детектора по пикселю 10 м; ниже ¼ порога не показано</LegendNote>
+    </>
+  );
+}
+
+function ZonesLegend() {
+  return (
+    <>
+      <div
+        aria-hidden
+        className="h-2.5 w-full rounded-[1px] border border-line-hairline"
+        style={{ background: ZONE_RAMP_CSS }}
+      />
+      <div className="flex justify-between font-mono text-[11px] text-text-tertiary">
+        <span>порог</span>
+        <span>p макс. зоны</span>
+        <span>1</span>
+      </div>
+      <LegendNote>
+        связные пиксели выше порога; подпись — зона и p макс. · оценка модели, не измерение
+      </LegendNote>
+    </>
+  );
+}
+
 function MeasurementsLegend({ ground }: { ground: Ground }) {
   return (
     <>
@@ -225,6 +267,10 @@ export function LayerLegend({
       return <AnalysisAreaLegend ground={ground} />;
     case "observation-marks":
       return <MeasurementsLegend ground={ground} />;
+    case "probability-ramp":
+      return <ProbabilityLegend />;
+    case "zone-outline":
+      return <ZonesLegend />;
     case "delta-ramp":
       return (
         <>

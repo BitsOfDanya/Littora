@@ -7,8 +7,15 @@ from fastapi.responses import FileResponse, Response
 from starlette.concurrency import run_in_threadpool
 
 from app.analysis.export import to_csv, to_geojson
-from app.analysis.service import IMAGE_FILE, MASK_FILE, AnalysisRequest
+from app.analysis.service import (
+    EXTRA_LAYER_FILES,
+    IMAGE_FILE,
+    MASK_FILE,
+    PROBABILITY_FILE,
+    AnalysisRequest,
+)
 from app.api.dependencies import AnalysisDep
+from app.core.errors import NotFoundError
 from app.schemas.analysis import AnalysisCreate
 
 router = APIRouter(tags=["analyses"])
@@ -23,9 +30,14 @@ StatusFilter = Literal[
 
 
 @router.post("/analyses")
-async def create_analysis(payload: AnalysisCreate, analysis: AnalysisDep) -> dict[str, Any]:
+async def create_analysis(
+    payload: AnalysisCreate, analysis: AnalysisDep, response: Response
+) -> dict[str, Any]:
     request = AnalysisRequest(**payload.model_dump())
-    return await run_in_threadpool(analysis.run, request)
+    result = await run_in_threadpool(analysis.submit, request)
+    if result.get("state") == "running":
+        response.status_code = 202
+    return result
 
 
 @router.get("/analyses")
@@ -45,9 +57,19 @@ def read_analysis(analysis_id: str, analysis: AnalysisDep) -> dict[str, Any]:
     return analysis.get(analysis_id)
 
 
+@router.get("/analyses/{analysis_id}/conditions")
+async def read_conditions(analysis_id: str, analysis: AnalysisDep) -> dict[str, Any]:
+    return await run_in_threadpool(analysis.conditions, analysis_id)
+
+
 @router.get("/analyses/{analysis_id}/image.png", response_class=FileResponse)
 def read_image(analysis_id: str, analysis: AnalysisDep) -> FileResponse:
     return FileResponse(analysis.layer_path(analysis_id, IMAGE_FILE), media_type="image/png")
+
+
+@router.get("/analyses/{analysis_id}/probability.png", response_class=FileResponse)
+def read_probability(analysis_id: str, analysis: AnalysisDep) -> FileResponse:
+    return FileResponse(analysis.layer_path(analysis_id, PROBABILITY_FILE), media_type="image/png")
 
 
 @router.get("/analyses/{analysis_id}/mask.png", response_class=FileResponse)
@@ -57,6 +79,23 @@ def read_mask(analysis_id: str, analysis: AnalysisDep) -> FileResponse:
 
 def _attachment(name: str) -> dict[str, str]:
     return {"Content-Disposition": f'attachment; filename="{name}"'}
+
+
+@router.get("/analyses/{analysis_id}/pixel")
+async def read_pixel_values(
+    analysis_id: str,
+    analysis: AnalysisDep,
+    lon: Annotated[float, Query(ge=-180, le=180)],
+    lat: Annotated[float, Query(ge=-90, le=90)],
+) -> dict[str, Any]:
+    return await run_in_threadpool(analysis.pixel, analysis_id, lon, lat)
+
+
+@router.get("/analyses/{analysis_id}/layers/{name}", response_class=FileResponse)
+def read_extra_layer(analysis_id: str, name: str, analysis: AnalysisDep) -> FileResponse:
+    if name not in EXTRA_LAYER_FILES:
+        raise NotFoundError("Такого слоя нет")
+    return FileResponse(analysis.layer_path(analysis_id, name), media_type="image/png")
 
 
 @router.get("/analyses/{analysis_id}/export.geojson")
