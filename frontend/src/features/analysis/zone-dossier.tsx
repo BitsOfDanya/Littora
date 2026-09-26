@@ -36,20 +36,36 @@ import {
 
 const ZONE_FIT_MAX_ZOOM = 15;
 
-const ADVICE_TONES: Readonly<Record<ZoneAdviceKind, string>> = {
+const ADVICE_BORDERS: Readonly<Record<ZoneAdviceKind, string>> = {
   survey: "border-state-ok",
   recheck: "border-state-caution",
   not_debris: "border-line-strong",
 };
 
-function AdviceNote({ zone }: { zone: RealZone }) {
+function uncertaintyParts(zone: RealZone, threshold: number | null): string[] {
+  const parts: string[] = [];
+  if (zone.probabilityMax !== null)
+    parts.push(
+      `вероятность ${formatProbability(zone.probabilityMax)}${threshold === null ? "" : ` при пороге ${formatNumber(threshold, 2)}`}, калибр. на val`,
+    );
+  if (zone.stability)
+    parts.push(`устойчивость ${formatPercent(zone.stability.agreement, 0)} из 8 видов`);
+  if (zone.coverage) parts.push(`доля покрытия ${coverageRange(zone.coverage)}`);
+  return parts;
+}
+
+function AdviceNote({ zone, threshold }: { zone: RealZone; threshold: number | null }) {
   const advice = zoneAdvice(zone);
+  const parts = uncertaintyParts(zone, threshold);
   return (
     <div
-      className={`flex flex-col gap-0.5 border-l-2 bg-surface-raised px-2.5 py-2 text-[12px] leading-4 ${ADVICE_TONES[advice.kind]}`}
+      className={`flex flex-col gap-1 border-l-2 bg-surface-raised px-2.5 py-2 text-[12px] leading-4 ${ADVICE_BORDERS[advice.kind]}`}
     >
-      <span className="font-semibold text-text-primary">Что делать: {advice.title}</span>
+      <span className="font-semibold text-text-primary">Решение: {advice.title}</span>
       <span className="text-text-secondary">{advice.reason}</span>
+      {parts.length ? (
+        <span className="text-text-tertiary">Неопределённость: {parts.join(" · ")}</span>
+      ) : null}
     </div>
   );
 }
@@ -145,7 +161,7 @@ export function ZoneDossier({
     >
       <PanelSection index="01" title="Сводка">
         {analysis.stale ? <StaleNote analysis={analysis} /> : null}
-        <AdviceNote zone={zone} />
+        <AdviceNote zone={zone} threshold={threshold} />
         <ReadoutGrid>
           <Readout
             label="Вероятность, макс. (калибр.)"

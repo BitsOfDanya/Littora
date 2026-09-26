@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ModeHint } from "@/features/analysis/mode-hint";
 import { ShellSlot } from "@/features/shell/shell-slots";
 import { CompareDivider } from "@/features/timeline/compare-divider";
 import { CompareInspector } from "@/features/timeline/compare-inspector";
@@ -13,6 +14,14 @@ export const metadata: Metadata = { title: "Динамика" };
 export default function TimelinePage() {
   return (
     <>
+      <ModeHint
+        title="Динамика"
+        steps={[
+          "Выберите пролёты на ленте",
+          "«Посчитать» — детектор по каждому",
+          "Сравните два пролёта: новые, сохранившиеся, исчезнувшие зоны",
+        ]}
+      />
       <CompareMapLayers />
       <TimelineCompareKeys />
       <ShellSlot region="map-overlay">

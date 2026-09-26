@@ -29,7 +29,8 @@ export type LegendKind =
   | "route-line"
   | "search-radius"
   | "team-labels"
-  | "concentration-domains";
+  | "concentration-domains"
+  | "density-classes";
 
 export type CompositeLayerId =
   "scene-true-color" | "scene-false-color" | "scene-fdi" | "scene-ndvi";
@@ -46,6 +47,7 @@ export type LayerId =
   | "field-observations"
   | "team-labels"
   | "concentration-domains"
+  | "density"
   | "debris-probability"
   | "detector-zones"
   | "aoi-boundary"
@@ -199,6 +201,16 @@ export const LAYERS: readonly LayerDefinition[] = [
     modes: ["monitor", "timeline", "forecast"],
     legend: "zone-outline",
     plannedReason: "Появятся с детектором: пиксели выше порога, собранные в зоны.",
+  },
+  {
+    id: "density",
+    label: "Плотность материала, м²/км²",
+    group: "results",
+    capability: "coverage_estimation",
+    hasDemo: false,
+    modes: ["monitor"],
+    legend: "density-classes",
+    plannedReason: "Появится с оценкой доли покрытия пикселя.",
   },
   {
     id: "coverage",

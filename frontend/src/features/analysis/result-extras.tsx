@@ -19,6 +19,7 @@ const TOGGLES: readonly [LayerId, string, keyof Analysis["layers"] | null][] = [
   ["no-data", "Маска", "mask"],
   ["debris-probability", "Вероятность", "probability"],
   ["coverage", "Покрытие", "coverage"],
+  ["density", "Плотность", "coverage"],
   ["detector-zones", "Зоны", null],
 ];
 

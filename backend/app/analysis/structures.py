@@ -20,7 +20,7 @@ OVERPASS_URLS = (
     "https://overpass.kumi.systems/api/interpreter",
 )
 OSM_DIR = "osm"
-USER_AGENT = "Littora/0.1 (+https://github.com/BitsOfDanya/Littora)"
+USER_AGENT = "littora-api/0.1 (marine litter monitoring)"
 TIMEOUT_S = 25
 PAD_DEG = 0.01
 STRUCTURE_M = 60.0

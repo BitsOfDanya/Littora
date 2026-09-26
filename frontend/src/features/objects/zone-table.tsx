@@ -1,7 +1,14 @@
 "use client";
 
 import { useMemo } from "react";
-import { FLAG_SHORT, type RealZone, zoneColor } from "@/features/analysis/zones";
+import {
+  ADVICE_TONES,
+  FLAG_SHORT,
+  FLAG_TONES,
+  type RealZone,
+  zoneAdvice,
+  zoneColor,
+} from "@/features/analysis/zones";
 import { useStatusHintStore } from "@/features/shell/status-hint-store";
 import { formatLngLat } from "@/lib/format/coordinates";
 import { formatArea, formatNumber } from "@/lib/format/numbers";
@@ -104,11 +111,23 @@ export function ZoneTable({
                     style={{ background: `rgb(${red},${green},${blue})` }}
                   />
                   {zone.id}
+                  <span
+                    title={zoneAdvice(zone).title}
+                    className={cn(
+                      "rounded-[2px] border px-1 font-sans text-[10px] leading-[14px] font-normal",
+                      ADVICE_TONES[zoneAdvice(zone).kind],
+                    )}
+                  >
+                    {zoneAdvice(zone).short}
+                  </span>
                   {zone.flags.map((flag) => (
                     <span
                       key={flag.kind}
                       title={[flag.label, ...flag.evidence].join(" · ")}
-                      className="rounded-[2px] border border-line-hairline px-1 font-sans text-[10px] leading-[14px] font-normal text-text-secondary"
+                      className={cn(
+                        "rounded-[2px] border px-1 font-sans text-[10px] leading-[14px] font-normal",
+                        FLAG_TONES[flag.kind] ?? "border-line-hairline text-text-secondary",
+                      )}
                     >
                       {FLAG_SHORT[flag.kind] ?? flag.label}
                     </span>

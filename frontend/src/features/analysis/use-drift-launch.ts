@@ -31,3 +31,22 @@ export function useDriftLaunch(): { available: boolean; launch: (analysisId: str
 
   return { available, launch };
 }
+
+const SURVEY_MODE = WORKSPACE_MODES.find((mode) => mode.id === "survey") ?? WORKSPACE_MODES[0];
+
+export function useSurveyLaunch(): { available: boolean; launch: (analysisId: string) => void } {
+  const router = useRouter();
+  const setAnalysis = useAnalysisStore((state) => state.setAnalysis);
+  const aoiId = useWorkspaceStore((state) => state.aoiId);
+  const available = useCapability("survey_planning") === "available";
+  const launch = useCallback(
+    (analysisId: string) => {
+      setAnalysis(analysisId);
+      const params = new URLSearchParams(viewQuery(aoiId, null));
+      params.set("analysis", analysisId);
+      router.push(modeHref(SURVEY_MODE, params.toString()));
+    },
+    [aoiId, router, setAnalysis],
+  );
+  return { available, launch };
+}

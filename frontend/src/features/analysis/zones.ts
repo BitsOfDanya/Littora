@@ -289,3 +289,16 @@ export function zoneAdvice(zone: RealZone): ZoneAdvice {
       "высокая вероятность, без признаков судна и сооружений: включите в план обследования судном или БПЛА",
   };
 }
+
+export const FLAG_TONES: Readonly<Record<string, string>> = {
+  vessel: "border-line-strong text-text-secondary",
+  structure: "border-line-strong text-text-secondary",
+  port: "border-line-hairline text-text-tertiary",
+  unstable: "border-state-caution text-state-caution",
+};
+
+export const ADVICE_TONES: Readonly<Record<ZoneAdviceKind, string>> = {
+  survey: "border-state-ok text-state-ok",
+  recheck: "border-state-caution text-state-caution",
+  not_debris: "border-line-strong text-text-tertiary",
+};

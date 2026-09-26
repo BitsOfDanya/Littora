@@ -5,6 +5,7 @@ import { ZONE_RAMP_CSS } from "@/features/analysis/zones";
 import { GROUND_INK } from "@/features/map/palette";
 import { BEACHING, DRIFT, type Ground, rampFor } from "@/features/map/ramps";
 import { SeverityGlyph } from "@/ui/indicators";
+import { DENSITY_CLASSES } from "@/features/analysis/density";
 import { coverageTicks, DivergingLegend, LegendRamp } from "./legend-ramp";
 import type { LayerTruth } from "./use-layer-truth";
 import {
@@ -287,6 +288,30 @@ export function LayerLegend({
       return <AnalysisAreaLegend ground={ground} />;
     case "observation-marks":
       return <MeasurementsLegend ground={ground} />;
+    case "density-classes":
+      return (
+        <div className="flex flex-col gap-1 text-[11px] leading-[14px] text-text-secondary">
+          {DENSITY_CLASSES.map((entry, index) => (
+            <span key={entry.label} className="flex items-center gap-2">
+              <span
+                aria-hidden
+                className="h-2.5 w-4 rounded-[1px]"
+                style={{
+                  background: `rgba(${entry.color.slice(0, 3).join(",")},${entry.color[3] / 255})`,
+                }}
+              />
+              {entry.label} ·{" "}
+              {index === 0
+                ? `до ${entry.max}`
+                : entry.max === Infinity
+                  ? `от ${DENSITY_CLASSES[index - 1].max}`
+                  : `${DENSITY_CLASSES[index - 1].max}–${entry.max}`}{" "}
+              м²/км²
+            </span>
+          ))}
+          <span>ячейка 1 км; сумма площади материала зон без «похоже на судно»</span>
+        </div>
+      );
     case "concentration-domains":
       return (
         <div className="flex flex-col gap-1 text-[11px] leading-[14px] text-text-secondary">

@@ -29,6 +29,7 @@ export type SectionId =
   | "checks"
   | "concentration"
   | "pairs"
+  | "case"
   | "drift"
   | "datasets"
   | "limits"
@@ -62,6 +63,10 @@ export const SECTION_COPY: Record<SectionId, { title: string; lede: string }> = 
   concentration: {
     title: "Концентрация, шт./км²",
     lede: "Кросс-валидация по дням съёмки против медианы профиля. Модель идёт в сервис, только если её выигрыш над медианой значим.",
+  },
+  case: {
+    title: "Данные кейса: S1–S4",
+    lede: "Полевой реестр организаторов: где и когда шли наблюдения, что вошло в целевые величины и почему у большинства событий нет пары со снимком.",
   },
   pairs: {
     title: "Судно и спутник в один день",

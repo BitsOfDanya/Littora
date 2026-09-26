@@ -8,6 +8,7 @@ import { ChecksSection, hasChecks } from "./checks-section";
 import { CompareSection } from "./compare-section";
 import { ConcentrationSection } from "./concentration-section";
 import { API_LEDE, MATRIX_CLASSES, MATRIX_COPY } from "./copy";
+import { CaseDataSection } from "./case-data-section";
 import { DatasetsSection } from "./datasets-section";
 import { DriftSection } from "./drift-section";
 import { GallerySection, ReadingGuide } from "./guide-sections";
@@ -118,9 +119,10 @@ export function ModelsReport() {
         ) : null}
         {pairs ? <PairsSection link={pairs} index={pairsIndex} /> : null}
         {drift ? <DriftSection drift={drift} index={driftIndex} /> : null}
-        <DatasetsSection index={datasetsIndex} />
-        <LimitationsSection index={datasetsIndex + 1} />
-        {evidence ? null : <PipelineSection index={datasetsIndex + 2} />}
+        <CaseDataSection index={datasetsIndex} />
+        <DatasetsSection index={datasetsIndex + 1} />
+        <LimitationsSection index={datasetsIndex + 2} />
+        {evidence ? null : <PipelineSection index={datasetsIndex + 3} />}
       </ReportSheet>
     </ShellSlot>
   );

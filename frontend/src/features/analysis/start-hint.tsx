@@ -7,7 +7,7 @@ import { useCurrentAnalysis } from "./use-analysis";
 const KEY = "littora:start-hint";
 const listeners = new Set<() => void>();
 
-function read(): boolean {
+export function readHints(): boolean {
   try {
     return window.localStorage.getItem(KEY) !== "hidden";
   } catch {
@@ -25,7 +25,7 @@ export function showHints(): void {
   }
 }
 
-function hide(): void {
+export function hideHints(): void {
   try {
     window.localStorage.setItem(KEY, "hidden");
   } catch {
@@ -35,7 +35,7 @@ function hide(): void {
   }
 }
 
-function subscribe(listener: () => void): () => void {
+export function subscribeHints(listener: () => void): () => void {
   listeners.add(listener);
   return () => listeners.delete(listener);
 }
@@ -88,7 +88,7 @@ function useHint(): { title: string; steps: readonly string[] } {
 }
 
 export function StartHint() {
-  const visible = useSyncExternalStore(subscribe, read, () => false);
+  const visible = useSyncExternalStore(subscribeHints, readHints, () => false);
   const hint = useHint();
   if (!visible) return null;
   return (
@@ -107,7 +107,7 @@ export function StartHint() {
       </ol>
       <button
         type="button"
-        onClick={hide}
+        onClick={hideHints}
         title="Скрыть подсказки; вернуть — в окне «Помощь»"
         className="shrink-0 text-text-secondary underline hover:text-text-primary"
       >

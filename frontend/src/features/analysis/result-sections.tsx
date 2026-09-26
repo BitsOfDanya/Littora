@@ -26,9 +26,9 @@ import { ConditionsRows } from "./conditions-rows";
 import { formatConcentration, formatDay } from "./format";
 import { LayerChips, TargetComparison } from "./result-extras";
 import { RunProgress } from "./run-progress";
-import { useAnalysisRunStart, useRunAnalysis } from "./use-analysis";
-import { useDriftLaunch } from "./use-drift-launch";
-import { formatProbability, toRealZones, zoneColor } from "./zones";
+import { useAnalysisConditions, useAnalysisRunStart, useRunAnalysis } from "./use-analysis";
+import { useDriftLaunch, useSurveyLaunch } from "./use-drift-launch";
+import { ADVICE_TONES, formatProbability, toRealZones, zoneAdvice, zoneColor } from "./zones";
 
 export const STALE_NOTE = "результат посчитан прежней версией модели";
 
@@ -86,15 +86,26 @@ export function RetryNote({ analysis, progress }: RerunNoteProps) {
 }
 
 export function DriftAction({ analysis }: { analysis: Analysis }) {
-  const { available, launch } = useDriftLaunch();
-  if (!available || !analysis.detection.zones.length) return null;
+  const drift = useDriftLaunch();
+  const survey = useSurveyLaunch();
+  if (!analysis.detection.zones.length || (!drift.available && !survey.available)) return null;
   return (
-    <div className="flex flex-col items-start gap-1">
-      <Button variant="primary" size="md" onClick={() => launch(analysis.id)}>
-        Сценарий дрейфа
-      </Button>
+    <div className="flex flex-col items-start gap-1.5">
+      <div className="flex flex-wrap gap-2">
+        {drift.available ? (
+          <Button variant="primary" size="md" onClick={() => drift.launch(analysis.id)}>
+            Сценарий дрейфа
+          </Button>
+        ) : null}
+        {survey.available ? (
+          <Button size="md" onClick={() => survey.launch(analysis.id)}>
+            Маршрут обследования из порта
+          </Button>
+        ) : null}
+      </div>
       <p className="text-[11px] leading-[14px] text-text-tertiary">
-        Откроет «Прогноз» с этим анализом: куда зоны унесёт за 6–72 ч и откуда они пришли.
+        Дрейф — куда зоны унесёт за 6–72 ч и откуда они пришли. Маршрут — обход зон судном из
+        ближайшего порта и вылеты БПЛА с поправкой на дрейф к моменту прибытия.
       </p>
     </div>
   );
@@ -136,8 +147,11 @@ function flaggedZones(analysis: Analysis): number {
   ).length;
 }
 
+const STORM_WIND_MS = 8;
+
 function PlainSummary({ analysis }: { analysis: Analysis }) {
   const { detection, concentration } = analysis;
+  const wind = useAnalysisConditions(analysis).data?.wind?.speed_ms ?? null;
   const day = analysis.scene ? formatDay(analysis.scene.acquired_at.slice(0, 10)) : null;
   const zones = detection.zones.length;
   const flagged = flaggedZones(analysis);
@@ -157,6 +171,12 @@ function PlainSummary({ analysis }: { analysis: Analysis }) {
       <span className="text-[11px] font-semibold text-text-secondary">Коротко</span>
       <span className="text-text-primary">{first}</span>
       <span className="text-text-primary">{second}</span>
+      {wind !== null && wind >= STORM_WIND_MS ? (
+        <span className="text-state-caution">
+          Ветер {formatNumber(wind, 1)} м/с на момент снимка: пена и барашки дают ложные зоны —
+          перепроверяйте зоны по соседнему пролёту.
+        </span>
+      ) : null}
     </div>
   );
 }
@@ -293,7 +313,17 @@ function ZoneList({ analysis }: { analysis: Analysis }) {
                   className="size-2.5 rounded-[1px] border border-line-hairline"
                   style={{ background: `rgb(${red},${green},${blue})` }}
                 />
-                <span className="text-text-primary">{zone.id}</span>
+                <span className="flex items-center gap-1.5 text-text-primary">
+                  {zone.id}
+                  <span
+                    className={cn(
+                      "rounded-[2px] border px-1 font-sans text-[10px] leading-[14px]",
+                      ADVICE_TONES[zoneAdvice(zone).kind],
+                    )}
+                  >
+                    {zoneAdvice(zone).short}
+                  </span>
+                </span>
                 <span className="text-text-secondary">
                   {zone.areaM2 === null ? "—" : formatArea(zone.areaM2)}
                 </span>

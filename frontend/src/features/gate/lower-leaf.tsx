@@ -62,10 +62,7 @@ export function LowerLeafContent(button: EnterButtonProps) {
         {SITE.description}
       </p>
       <p className="mt-2 hidden max-w-[820px] text-[12px] leading-[18px] text-(--gate-ink)/80 md:block">
-        {SITE.sources}{" "}
-        <a href={SITE.repository} target="_blank" rel="noreferrer" className="underline">
-          README и код
-        </a>
+        {SITE.sources} Методика, данные и воспроизведение описаны в README проекта.
       </p>
       <dl className="mt-4 hidden max-w-[900px] grid-cols-4 gap-4 md:grid">
         {GATE_FACTS.map((fact) => (
