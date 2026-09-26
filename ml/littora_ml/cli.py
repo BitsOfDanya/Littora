@@ -565,6 +565,32 @@ def _detector_c1check(args: argparse.Namespace) -> None:
     print(f"выбрано: {report['chosen']}")
 
 
+def _detector_reference(args: argparse.Namespace) -> None:
+    from littora_ml.detector.dataset import load_patch_set
+    from littora_ml.detector.rescore import write_reference
+
+    patches = load_patch_set(resolve(DATA_VARIANTS["marida_l2a"]))
+    summary = write_reference(patches, _detector_split(patches, "common"))
+    for part, block in summary.items():
+        print(
+            f"{part}: патчей {block['patches']}, размеченных пикселей {block['labeled_pixels']}, "
+            f"мусора {block['debris_pixels']}"
+        )
+
+
+def _detector_rescore(args: argparse.Namespace) -> None:
+    from littora_ml.detector.rescore import rescore
+
+    for run in args.runs.split(","):
+        result = rescore(run)
+        again, stored = result["recomputed"], result["stored"]
+        print(
+            f"{run}: {result['patches']} патчей test · пересчёт P {again['precision']:.4f} "
+            f"R {again['recall']:.4f} F1 {again['f1']:.4f} IoU {again['iou']:.4f} · в отчёте "
+            f"F1 {stored['f1']:.4f} IoU {stored['iou']:.4f}"
+        )
+
+
 def _detector_negatives(args: argparse.Namespace) -> None:
     from littora_ml.detector.regional import negatives_report
 
@@ -758,6 +784,15 @@ def build_parser() -> argparse.ArgumentParser:
     c1check.add_argument("--service", required=True)
     c1check.add_argument("--candidates", default="")
     c1check.set_defaults(handler=_detector_c1check)
+    reference = detector_commands.add_parser(
+        "reference", help="эталонная разметка val и test в reports/predictions/detector/reference"
+    )
+    reference.set_defaults(handler=_detector_reference)
+    rescore = detector_commands.add_parser(
+        "rescore", help="пересчёт P, R, F1, IoU по сохранённым предсказаниям и эталону"
+    )
+    rescore.add_argument("--runs", required=True)
+    rescore.set_defaults(handler=_detector_rescore)
     stability = detector_commands.add_parser(
         "stability", help="согласие зон сервиса по 8 поворотам и отражениям"
     )

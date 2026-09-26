@@ -478,3 +478,17 @@ def test_c1_check_is_a_collection_block_not_a_run(
     assert [(row["part"], row["in_service"], row["patches"]) for row in collection["rows"]] == [
         ("val", True, 116)
     ]
+
+
+def test_figures_are_served_only_from_the_whitelist(settings: Settings) -> None:
+    local = settings.model_copy(
+        update={
+            "reports_dir": Path(__file__).resolve().parents[2] / "reports",
+            "models_dir": Path(__file__).resolve().parents[2] / "models",
+        }
+    )
+    with TestClient(create_app(local)) as client:
+        assert client.get("/api/v1/models/figures/plp").headers["content-type"] == "image/png"
+        assert client.get("/api/v1/models/figures/best").status_code == 200
+        assert client.get("/api/v1/models/figures/..%2Fsecret").status_code == 404
+        assert client.get("/api/v1/models/figures/unknown").status_code == 404

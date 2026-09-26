@@ -108,4 +108,9 @@ cache/
 !/models/concentration/service/
 /reports/predictions/detector/*/
 !/reports/predictions/detector/raunet__marida_mixed__common/
+!/reports/predictions/detector/reference/
+!/reports/predictions/detector/raunet__marida_mixed_c1__common/
+!/reports/predictions/detector/lgbm_pixel__marida_l2a__common/
+!/reports/predictions/detector/rf_pixel__marida_l2a__common/
+!/reports/predictions/detector/fdi_rule__marida_l2a__common/
 /reports/predictions/concentration/external/

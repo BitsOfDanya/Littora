@@ -21,6 +21,8 @@ export const REPORT_COPY = {
 } as const;
 
 export type SectionId =
+  | "guide"
+  | "gallery"
   | "summary"
   | "compare"
   | "threshold"
@@ -33,6 +35,14 @@ export type SectionId =
   | "pipeline";
 
 export const SECTION_COPY: Record<SectionId, { title: string; lede: string }> = {
+  guide: {
+    title: "Как читать отчёт",
+    lede: "Три вывода для практики: чему доверять, что перепроверять и чего по снимку не выводить.",
+  },
+  gallery: {
+    title: "Как выглядит мусор на снимке",
+    lede: "Вблизи — мишени известного размера и патчи MARIDA, издалека — участки полевых измерений в Чёрном море. Рисунки построены теми же командами, что и метрики.",
+  },
   summary: {
     title: "Сводка",
     lede: "Метрики по классу «морской мусор» на пиксельном уровне, с 95-процентными интервалами.",

@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import type { Ref } from "react";
 import { SITE } from "@/config/site";
 import { Kbd } from "@/ui/kbd";
-import { GATE_COPY } from "./gate-copy";
+import { GATE_COPY, GATE_FACTS, GATE_STEPS } from "./gate-copy";
 import { useGateValue } from "./use-gate-value";
 
 function LockIcon() {
@@ -61,7 +61,25 @@ export function LowerLeafContent(button: EnterButtonProps) {
       <p className="mt-2 max-w-[620px] text-[13px] leading-5 text-(--gate-ink) md:mt-3 md:text-[15px] md:leading-6">
         {SITE.description}
       </p>
-      <div className="mt-5 md:mt-7">
+      <dl className="mt-4 hidden max-w-[900px] grid-cols-4 gap-4 md:grid">
+        {GATE_FACTS.map((fact) => (
+          <div key={fact.value} className="border-t border-(--gate-ink)/30 pt-2">
+            <dt className="font-mono text-[18px] leading-6 font-semibold text-(--gate-ink)">
+              {fact.value}
+            </dt>
+            <dd className="text-[12px] leading-4 text-(--gate-ink)/80">{fact.label}</dd>
+          </div>
+        ))}
+      </dl>
+      <ol className="mt-3 hidden flex-wrap gap-x-4 gap-y-1 text-[12px] leading-4 text-(--gate-ink)/80 md:flex">
+        {GATE_STEPS.map((step, index) => (
+          <li key={step}>
+            <span className="font-mono">{index + 1}</span> {step}
+            {index < GATE_STEPS.length - 1 ? " →" : ""}
+          </li>
+        ))}
+      </ol>
+      <div className="mt-5 md:mt-6">
         <EnterButton {...button} />
       </div>
     </div>

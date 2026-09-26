@@ -10,6 +10,7 @@ import { ConcentrationSection } from "./concentration-section";
 import { API_LEDE, MATRIX_CLASSES, MATRIX_COPY } from "./copy";
 import { DatasetsSection } from "./datasets-section";
 import { DriftSection } from "./drift-section";
+import { GallerySection, ReadingGuide } from "./guide-sections";
 import { PairsSection } from "./pairs-section";
 import { formatCount } from "./format";
 import { LimitationsSection } from "./limitations-section";
@@ -22,7 +23,7 @@ import { useReportBaseHint } from "./use-report-hint";
 
 const TITLE_ID = "models-report-title";
 
-const FIRST_EXTRA_INDEX = 4;
+const FIRST_EXTRA_INDEX = 5;
 
 type Selection = { modelId: string; threshold: number };
 
@@ -82,6 +83,7 @@ export function ModelsReport() {
       <ReportSheet titleId={TITLE_ID}>
         <ReportHeader titleId={TITLE_ID} isDemo={isDemo} sources={evidence?.sources} />
         {report.origin === "none" ? <ReportPlannedState fetch={fetch} /> : null}
+        {evidence ? <ReadingGuide index={0} /> : null}
         <SummarySection
           model={inUse}
           evaluationSet={data?.evaluationSet ?? null}
@@ -105,6 +107,7 @@ export function ModelsReport() {
           lede={evidence ? confusionLede(selected) : undefined}
           matrixNote={evidence ? MATRIX_COPY.apiGrouping : undefined}
         />
+        {evidence ? <GallerySection index={4} /> : null}
         {evidence && showChecks ? <ChecksSection evidence={evidence} index={checksIndex} /> : null}
         {evidence && showConcentration ? (
           <ConcentrationSection

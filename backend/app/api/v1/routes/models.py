@@ -1,11 +1,12 @@
+import json
 from datetime import UTC, datetime
 from typing import Annotated
 
 from fastapi import APIRouter, Query
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 
 from app.api.dependencies import EvaluationDep, OptionalDriftDep, SettingsDep
-from app.core.errors import NotImplementedYetError
+from app.core.errors import NotFoundError, NotImplementedYetError
 from app.evaluation.drift import drift_method
 from app.evaluation.report_html import download_name, render_models_report
 from app.schemas.models import ModelsResponse
@@ -16,6 +17,16 @@ REPORT_POLICY = (
 )
 
 router = APIRouter(tags=["models"])
+
+FIGURES = {
+    "best": "detector/{run}/best.png",
+    "worst": "detector/{run}/worst.png",
+    "false_alarms": "detector/{run}/false_alarms.png",
+    "reliability": "detector/{run}/reliability.png",
+    "plp": "detector/external/plp.png",
+    "pairs": "satellite/pairs_{run}.png",
+    "drift": "drift/blacksea.png",
+}
 
 
 @router.get("/models", response_model=ModelsResponse)
@@ -56,3 +67,16 @@ def read_models_report(
     if download:
         headers["Content-Disposition"] = f'attachment; filename="{download_name(generated_at)}"'
     return HTMLResponse(body, headers=headers)
+
+
+@router.get("/models/figures/{name}", response_class=FileResponse)
+def read_figure(name: str, settings: SettingsDep) -> FileResponse:
+    template = FIGURES.get(name)
+    if template is None:
+        raise NotFoundError("Такого рисунка нет")
+    manifest = settings.models_dir / "detector" / "service" / "detector.json"
+    run = json.loads(manifest.read_text(encoding="utf-8"))["name"] if manifest.exists() else ""
+    path = settings.reports_dir / "figures" / template.format(run=run)
+    if not path.is_file():
+        raise NotFoundError("Рисунок не построен")
+    return FileResponse(path, media_type="image/png", headers={"Cache-Control": "max-age=3600"})

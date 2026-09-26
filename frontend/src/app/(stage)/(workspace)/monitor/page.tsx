@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AnalysisInspector } from "@/features/analysis/analysis-inspector";
 import { AnalysisLayers } from "@/features/analysis/analysis-layers";
+import { StartHint } from "@/features/analysis/start-hint";
 import { TeamLabelsLayer } from "@/features/analysis/team-labels-layer";
 import { CandidateInspector } from "@/features/inspector/candidate-inspector";
 import { MonitorLayers } from "@/features/monitor/map/monitor-layers";
@@ -15,6 +16,7 @@ export default function MonitorPage() {
     <>
       <AnalysisLayers />
       <TeamLabelsLayer />
+      <StartHint />
       <MonitorLayers />
       <CandidateInspector />
       <AnalysisInspector />

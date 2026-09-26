@@ -370,7 +370,14 @@ cd backend && .venv/bin/python -m app.case pair
 - Прогон `raunet__marida_mixed__common`, конфиг `configs/detector/raunet.toml`: RA-U-Net (остаточные блоки, attention gates), ширина 32, глубина 4, dropout 0,1, 8,21 млн параметров; вход — 11 каналов отражения и 8 индексов (NDVI, FDI, FAI, NDWI, NDMI, PI, наклон red-edge, отношение SWIR); потери BCE + Dice, `pos_weight` 4; lr 0,001, weight decay 0,0001, batch 16, до 80 эпох, остановка через 25 эпох без улучшения, пересэмплирование патчей с мусором ×3; seed 42. Лучшая эпоха 42 из 68, обучение 5 592 с на Apple MPS.
 - Данные `marida_mixed` (2 657 патчей): train-патчи в исходной обработке MARIDA и в L2A, val и test — только L2A.
 - Веса: `models/detector/service/detector.onnx` (32,8 МБ) и манифест `detector.json` в git. ONNX-граф принимает 11 каналов отражения и сам считает индексы и нормализацию; максимальное расхождение ONNX и PyTorch — 1,6·10⁻⁶. Веса остальных прогонов в git не входят и пересобираются `make`.
-- Предсказания сервисной модели на val и test: `reports/predictions/detector/raunet__marida_mixed__common/val.npz`, `test.npz`. Рисунки: `reports/figures/detector/raunet__marida_mixed__common/` — лучшие и худшие примеры, ложные срабатывания, надёжность вероятности.
+- Предсказания сервисной модели на val и test: `reports/predictions/detector/raunet__marida_mixed__common/val.npz`, `test.npz` (вероятность ×255 и маска решений на рабочем пороге). Предсказания базовых решений на том же test: `lgbm_pixel__marida_l2a__common`, `rf_pixel__marida_l2a__common`, `fdi_rule__marida_l2a__common`, а также кандидата `raunet__marida_mixed_c1__common`.
+- Эталонная разметка проверочной выборки: `reports/predictions/detector/reference/val.npz` и `test.npz` — классы MARIDA (CC BY 4.0) для 327 и 312 патчей, идентификаторы патчей и сцен; неразмеченные и недействительные пиксели — 0. Метрики из сохранённых предсказаний пересчитываются без скачивания MARIDA и без весов:
+
+```bash
+ml/.venv/bin/python -m littora_ml detector rescore --runs raunet__marida_mixed__common,lgbm_pixel__marida_l2a__common,rf_pixel__marida_l2a__common,fdi_rule__marida_l2a__common
+```
+
+  Результат совпадает с `reports/metrics/detector/<run>.json` до четвёртого знака (RA-U-Net: P 0,8357, R 0,9699, F1 0,8978, IoU 0,8146 на 312 патчах, 180 209 размеченных пикселях, 299 пикселях мусора). Эталон пересобирается командой `python -m littora_ml detector reference` после `make detector-data`. Рисунки: `reports/figures/detector/raunet__marida_mixed__common/` — лучшие и худшие примеры, ложные срабатывания, надёжность вероятности.
 
 Параметры сервиса (`models/detector/service/detector.json`):
 
@@ -637,7 +644,7 @@ C = N / A, где N — число предметов, A — обследова�
 | Динамика | `2` | пролёты Sentinel-2 по району, прогон до 12 пролётов, детекции по датам, сравнение двух дат шторкой, прозрачностью или линзой |
 | Прогноз | `3` | сценарий дрейфа зон текущего анализа: облако 90 %, медианная траектория, обратный дрейф, частицы течений, риск выноса на берег |
 | Обследование | `4` | цели, срочность, маршрут от порта, радиус поиска, окно выхода, выгрузка GPX |
-| Модели | `5` | отчёт `/api/v1/models`, печатная версия `/api/v1/models/report.html` |
+| Модели | `5` | «Как читать отчёт» (чему доверять, что перепроверять, чего не выводить), галерея «вблизи и издалека» (мишени PLP, удачные и ложные обнаружения, пары судно — спутник), сравнение моделей на одном test, порог и ошибки, проверки вне обучения, коллекция C1, флаги зон, концентрация, пары судно — спутник, дрейф; данные — `/api/v1/models`, печатная версия — `/api/v1/models/report.html` |
 
 Слои:
 
@@ -723,6 +730,7 @@ C = N / A, где N — число предметов, A — обследова�
 | POST | `/api/v1/timeline/runs` | фоновый прогон детектора по пролётам: `max_passes` (1–12, по умолчанию 6) или `scene_ids` |
 | GET | `/api/v1/timeline/runs/{run_id}` | ход прогона |
 | GET | `/api/v1/timeline/compare` | сравнение анализов `before` и `after`: новые, сохранившиеся, исчезнувшие и ненаблюдавшиеся зоны с площадями |
+| GET | `/api/v1/models/figures/{name}` | рисунки отчёта из `reports/figures`: `best`, `worst`, `false_alarms`, `reliability`, `plp`, `pairs`, `drift`; только из белого списка |
 | GET | `/api/v1/labels` | разметка команды из `data/validation`: полигоны заведомого фона и точки аудита зон, GeoJSON |
 | GET | `/api/v1/models` | отчёт оценки из `reports/metrics`, `reports/splits` и манифестов `models/*/service`: сервисный детектор, прогоны на одном test, проверки вне обучения, профили концентрации, спутниковые пары, метод дрейфа и его сверка, список файлов-источников; без артефактов — 501 |
 | GET | `/api/v1/models/report.html` | тот же отчёт одной страницей; `print=true` — сразу печать в PDF, `download=true` — выгрузка HTML |
