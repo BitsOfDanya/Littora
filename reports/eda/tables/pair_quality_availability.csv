@@ -1,0 +1,4 @@
+decision,pairs,with_water,with_cloud,with_bright_water
+accepted,11,11,11,11
+candidate,3,0,0,0
+rejected,193,0,0,0

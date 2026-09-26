@@ -1,0 +1,5 @@
+target_key,measurement_profile,target_scope,rows,events,zeros
+litter-visual,S3_visual_GT2,all_litter,41,41,0
+litter-visual,S4_visual_GT2_5,all_litter,33,33,0
+plastic-trawl,S1_trawl_5_to_50,total_plastic,83,83,0
+plastic-visual,S2_visual_GT2,total_plastic,63,63,0

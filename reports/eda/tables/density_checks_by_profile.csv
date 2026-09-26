@@ -1,0 +1,11 @@
+measurement_profile,check,rows
+S1_aerial_GT50,match,82
+S1_aerial_GT50,missing,15
+S1_trawl_5_to_50,published_only,83
+S1_trawl_GT5_F,match,6
+S1_trawl_GT5_H,match,70
+S1_trawl_GT5_N,match,94
+S2_visual_GT2,match,133
+S3_visual_GT2,match,76
+S3_visual_GT2,rounding,6
+S4_visual_GT2_5,published_only,33

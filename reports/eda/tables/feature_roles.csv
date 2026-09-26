@@ -1,0 +1,57 @@
+field,role,reason
+sample_id,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+source_id,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+source_short,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+source_doi,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+source_license,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+region,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+sea_area,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+record_type,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+sampling_method,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+platform,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+latitude,used,пространственный baseline; доступны в запросе
+longitude,used,пространственный baseline; доступны в запросе
+lat_start,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+lon_start,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+lat_end,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+lon_end,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+date_utc,available_not_used,доступна в запросе; короткие экспедиции и смешение года/источника
+time_start_utc,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+time_end_utc,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+datetime_start_iso,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+litter_category,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+litter_item_type,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+material,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+size_class,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+items_count,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+concentration_value_orig,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+concentration_unit_orig,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+concentration_items_km2,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+concentration_g_km2,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+concentration_basis,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+transect_length_km,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+transect_width_m,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+sampled_area_km2,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+sea_state_beaufort,not_available_at_inference,полевое измерение; нужен независимый слой с сопоставимыми единицами
+wind_speed_kn,not_available_at_inference,полевое измерение; нужен независимый слой с сопоставимыми единицами
+optical_missions_available,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+notes,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+source_event_id,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+event_id,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+parent_sample_id,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+source_category_code,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+position_role,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+target_scope,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+quality_flags,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+provenance,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+calculation_method,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+measurement_profile,stratification_only,отдельные метрики и модели для несовместимых протоколов
+zero_scope,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+reported_concentration_items_km2,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+reported_concentration_g_km2,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+parent_concentration_items_km2,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+density_numerator_items,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+source_reported_total_items,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+source_object_filtered_items,forbidden_target_leakage,"ответ, его производная или контекст родительской метки"
+source_row_refs,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели
+missions_calendar_eligible,excluded_metadata,идентификатор/происхождение/метод/геометрия учёта; не вход текущей модели

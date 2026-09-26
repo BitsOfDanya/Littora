@@ -1,0 +1,16 @@
+source_id,decision,reason_code,events
+S1_GPGP2018,not_used,no_target,98
+S1_GPGP2018,rejected,not_acquired,83
+S2_SARGASSO_MSM41,rejected,before_mission,51
+S2_SARGASSO_MSM41,rejected,no_scene_in_window,10
+S2_SARGASSO_MSM41,rejected,time_shift,2
+S3_SE_NORTH_SEA,rejected,before_mission,4
+S3_SE_NORTH_SEA,rejected,no_scene_in_window,7
+S3_SE_NORTH_SEA,rejected,partial_coverage,1
+S3_SE_NORTH_SEA,rejected,tile_cloud,6
+S3_SE_NORTH_SEA,rejected,time_shift,23
+S4_BLACK_SEA_DOORS3,accepted,accepted,9
+S4_BLACK_SEA_DOORS3,candidate,quality_unverified,1
+S4_BLACK_SEA_DOORS3,rejected,partial_coverage,1
+S4_BLACK_SEA_DOORS3,rejected,tile_cloud,1
+S4_BLACK_SEA_DOORS3,rejected,time_shift,21

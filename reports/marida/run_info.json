@@ -1,0 +1,45 @@
+{
+  "executed_at_utc": "2026-09-25T21:26:06.488856+00:00",
+  "python": "3.12.11 (main, Jun 10 2026, 20:21:11) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "versions": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "rasterio": "1.5.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "nbclient": "0.11.0"
+  },
+  "config": {
+    "seed": 42,
+    "expected_patches": 1381,
+    "expected_archive_md5": "9bf32266f6e3711c9dfa3699b856c76f",
+    "link_distance_km": 25.0,
+    "link_days": 3,
+    "same_day_distance_km": 100.0,
+    "bootstrap_repeats": 1000,
+    "forest": {
+      "n_estimators": 125,
+      "max_depth": 20,
+      "min_samples_leaf": 2,
+      "n_jobs": 4
+    },
+    "evaluation": {
+      "threshold_metric": "validation_pixel_f1",
+      "positive_class": 1,
+      "ignore_class": 0,
+      "confidence_weights": [
+        1.0,
+        0.6666666666666666,
+        0.3333333333333333
+      ],
+      "split_priority": [
+        "train",
+        "val",
+        "test"
+      ]
+    }
+  },
+  "archive_md5": "9bf32266f6e3711c9dfa3699b856c76f",
+  "network_required_for_notebook": false
+}

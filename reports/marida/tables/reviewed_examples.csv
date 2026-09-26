@@ -1,0 +1,4 @@
+reason,patch_id,tp,fp,fn,score_path,mask_path
+fp,4-3-18_50LLR_14,0,17,0,data/processed/marida_baseline/examples/4-3-18_50LLR_14_score.tif,data/processed/marida_baseline/examples/4-3-18_50LLR_14_mask.tif
+fn,3-11-16_16PDC_2,3,0,8,data/processed/marida_baseline/examples/3-11-16_16PDC_2_score.tif,data/processed/marida_baseline/examples/3-11-16_16PDC_2_mask.tif
+tp,22-12-20_18QYF_0,28,0,0,data/processed/marida_baseline/examples/22-12-20_18QYF_0_score.tif,data/processed/marida_baseline/examples/22-12-20_18QYF_0_mask.tif

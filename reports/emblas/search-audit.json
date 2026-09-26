@@ -1,0 +1,147 @@
+{
+  "checked_on": "2026-09-26",
+  "result": "No validated session-to-coordinate join; no events added to T3",
+  "downloads": [
+    {
+      "path": "data/external/emblas-floating-litter/gonzalez-fernandez2022-mmc2.xlsx",
+      "bytes": 58688,
+      "sha256": "fe649f086e0c075e7ada3a961d7fac181c478f9e4a0ed9f73b6c1e60f57da032",
+      "md5": "2118e64c762e108f64050e9a1e79eb4e"
+    },
+    {
+      "path": "data/external/redmarlitter-research/waste-2017-2019.xlsx",
+      "bytes": 74978,
+      "sha256": "6baa4b57aa2dd53bd4983f8fa975ec07ad5c14de25ea979f00e02c91b9a71200",
+      "md5": "d1be479d821c6c6ef4397860fc980d0e"
+    },
+    {
+      "path": "data/external/redmarlitter-research/api-2017-2019.json",
+      "bytes": 5419421,
+      "sha256": "81e3e3edd9ef2b452fc1f813862c7104d23f72ae7f499ba9e47235c4ffd176b0",
+      "md5": "9bfa36a8cac6208c39941f66840c1edd"
+    },
+    {
+      "path": "data/external/emblas-floating-litter/erddap-catalog-2026-09-26.csv",
+      "bytes": 93606,
+      "sha256": "7f9d9322142e22b8c39caf6a6782841ab80e3766dd459efa62aa617c81d4f4d8",
+      "md5": "dbfe02b064b2579f76e73ef1569b3cd2"
+    }
+  ],
+  "requests": {
+    "supplement": "https://ars.els-cdn.com/content/image/1-s2.0-S0269749122010302-mmc2.xlsx?download=true",
+    "redmar_xlsx": "https://map.redmarlitter.eu/en/generate-xlsx?time_from=2017-01-01&time_to=2019-12-31&source_type=all&shape_data=null&data_type=waste&TypeByShape=true&WasteWidth=true&WasteTrajectory=true&WasteWindSpeed=true&WasteWindDirection=true&WasteTypePercent=true&WasteSizePercent=true&WasteTypeConcentration=true&WasteSizeConcentration=true&WastePeriodType=true&WastePeriodCharacter=true&WastePeriodComplexFactor=true",
+    "redmar_api": {
+      "url": "https://map.redmarlitter.eu/frontend/ajax",
+      "method": "POST",
+      "form": {
+        "fork[module]": "Wastewaters",
+        "fork[action]": "GetData",
+        "fork[language]": "en",
+        "time_from": "2017-01-01",
+        "time_to": "2019-12-31",
+        "source_type": "all"
+      }
+    },
+    "erddap": "https://erddap.emodnet-chemistry.eu/erddap/info/index.csv"
+  },
+  "supplement_audit": {
+    "sheet": "TableS2_Monitoring sessions",
+    "range": "A2:N303",
+    "rows": 302,
+    "unique_session_ids": 302,
+    "headers": [
+      "Monitoring Session ID",
+      "StartTime",
+      "Sea condition (Beaufort scale)",
+      "Monitoring duration (h)",
+      "ObservationHeight (m)",
+      "ObservTrackWidth (m)",
+      "TransectLength (m)",
+      "Litter Item Count",
+      "SurveyedArea (km2)",
+      "LitterDensity (Items/km2)",
+      "Year",
+      "Basin Zone (westernern vs. easternern)",
+      "DistanceToCoast1",
+      "DistanceToCoast2"
+    ],
+    "count_by_year": {
+      "2017": 132,
+      "2019": 170
+    },
+    "sum_area_km2": 93.92213002,
+    "sum_litter_count": 7655,
+    "zero_sessions": 40,
+    "missing_area": 0,
+    "max_abs_difference_reported_density_vs_count_div_area": 0.055532965437123494,
+    "max_abs_difference_reported_area_vs_width_times_length_km2": 4.0000000000040004e-05,
+    "russian_survey_rows": "TableS1_EMBLAS surveys20172019!B8:F13",
+    "russian_survey_rows_are_not_session_count": true
+  },
+  "redmar_audit": {
+    "waste_rows_xlsx": 905,
+    "waste_features_api": 905,
+    "eastern_filter": "geometry.coordinates[0] > 38 (geographic screen, not EMBLAS membership)",
+    "eastern_rows": 665,
+    "eastern_date_counts": {
+      "20.09.2019": 73,
+      "02.10.2019": 369,
+      "19.09.2019": 48,
+      "28.10.2019": 110,
+      "24.09.2019": 59,
+      "29.10.2019": 6
+    },
+    "eastern_rows_matching_any_S2_calendar_date": 0,
+    "eastern_rows_without_end_latitude": 664,
+    "eastern_rows_with_type_concentration": 0,
+    "batumi_27_unverified_candidate": {
+      "rows": 94,
+      "types": {
+        "Litter patch >20 items": 1,
+        "Jellyfish": 37,
+        "Plastic bottle": 1,
+        "Polystyrene pieces 2.5 cm - 50cm": 4,
+        "Paper packaging": 1,
+        "Feather": 2,
+        "Leaves": 16,
+        "None": 24,
+        "Cover / packaging": 6,
+        "Cans": 1,
+        "Other wood": 1
+      },
+      "candidate_S2_ID": 302,
+      "match_status": "unverified; dates/counts differ; no session geometry linkage"
+    }
+  },
+  "additional_checks_2026_09_26": [
+    {
+      "url": "https://mdpi-res.com/d_attachment/oceans/oceans-07-00026/article_deploy/oceans-07-00026-s001.zip",
+      "status": 200,
+      "result": "one 14-page PDF; no session-coordinate table",
+      "sha256": "cffe534581523f9886b780991a709836c25ad528a1cd193bae917a204378dc20"
+    },
+    {
+      "url": "https://api.github.com/repos/CNR-ISMAR/pmar/git/trees/main?recursive=1",
+      "status": 200,
+      "result": "model code and basin polygons; no EMBLAS observation table"
+    },
+    {
+      "url": "https://floating-litter-monitoring.jrc.ec.europa.eu/api/Observation/GetPositionsForWelcomePage",
+      "method": "POST",
+      "status": 200,
+      "result": "4 recent records in September 2026; not EMBLAS"
+    },
+    {
+      "url": "https://floating-litter-monitoring.jrc.ec.europa.eu/api/Observation/GetPositionsForGeoportal",
+      "method": "POST",
+      "status": 302,
+      "result": "proxy/auth redirect"
+    },
+    {
+      "url": "https://floating-litter-monitoring.jrc.ec.europa.eu/api/Observation/GetList",
+      "method": "POST",
+      "status": 302,
+      "result": "proxy/auth redirect"
+    }
+  ]
+}

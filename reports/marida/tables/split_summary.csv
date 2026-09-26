@@ -1,0 +1,4 @@
+split,patches,scenes,groups,dates,tiles,usable_pixels,debris_pixels
+train,664,35,34,34,13,395754,1908
+val,290,11,10,10,7,160602,1061
+test,427,17,15,14,8,281021,430

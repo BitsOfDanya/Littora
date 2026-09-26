@@ -1,0 +1,7 @@
+version,first,second,shared_patch_ids,shared_scenes,shared_groups,exact_duplicate_edges,same_day_near_edges,spacetime_near_edges,all_dependency_edges,shared_tiles
+official,train,val,0,0,1,0,1856,110,1856,5
+official,train,test,0,0,0,0,0,0,0,6
+official,val,test,0,0,2,0,1094,2,1094,5
+strict,train,val,0,0,0,0,0,0,0,5
+strict,train,test,0,0,0,0,0,0,0,6
+strict,val,test,0,0,0,0,0,0,0,5

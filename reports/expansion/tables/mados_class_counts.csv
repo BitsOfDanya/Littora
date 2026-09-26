@@ -1,0 +1,16 @@
+class_id,class_name,pixels
+1,Marine Debris,4696
+2,Dense Sargassum,4308
+3,Sparse Floating Algae,4972
+4,Natural Organic Material,1454
+5,Ship,13222
+6,Oil Spill,234568
+7,Marine Water,496702
+8,Sediment-Laden Water,376061
+9,Foam,1225
+10,Turbid Water,170306
+11,Shallow Water,122753
+12,Waves and Wakes,20374
+13,Oil Platform,15701
+14,Jellyfish,2541
+15,Sea Snot,12272

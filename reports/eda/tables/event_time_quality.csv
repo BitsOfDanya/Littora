@@ -1,0 +1,5 @@
+source_id,events,days,known_start,known_end,cross_midnight,median_duration_hours,max_duration_hours
+S1_GPGP2018,181,26,150,150,15,3.2083333333333335,4.016666666666666
+S2_SARGASSO_MSM41,63,26,63,63,0,1.0,1.85
+S3_SE_NORTH_SEA,41,12,41,41,0,0.75,3.85
+S4_BLACK_SEA_DOORS3,33,12,0,0,0,,

@@ -1,0 +1,11 @@
+dataset,comparison,groups,valid_repeats,low,high,metric
+mados_test,joint,42,1000,0.3527537346701515,0.7246914584363329,F1
+mados_test,mados_only,42,1000,0.3397333786885435,0.7197055995795483,F1
+mados_test,marida_frozen,42,1000,0.21585124843343295,0.6953973767945961,F1
+mados_test,joint minus marida_frozen,42,1000,0.000659467871157508,0.17233867639824413,paired_delta_F1
+mados_test,mados_only minus marida_frozen,42,1000,-0.0179383078518533,0.1688750919557626,paired_delta_F1
+marida_development_test,joint,15,1000,0.6040100420930455,0.8071331785594347,F1
+marida_development_test,mados_only,15,1000,0.5223170915795546,0.7806724104736233,F1
+marida_development_test,marida_frozen,15,1000,0.5349959477024238,0.7605061819531451,F1
+marida_development_test,joint minus marida_frozen,15,1000,-0.0011223394434553802,0.14459054835515978,paired_delta_F1
+marida_development_test,mados_only minus marida_frozen,15,1000,-0.09889558252248583,0.13384976201489193,paired_delta_F1

@@ -3,7 +3,7 @@
   "title": "Plastic Litter Project 2019 (University of the Aegean)",
   "license": "CC-BY-4.0",
   "source": "https://doi.org/10.5281/zenodo.3752719",
-  "retrieved": "2026-09-25",
+  "retrieved": "2026-09-26",
   "bytes": 68887501,
   "files": [
     {
@@ -11,5 +11,9 @@
       "bytes": 68887501,
       "md5": "e80e1d7d57060cca2be1670c531fb0de"
     }
-  ]
+  ],
+  "unpacked": {
+    "files": 73,
+    "bytes": 71915452
+  }
 }

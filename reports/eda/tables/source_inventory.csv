@@ -1,0 +1,50 @@
+source,kind,license,manifest_exists,manifest_bytes,local_files,local_bytes,intended_use
+marida,labelled,CC-BY-4.0,True,1164612748.0,0,0,"pretrain,validation"
+marida-juliaeo,labelled,CC-BY-4.0,True,95620537.0,0,0,"baseline,validation"
+mados,labelled,CC-BY-4.0,True,4038418740.0,0,0,"pretrain,validation"
+plp2019,labelled,CC-BY-4.0,True,68887501.0,0,0,"calibration,validation"
+plp2021,labelled,CC-BY-4.0,True,7386824112.0,0,0,"calibration,validation"
+plp2022-2023,labelled,CC-BY-4.0,True,3829262931.0,0,0,"calibration,validation"
+windrows-med,labelled,CC-BY-4.0,True,2064602440.0,0,0,"pretrain,validation"
+marinedebrisdetector,labelled,как у исходных,True,1233369064.0,0,0,"pretrain,validation"
+nasa-marine-debris,labelled,CC-BY-NC-4.0,True,77210385.0,0,0,validation
+litterlines,labelled,CC-BY-4.0,True,382272.0,0,0,validation
+flodas,labelled,CC-BY-NC-4.0,False,,0,0,validation
+s1-floatdet-korea,labelled,CC-BY-NC-4.0,False,,0,0,pretrain
+duarte-azevedo,labelled,CC-BY-4.0,False,,0,0,pretrain
+labplas-spectra,spectra,CC-BY-4.0,False,,0,0,pretrain
+knaeps-spectra,spectra,CC0-1.0,True,4856703.0,0,0,calibration
+doors-blacksea,observations,CC-BY-4.0,True,9985.0,0,0,validation
+emodnet-beach-litter,observations,CC-BY-4.0,True,5703134.0,0,0,validation
+dalnie-zelentsy-2023,observations,CC-BY-SA-4.0,True,19316.0,0,0,"pretrain,validation"
+marine-litterwatch,observations,CC-BY-4.0,True,68138373.0,0,0,validation
+haseler2020-beaches,observations,CC-BY-4.0,True,40407.0,0,0,validation
+emblas-floating-litter,observations,CC-BY-NC-4.0,True,58688.0,0,0,validation
+adis-ocean-cleanup,observations,CC-BY-4.0,True,14657085.0,0,0,"calibration,validation"
+blacksea-oil-s1,labelled,CC-BY-4.0,False,,0,0,pretrain
+gpgp-lebreton,observations,CC-BY-4.0,True,4973774.0,0,0,calibration
+oceanscan,observations,по кампаниям,False,,0,0,validation
+locate-blacksea,model,CC-BY-4.0,False,,0,0,"drift,validation"
+global-lagrangian-litter,model,CC-BY-4.0,False,,0,0,drift
+sentinel2-earth-search,imagery,Copernicus,False,,0,0,"inference,demo,pretrain"
+sentinel2-cdse,imagery,Copernicus,False,,0,0,"inference,pretrain"
+sentinel2-planetary-computer,imagery,Copernicus,False,,0,0,"inference,pretrain"
+roscosmos-open-data,imagery,не указана,False,,0,0,demo
+iki-see-the-sea,imagery,по договору,False,,0,0,validation
+cmems-blacksea-phy,ocean,Copernicus Marine,False,,0,0,drift
+cmems-baltic-phy,ocean,Copernicus Marine,False,,0,0,drift
+cmems-arctic-phy,ocean,Copernicus Marine,False,,0,0,drift
+cmems-global-phy,ocean,Copernicus Marine,False,,0,0,drift
+cmems-waves,ocean,Copernicus Marine,False,,0,0,drift
+cmems-wind,atmosphere,Copernicus Marine,False,,0,0,drift
+era5,atmosphere,CC-BY-4.0,False,,0,0,drift
+gfs,atmosphere,NOAA open data,False,,0,0,drift
+hycom,ocean,Public release,False,,0,0,drift
+open-meteo,ocean,CC-BY-4.0,False,,0,0,"drift,demo"
+natural-earth,geo,Public domain,True,12600180.0,0,0,aoi
+marine-regions-iho,geo,CC-BY-4.0,True,22766707.0,0,0,aoi
+world-port-index,geo,не указана,True,3508891.0,0,0,aoi
+river-plastic-meijer2021,model,CC-BY-4.0,True,707627.0,0,0,aoi
+river-plastic-lebreton2017,model,CC-BY-4.0,True,26617672.0,0,0,aoi
+shipping-density,geo,CC-BY-4.0,False,,0,0,"aoi,validation"
+osm-water-polygons,geo,ODbL-1.0,False,,0,0,aoi

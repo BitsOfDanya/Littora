@@ -1,0 +1,4 @@
+split,pixels,positive_pixels,patches,scenes
+train,761887,2561,1433,96
+val,358121,1162,642,36
+test,361147,973,728,42

@@ -1,0 +1,61 @@
+model,split,class_id,pixels,predicted_debris,predicted_debris_rate,class_name
+nir_threshold,val,1,1061,1012,0.9538171536286523,Marine Debris
+nir_threshold,val,2,38,38,1.0,Dense Sargassum
+nir_threshold,val,3,146,111,0.7602739726027398,Sparse Sargassum
+nir_threshold,val,4,140,138,0.9857142857142858,Natural Organic Material
+nir_threshold,val,5,1372,1305,0.9511661807580175,Ship
+nir_threshold,val,6,16868,15567,0.9228717097462651,Clouds
+nir_threshold,val,7,16085,295,0.01834006838669568,Marine Water
+nir_threshold,val,8,91264,91262,0.9999780855539971,Sediment-Laden Water
+nir_threshold,val,9,440,432,0.9818181818181818,Foam
+nir_threshold,val,10,27002,4083,0.1512110214058218,Turbid Water
+nir_threshold,val,11,999,0,0.0,Shallow Water
+nir_threshold,val,12,987,839,0.8500506585612969,Waves
+nir_threshold,val,13,2169,113,0.052097740894421395,Cloud Shadows
+nir_threshold,val,14,1935,536,0.27700258397932814,Wakes
+nir_threshold,val,15,96,24,0.25,Mixed Water
+nir_threshold,test,1,430,328,0.7627906976744186,Marine Debris
+nir_threshold,test,2,1889,1889,1.0,Dense Sargassum
+nir_threshold,test,3,1120,920,0.8214285714285714,Sparse Sargassum
+nir_threshold,test,4,55,47,0.8545454545454545,Natural Organic Material
+nir_threshold,test,5,1178,1122,0.9524617996604414,Ship
+nir_threshold,test,6,36641,33029,0.9014219044240059,Clouds
+nir_threshold,test,7,26612,1079,0.040545618517961825,Marine Water
+nir_threshold,test,8,155134,155114,0.9998710791960499,Sediment-Laden Water
+nir_threshold,test,9,429,427,0.9953379953379954,Foam
+nir_threshold,test,10,47555,6163,0.1295973083797708,Turbid Water
+nir_threshold,test,11,2518,35,0.013899920571882446,Shallow Water
+nir_threshold,test,12,1865,876,0.4697050938337802,Waves
+nir_threshold,test,13,3919,103,0.026282214850727226,Cloud Shadows
+nir_threshold,test,14,1581,495,0.31309297912713474,Wakes
+nir_threshold,test,15,95,8,0.08421052631578947,Mixed Water
+spectral_forest,val,1,1061,759,0.7153628652214892,Marine Debris
+spectral_forest,val,2,38,0,0.0,Dense Sargassum
+spectral_forest,val,3,146,1,0.00684931506849315,Sparse Sargassum
+spectral_forest,val,4,140,39,0.2785714285714286,Natural Organic Material
+spectral_forest,val,5,1372,64,0.04664723032069971,Ship
+spectral_forest,val,6,16868,1,5.928385107896609e-05,Clouds
+spectral_forest,val,7,16085,0,0.0,Marine Water
+spectral_forest,val,8,91264,46,0.0005040322580645161,Sediment-Laden Water
+spectral_forest,val,9,440,15,0.03409090909090909,Foam
+spectral_forest,val,10,27002,0,0.0,Turbid Water
+spectral_forest,val,11,999,0,0.0,Shallow Water
+spectral_forest,val,12,987,2,0.002026342451874367,Waves
+spectral_forest,val,13,2169,0,0.0,Cloud Shadows
+spectral_forest,val,14,1935,26,0.013436692506459949,Wakes
+spectral_forest,val,15,96,0,0.0,Mixed Water
+spectral_forest,test,1,430,308,0.7162790697674418,Marine Debris
+spectral_forest,test,2,1889,4,0.0021175224986765486,Dense Sargassum
+spectral_forest,test,3,1120,2,0.0017857142857142857,Sparse Sargassum
+spectral_forest,test,4,55,21,0.38181818181818183,Natural Organic Material
+spectral_forest,test,5,1178,59,0.0500848896434635,Ship
+spectral_forest,test,6,36641,7,0.0001910428208837095,Clouds
+spectral_forest,test,7,26612,0,0.0,Marine Water
+spectral_forest,test,8,155134,0,0.0,Sediment-Laden Water
+spectral_forest,test,9,429,52,0.12121212121212122,Foam
+spectral_forest,test,10,47555,0,0.0,Turbid Water
+spectral_forest,test,11,2518,0,0.0,Shallow Water
+spectral_forest,test,12,1865,48,0.025737265415549597,Waves
+spectral_forest,test,13,3919,0,0.0,Cloud Shadows
+spectral_forest,test,14,1581,30,0.018975332068311195,Wakes
+spectral_forest,test,15,95,0,0.0,Mixed Water

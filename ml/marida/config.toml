@@ -1,0 +1,21 @@
+seed = 42
+expected_patches = 1381
+expected_archive_md5 = "9bf32266f6e3711c9dfa3699b856c76f"
+link_distance_km = 25.0
+link_days = 3
+same_day_distance_km = 100.0
+bootstrap_repeats = 1000
+
+[forest]
+n_estimators = 125
+max_depth = 20
+min_samples_leaf = 2
+n_jobs = 4
+
+[evaluation]
+threshold_metric = "validation_pixel_f1"
+positive_class = 1
+ignore_class = 0
+confidence_weights = [1.0, 0.6666666666666666, 0.3333333333333333]
+# Original holdout has priority; dependencies can move train -> val/test, never test -> train.
+split_priority = ["train", "val", "test"]
