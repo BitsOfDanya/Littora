@@ -49,7 +49,7 @@ export function PlannedGroupNote({ group }: { group: LayerGroupId }) {
   const status = meta.isPending ? "loading" : meta.isError ? "error" : "planned";
   return (
     <PlannedState
-      title={plan.title}
+      title={status === "loading" ? `${plan.title.split(" — ")[0]} — проверяем сервер` : plan.title}
       capability={plan.capability}
       status={status}
       requirement={plan.requirement}

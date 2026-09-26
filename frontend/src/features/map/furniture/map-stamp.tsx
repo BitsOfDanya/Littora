@@ -19,7 +19,7 @@ function useStampVariant(): StampVariant | null {
   const detector = useCapability("debris_detection");
   if (origin === "api") return null;
   if (origin === "demo") return "demo";
-  return detector === "available" ? null : "planned";
+  return detector === "planned" ? "planned" : null;
 }
 
 type MapStampProps = { align: "center" | "start"; style: CSSProperties };
