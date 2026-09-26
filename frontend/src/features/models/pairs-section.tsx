@@ -109,7 +109,7 @@ export function PairsSection({ link, index }: { link: SatelliteLinkCheck; index:
               Спутник: пикселей воды
             </th>
             <th scope="col" className={cn(HEAD, "pl-3 text-right")}>
-              Доля зон
+              Пикселей выше порога
             </th>
             <th scope="col" className={cn(HEAD, "pl-3 text-right")}>
               Вероятность, p99
@@ -138,7 +138,9 @@ export function PairsSection({ link, index }: { link: SatelliteLinkCheck; index:
                 {pair.waterPixels === null ? "—" : formatNumber(pair.waterPixels)}
               </td>
               <td className={cn(CELL, "pl-3 text-right font-mono")}>
-                {pair.detectedShare === null ? "—" : formatNumber(pair.detectedShare, 3)}
+                {pair.detectedShare === null || pair.waterPixels === null
+                  ? "—"
+                  : formatNumber(Math.round(pair.detectedShare * pair.waterPixels))}
               </td>
               <td className={cn(CELL, "pl-3 text-right font-mono")}>
                 {pair.probabilityP99 === null ? "—" : formatNumber(pair.probabilityP99, 5)}
@@ -157,12 +159,13 @@ export function PairsSection({ link, index }: { link: SatelliteLinkCheck; index:
         Судно насчитало на этих трансектах{" "}
         {formatNumber(Math.min(...link.pairs.map((pair) => pair.concentration ?? Infinity)), 0)}–
         {formatNumber(Math.max(...link.pairs.map((pair) => pair.concentration ?? 0)), 0)} шт./км²
-        предметов от 2,5 см, а детектор на снимке того же дня не выделил ни одной зоны: отдельные
-        предметы такого размера в пикселе 10 м не видны, спутник замечает только скопления. Ни один
-        признак снимка не связан с измеренной концентрацией значимо (Спирмен, 7 пар), поэтому
-        концентрация по снимку не выводится, а в сервисе остаётся полевая модель со статусом
-        «исследовательская оценка». Кнопка запускает анализ района пары на её снимке — снимок, маска
-        качества, композиты и полевое измерение видны на карте.
+        предметов от 2,5 см, а детектор на снимке того же дня почти ничего не выделил: от 0 до 58
+        пикселей выше порога из ~1,1 млн пикселей воды, не больше 0,005 %. Отдельные предметы такого
+        размера в пикселе 10 м не видны, спутник замечает только скопления. Ни один признак снимка
+        не связан с измеренной концентрацией значимо (Спирмен, 7 пар), поэтому концентрация по
+        снимку не выводится, а в сервисе остаётся полевая модель со статусом «исследовательская
+        оценка». Кнопка запускает анализ района пары на её снимке — снимок, маска качества,
+        композиты, зоны и полевое измерение видны на карте.
       </p>
     </ReportSection>
   );

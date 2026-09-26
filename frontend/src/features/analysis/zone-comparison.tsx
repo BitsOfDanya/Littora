@@ -157,7 +157,8 @@ export function ZoneComparison({ analysis, zone }: { analysis: Analysis; zone: R
       <p className="text-[11px] leading-[14px] text-text-tertiary">
         Судно считает отдельные предметы от 2–2,5 см на площади трансекта, спутник видит скопления,
         заметные в пикселе 10 м. На 7 парах того же дня в Чёрном море судно насчитало 190–590{" "}
-        {CONCENTRATION_UNIT}, а детектор зон не выделил — концентрация по площади зоны не выводится.{" "}
+        {CONCENTRATION_UNIT}, а детектор выделил от 0 до 58 пикселей из ~1,1 млн без связи с
+        концентрацией — поэтому концентрация по площади зоны не выводится.{" "}
         <Link href="/models#models-pairs" className="underline hover:text-text-primary">
           Пары судно — спутник
         </Link>
