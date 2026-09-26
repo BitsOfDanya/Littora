@@ -245,6 +245,22 @@ export type CollectionCheck = {
   rows: readonly CollectionRow[];
 };
 
+export type ServiceRegionRow = {
+  region: string;
+  scenes: number;
+  patches: number;
+  debrisPixels: number;
+  metrics: ClassificationMetrics;
+};
+
+export type ServiceRegionCheck = {
+  run: string;
+  part: string;
+  description: string | null;
+  regions: readonly ServiceRegionRow[];
+  pooled: ServiceRegionRow;
+};
+
 export type ModelEvidence = {
   service: ServiceProfile | null;
   otherTestRuns: number;
@@ -254,6 +270,7 @@ export type ModelEvidence = {
   plp: PlpCheck | null;
   zoneFlags: readonly ZoneFlagCheck[];
   collection: CollectionCheck | null;
+  serviceByRegion: ServiceRegionCheck | null;
   concentration: readonly ConcentrationProfile[];
   satelliteLink: SatelliteLinkCheck | null;
   drift: DriftMethodSummary | null;

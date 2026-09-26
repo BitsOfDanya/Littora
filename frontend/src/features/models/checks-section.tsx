@@ -8,6 +8,8 @@ import type {
   NegativesCheck,
   PlpCheck,
   RegionCheck,
+  ServiceRegionCheck,
+  ServiceRegionRow,
   ZoneFlagCheck,
 } from "@/data/models";
 import type { ClassificationMetrics } from "@/domain/model";
@@ -161,6 +163,77 @@ function RegionsBlock({ check }: { check: RegionCheck }) {
         </tbody>
       </table>
       {check.protocol ? <p className={NOTE}>Протокол: {check.protocol}.</p> : null}
+    </Block>
+  );
+}
+
+const SERVICE_REGION_COLUMNS = ["Патчей", "Пикс. мусора", "P", "R", "F1", "IoU"] as const;
+
+function ServiceRegionCells({ row }: { row: ServiceRegionRow }) {
+  return (
+    <>
+      <td className={cn(CELL, "pl-3 text-right font-mono")}>{formatCount(row.patches)}</td>
+      <td className={cn(CELL, "pl-3 text-right font-mono")}>{formatCount(row.debrisPixels)}</td>
+      <td className={cn(CELL, "pl-3 text-right")}>
+        <Share value={row.metrics.precision} />
+      </td>
+      <td className={cn(CELL, "pl-3 text-right")}>
+        <Share value={row.metrics.recall} />
+      </td>
+      <td className={cn(CELL, "pl-3 text-right")}>
+        <Share value={row.metrics.f1} />
+      </td>
+      <td className={cn(CELL, "pl-3 text-right")}>
+        <Share value={row.metrics.iou} />
+      </td>
+    </>
+  );
+}
+
+function ServiceRegionsBlock({ check }: { check: ServiceRegionCheck }) {
+  return (
+    <Block>
+      <CheckHead
+        title="Сервисная модель по регионам test"
+        detail={<span className="font-mono">{check.run}</span>}
+      />
+      <table className="w-full border-collapse">
+        <caption className="sr-only">
+          Метрики сервисной модели на отложенном test отдельно по каждому региону
+        </caption>
+        <thead>
+          <tr className="border-b border-text-primary">
+            <th scope="col" className={cn(HEAD, "text-left")}>
+              Регион
+            </th>
+            {SERVICE_REGION_COLUMNS.map((title) => (
+              <th key={title} scope="col" className={cn(HEAD, "pl-3 text-right")}>
+                {title}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {check.regions.map((row) => (
+            <tr key={row.region} className={ROW}>
+              <th scope="row" className={cn(CELL, "text-left font-normal")}>
+                <span className="text-text-primary">{row.region}</span>
+                <span className="block text-[11px] text-text-tertiary">
+                  {row.scenes} {pluralRu(row.scenes, ["сцена", "сцены", "сцен"])}
+                </span>
+              </th>
+              <ServiceRegionCells row={row} />
+            </tr>
+          ))}
+          <tr className="border-b border-text-primary">
+            <th scope="row" className={cn(CELL, "text-left font-semibold text-text-primary")}>
+              Весь {check.part}
+            </th>
+            <ServiceRegionCells row={check.pooled} />
+          </tr>
+        </tbody>
+      </table>
+      {check.description ? <p className={NOTE}>{check.description}</p> : null}
     </Block>
   );
 }
@@ -440,6 +513,7 @@ export function hasChecks(evidence: ModelEvidence): boolean {
   return Boolean(
     evidence.domainShift.length ||
     evidence.regions.length ||
+    evidence.serviceByRegion ||
     evidence.negatives ||
     evidence.plp ||
     evidence.zoneFlags.length,
@@ -453,6 +527,7 @@ export function ChecksSection({ evidence, index }: { evidence: ModelEvidence; in
         {evidence.domainShift.map((check) => (
           <DomainShiftBlock key={check.source} check={check} />
         ))}
+        {evidence.serviceByRegion ? <ServiceRegionsBlock check={evidence.serviceByRegion} /> : null}
         {evidence.regions.map((check) => (
           <RegionsBlock key={check.run} check={check} />
         ))}

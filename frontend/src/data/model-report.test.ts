@@ -123,6 +123,36 @@ const response: ModelsResponse = modelsResponseSchema.parse({
       }),
     ],
     checks: {
+      service_by_region: {
+        run: SERVICE,
+        part: "test",
+        split: "common",
+        description: "разбивка test по регионам",
+        regions: [
+          {
+            region: "honduras",
+            scenes: 9,
+            patches: 263,
+            labeled_pixels: 1000,
+            debris_pixels: 205,
+            true_positives: 200,
+            false_positives: 31,
+            false_negatives: 5,
+            metrics: { precision: 0.866, recall: 0.976, f1: 0.917, iou: 0.847 },
+          },
+        ],
+        pooled: {
+          region: "all",
+          scenes: 13,
+          patches: 312,
+          labeled_pixels: 1000,
+          debris_pixels: 299,
+          true_positives: 290,
+          false_positives: 57,
+          false_negatives: 9,
+          metrics: { precision: 0.836, recall: 0.97, f1: 0.898, iou: 0.815 },
+        },
+      },
       domain_shift: [
         run("raunet__marida__on_marida_l2a__common", 0.8427, {
           source_run: "raunet__marida",
@@ -425,6 +455,12 @@ describe("model report mapping", () => {
     expect(shift?.results.map((result) => result.data)).toEqual(["marida", "marida_l2a"]);
     expect(evidence?.regions[0].pooled.f1).toBe(0.59007299270073);
     expect(evidence?.regions[0].regions[0].region).toBe("Гондурас");
+    expect(evidence?.serviceByRegion?.regions[0]).toMatchObject({
+      region: "Гондурас",
+      patches: 263,
+      debrisPixels: 205,
+    });
+    expect(evidence?.serviceByRegion?.pooled.metrics.f1).toBe(0.898);
     expect(evidence?.negatives).toMatchObject({
       pixels: 488727,
       alarmPixels: 1,

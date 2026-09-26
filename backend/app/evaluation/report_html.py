@@ -28,6 +28,7 @@ from app.schemas.models import (
     Metrics,
     ModelsResponse,
     PlasticLitterProject,
+    RegionBreakdown,
     SatelliteLink,
     ServedConcentration,
     ZoneFlagCheck,
@@ -152,6 +153,7 @@ KNOWN_CHECKS = {
     "plp",
     "zone_flags",
     "collection",
+    "service_by_region",
 }
 KNOWN_CONCENTRATION = {"profiles", "satellite_link"}
 KNOWN_SERVICE = {
@@ -894,6 +896,48 @@ def region_block(check: LeaveRegionOut) -> str:
     return block("Новая география", table(columns, rows, classes=classes) + text, detail)
 
 
+def service_region_block(check: RegionBreakdown) -> str:
+    columns = [
+        Column("Регион"),
+        Column("Патчей", numeric=True),
+        Column("Пикс. мусора", numeric=True),
+        Column("P", numeric=True),
+        Column("R", numeric=True),
+        Column("F1", numeric=True),
+        Column("IoU", numeric=True),
+    ]
+    rows = [
+        [
+            esc(REGION_LABELS.get(row.region, row.region)),
+            f"{number(row.patches)} ({counted(row.scenes, ('сцена', 'сцены', 'сцен'))})",
+            number(row.debris_pixels),
+            share(row.metrics.precision),
+            share(row.metrics.recall),
+            share(row.metrics.f1),
+            share(row.metrics.iou),
+        ]
+        for row in check.regions
+    ]
+    pooled = check.pooled
+    rows.append(
+        [
+            "<strong>Весь test</strong>",
+            f"{number(pooled.patches)} ({counted(pooled.scenes, ('сцена', 'сцены', 'сцен'))})",
+            number(pooled.debris_pixels),
+            share(pooled.metrics.precision),
+            share(pooled.metrics.recall),
+            share(pooled.metrics.f1),
+            share(pooled.metrics.iou),
+        ]
+    )
+    text = note(esc(check.description)) if check.description else ""
+    classes = [""] * len(check.regions) + ["total"]
+    detail = f"{mono(check.run)} · {esc(check.part)}"
+    return block(
+        "Сервисная модель по регионам test", table(columns, rows, classes=classes) + text, detail
+    )
+
+
 def negatives_block(check: BlackSeaNegatives) -> str:
     rows = [
         [
@@ -1064,6 +1108,8 @@ def checks_section(response: ModelsResponse, index: int) -> str | None:
         return None
     checks = detector.checks
     blocks = domain_shift_blocks(detector)
+    if checks.service_by_region:
+        blocks.append(service_region_block(checks.service_by_region))
     blocks += [region_block(check) for check in checks.leave_region_out]
     if checks.black_sea_negatives:
         blocks.append(negatives_block(checks.black_sea_negatives))

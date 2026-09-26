@@ -59,7 +59,8 @@ function useSurveyGeometry(view: SurveyView | null) {
         view.drift.get(target.id)?.position ?? target.observedPosition,
       ]),
     }));
-    const route: Path = { id: "route", path: toPath(view.route.path) };
+    const track = view.plan.track?.length ? view.plan.track : view.route.path;
+    const route: Path = { id: "route", path: toPath(track) };
     return { rings, radii, links, route };
   }, [view]);
 }

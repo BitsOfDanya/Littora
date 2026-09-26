@@ -93,6 +93,18 @@ const detectionRateSchema = z.object({
   zone_detected: z.number().int().nullable(),
 });
 
+const regionBreakdownRowSchema = z.object({
+  region: z.string(),
+  scenes: z.number().int(),
+  patches: z.number().int(),
+  labeled_pixels: z.number().int(),
+  debris_pixels: z.number().int(),
+  true_positives: z.number().int(),
+  false_positives: z.number().int(),
+  false_negatives: z.number().int(),
+  metrics: metricsSchema,
+});
+
 const detectorChecksSchema = z.object({
   domain_shift: z.array(detectorRunSchema),
   leave_region_out: z.array(
@@ -208,6 +220,17 @@ const detectorChecksSchema = z.object({
           difference_ci95: intervalSchema.nullable(),
         }),
       ),
+    })
+    .nullable()
+    .default(null),
+  service_by_region: z
+    .object({
+      run: z.string(),
+      part: z.string(),
+      split: z.string().nullable(),
+      description: z.string().nullable(),
+      regions: z.array(regionBreakdownRowSchema),
+      pooled: regionBreakdownRowSchema,
     })
     .nullable()
     .default(null),

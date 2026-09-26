@@ -22,6 +22,8 @@ import type {
   RegionCheck,
   SatelliteLinkCheck,
   ServiceProfile,
+  ServiceRegionCheck,
+  ServiceRegionRow,
 } from "./models";
 
 export const MODELS_SOURCE = "GET /api/v1/models";
@@ -331,6 +333,25 @@ function regionChecks(checks: DetectorChecksItem): RegionCheck[] {
   });
 }
 
+function serviceByRegion(checks: DetectorChecksItem): ServiceRegionCheck | null {
+  const breakdown = checks.service_by_region;
+  if (!breakdown) return null;
+  const row = (item: (typeof breakdown.regions)[number]): ServiceRegionRow => ({
+    region: REGION_LABELS[item.region] ?? item.region,
+    scenes: item.scenes,
+    patches: item.patches,
+    debrisPixels: item.debris_pixels,
+    metrics: pickMetrics(item.metrics),
+  });
+  return {
+    run: breakdown.run,
+    part: breakdown.part,
+    description: breakdown.description,
+    regions: breakdown.regions.map(row),
+    pooled: row(breakdown.pooled),
+  };
+}
+
 function negativesCheck(checks: DetectorChecksItem): NegativesCheck | null {
   const negatives = checks.black_sea_negatives;
   if (!negatives) return null;
@@ -548,6 +569,7 @@ function evidenceOf(
           })),
         }
       : null,
+    serviceByRegion: detector ? serviceByRegion(detector.checks) : null,
     concentration: concentrationProfiles(response.concentration),
     satelliteLink: satelliteLink(response.concentration),
     drift: driftSummary(response.drift),

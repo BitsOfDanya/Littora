@@ -17,8 +17,16 @@ from app.drift.products import ENVELOPE_MARGIN_M
 from app.survey.geo import along, bearing_deg, centroid, distance_km, equivalent_radius_km
 from app.survey.ports import Port, nearest_port
 from app.survey.route import plan_tour
+from app.survey.water import (
+    ROUTE_CELL_M,
+    Passage,
+    Router,
+    SceneWater,
+    mask_water,
+    straight,
+)
 
-MODEL_NAME = "littora-survey-2"
+MODEL_NAME = "littora-survey-3"
 VALUE_KIND = "plan"
 MAX_TARGETS = 12
 CLUSTER_KM = 0.5
@@ -50,8 +58,8 @@ WEIGHTS = {
 }
 PLAN_REASON = (
     "расчётный план, а не проверенный маршрут: цели ранжированы по вероятности детектора, "
-    "площади, срочности по сценарию дрейфа и удалённости от порта; расстояния по прямой "
-    "без обхода берега и фарватеров; погода и допуски судна не учтены"
+    "площади, срочности по сценарию дрейфа и удалённости от порта; переходы в обход суши "
+    "по маске воды, где она есть, иначе по прямой; фарватеры, погода и допуски судна не учтены"
 )
 NO_DRIFT_NOTE = (
     "дрейф не рассчитан — срочность и окна по дрейфу не оценены; "
@@ -550,6 +558,7 @@ class RouteLeg:
     cumulative: list[float]
     arrivals: list[float]
     back_km: float
+    passages: list[Passage] = field(default_factory=list)
 
 
 def _route_leg(
@@ -559,20 +568,60 @@ def _route_leg(
     moment: dt.datetime,
     t0: dt.datetime,
     options: SurveyOptions,
+    router: Router | None = None,
 ) -> RouteLeg:
     positions = [group.at(moment, t0) for group in groups]
     if order is None:
         order = plan_tour(port.position, positions)
-    cumulative, arrivals = [], []
+    cumulative, arrivals, passages = [], [], []
     travelled = 0.0
     previous: Sequence[float] = port.position
     for visit, index in enumerate(order):
-        travelled += distance_km(previous, positions[index])
+        passages.append(_passage(router, previous, positions[index]))
+        travelled += passages[-1].km
         previous = positions[index]
         cumulative.append(travelled)
         arrivals.append(travelled / options.speed_kmh + visit * options.dwell_min / 60.0)
-    back = distance_km(previous, port.position) if order else 0.0
-    return RouteLeg(order, positions, cumulative, arrivals, back)
+    back = 0.0
+    if order:
+        passages.append(_passage(router, previous, port.position))
+        back = passages[-1].km
+    return RouteLeg(order, positions, cumulative, arrivals, back, passages)
+
+
+def _passage(router: Router | None, a: Sequence[float], b: Sequence[float]) -> Passage:
+    return router.leg(a, b) if router is not None else straight(a, b)
+
+
+def _passage_payload(passage: Passage) -> dict[str, Any]:
+    return {
+        "km": round(passage.km, 2),
+        "over_land": passage.over_land,
+        "detour": passage.detour,
+        "path": passage.path,
+    }
+
+
+def _track(passages: list[Passage]) -> list[list[float]]:
+    track: list[list[float]] = []
+    for passage in passages:
+        points = passage.path[1:] if track and track[-1] == passage.path[0] else passage.path
+        track.extend(points)
+    return track
+
+
+def _routing_note(router: Router | None, passages: list[Passage]) -> str:
+    if router is None:
+        return "маршрут — прямые отрезки: маски суши нет, пересечение берега не проверено"
+    detours = sum(1 for passage in passages if passage.detour)
+    crossing = sum(1 for passage in passages if passage.over_land)
+    unknown = sum(1 for passage in passages if passage.over_land is None)
+    parts = [f"маршрут — обход суши по маске воды ({router.label}); переходов в обход: {detours}"]
+    if crossing:
+        parts.append(f"водного пути в маске нет — прямой отрезок через сушу: {crossing}")
+    if unknown:
+        parts.append(f"вне маски — прямой отрезок, берег не проверен: {unknown}")
+    return "; ".join(parts)
 
 
 def _exit_window(
@@ -739,6 +788,7 @@ def plan(
     options: SurveyOptions,
     passes: list[dict[str, Any]] | None = None,
     now: dt.datetime | None = None,
+    scene_water: SceneWater | None = None,
 ) -> dict[str, Any]:
     request = options.as_dict()
     now = now or dt.datetime.now(dt.UTC)
@@ -770,6 +820,8 @@ def plan(
     forecasts = {item["candidate_id"]: item for item in (scenario or {}).get("forecasts", [])}
     mask = ((scenario or {}).get("current_field") or {}).get("mask")
     shore = ShoreMask(mask) if mask else None
+    sources = [source for source in (scene_water, mask_water(mask)) if source is not None]
+    router = Router(sources) if sources else None
     groups = _groups_with_context(zones, forecasts, shore, ports)
     for group in groups:
         group.components = _components(group, options, bool(ports))
@@ -812,13 +864,13 @@ def plan(
     window = None
     leg = None
     if port is not None and route_groups:
-        leg = _route_leg(port, route_groups, None, ready, t0, options)
+        leg = _route_leg(port, route_groups, None, ready, t0, options, router)
         window = _exit_window(leg, route_groups, t0, ready, options)
         departure = _parse(window["departure"]) if window else ready
-        leg = _route_leg(port, route_groups, None, departure, t0, options)
+        leg = _route_leg(port, route_groups, None, departure, t0, options, router)
         window = _exit_window(leg, route_groups, t0, ready, options)
         departure = _parse(window["departure"]) if window else ready
-        leg = _route_leg(port, route_groups, leg.order, departure, t0, options)
+        leg = _route_leg(port, route_groups, leg.order, departure, t0, options, router)
     departure = _parse(window["departure"]) if window else None
     if window is not None:
         window["basis"] = _window_basis(window, options, summary["used"])
@@ -935,11 +987,20 @@ def plan(
                     "target_id": target_id,
                     "cumulative_km": round(cumulative, 2),
                     "arrive_h": round(arrival, 3),
+                    **_passage_payload(passage),
                 }
-                for target_id, cumulative, arrival in zip(
-                    order_ids, leg.cumulative, leg.arrivals, strict=True
+                for target_id, cumulative, arrival, passage in zip(
+                    order_ids, leg.cumulative, leg.arrivals, leg.passages[:-1], strict=True
                 )
             ],
+            "back": _passage_payload(leg.passages[-1]),
+            "track": _track(leg.passages),
+            "over_land": True
+            if any(passage.over_land for passage in leg.passages)
+            else False
+            if all(passage.over_land is False for passage in leg.passages)
+            else None,
+            "land_mask": router.label if router is not None else None,
             "one_way_km": round(leg.cumulative[-1], 2),
             "distance_km": round(total, 2),
             "duration_h": round(
@@ -948,8 +1009,10 @@ def plan(
             "speed_kn": options.speed_kn,
             "dwell_min": options.dwell_min,
             "method": "ближайший сосед + 2-opt по прямым расстояниям; позиции целей — "
-            "по сценарию дрейфа на момент выхода",
+            "по сценарию дрейфа на момент выхода; переход, пересекающий сушу по маске, "
+            f"заменён кратчайшим путём по сетке воды ~{ROUTE_CELL_M:g} м (8 соседей)",
         }
+        messages.append(_routing_note(router, leg.passages))
     port_payload = None
     if port is not None:
         port_payload = {

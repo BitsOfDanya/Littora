@@ -194,6 +194,7 @@ export function RequestSection({ analysis }: { analysis: Analysis | null }) {
           busy={running}
           disabled={running || !aoi}
           onClick={onRun}
+          data-tour="run-analysis"
         >
           {running ? "Читаем снимок и маску…" : "Запустить анализ"}
         </Button>

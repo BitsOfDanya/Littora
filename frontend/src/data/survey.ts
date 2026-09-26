@@ -132,6 +132,7 @@ export type SurveyPlan = {
   dwellMin: number;
   weights: SurveyScoreWeights;
   route: readonly SurveyRouteStop[];
+  track?: readonly LngLat[];
   targets: readonly SurveyPlanTarget[];
   passes: readonly PlannedPass[];
   meta?: SurveyPlanMeta;
@@ -295,6 +296,7 @@ export function toSurveyPlan(response: SurveyResponse, aoiId: string): SurveyPla
     dwellMin: response.request.dwell_min,
     weights: response.weights,
     route,
+    track: (response.route?.track ?? []).map(([lng, lat]) => [lng, lat] as LngLat),
     targets: response.targets.map(toSurveyTarget),
     passes: toPasses(response),
     meta: {

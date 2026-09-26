@@ -3,6 +3,7 @@ import json
 from collections.abc import Iterator
 from pathlib import Path
 
+import numpy as np
 import pytest
 from fastapi.testclient import TestClient
 
@@ -16,6 +17,7 @@ from app.survey.planner import MAX_TARGETS, SurveyOptions, plan, score_of
 from app.survey.ports import Port, load_ports
 from app.survey.route import nearest_neighbour, plan_tour, tour_length, two_opt
 from app.survey.service import SurveyService
+from app.survey.water import MaskWater, Router
 from tests.fakes import (
     FakeCatalog,
     FakeDetector,
@@ -351,7 +353,7 @@ def test_survey_is_cached_and_refreshed_after_drift(client: TestClient, tmp_path
     assert missing.json()["error"]["code"] == "not_found"
     body = client.post(url).json()
     assert body["analysis_id"] == identifier
-    assert body["model"] == "littora-survey-2"
+    assert body["model"] == "littora-survey-3"
     assert body["request"] == SurveyOptions().as_dict()
     assert body["drift"]["used"] is False
     [target] = body["targets"]
@@ -418,3 +420,60 @@ def test_survey_capability_follows_wiring(client: TestClient) -> None:
     statuses = {c["key"]: c["status"] for c in client.get("/api/v1/meta").json()["capabilities"]}
     assert statuses["survey_planning"] == "planned"
     assert client.post("/api/v1/analyses/0123456789abcdef/survey").status_code == 501
+
+
+def land_block_mask() -> dict:
+    rows = ["1" * 20 for _ in range(20)]
+    for row in range(8, 12):
+        rows[row] = "1" * 9 + "00" + "1" * 9
+    return {
+        "bounds": [29.0, 43.0, 30.0, 44.0],
+        "rows": 20,
+        "cols": 20,
+        "row_order": "north_to_south",
+        "water": "1",
+        "data": rows,
+    }
+
+
+def test_leg_across_a_land_block_goes_around_it() -> None:
+    mask = MaskWater(land_block_mask())
+    west, east = [29.3, 43.5], [29.7, 43.5]
+    straight_line = np.column_stack([np.linspace(29.3, 29.7, 50), np.full(50, 43.5)])
+    assert (mask.sample(straight_line[:, 0], straight_line[:, 1]) == 2).any()
+    passage = Router([mask]).leg(west, east)
+    assert passage.detour is True
+    assert passage.over_land is False
+    assert passage.path[0] == west and passage.path[-1] == east
+    assert passage.km > distance_km(west, east)
+    dense = []
+    for a, b in zip(passage.path, passage.path[1:], strict=False):
+        t = np.linspace(0.0, 1.0, 200)
+        dense.append(np.column_stack([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]))
+    points = np.concatenate(dense)
+    assert not (mask.sample(points[:, 0], points[:, 1]) == 2).any()
+    open_water = Router([mask]).leg([29.1, 43.1], [29.3, 43.2])
+    assert open_water.detour is False and open_water.over_land is False
+    assert Router([]).leg(west, east).over_land is None
+
+
+def test_plan_routes_around_land_and_notes_it() -> None:
+    port = Port("port-w", "Порт В", "Port W", "Russia", "Чёрное море", "Small", None, (29.3, 43.5))
+    scenario = drift([])
+    scenario["current_field"]["mask"] = land_block_mask()
+    target = [zone(1, 29.7, 43.5, 0.9, 50)]
+    body = plan(analysis(target), scenario, [port], SurveyOptions(), now=NOW)
+    route = body["route"]
+    [leg] = route["legs"]
+    assert leg["detour"] is True and leg["over_land"] is False
+    assert route["back"]["detour"] is True
+    assert route["over_land"] is False
+    assert leg["km"] > distance_km(port.position, [29.7, 43.5])
+    assert route["one_way_km"] == leg["km"]
+    assert route["path"] == [[29.3, 43.5], [29.7, 43.5], [29.3, 43.5]]
+    assert len(route["track"]) > 3
+    assert any("обход суши по маске воды" in message for message in body["messages"])
+    bare = plan(analysis(target), None, [port], SurveyOptions(), now=NOW)
+    assert bare["route"]["over_land"] is None
+    assert bare["route"]["legs"][0]["detour"] is False
+    assert any("прямые отрезки" in message for message in bare["messages"])

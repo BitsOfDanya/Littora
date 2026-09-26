@@ -1,11 +1,13 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { useTourActive } from "@/features/shell/guide-tour";
 import { hideHints, readHints, subscribeHints } from "./start-hint";
 
 export function ModeHint({ title, steps }: { title: string; steps: readonly string[] }) {
   const visible = useSyncExternalStore(subscribeHints, readHints, () => false);
-  if (!visible) return null;
+  const touring = useTourActive();
+  if (!visible || touring) return null;
   return (
     <div
       role="note"

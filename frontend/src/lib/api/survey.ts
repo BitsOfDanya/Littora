@@ -90,6 +90,8 @@ const routeSchema = z.object({
   port_id: z.string(),
   order: z.array(z.string()),
   path: z.array(positionSchema),
+  track: z.array(positionSchema).optional(),
+  over_land: z.boolean().nullable().optional(),
   legs: z.array(
     z.object({ target_id: z.string(), cumulative_km: z.number(), arrive_h: z.number() }),
   ),

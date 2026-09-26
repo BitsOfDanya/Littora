@@ -211,6 +211,27 @@ class CollectionCheck(BaseModel):
     rows: list[CollectionCheckRow]
 
 
+class RegionBreakdownRow(BaseModel):
+    region: str
+    scenes: int
+    patches: int
+    labeled_pixels: int
+    debris_pixels: int
+    true_positives: int
+    false_positives: int
+    false_negatives: int
+    metrics: Metrics
+
+
+class RegionBreakdown(BaseModel):
+    run: str
+    part: str
+    split: str | None
+    description: str | None
+    regions: list[RegionBreakdownRow]
+    pooled: RegionBreakdownRow
+
+
 class DetectorChecks(BaseModel):
     domain_shift: list[DetectorRun]
     leave_region_out: list[LeaveRegionOut]
@@ -218,6 +239,7 @@ class DetectorChecks(BaseModel):
     plp: PlasticLitterProject | None
     zone_flags: list[ZoneFlagCheck] = []
     collection: CollectionCheck | None = None
+    service_by_region: RegionBreakdown | None = None
 
 
 class DetectorReport(BaseModel):

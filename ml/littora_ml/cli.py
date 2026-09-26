@@ -579,9 +579,23 @@ def _detector_reference(args: argparse.Namespace) -> None:
 
 
 def _detector_rescore(args: argparse.Namespace) -> None:
-    from littora_ml.detector.rescore import rescore
+    from littora_ml.detector.rescore import rescore, rescore_by_region
 
     for run in args.runs.split(","):
+        if args.by_region:
+            report = rescore_by_region(run)
+            print(f"{run}: test по регионам")
+            print(
+                f"{'регион':<18}{'сцен':>6}{'патчей':>8}{'мусора':>9}{'TP':>8}{'FP':>8}{'FN':>8}"
+                f"{'P':>8}{'R':>8}{'F1':>8}{'IoU':>8}"
+            )
+            for region, row in [*report["regions"].items(), ("все", report["pooled"])]:
+                print(
+                    f"{region:<18}{row['scenes']:>6}{row['patches']:>8}{row['debris_pixels']:>9}"
+                    f"{row['tp']:>8}{row['fp']:>8}{row['fn']:>8}{row['precision']:>8.4f}"
+                    f"{row['recall']:>8.4f}{row['f1']:>8.4f}{row['iou']:>8.4f}"
+                )
+            continue
         result = rescore(run)
         again, stored = result["recomputed"], result["stored"]
         print(
@@ -792,6 +806,7 @@ def build_parser() -> argparse.ArgumentParser:
         "rescore", help="пересчёт P, R, F1, IoU по сохранённым предсказаниям и эталону"
     )
     rescore.add_argument("--runs", required=True)
+    rescore.add_argument("--by-region", action="store_true")
     rescore.set_defaults(handler=_detector_rescore)
     stability = detector_commands.add_parser(
         "stability", help="согласие зон сервиса по 8 поворотам и отражениям"

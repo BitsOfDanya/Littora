@@ -307,6 +307,34 @@ const EVIDENCE: ModelEvidence = {
       },
     ],
   },
+  serviceByRegion: {
+    run: "raunet__marida_mixed__common",
+    part: "test",
+    description: "Модель обучалась на всех регионах train — это не проверка на новом регионе.",
+    regions: [
+      {
+        region: "Гондурас",
+        scenes: 9,
+        patches: 263,
+        debrisPixels: 205,
+        metrics: { precision: 0.866, recall: 0.976, f1: 0.917, iou: 0.847 },
+      },
+      {
+        region: "Индонезия",
+        scenes: 1,
+        patches: 26,
+        debrisPixels: 41,
+        metrics: { precision: 0.661, recall: 0.902, f1: 0.763, iou: 0.617 },
+      },
+    ],
+    pooled: {
+      region: "all",
+      scenes: 13,
+      patches: 312,
+      debrisPixels: 299,
+      metrics: { precision: 0.836, recall: 0.97, f1: 0.898, iou: 0.815 },
+    },
+  },
   concentration: [PROFILE],
   satelliteLink: { events: 7, correlations: 7, minPValue: 0.26, pairs: [] },
   drift: DRIFT,
@@ -382,6 +410,10 @@ describe("Models report on evaluation artifacts", () => {
     expect(checks).toContain("13 из 157");
     expect(checks).toContain("Коллекция сервиса C1");
     expect(checks).toContain("116 патчей, 5 сцен");
+    expect(checks).toContain("Сервисная модель по регионам test");
+    expect(checks).toContain("Индонезия");
+    expect(checks).toContain("0,76");
+    expect(checks).toContain("Весь test");
     expect(checks).toContain("0,70");
     const concentration = render(
       createElement(ConcentrationSection, {

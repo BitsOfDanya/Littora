@@ -36,6 +36,8 @@ from app.schemas.models import (
     PlasticLitterProject,
     PlpBackground,
     Postprocessing,
+    RegionBreakdown,
+    RegionBreakdownRow,
     RegionResult,
     SatelliteLink,
     SatellitePair,
@@ -52,6 +54,7 @@ DETECTOR_SPLITS = Path("splits") / "detector_marida.csv"
 DETECTOR_MANIFEST = Path("detector") / "service" / "detector.json"
 CONCENTRATION_SERVICE = Path("concentration") / "service"
 CALIBRATION_PREFIX = "calibration__"
+REGIONS_SERVICE_PREFIX = "regions_service__"
 SUMMARY_FILE = "summary.json"
 CONCENTRATION_REPORTS = ("broad", "compact")
 PLP_GROUPS = ("plastic", "mixed", "plastic_or_mixed", "natural_controls")
@@ -322,6 +325,42 @@ def parse_regions(payload: dict[str, Any]) -> LeaveRegionOut:
         protocol=payload.get("protocol") if isinstance(payload.get("protocol"), str) else None,
         regions=sorted(rows, key=lambda row: -row.positives),
         pooled=pooled,
+    )
+
+
+def _breakdown_row(region: str, block: Any) -> RegionBreakdownRow:
+    if not isinstance(block, dict):
+        raise ArtifactError(f"нет данных по региону {region}")
+    metrics = _metrics(block)
+    if metrics is None:
+        raise ArtifactError(f"нет метрик по региону {region}")
+    return RegionBreakdownRow(
+        region=region,
+        scenes=int(block["scenes"]),
+        patches=int(block["patches"]),
+        labeled_pixels=int(block["labeled_pixels"]),
+        debris_pixels=int(block["debris_pixels"]),
+        true_positives=int(block["tp"]),
+        false_positives=int(block["fp"]),
+        false_negatives=int(block["fn"]),
+        metrics=metrics,
+    )
+
+
+def parse_region_breakdown(payload: dict[str, Any]) -> RegionBreakdown:
+    regions = payload.get("regions")
+    if not isinstance(regions, dict) or not regions:
+        raise ArtifactError("нет разбивки по регионам")
+    rows = [_breakdown_row(region, block) for region, block in regions.items()]
+    description = payload.get("description")
+    split = payload.get("split")
+    return RegionBreakdown(
+        run=str(payload.get("run") or ""),
+        part=str(payload.get("part") or "test"),
+        split=split if isinstance(split, str) else None,
+        description=description if isinstance(description, str) else None,
+        regions=sorted(rows, key=lambda row: -row.debris_pixels),
+        pooled=_breakdown_row("all", payload.get("pooled")),
     )
 
 
@@ -654,7 +693,7 @@ class EvaluationReports:
             path
             for path in folder.glob("*.json")
             if path.name not in (SUMMARY_FILE, C1_REPORT)
-            and not path.name.startswith(CALIBRATION_PREFIX)
+            and not path.name.startswith((CALIBRATION_PREFIX, REGIONS_SERVICE_PREFIX))
         )
 
     def _files(self) -> list[Path]:
@@ -662,6 +701,7 @@ class EvaluationReports:
         concentration = self.reports_dir / CONCENTRATION_METRICS
         candidates: list[Path] = [
             *self._run_files(),
+            *sorted(detector.glob(f"{REGIONS_SERVICE_PREFIX}*.json")),
             *sorted((detector / "regions").glob("*.json")),
             *sorted((detector / "external").glob("*.json")),
             *(detector / FLAGS_DIR / name for name in (VESSELS_REPORT, STABILITY_REPORT)),
@@ -742,6 +782,12 @@ class EvaluationReports:
         path = self._detector_dir() / C1_REPORT
         return self._parse(path, parse_c1_check, sources, service) if path.is_file() else None
 
+    def _service_by_region(self, service: str | None, sources: list[str]) -> RegionBreakdown | None:
+        if service is None:
+            return None
+        path = self._detector_dir() / f"{REGIONS_SERVICE_PREFIX}{service}.json"
+        return self._parse(path, parse_region_breakdown, sources) if path.is_file() else None
+
     def _zone_flags(self, sources: list[str]) -> list[ZoneFlagCheck]:
         folder = self._detector_dir() / FLAGS_DIR
         checks = []
@@ -789,6 +835,7 @@ class EvaluationReports:
                 plp=self._parse(plp_path, parse_plp, sources) if plp_path.is_file() else None,
                 zone_flags=self._zone_flags(sources),
                 collection=self._collection(service_name, sources),
+                service_by_region=self._service_by_region(service_name, sources),
             ),
         )
 

@@ -1,38 +1,26 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { useTourActive } from "@/features/shell/guide-tour";
 import { useAnalysisStore } from "@/state/analysis-store";
 import { useCurrentAnalysis } from "./use-analysis";
 
-const KEY = "littora:start-hint";
 const listeners = new Set<() => void>();
 
+let hiddenInSession = false;
+
 export function readHints(): boolean {
-  try {
-    return window.localStorage.getItem(KEY) !== "hidden";
-  } catch {
-    return true;
-  }
+  return !hiddenInSession;
 }
 
 export function showHints(): void {
-  try {
-    window.localStorage.removeItem(KEY);
-  } catch {
-    return;
-  } finally {
-    listeners.forEach((listener) => listener());
-  }
+  hiddenInSession = false;
+  listeners.forEach((listener) => listener());
 }
 
 export function hideHints(): void {
-  try {
-    window.localStorage.setItem(KEY, "hidden");
-  } catch {
-    return;
-  } finally {
-    listeners.forEach((listener) => listener());
-  }
+  hiddenInSession = true;
+  listeners.forEach((listener) => listener());
 }
 
 export function subscribeHints(listener: () => void): () => void {
@@ -90,7 +78,8 @@ function useHint(): { title: string; steps: readonly string[] } {
 export function StartHint() {
   const visible = useSyncExternalStore(subscribeHints, readHints, () => false);
   const hint = useHint();
-  if (!visible) return null;
+  const touring = useTourActive();
+  if (!visible || touring) return null;
   return (
     <div
       role="note"

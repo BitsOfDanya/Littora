@@ -8,12 +8,14 @@ from typing import Any
 
 from shapely.geometry import box
 
+from app.analysis.pixels import PIXELS_FILE
 from app.analysis.service import AnalysisService
 from app.core.errors import AppError, NotFoundError
 from app.drift.service import DRIFT_FILE
 from app.earth.catalog import Scene
 from app.survey.planner import MODEL_NAME, SurveyOptions, iso, plan, with_clock
 from app.survey.ports import Port
+from app.survey.water import scene_water
 
 SURVEY_FILE = "survey.json"
 PASS_SEARCH_DAYS = 10
@@ -110,9 +112,11 @@ class SurveyService:
         options: SurveyOptions,
         passes: list[dict[str, Any]],
         passes_note: str | None,
+        folder: Path,
     ) -> dict[str, Any]:
         now = self.now()
-        body = plan(result, drift, self.ports, options, passes, now)
+        water = scene_water(folder / PIXELS_FILE)
+        body = plan(result, drift, self.ports, options, passes, now, water)
         if passes_note:
             body["messages"].append(passes_note)
         payload = {
@@ -143,7 +147,7 @@ class SurveyService:
         ):
             return with_clock(saved, self.now())
         passes, note = self.passes(analysis, result)
-        return self._save(path, self._compute(result, drift, options, passes, note))
+        return self._save(path, self._compute(result, drift, options, passes, note, path.parent))
 
     def cached(self, analysis: AnalysisService, analysis_id: str) -> dict[str, Any]:
         result, path, drift_path = self._locate(analysis, analysis_id)
@@ -158,6 +162,6 @@ class SurveyService:
         except TypeError:
             options = SurveyOptions()
         payload = self._compute(
-            result, drift, options, saved.get("passes", []), saved.get("passes_note")
+            result, drift, options, saved.get("passes", []), saved.get("passes_note"), path.parent
         )
         return self._save(path, payload)

@@ -1,5 +1,6 @@
 "use client";
 
+import { GuideTour } from "./guide-tour";
 import { type ReactNode, useRef } from "react";
 import type { WorkspaceModeId } from "@/config/modes";
 import { useViewportPadding } from "@/features/map/use-viewport-padding";
@@ -102,6 +103,7 @@ function ShellLayoutView() {
         </div>
       ) : null}
       <ShortcutSheet />
+      {isPhone ? null : <GuideTour />}
     </div>
   );
 }

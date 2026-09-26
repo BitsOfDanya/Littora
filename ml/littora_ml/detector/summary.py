@@ -13,7 +13,7 @@ KEYS = ("precision", "recall", "f1", "iou", "pr_auc")
 def detector_summary() -> pd.DataFrame:
     rows = []
     for path in sorted((REPORTS / "metrics" / "detector").glob("*.json")):
-        if path.name.startswith(("summary", "calibration__")):
+        if path.name.startswith(("summary", "calibration__", "regions_service__")):
             continue
         report = json.loads(path.read_text(encoding="utf-8"))
         post = (report.get("postprocessing") or {}).get("chosen") or {}
