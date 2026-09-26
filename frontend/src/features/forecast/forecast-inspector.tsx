@@ -5,7 +5,12 @@ import { useCallback, useMemo } from "react";
 import { findAoi } from "@/config/aois";
 import { WORKSPACE_MODES } from "@/config/modes";
 import type { DriftState } from "@/data/drift";
-import { type BeachSegmentRisk, useDriftScenario, useDriftState } from "@/data/forecast";
+import {
+  type BeachSegmentRisk,
+  type DriftForecastDetail,
+  useDriftScenario,
+  useDriftState,
+} from "@/data/forecast";
 import { fitAoi, fitTo } from "@/features/map/camera";
 import { useMainMap } from "@/features/map/use-main-map";
 import type { Crumb } from "@/features/inspector/parts/breadcrumbs";
@@ -52,6 +57,51 @@ function scrollableAncestor(element: HTMLElement | null): HTMLElement | null {
       return node;
   }
   return null;
+}
+
+function downloadDrift(id: string, t0: string | null, forecast: DriftForecastDetail) {
+  const feature = (geometry: object, properties: object) => ({
+    type: "Feature",
+    geometry,
+    properties: { zone: id, t0, ...properties },
+  });
+  const collection = {
+    type: "FeatureCollection",
+    features: [
+      feature({ type: "Point", coordinates: [...forecast.origin] }, { kind: "origin" }),
+      ...forecast.envelopes.flatMap((envelope) => [
+        feature(envelope.polygon, { kind: "envelope", horizon_h: envelope.horizonH }),
+        feature(
+          { type: "Point", coordinates: [...envelope.median] },
+          { kind: "median", horizon_h: envelope.horizonH },
+        ),
+      ]),
+      ...(forecast.hindcastPath.length > 1
+        ? [
+            feature(
+              { type: "LineString", coordinates: forecast.hindcastPath.map((point) => [...point]) },
+              { kind: "hindcast" },
+            ),
+          ]
+        : []),
+      ...forecast.beaching
+        .filter((risk) => risk.path.length > 1)
+        .map((risk) =>
+          feature(
+            { type: "LineString", coordinates: risk.path.map((point) => [...point]) },
+            { kind: "beaching", name: risk.name, members: risk.members },
+          ),
+        ),
+    ],
+  };
+  const url = URL.createObjectURL(
+    new Blob([JSON.stringify(collection)], { type: "application/geo+json" }),
+  );
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `drift-${id}.geojson`;
+  link.click();
+  URL.revokeObjectURL(url);
 }
 
 function shortDate(iso: string): string {
@@ -135,12 +185,13 @@ function ReadyInspector({
           </Link>
           <Button
             size="lg"
-            disabled
+            disabled={isDemo}
             icon={<IconDownload size={14} />}
+            onClick={() => downloadDrift(candidate.id, run.t0, forecast)}
             title={
               isDemo
                 ? "Экспорт GeoJSON появится с возможностью drift_forecast"
-                : "Выгрузка сценария дрейфа в GeoJSON пока не подключена"
+                : "Скачать сценарий дрейфа: облака по горизонтам, медианы, путь назад, риск берега"
             }
           >
             GeoJSON

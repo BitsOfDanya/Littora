@@ -54,6 +54,37 @@ def test_digital_numbers_with_the_l2a_offset_are_rescaled() -> None:
     assert any("смещение" in note for note in upload.notes)
 
 
+def test_declared_scale_and_offset_win_over_the_guess() -> None:
+    raw = sea(11) * 0 + 1200
+    content = geotiff(raw, "uint16")
+    with MemoryFile(content) as memory, memory.open() as dataset:
+        profile = dataset.profile
+        values = dataset.read()
+    with MemoryFile() as memory:
+        with memory.open(**profile) as dataset:
+            dataset.write(values)
+            dataset.scales = [0.0001] * 11
+            dataset.offsets = [0.0] * 11
+        tagged = memory.read()
+    upload = read_upload(tagged, 10_000_000)
+    assert upload.stack is not None
+    assert upload.stack.image[1, 0, 0] == pytest.approx(0.12, abs=1e-4)
+    assert any("метаданных" in note for note in upload.notes)
+
+
+def test_zone_area_follows_the_pixel_size() -> None:
+    from app.analysis.zones import mask_zones
+
+    mask = np.zeros((10, 10), dtype=bool)
+    mask[2:4, 2:4] = True
+    found: dict[str, int] = {}
+    zones = mask_zones(
+        mask, mask.astype(float), Affine(20, 0, 400000, 0, -20, 4950000), CRS, stats=found
+    )
+    assert zones[0]["area_km2"] == pytest.approx(4 * 400 / 1e6)
+    assert found["total"] == 1
+
+
 def test_png_without_georeference_needs_the_map_view() -> None:
     rgb = np.full((50, 60, 3), 40, dtype=np.uint8)
     with pytest.raises(UploadError):

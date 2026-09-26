@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { AREAS_OF_INTEREST } from "@/config/aois";
 import { useCandidates } from "@/data/candidates";
+import { useCurrentAnalysis } from "@/features/analysis/use-analysis";
 import { useStatusHintStore } from "@/features/shell/status-hint-store";
 import { ANALYSIS_ID_PATTERN } from "@/lib/api/analyses";
 import { useAnalysisStore } from "@/state/analysis-store";
@@ -24,6 +25,15 @@ function useUrlRead(): { current: boolean } {
   const readRef = useRef(false);
   const pendingSelectionRef = useRef<string | null>(null);
   const pendingAnalysisRef = useRef<string | null>(null);
+  const linkedRef = useRef<string | null>(null);
+  const current = useCurrentAnalysis().data;
+  const selectScene = useWorkspaceStore((state) => state.selectScene);
+
+  useEffect(() => {
+    if (!current || current.id !== linkedRef.current) return;
+    linkedRef.current = null;
+    if (current.scene && current.scene.collection !== "upload") selectScene(current.scene.id);
+  }, [current, selectScene]);
 
   useEffect(() => {
     if (!readRef.current) {
@@ -42,6 +52,7 @@ function useUrlRead(): { current: boolean } {
     const pendingAnalysis = pendingAnalysisRef.current;
     if (pendingAnalysis) {
       pendingAnalysisRef.current = null;
+      linkedRef.current = pendingAnalysis;
       setAnalysis(pendingAnalysis);
     }
     const pending = pendingSelectionRef.current;

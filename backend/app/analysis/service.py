@@ -645,6 +645,9 @@ class AnalysisService:
                 "model": detection.model,
                 "threshold": detection.threshold,
                 "zones": detection.zones,
+                "zones_total": detection.zones_total
+                if detection.zones_total is not None
+                else len(detection.zones),
             },
             "concentration": {
                 **_status(concentration_status),
@@ -820,6 +823,9 @@ class AnalysisService:
                 "model": detection.model,
                 "threshold": detection.threshold,
                 "zones": detection.zones,
+                "zones_total": detection.zones_total
+                if detection.zones_total is not None
+                else len(detection.zones),
             },
             "concentration": {
                 **_status(concentration.status),

@@ -81,6 +81,16 @@ def _scale(raw: np.ndarray, valid: np.ndarray, notes: list[str]) -> np.ndarray:
     return np.where(valid, np.maximum(raw, REFLECTANCE_FLOOR), 0.0).astype(np.float32)
 
 
+def _declared(scales, offsets, count: int) -> tuple[np.ndarray, np.ndarray] | None:
+    scale = np.array(scales if scales and len(scales) == count else [1.0] * count, dtype=np.float32)
+    offset = np.array(
+        offsets if offsets and len(offsets) == count else [0.0] * count, dtype=np.float32
+    )
+    if np.allclose(scale, 1.0) and np.allclose(offset, 0.0):
+        return None
+    return scale, offset
+
+
 def water_scl(image: np.ndarray, valid: np.ndarray) -> np.ndarray:
     green, nir = image[2], image[7]
     water = valid & ((green - nir) / np.maximum(green + nir, 1e-6) > WATER_NDWI)
@@ -140,6 +150,7 @@ def read_upload(
                 raise UploadError(f"Снимок больше {max_pixels:,} пикселей".replace(",", " "))
             crs, transform, bounds = _georeference(dataset, bbox, notes)
             raw = dataset.read().astype(np.float32)
+            scales, offsets = dataset.scales, dataset.offsets
             nodata = dataset.nodata
             descriptions = dataset.descriptions
             count = dataset.count
@@ -161,7 +172,14 @@ def read_upload(
             "(B01–B12 без B09 и B10) — по видимым каналам плавающий мусор не определяется"
         )
         return Upload(None, display, valid, scl, crs, transform, bounds, count, notes, visible=rgb)
-    image = _scale(raw[order], valid, notes)
+    declared = _declared(scales, offsets, count)
+    if declared is not None:
+        scale, offset = declared
+        image = raw * scale[:, None, None] + offset[:, None, None]
+        image = np.where(valid, np.maximum(image[order], REFLECTANCE_FLOOR), 0.0).astype(np.float32)
+        notes.append("масштаб и смещение взяты из метаданных файла")
+    else:
+        image = _scale(raw[order], valid, notes)
     scl = water_scl(image, valid)
     stack = BandStack(image, scl, crs, transform)
     rgb = _stretch(image[[3, 2, 1]], valid)

@@ -272,6 +272,7 @@ class OnnxDetector:
         coverage = Coverage(stack.image, sea)
         started = time.perf_counter()
         detected = probability >= raw_threshold
+        found: dict[str, int] = {}
         zones = mask_zones(
             detected,
             shown,
@@ -281,6 +282,7 @@ class OnnxDetector:
             stack.scl,
             self._describer(stack),
             self._measurer(stack, coverage, timings),
+            found,
         )
         timings["zones_s"] = round(time.perf_counter() - started - timings.get("stability_s", 0), 2)
         height, width = stack.shape
@@ -310,7 +312,8 @@ class OnnxDetector:
         pixels = int(sum(zone["pixels"] for zone in zones))
         status = ResultStatus.DETECTED if zones else ResultStatus.NOT_DETECTED
         reason = (
-            f"зон: {len(zones)}, пикселей выше порога {threshold:.2f}: {pixels}"
+            f"зон: {len(zones)}{_truncated(found, len(zones))}, "
+            f"пикселей выше порога {threshold:.2f}: {pixels}"
             if zones
             else f"пикселей выше порога {threshold:.2f} нет"
         )
@@ -324,7 +327,15 @@ class OnnxDetector:
             extra_layers=extra_layers,
             timings=timings,
             pixels=packed,
+            zones_total=found.get("total", len(zones)),
         )
+
+
+def _truncated(found: dict[str, int], shown: int) -> str:
+    total = found.get("total", shown)
+    if total <= shown:
+        return ""
+    return f" из {total} (показаны {shown} с наибольшей вероятностью)"
 
 
 def _read_json(path: Path) -> dict[str, Any] | None:

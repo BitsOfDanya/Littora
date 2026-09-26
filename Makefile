@@ -76,8 +76,8 @@ ml-all: audit registry detector-data detector-baselines detector-marida detector
 
 smoke:
 	$(PY) -m littora_ml detector rescore --runs $(DETECTOR_FINAL),lgbm_pixel__marida_l2a__common,rf_pixel__marida_l2a__common,fdi_rule__marida_l2a__common
-	cd backend && .venv/bin/python -m pytest -q
-	cd ml && .venv/bin/python -m pytest -q
+	cd backend && $(abspath $(PY)) -m pytest -q
+	cd ml && $(abspath $(PY)) -m pytest -q
 
 smoke-api:
 	curl -sf http://localhost:8000/api/v1/health

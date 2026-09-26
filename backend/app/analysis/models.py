@@ -22,6 +22,7 @@ class DetectionOutcome:
     extra_layers: dict[str, Any] = field(default_factory=dict)
     timings: dict[str, float] = field(default_factory=dict)
     pixels: bytes | None = None
+    zones_total: int | None = None
 
 
 @dataclass(frozen=True)

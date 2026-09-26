@@ -78,7 +78,7 @@ def test_layers_and_exports_agree_with_the_result(client: TestClient) -> None:
     assert len(geojson["features"]) == 1 + len(result["observations"])
     csv_text = client.get(f"/api/v1/analyses/{result['id']}/export.csv").text
     lines = csv_text.lstrip("﻿").splitlines()
-    assert lines[0].startswith("feature,id,value_kind,status,value,unit")
+    assert lines[0].startswith("feature,id,value_kind,status,estimate_status,value,unit")
     assert any(line.startswith("field_observation,MPL-0904,measurement") for line in lines)
 
 
@@ -449,5 +449,8 @@ def test_csv_keeps_the_concentration_estimate_as_its_own_row(client: TestClient)
     estimate = next(row for row in rows if row["feature"] == "concentration")
     assert area["value"] == ""
     assert estimate["value_kind"] == "model_estimate"
-    assert estimate["status"] == body["concentration"]["label"]
-    assert estimate["measurement_profile"] == (body["concentration"]["profile"] or "")
+    assert estimate["status"] == area["status"]
+    assert estimate["estimate_status"] == body["concentration"]["label"]
+    assert estimate["measurement_profile"] == (
+        body["concentration"]["profile"] or "вне области профилей"
+    )

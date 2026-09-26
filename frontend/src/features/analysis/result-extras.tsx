@@ -34,6 +34,8 @@ export function LayerChips({ analysis }: { analysis: Analysis }) {
   const toggleLayer = useMapLayersStore((state) => state.toggleLayer);
   const strict = useZoneFilterStore((state) => state.strict);
   const toggleStrict = useZoneFilterStore((state) => state.toggle);
+  const shown = COMPOSITES.find(([id]) => id === composite);
+  const active = shown && !analysis.layers[shown[2]] ? "scene-true-color" : composite;
   return (
     <div className="flex flex-col gap-1.5">
       <span className="text-[11px] font-semibold text-text-secondary">Показать на карте</span>
@@ -42,12 +44,13 @@ export function LayerChips({ analysis }: { analysis: Analysis }) {
           <button
             key={id}
             type="button"
-            aria-pressed={composite === id}
+            aria-pressed={active === id}
             disabled={!analysis.layers[key]}
+            title={analysis.layers[key] ? undefined : "Для этого анализа слой не построен"}
             onClick={() => setComposite(id)}
             className={cn(
               CHIP,
-              composite === id
+              active === id
                 ? "border-text-primary bg-surface-raised text-text-primary"
                 : "border-line-control text-text-secondary hover:text-text-primary",
             )}

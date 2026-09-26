@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import time
 import urllib.parse
 import urllib.request
 from collections.abc import Sequence
@@ -22,6 +23,7 @@ OVERPASS_URLS = (
 OSM_DIR = "osm"
 USER_AGENT = "littora-api/0.1 (marine litter monitoring)"
 TIMEOUT_S = 25
+TOTAL_S = 45
 PAD_DEG = 0.01
 STRUCTURE_M = 60.0
 PORT_M = 2000.0
@@ -108,7 +110,10 @@ class OsmStructures:
 
     def _fetch(self, query: str) -> dict[str, Any]:
         error: OSError | None = None
+        deadline = time.monotonic() + TOTAL_S
         for url in self.urls:
+            if time.monotonic() > deadline:
+                break
             request = urllib.request.Request(
                 url,
                 data=urllib.parse.urlencode({"data": query}).encode(),
@@ -118,7 +123,12 @@ class OsmStructures:
                 with urllib.request.urlopen(
                     request, timeout=TIMEOUT_S, context=build_ssl_context()
                 ) as reply:
-                    return json.load(reply)
+                    chunks = []
+                    while chunk := reply.read(65536):
+                        if time.monotonic() > deadline:
+                            raise TimeoutError(f"Overpass не ответил за {TOTAL_S} с")
+                        chunks.append(chunk)
+                    return json.loads(b"".join(chunks))
             except OSError as failure:
                 error = failure
         raise error or OSError("нет адресов Overpass")
