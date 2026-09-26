@@ -3,6 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import hashlib
 import json
+import math
 import re
 import threading
 import time
@@ -290,7 +291,7 @@ class AnalysisService:
         return current != result.get("id")
 
     def _read(self, path: Path) -> dict[str, Any]:
-        result = json.loads(path.read_text(encoding="utf-8"))
+        result = self._finite(json.loads(path.read_text(encoding="utf-8")))
         return {**result, "stale": self.is_stale(result)}
 
     def _folder(self, analysis_id: str) -> Path:
@@ -303,6 +304,51 @@ class AnalysisService:
         if not path.exists():
             raise NotFoundError("Нет такого анализа")
         return self._read(path)
+
+    def concentration_domains(self) -> dict[str, Any]:
+        domains = getattr(self.concentration_model, "domains", None)
+        if domains is None:
+            raise NotImplementedYetError("Модель концентрации не подключена")
+        return domains()
+
+    def target_estimates(self, analysis_id: str) -> dict[str, Any]:
+        result = self.get(analysis_id)
+        area = shape(result["area"])
+        day = dt.date.fromisoformat(result["request"]["date"])
+        detection = DetectionOutcome(status=ResultStatus.NOT_DETECTED, reason="")
+        rows = []
+        for target in self.config.targets:
+            outcome = self.concentration_model.estimate(
+                None, area, detection, EstimateContext(target.key, day)
+            )
+            rows.append(
+                {
+                    "key": target.key,
+                    "title": target.title,
+                    "material": target.material,
+                    "size_class": target.size_class,
+                    "profiles": list(target.profiles),
+                    "selected": target.key == result["target"]["key"],
+                    "status": _status(outcome.status),
+                    "reason": outcome.reason,
+                    "value": outcome.value,
+                    "lower": outcome.lower,
+                    "upper": outcome.upper,
+                    "profile": outcome.profile,
+                    "unit": UNIT,
+                }
+            )
+        return {"analysis_id": analysis_id, "date": day.isoformat(), "targets": rows}
+
+    @staticmethod
+    def _finite(value: Any) -> Any:
+        if isinstance(value, float):
+            return value if math.isfinite(value) else None
+        if isinstance(value, dict):
+            return {key: AnalysisService._finite(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [AnalysisService._finite(item) for item in value]
+        return value
 
     def pixel(self, analysis_id: str, lon: float, lat: float) -> dict[str, Any]:
         result = self.get(analysis_id)
@@ -600,8 +646,9 @@ class AnalysisService:
             "observations": self._observations(area, request.date, request.window_days),
             "messages": messages,
         }
+        result = self._finite(result)
         (folder / RESULT_FILE).write_text(
-            json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8"
+            json.dumps(result, ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8"
         )
         return {**result, "stale": False}
 

@@ -10,12 +10,29 @@ export type ZoneStability = { agreement: number; views: number };
 
 export type ZoneCoverage = {
   mean: number;
-  low: number;
-  high: number;
-  area_m2: number;
-  area_m2_low: number;
-  area_m2_high: number;
+  low: number | null;
+  high: number | null;
+  area_m2: number | null;
+  area_m2_low: number | null;
+  area_m2_high: number | null;
 };
+
+export function coverageRange(coverage: ZoneCoverage): string {
+  const low = coverage.low === null ? "?" : formatPercentShort(coverage.low);
+  const high = coverage.high === null ? "?" : formatPercentShort(coverage.high);
+  return `${low}–${high}`;
+}
+
+export function coverageArea(coverage: ZoneCoverage): string {
+  if (coverage.area_m2 === null) return "площадь не оценена";
+  const low = coverage.area_m2_low === null ? "?" : formatNumber(coverage.area_m2_low, 0);
+  const high = coverage.area_m2_high === null ? "?" : formatNumber(coverage.area_m2_high, 0);
+  return `≈ ${formatNumber(coverage.area_m2, 0)} м² материала (${low}–${high})`;
+}
+
+function formatPercentShort(value: number): string {
+  return `${formatNumber(value * 100, 0)} %`;
+}
 
 export type RealZone = {
   id: string;
@@ -229,4 +246,46 @@ export function findCurrentMatch<T extends Pick<AnalysisListItem, "stale">>(
   matches: (item: T) => boolean,
 ): T | null {
   return items.find((item) => !item.stale && matches(item)) ?? null;
+}
+
+export type ZoneAdviceKind = "survey" | "recheck" | "not_debris";
+
+export type ZoneAdvice = { kind: ZoneAdviceKind; title: string; short: string; reason: string };
+
+const WEAK_PROBABILITY = 0.5;
+
+export function zoneAdvice(zone: RealZone): ZoneAdvice {
+  const kinds = new Set(zone.flags.map((flag) => flag.kind));
+  if (kinds.has("vessel") || kinds.has("structure")) {
+    const labels = zone.flags
+      .filter((flag) => flag.kind === "vessel" || flag.kind === "structure")
+      .map((flag) => flag.label);
+    return {
+      kind: "not_debris",
+      title: "Вероятно не мусор",
+      short: "не мусор?",
+      reason: `${labels.join(", ")}: сверьте со снимком, отметьте в «Проверке командой»`,
+    };
+  }
+  const weak = zone.probabilityMax !== null && zone.probabilityMax < WEAK_PROBABILITY;
+  if (kinds.has("unstable") || kinds.has("port") || weak) {
+    const reasons = [
+      kinds.has("unstable") ? "зона неустойчива к поворотам" : null,
+      kinds.has("port") ? "рядом порт" : null,
+      weak ? "вероятность ниже 0,5" : null,
+    ].filter(Boolean);
+    return {
+      kind: "recheck",
+      title: "Перепроверить на следующем снимке",
+      short: "перепроверить",
+      reason: `${reasons.join(", ")}: подтвердите по соседнему пролёту в «Динамике»`,
+    };
+  }
+  return {
+    kind: "survey",
+    title: "Кандидат на проверку на месте",
+    short: "проверить",
+    reason:
+      "высокая вероятность, без признаков судна и сооружений: включите в план обследования судном или БПЛА",
+  };
 }

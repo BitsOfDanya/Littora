@@ -169,6 +169,26 @@ function ZonesLegend() {
         <span>p макс. зоны</span>
         <span>1</span>
       </div>
+      <div className="flex flex-col gap-1 text-[11px] leading-[14px] text-text-secondary">
+        <span className="flex items-center gap-2">
+          <span
+            aria-hidden
+            className="size-2.5 rounded-full border border-state-alarm bg-state-alarm/60"
+          />
+          закрашенный маркер — проверить на месте
+        </span>
+        <span className="flex items-center gap-2">
+          <span
+            aria-hidden
+            className="size-2.5 rounded-full border border-state-alarm bg-state-alarm/10"
+          />
+          бледный — перепроверить на следующем снимке
+        </span>
+        <span className="flex items-center gap-2">
+          <span aria-hidden className="size-2.5 rounded-full border border-line-strong" />
+          полый серый — похоже на судно или сооружение
+        </span>
+      </div>
       <LegendNote>
         связные пиксели выше порога; подпись — зона и p макс. · оценка модели, не измерение
       </LegendNote>
@@ -267,6 +287,19 @@ export function LayerLegend({
       return <AnalysisAreaLegend ground={ground} />;
     case "observation-marks":
       return <MeasurementsLegend ground={ground} />;
+    case "concentration-domains":
+      return (
+        <div className="flex flex-col gap-1 text-[11px] leading-[14px] text-text-secondary">
+          <span className="flex items-center gap-2">
+            <span
+              aria-hidden
+              className="h-2.5 w-4 border border-dotted border-state-ok bg-state-ok/10"
+            />
+            до 60 км от точек полевого профиля и в его сезон ±30 сут
+          </span>
+          <span>вне области — «концентрация недоступна»</span>
+        </div>
+      );
     case "team-labels":
       return (
         <div className="flex flex-col gap-1 text-[11px] leading-[14px] text-text-secondary">

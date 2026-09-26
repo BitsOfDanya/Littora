@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { showHints } from "@/features/analysis/start-hint";
 import { ApiStatusLabel } from "@/features/system/backend-status";
 import { useApiStatus } from "@/features/system/use-api-status";
 import { useShellUiStore } from "@/state/shell-ui-store";
@@ -159,6 +160,11 @@ export function ShortcutSheet() {
           </li>
           <li>
             Выгрузка GeoJSON и CSV — внизу панели анализа; точность моделей — в режиме «Модели».
+          </li>
+          <li>
+            <button type="button" onClick={showHints} className="underline hover:text-text-primary">
+              Снова показывать подсказки на карте
+            </button>
           </li>
         </ol>
         <label className="flex h-12 shrink-0 items-center gap-3 border-b border-line-hairline px-5 focus-within:shadow-[inset_0_-2px_0_var(--focus-ring)]">

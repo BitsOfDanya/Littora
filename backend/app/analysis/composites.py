@@ -95,12 +95,22 @@ class Coverage:
             return None
         low, high = self.low[inside], self.high[inside]
         return {
-            "mean": round(float(np.nanmean(central)), 4),
-            "low": round(float(np.nanmean(low)), 4),
-            "high": round(float(np.nanmean(high)), 4),
-            "area_m2": round(float(np.nansum(central) * PIXEL_M2), 1),
-            "area_m2_low": round(float(np.nansum(low) * PIXEL_M2), 1),
-            "area_m2_high": round(float(np.nansum(high) * PIXEL_M2), 1),
+            "mean": _mean(central),
+            "low": _mean(low),
+            "high": _mean(high),
+            "area_m2": _area(central),
+            "area_m2_low": _area(low),
+            "area_m2_high": _area(high),
             "endmember_nir": PLASTIC_NIR,
             "endmember_nir_range": list(PLASTIC_NIR_RANGE),
         }
+
+
+def _mean(values: np.ndarray) -> float | None:
+    finite = values[np.isfinite(values)]
+    return round(float(finite.mean()), 4) if finite.size else None
+
+
+def _area(values: np.ndarray) -> float | None:
+    finite = values[np.isfinite(values)]
+    return round(float(finite.sum() * PIXEL_M2), 1) if finite.size else None

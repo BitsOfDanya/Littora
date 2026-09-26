@@ -32,6 +32,7 @@ import {
   formatProbability,
   type RealZone,
   toRealZones,
+  zoneAdvice,
   zoneColor,
   zoneLabel,
 } from "./zones";
@@ -234,12 +235,21 @@ function zoneLayers(
       pickable: true,
       filled: true,
       stroked: true,
-      getFillColor: (feature) => withAlpha(colorOf(feature.properties.zone), ZONE_FILL_ALPHA),
-      getLineColor: (feature) => colorOf(feature.properties.zone),
+      getFillColor: (feature) =>
+        zoneAdvice(feature.properties.zone).kind === "not_debris"
+          ? withAlpha(palette.outline, 0.08)
+          : withAlpha(colorOf(feature.properties.zone), ZONE_FILL_ALPHA),
+      getLineColor: (feature) =>
+        zoneAdvice(feature.properties.zone).kind === "not_debris"
+          ? palette.outline
+          : colorOf(feature.properties.zone),
       getLineWidth: 1.4,
       lineWidthUnits: "pixels",
       lineWidthMinPixels: 1,
-      updateTriggers: { getFillColor: threshold, getLineColor: threshold },
+      updateTriggers: {
+        getFillColor: [threshold, palette.ground],
+        getLineColor: [threshold, palette.ground],
+      },
       ...handlers,
     }),
   ];
@@ -255,8 +265,13 @@ function zoneLayers(
         radiusUnits: "pixels",
         stroked: true,
         filled: true,
-        getFillColor: (zone) => withAlpha(colorOf(zone), 0.35),
-        getLineColor: (zone) => colorOf(zone),
+        getFillColor: (zone) => {
+          const kind = zoneAdvice(zone).kind;
+          if (kind === "not_debris") return withAlpha(palette.outline, 0);
+          return withAlpha(colorOf(zone), kind === "recheck" ? 0.12 : 0.55);
+        },
+        getLineColor: (zone) =>
+          zoneAdvice(zone).kind === "not_debris" ? palette.outline : colorOf(zone),
         getLineWidth: 1.6,
         lineWidthUnits: "pixels",
         updateTriggers: { getFillColor: threshold, getLineColor: threshold },

@@ -61,6 +61,12 @@ export function LowerLeafContent(button: EnterButtonProps) {
       <p className="mt-2 max-w-[620px] text-[13px] leading-5 text-(--gate-ink) md:mt-3 md:text-[15px] md:leading-6">
         {SITE.description}
       </p>
+      <p className="mt-2 hidden max-w-[820px] text-[12px] leading-[18px] text-(--gate-ink)/80 md:block">
+        {SITE.sources}{" "}
+        <a href={SITE.repository} target="_blank" rel="noreferrer" className="underline">
+          README и код
+        </a>
+      </p>
       <dl className="mt-4 hidden max-w-[900px] grid-cols-4 gap-4 md:grid">
         {GATE_FACTS.map((fact) => (
           <div key={fact.value} className="border-t border-(--gate-ink)/30 pt-2">

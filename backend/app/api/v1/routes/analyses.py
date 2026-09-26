@@ -81,6 +81,16 @@ def _attachment(name: str) -> dict[str, str]:
     return {"Content-Disposition": f'attachment; filename="{name}"'}
 
 
+@router.get("/concentration/domains")
+def read_concentration_domains(analysis: AnalysisDep) -> dict[str, Any]:
+    return analysis.concentration_domains()
+
+
+@router.get("/analyses/{analysis_id}/targets")
+def read_target_estimates(analysis_id: str, analysis: AnalysisDep) -> dict[str, Any]:
+    return analysis.target_estimates(analysis_id)
+
+
 @router.get("/analyses/{analysis_id}/pixel")
 async def read_pixel_values(
     analysis_id: str,

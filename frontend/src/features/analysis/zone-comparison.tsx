@@ -9,7 +9,7 @@ import { queryKeys } from "@/lib/query/query-keys";
 import { cn } from "@/ui/cn";
 import { CONCENTRATION_UNIT, profileLabel } from "./analysis-copy";
 import { formatConcentration, formatDay, formatDelta } from "./format";
-import type { RealZone } from "./zones";
+import { coverageArea, coverageRange, type RealZone } from "./zones";
 
 const EARTH_KM = 6371.0088;
 const NEAREST = 5;
@@ -85,7 +85,7 @@ export function ZoneComparison({ analysis, zone }: { analysis: Analysis; zone: R
           </p>
           <p className="text-text-secondary">
             {coverage
-              ? `покрытие ~${formatPercent(coverage.mean, 0)} (${formatPercent(coverage.low, 0)}–${formatPercent(coverage.high, 0)}), ~${formatNumber(coverage.area_m2, 0)} м² материала`
+              ? `покрытие ~${formatPercent(coverage.mean, 0)} (${coverageRange(coverage)}), ${coverageArea(coverage)}`
               : "доля покрытия не оценена"}
           </p>
           <p className="mt-1 text-[11px] text-text-tertiary">модельная оценка по снимку</p>

@@ -24,6 +24,7 @@ import {
 } from "./analysis-copy";
 import { ConditionsRows } from "./conditions-rows";
 import { formatConcentration, formatDay } from "./format";
+import { LayerChips, TargetComparison } from "./result-extras";
 import { RunProgress } from "./run-progress";
 import { useAnalysisRunStart, useRunAnalysis } from "./use-analysis";
 import { useDriftLaunch } from "./use-drift-launch";
@@ -150,7 +151,7 @@ function PlainSummary({ analysis }: { analysis: Analysis }) {
   const second =
     concentration.value !== null
       ? `Концентрация для района — около ${formatConcentration(concentration.value)} ${CONCENTRATION_UNIT}${concentration.lower !== null && concentration.upper !== null ? ` (от ${formatConcentration(concentration.lower)} до ${formatConcentration(concentration.upper)})` : ""}: это оценка по измерениям с судна, а не подсчёт по снимку.`
-      : "Концентрацию для этого района и даты оценить нельзя: нет подходящих полевых данных.";
+      : "Концентрацию для этого района и даты оценить нельзя: рядом нет полевых измерений нужного сезона — где они есть, показано на карте зелёным пунктиром.";
   return (
     <div className="flex flex-col gap-1 rounded-[2px] border border-line-hairline bg-surface-raised px-2.5 py-2 text-[12px] leading-4">
       <span className="text-[11px] font-semibold text-text-secondary">Коротко</span>
@@ -183,6 +184,7 @@ export function ResultSection({ analysis }: { analysis: Analysis }) {
         <RetryNote analysis={analysis} progress={false} />
       ) : null}
       <PlainSummary analysis={analysis} />
+      {analysis.layers.image ? <LayerChips analysis={analysis} /> : null}
       <p className="text-[12px] leading-4 text-text-secondary">
         {STATUS_HINTS[analysis.status.status]}
       </p>
@@ -206,6 +208,7 @@ export function ResultSection({ analysis }: { analysis: Analysis }) {
           tone={detection.status === "insufficient_data" ? "secondary" : "primary"}
         />
       </ReadoutGrid>
+      <TargetComparison analysis={analysis} />
       <details className="group text-[12px] leading-4">
         <summary className="cursor-pointer text-text-secondary select-none hover:text-text-primary">
           Подробности для специалиста

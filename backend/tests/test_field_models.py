@@ -203,3 +203,18 @@ def test_leap_year_days_match_the_training_numbering_around_new_year() -> None:
     assert crossing.in_season(dt.date(2025, 1, 1))
     assert crossing.in_season(dt.date(2024, 12, 22))
     assert not crossing.in_season(dt.date(2024, 12, 21))
+
+
+def test_domains_are_circles_around_field_points() -> None:
+    from pathlib import Path
+
+    from app.analysis.field_models import FieldConcentrationModel
+
+    model = FieldConcentrationModel.load(
+        Path(__file__).resolve().parents[2] / "models/concentration/service"
+    )
+    features = model.domains()["features"]
+    assert {feature["properties"]["target"] for feature in features} >= {"litter-visual"}
+    black_sea = next(f for f in features if f["properties"]["profile"].startswith("S4"))
+    assert black_sea["properties"]["max_distance_km"] == 60
+    assert black_sea["geometry"]["type"] in {"Polygon", "MultiPolygon"}

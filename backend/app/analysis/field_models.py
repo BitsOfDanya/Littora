@@ -78,6 +78,17 @@ class ProfileModel:
             self.spec["domain"]["max_distance_km"],
         )
 
+    def domain_geometry(self) -> BaseGeometry:
+        from shapely.geometry import Point, mapping, shape
+        from shapely.ops import transform, unary_union
+
+        radius = float(self.spec["domain"]["max_distance_km"])
+        lat0, lon0 = self.spec["reference"]["latitude"], self.spec["reference"]["longitude"]
+        scale = 111.32 * math.cos(math.radians(lat0))
+        union = unary_union([Point(x, y).buffer(radius, 32) for x, y, *_ in self.spec["points"]])
+        lonlat = transform(lambda x, y, z=None: (lon0 + x / scale, lat0 + y / 110.57), union)
+        return shape(mapping(lonlat.simplify(0.01)))
+
     def in_area(self, lat: float, lon: float) -> bool:
         west, south, east, north = self.bounds()
         if not (west <= lon <= east and south <= lat <= north):
@@ -147,6 +158,34 @@ class FieldConcentrationModel:
         files = sorted(directory.glob("*.json")) if directory.exists() else []
         models = [ProfileModel(json.loads(path.read_text(encoding="utf-8"))) for path in files]
         return cls(models) if models else UnavailableConcentrationModel()
+
+    def domains(self) -> dict[str, Any]:
+        from shapely.geometry import mapping
+
+        features = []
+        for model in self.models:
+            spec = model.spec
+            season = spec["domain"]["season"]
+            window = f"{season['span'][0]}–{season['span'][1]} ±{season['margin_days']} сут"
+            lower, upper = model.interval(float(spec.get("constant") or 0))
+            features.append(
+                {
+                    "type": "Feature",
+                    "geometry": mapping(model.domain_geometry()),
+                    "properties": {
+                        "profile": model.profile,
+                        "target": model.target,
+                        "model": spec["model"],
+                        "value": round(float(spec.get("constant") or 0), 1),
+                        "lower": round(lower, 1),
+                        "upper": round(upper, 1),
+                        "max_distance_km": spec["domain"]["max_distance_km"],
+                        "season": window,
+                        "points": len(spec["points"]),
+                    },
+                }
+            )
+        return {"type": "FeatureCollection", "features": features}
 
     def estimate(
         self,

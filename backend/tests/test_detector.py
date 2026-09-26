@@ -248,3 +248,22 @@ def test_pixel_probe_reads_values_and_zone(monkeypatch, tmp_path) -> None:
     assert value["reflectance"]["B08"] == pytest.approx(0.08, abs=1e-3)
     outside = read_pixel(path, outcome.zones, 0.0, 0.0)
     assert outside["inside"] is False
+
+
+def test_coverage_bound_is_empty_when_water_is_brighter_than_the_endmember() -> None:
+    image = np.full((11, 41, 41), 0.02, dtype=np.float32)
+    image[7] = 0.09
+    image[7, 20, 20] = 0.2
+    estimate = Coverage(image, np.ones((41, 41), dtype=bool)).zone(
+        np.pad(np.ones((1, 1), bool), 20)
+    )
+    assert estimate["high"] is None
+    assert estimate["area_m2_high"] is None
+    assert estimate["mean"] is not None
+
+
+def test_non_finite_numbers_never_reach_the_saved_result() -> None:
+    from app.analysis.service import AnalysisService
+
+    cleaned = AnalysisService._finite({"a": float("nan"), "b": [1.0, float("inf")], "c": "x"})
+    assert cleaned == {"a": None, "b": [1.0, None], "c": "x"}

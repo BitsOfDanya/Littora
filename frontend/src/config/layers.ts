@@ -28,7 +28,8 @@ export type LegendKind =
   | "target-rings"
   | "route-line"
   | "search-radius"
-  | "team-labels";
+  | "team-labels"
+  | "concentration-domains";
 
 export type CompositeLayerId =
   "scene-true-color" | "scene-false-color" | "scene-fdi" | "scene-ndvi";
@@ -44,6 +45,7 @@ export type LayerId =
   | "analysis-area"
   | "field-observations"
   | "team-labels"
+  | "concentration-domains"
   | "debris-probability"
   | "detector-zones"
   | "aoi-boundary"
@@ -158,6 +160,16 @@ export const LAYERS: readonly LayerDefinition[] = [
     modes: ["monitor"],
     legend: "observation-marks",
     plannedReason: "Нужны данные кейса в data/case на сервере.",
+  },
+  {
+    id: "concentration-domains",
+    label: "Где доступна концентрация",
+    group: "analysis",
+    capability: "concentration_model",
+    hasDemo: false,
+    modes: ["monitor"],
+    legend: "concentration-domains",
+    plannedReason: "Появится с моделью концентрации на сервере.",
   },
   {
     id: "team-labels",
@@ -389,6 +401,7 @@ export const DEFAULT_VISIBLE_LAYERS: readonly LayerId[] = [
   "analysis-area",
   "field-observations",
   "team-labels",
+  "concentration-domains",
   "debris-probability",
   "detector-zones",
   "coverage",

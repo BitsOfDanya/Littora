@@ -68,11 +68,11 @@ export const zoneSchema = z.looseObject({
   coverage: z
     .object({
       mean: z.number(),
-      low: z.number(),
-      high: z.number(),
-      area_m2: z.number(),
-      area_m2_low: z.number(),
-      area_m2_high: z.number(),
+      low: z.number().nullable(),
+      high: z.number().nullable(),
+      area_m2: z.number().nullable(),
+      area_m2_low: z.number().nullable(),
+      area_m2_high: z.number().nullable(),
     })
     .nullable()
     .optional(),
@@ -297,3 +297,58 @@ export const getPixel = (id: string, lon: number, lat: number, signal?: AbortSig
     pixelSchema,
     { signal },
   );
+
+const estimateStatusSchema = z.object({ status: z.string(), label: z.string() });
+
+export const targetEstimatesSchema = z.object({
+  analysis_id: z.string(),
+  date: z.string(),
+  targets: z.array(
+    z.object({
+      key: z.string(),
+      title: z.string(),
+      material: z.string(),
+      size_class: z.string(),
+      profiles: z.array(z.string()),
+      selected: z.boolean(),
+      status: estimateStatusSchema,
+      reason: z.string(),
+      value: z.number().nullable(),
+      lower: z.number().nullable(),
+      upper: z.number().nullable(),
+      profile: z.string().nullable(),
+      unit: z.string(),
+    }),
+  ),
+});
+
+export type TargetEstimates = z.infer<typeof targetEstimatesSchema>;
+
+export const getTargetEstimates = (id: string, signal?: AbortSignal) =>
+  apiRequest(`/analyses/${encodeURIComponent(id)}/targets`, targetEstimatesSchema, { signal });
+
+const domainFeatureSchema = z.object({
+  type: z.literal("Feature"),
+  geometry: geometrySchema,
+  properties: z.object({
+    profile: z.string(),
+    target: z.string(),
+    model: z.string(),
+    value: z.number(),
+    lower: z.number(),
+    upper: z.number(),
+    max_distance_km: z.number(),
+    season: z.string(),
+    points: z.number().int(),
+  }),
+});
+
+export const domainCollectionSchema = z.object({
+  type: z.literal("FeatureCollection"),
+  features: z.array(domainFeatureSchema),
+});
+
+export type ConcentrationDomain = z.infer<typeof domainFeatureSchema>;
+
+export const getConcentrationDomains = (signal?: AbortSignal) =>
+  apiRequest("/concentration/domains", domainCollectionSchema, { signal });

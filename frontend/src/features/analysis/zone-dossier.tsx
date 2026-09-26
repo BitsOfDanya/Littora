@@ -23,9 +23,36 @@ import { DriftAction, StaleNote } from "./result-sections";
 import { ZoneReview } from "@/features/review/zone-review";
 import { ZoneComparison } from "./zone-comparison";
 import { ZoneCrop } from "./zone-crop";
-import { formatProbability, type RealZone, zoneBounds, zoneColor } from "./zones";
+import {
+  coverageArea,
+  coverageRange,
+  formatProbability,
+  type RealZone,
+  type ZoneAdviceKind,
+  zoneAdvice,
+  zoneBounds,
+  zoneColor,
+} from "./zones";
 
 const ZONE_FIT_MAX_ZOOM = 15;
+
+const ADVICE_TONES: Readonly<Record<ZoneAdviceKind, string>> = {
+  survey: "border-state-ok",
+  recheck: "border-state-caution",
+  not_debris: "border-line-strong",
+};
+
+function AdviceNote({ zone }: { zone: RealZone }) {
+  const advice = zoneAdvice(zone);
+  return (
+    <div
+      className={`flex flex-col gap-0.5 border-l-2 bg-surface-raised px-2.5 py-2 text-[12px] leading-4 ${ADVICE_TONES[advice.kind]}`}
+    >
+      <span className="font-semibold text-text-primary">Что делать: {advice.title}</span>
+      <span className="text-text-secondary">{advice.reason}</span>
+    </div>
+  );
+}
 
 const CLASS_LABELS: Readonly<Record<string, string>> = Object.fromEntries(
   QUALITY_CLASSES.map((entry) => [entry.key, entry.label]),
@@ -118,6 +145,7 @@ export function ZoneDossier({
     >
       <PanelSection index="01" title="Сводка">
         {analysis.stale ? <StaleNote analysis={analysis} /> : null}
+        <AdviceNote zone={zone} />
         <ReadoutGrid>
           <Readout
             label="Вероятность, макс. (калибр.)"
@@ -141,8 +169,8 @@ export function ZoneDossier({
             <Readout
               label="Доля покрытия пикселя"
               value={formatPercent(zone.coverage.mean, 0)}
-              interval={`${formatPercent(zone.coverage.low, 0)}–${formatPercent(zone.coverage.high, 0)}`}
-              note={`≈ ${formatNumber(zone.coverage.area_m2, 0)} м² материала (${formatNumber(zone.coverage.area_m2_low, 0)}–${formatNumber(zone.coverage.area_m2_high, 0)}); оценка смешения с водой в NIR`}
+              interval={coverageRange(zone.coverage)}
+              note={`${coverageArea(zone.coverage)}; оценка смешения с водой в NIR, «?» — граница не определена в мутной воде`}
             />
           ) : null}
         </ReadoutGrid>
