@@ -1,0 +1,17 @@
+excluded_flag,measurement_profile,before,after
+source_total_vs_object_count_conflict,S1_trawl_5_to_50,83,83
+source_total_vs_object_count_conflict,S2_visual_GT2,63,63
+source_total_vs_object_count_conflict,S3_visual_GT2,41,41
+source_total_vs_object_count_conflict,S4_visual_GT2_5,33,33
+source_not_revalidated_in_repair,S1_trawl_5_to_50,83,83
+source_not_revalidated_in_repair,S2_visual_GT2,63,63
+source_not_revalidated_in_repair,S3_visual_GT2,41,41
+source_not_revalidated_in_repair,S4_visual_GT2_5,33,0
+numerator_area_unavailable,S1_trawl_5_to_50,83,83
+numerator_area_unavailable,S2_visual_GT2,63,63
+numerator_area_unavailable,S3_visual_GT2,41,41
+numerator_area_unavailable,S4_visual_GT2_5,33,0
+all_litter_not_plastic,S1_trawl_5_to_50,83,83
+all_litter_not_plastic,S2_visual_GT2,63,63
+all_litter_not_plastic,S3_visual_GT2,41,0
+all_litter_not_plastic,S4_visual_GT2_5,33,0

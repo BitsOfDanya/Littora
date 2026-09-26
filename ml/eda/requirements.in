@@ -1,0 +1,14 @@
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+scikit-learn
+nbformat
+nbclient
+nbconvert
+ipykernel
+pypdf
+pyproj
+shapely
+tabulate

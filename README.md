@@ -39,6 +39,10 @@ docker compose up --build
 
 Фронтенд собирается с `NEXT_PUBLIC_API_BASE_URL=/` и проксирует `/api/*` в сервис `backend`, поэтому CORS настраивать не нужно; он стартует после того, как backend прошёл проверку здоровья. Backend монтирует только на чтение `data/case`, `data/aoi`, `data/validation`, `reports`, `models/detector/service` и `models/concentration/service`; результаты анализов, кэш Open-Meteo, кэш OpenStreetMap и отметки команды хранит в томе `analyses` (`/storage`).
 
+### Демонстрационный стенд
+
+Развёрнутая версия: `http://5.129.225.86/`. Push в `main` запускает [GitHub Actions](.github/workflows/deploy.yml): workflow проверяет backend и frontend, передаёт архив коммита на сервер и вызывает [deploy/deploy.sh](deploy/deploy.sh). Скрипт под блокировкой собирает образы, обновляет Compose, ждёт healthcheck обоих сервисов и проверяет главную страницу и `/api/v1/health`; номер развёрнутого коммита записывается в `/opt/littora/deployed-revision`. Backend на сервере слушает только `127.0.0.1:8000`, настройки — в `/opt/littora/shared/.env`, результаты анализов — в Docker volume. Ключ SSH для деплоя хранится в секретах GitHub Actions, в репозиторий не попадает.
+
 ### Первый анализ
 
 Команды — во втором терминале (или запустите Compose с `-d`). Пример — Новороссийск, Цемесская бухта, 4 сентября 2025 г., район ≈11×9 км, целевая величина «весь плавающий мусор» (`litter-visual`):
@@ -882,6 +886,14 @@ Frontend (`frontend/src`):
 - Режимы — страницы Next.js; каждая добавляет свои панели в общую оболочку и свои слои deck.gl на карту.
 - Данные — только через хуки `src/data/*`, каждый ответ помечен источником; демо-данные лежат отдельно в `src/demo`.
 - Недоступная возможность из `/api/v1/meta` показывается как «не подключено»; когда статус меняется на `available`, интерфейс подключает её сам.
+
+## Дополнительные исследования команды
+
+Отдельные исследовательские прогоны; в сервис не подключены и на метрики выше не влияют.
+
+- **EDA данных кейса:** [notebook](notebooks/01_macroplastic_eda.ipynb), [HTML](reports/eda/macroplastic_eda.html), [выводы](reports/eda/conclusions.md), окружение и команды — [ml/eda/README.md](ml/eda/README.md). Аудит CSV и спутниковых пар, независимая проверка отбора и N/A, пропуски, география, групповые разбиения и три базовых прогноза концентрации по каждому профилю.
+- **EDA MARIDA и первые детекторы:** [notebook](notebooks/02_marida_eda.ipynb), [HTML](reports/marida/marida_eda.html), [результаты](reports/marida/conclusions.md), [инструкция](ml/marida/README.md). Проверены все 1 381 изображение и маски, разбиение с учётом соседних сцен, спектральный Random Forest и пороговое правило на исходной обработке MARIDA.
+- **Расширение данных:** [отчёт](reports/expansion/conclusions.md), [notebook](notebooks/03_data_expansion.ipynb), [HTML](reports/expansion/data_expansion.html), [протокол](ml/expansion/README.md). MADOS (2 803 кропа, 1,48 млн размеченных пикселей): совместный Random Forest MARIDA + MADOS поднял F1 с 0,446 до 0,567 на MADOS и с 0,641 до 0,701 на тестовой части MARIDA этого прогона; независимость источников по месту и времени не доказана — у MADOS нет геопривязки кропов. PLP2019: 65 размеченных пикселей, регрессия доли покрытия не лучше среднего train. ERA5: погода предыдущего дня для 74 визуальных событий не улучшила MAE. EMBLAS: [реестр 302 сессий с площадями и 40 нулями](reports/expansion/tables/emblas_events_pending.csv), координаты по Session ID не найдены, в T3 добавлено 0 событий ([поиск координат](docs/emblas-coordinate-search.md)).
 
 ## Ограничения и развитие
 

@@ -1,0 +1,14 @@
+concentration_unit_orig,target_scope,measurement_profile,rows
+items km-2,all_litter,S3_visual_GT2,41
+items km-2,all_litter,S4_visual_GT2_5,33
+items km-2,fisheries_litter_category,S3_visual_GT2,41
+items km-2,object_context,S2_visual_GT2,197
+items km-2,object_context,S3_visual_GT2,140
+items km-2,plastic_category,S1_aerial_GT50,81
+items km-2,plastic_category,S1_trawl_GT5_F,6
+items km-2,plastic_category,S1_trawl_GT5_H,70
+items km-2,plastic_category,S1_trawl_GT5_N,94
+items km-2,total_plastic,S1_aerial_GT50,16
+items km-2,total_plastic,S1_trawl_5_to_50,83
+items per transect,plastic_category,S2_visual_GT2,70
+items per transect,total_plastic,S2_visual_GT2,63

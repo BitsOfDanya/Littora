@@ -1,0 +1,7 @@
+sample_id,event_id,record_type,litter_item_type,source_row_refs
+MPL-0098,S3:HE419_MarLitter_transect20,item_observation,plastic fragment,890782 data row 52
+MPL-0099,S3:HE419_MarLitter_transect20,item_observation,plastic fragment,890782 data row 52
+MPL-0169,S3:HE419_MarLitter_transect28,item_observation,plastic fragment,890782 data row 60
+MPL-0170,S3:HE419_MarLitter_transect28,item_observation,plastic fragment,890782 data row 60
+MPL-0392,S2:MSM41_litter-T46,item_observation,plastic fragment,"Transect meta data!K53;MSM41_litter-T46:Plastic+Styrofoam;object data rows:393,394,395,396"
+MPL-0393,S2:MSM41_litter-T46,item_observation,plastic fragment,"Transect meta data!K53;MSM41_litter-T46:Plastic+Styrofoam;object data rows:393,394,395,396"

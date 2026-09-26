@@ -1,0 +1,4 @@
+model,threshold,selection,validation_f1
+marida_frozen,0.6310449457633717,previous MARIDA validation,
+mados_only,0.7657879304730166,MADOS validation max F1,0.7340280924331672
+joint,0.781312983247877,MADOS validation max F1,0.7050671286271113

@@ -1,0 +1,9 @@
+collection,decision,reason_code,pairs
+landsat-c2-l2,candidate,quality_unverified,3
+landsat-c2-l2,rejected,partial_coverage,2
+landsat-c2-l2,rejected,tile_cloud,13
+landsat-c2-l2,rejected,time_shift,88
+sentinel-2-c1-l2a,accepted,accepted,11
+sentinel-2-c1-l2a,rejected,partial_coverage,4
+sentinel-2-c1-l2a,rejected,tile_cloud,4
+sentinel-2-c1-l2a,rejected,time_shift,82

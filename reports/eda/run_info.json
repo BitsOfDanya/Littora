@@ -1,0 +1,44 @@
+{
+  "executed_at_utc": "2026-09-25T19:35:50.752212+00:00",
+  "python": "3.12.11 (main, Jun 10 2026, 20:21:11) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "versions": {
+    "pandas": "3.0.6",
+    "numpy": "2.5.3",
+    "matplotlib": "3.11.2",
+    "seaborn": "0.13.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "nbclient": "0.11.0",
+    "pypdf": "6.19.0",
+    "pyproj": "3.8.0"
+  },
+  "config": {
+    "seed": 42,
+    "spatial_group_km": 50.0,
+    "temporal_group_days": 3.0,
+    "folds": 5,
+    "bootstrap_repeats": 1000,
+    "knn_neighbors": 5,
+    "group_distance_sensitivity_km": [
+      25.0,
+      50.0,
+      100.0
+    ],
+    "group_time_sensitivity_days": [
+      1.0,
+      3.0,
+      7.0
+    ],
+    "drift_speeds_ms": [
+      0.05,
+      0.2,
+      0.5
+    ],
+    "area_relative_scenarios": [
+      0.1,
+      0.2
+    ]
+  },
+  "network_required": false
+}

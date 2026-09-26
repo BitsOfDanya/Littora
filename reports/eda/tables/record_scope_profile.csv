@@ -1,0 +1,14 @@
+source_id,record_type,target_scope,measurement_profile,rows,events,with_y
+S1_GPGP2018,transect_density,plastic_category,S1_aerial_GT50,81,30,81
+S1_GPGP2018,transect_density,plastic_category,S1_trawl_GT5_F,6,6,6
+S1_GPGP2018,transect_density,plastic_category,S1_trawl_GT5_H,70,70,70
+S1_GPGP2018,transect_density,plastic_category,S1_trawl_GT5_N,94,94,94
+S1_GPGP2018,transect_density,total_plastic,S1_aerial_GT50,16,16,1
+S1_GPGP2018,transect_density,total_plastic,S1_trawl_5_to_50,83,83,83
+S2_SARGASSO_MSM41,item_observation,object_context,S2_visual_GT2,197,60,0
+S2_SARGASSO_MSM41,transect_density,plastic_category,S2_visual_GT2,70,63,70
+S2_SARGASSO_MSM41,transect_density,total_plastic,S2_visual_GT2,63,63,63
+S3_SE_NORTH_SEA,item_observation,object_context,S3_visual_GT2,140,39,0
+S3_SE_NORTH_SEA,transect_density,all_litter,S3_visual_GT2,41,41,41
+S3_SE_NORTH_SEA,transect_density,fisheries_litter_category,S3_visual_GT2,41,41,41
+S4_BLACK_SEA_DOORS3,transect_density,all_litter,S4_visual_GT2_5,33,33,33

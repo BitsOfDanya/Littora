@@ -1,0 +1,10 @@
+metric,value
+candidate_pairs,207
+accepted_pairs,11
+accepted_events,9
+accepted_tile_scenes,5
+accepted_acquisition_days,4
+accepted_point_footprints,11
+accepted_events_known_time,0
+accepted_events_strict_timing_verified,0
+accepted_pairs_missing_bright_water,0

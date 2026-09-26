@@ -1,0 +1,86 @@
+{
+  "created_on": "2026-09-26",
+  "seed": 42,
+  "files": [
+    {
+      "path": "ml/expansion/test_contracts.py",
+      "bytes": 3930,
+      "sha256": "c1fe7a95846e8bc159a718479d263bc97cccb9ab117577558abf8089b69aad01"
+    },
+    {
+      "path": "ml/expansion/mados.py",
+      "bytes": 16724,
+      "sha256": "0de51c5a726824d7d4dbc210e27a06fb696b028c8de1355fcef228efe7b8d2b7"
+    },
+    {
+      "path": "ml/expansion/field_data.py",
+      "bytes": 8062,
+      "sha256": "42ce9e0497f74f68b017201dd6b635746d4f4d20769201ef31cb70d6703853fe"
+    },
+    {
+      "path": "ml/expansion/weather.py",
+      "bytes": 7092,
+      "sha256": "1a71c519af9d915b8ac5b5c104debfb6f1aa9a0dceff0a4d91b91b6d4956456a"
+    },
+    {
+      "path": "ml/expansion/report.py",
+      "bytes": 18332,
+      "sha256": "e0810ace1da26e71560e1e2b48d9d131ca032dc98b62e99877e0efaad338626a"
+    },
+    {
+      "path": "ml/expansion/requirements.lock.txt",
+      "bytes": 1923,
+      "sha256": "6fa20ebaecdb35ddfc509d29f1833c2a7dbc38f26e53df89fd3c87dc35104a1c"
+    },
+    {
+      "path": "ml/expansion/protocol.md",
+      "bytes": 6128,
+      "sha256": "7f77fcf7c38d67eb4285f9d7ad1dceed1e656ad4a634ca56b8e0229950729f7e"
+    },
+    {
+      "path": "data/processed/expansion/joint.joblib",
+      "bytes": 3436038,
+      "sha256": "1a39749e40f06c04b968dc1cdb619d941ab9ed4db7e23bbfe6071c411d1c556a"
+    },
+    {
+      "path": "data/processed/expansion/mados_only.joblib",
+      "bytes": 2784421,
+      "sha256": "c38ded1e537dfe36792ceac75609ca5828575de3757f2a2e44235a04f9c5a479"
+    },
+    {
+      "path": "data/processed/expansion/mados_test_predictions.npz",
+      "bytes": 499091,
+      "sha256": "afb8b8e1447a70af5703cf6927b3c5edc7d5262bb9f753cde005861ccf8bb5a1"
+    },
+    {
+      "path": "data/processed/expansion/marida_development_test_predictions.npz",
+      "bytes": 320258,
+      "sha256": "fdb45ee29bcdeb0a1811706162a660465ded32d42abc0dece22d206882054114"
+    },
+    {
+      "path": "data/processed/expansion/model_metadata.json",
+      "bytes": 834,
+      "sha256": "05d9f359836d6c40811cd53f3148c592277de9b5a74f0b99677ff29b3f8b590e"
+    },
+    {
+      "path": "data/manifests/marida.json",
+      "bytes": 420,
+      "sha256": "d8ab4378cff8b59df898a7fde68cdc3ac090662352f54ef990a6211c567658be"
+    },
+    {
+      "path": "data/manifests/mados.json",
+      "bytes": 425,
+      "sha256": "f14e6f176e4890f4d32772fe61b021ac101a3c5c57ef4ad692031b3f66862b7f"
+    },
+    {
+      "path": "data/manifests/plp2019.json",
+      "bytes": 422,
+      "sha256": "4602903e11f8c7408b1813ee8668fe928accf2ed19ba96a4372c16e81ef5652e"
+    },
+    {
+      "path": "data/case/macroplastic_marine_samples.csv",
+      "bytes": 927478,
+      "sha256": "30ce0a65e3880b833b5dfe3bc6f528ee5f5af14a0d22f25995f4ef8af585a764"
+    }
+  ]
+}

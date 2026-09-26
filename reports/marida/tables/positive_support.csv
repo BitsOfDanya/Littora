@@ -1,0 +1,4 @@
+split,positive_groups,positive_scenes,positive_patches
+test,14,15,110
+train,30,30,182
+val,9,10,81

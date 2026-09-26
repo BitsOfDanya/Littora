@@ -1,0 +1,5 @@
+measurement_profile,eligible_events,paired_events,retention_pct
+S1_trawl_5_to_50,83,0,0.0
+S2_visual_GT2,63,0,0.0
+S3_visual_GT2,41,0,0.0
+S4_visual_GT2_5,33,9,27.272727272727273

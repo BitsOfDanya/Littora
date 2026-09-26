@@ -129,7 +129,8 @@ region = "international"
 use = ["pretrain", "validation"]
 license = "как у исходных"
 commercial = true
-access = "open"
+access = "request"
+notes = "Проверено 2026-09-26: автор перевёл хостинг данных в private; доступ запрашивается у Marc Russwurm. Старые S3 URLs сохранены как provenance, не гарантированный открытый download."
 size = "54.1 GB"
 paper = "https://doi.org/10.1016/j.isci.2023.108402"
 homepage = "https://github.com/MarcCoru/marinedebrisdetector"
@@ -319,7 +320,7 @@ files = [
 
 [emblas-floating-litter]
 title = "EMBLAS: плавающий мусор в Чёрном море, 2017 и 2019 (González-Fernández et al., 2022)"
-about = "302 сессии наблюдений плавающего мусора с судов, в том числе 6 российских (Геленджик, Новороссийск, Сочи, Керченский пролив); координат нет"
+about = "302 сессии визуального учёта всего плавающего макромусора >2.5 см; в S2 есть площадь, длина, ширина полосы, число предметов и плотность, но нет координат. В S1 перечислены 6 российских экспедиций/программ, а не 6 сессий; поиск координат: docs/emblas-coordinate-search.md"
 kind = "observations"
 region = "russia"
 use = ["validation"]

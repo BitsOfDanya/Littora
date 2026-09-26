@@ -1,0 +1,4 @@
+measurement_profile,target_scope,zero_scope,zeros
+S1_aerial_GT50,plastic_category,plastic_category;S1_aerial_GT50;Unknown,2
+S1_aerial_GT50,total_plastic,total_plastic;S1_aerial_GT50;total megaplastic,1
+S3_visual_GT2,fisheries_litter_category,"fisheries_litter_category;S3_visual_GT2;fisheries-related litter (nets, ropes, floats)",35

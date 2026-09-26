@@ -1,0 +1,66 @@
+name: Deploy Littora
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e './backend[dev]'
+      - run: pytest backend/tests -q
+      - run: ruff check backend
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run check
+
+  deploy:
+    needs: [backend-tests, frontend-tests]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure SSH
+        env:
+          DEPLOY_KEY: ${{ secrets.LITTORA_DEPLOY_SSH_KEY_V2 }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/littora_deploy
+          chmod 600 ~/.ssh/littora_deploy
+          printf '%s\n' '5.129.225.86 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHMeXtjJrAroT3ONRiH7ZrdlU1Xf6DDpXocK47wo5CKJ' > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Upload release
+        run: |
+          tar --exclude=.git -czf "$RUNNER_TEMP/littora.tar.gz" .
+          scp -i ~/.ssh/littora_deploy -o IdentitiesOnly=yes \
+            "$RUNNER_TEMP/littora.tar.gz" \
+            littora-deploy@5.129.225.86:/opt/littora/incoming/${GITHUB_SHA}.tar.gz
+      - name: Deploy and verify
+        run: |
+          ssh -i ~/.ssh/littora_deploy -o IdentitiesOnly=yes \
+            littora-deploy@5.129.225.86 \
+            /opt/littora/deploy.sh "$GITHUB_SHA"

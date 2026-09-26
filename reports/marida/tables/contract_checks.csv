@@ -1,0 +1,15 @@
+check,value
+patches,1381
+tile_date_scenes,63
+dates,57
+tiles,17
+pixels,90505216
+annotated_pixels,837377
+usable_labelled_pixels,837377
+invalid_annotated_pixels,0
+labelled_without_confidence,0
+confidence_without_label,0
+nonfinite_band_values,979468
+negative_band_values,67339
+above_one_band_values,64762
+duplicate_image_content,0
