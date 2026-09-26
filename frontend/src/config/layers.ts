@@ -27,7 +27,8 @@ export type LegendKind =
   | "beaching"
   | "target-rings"
   | "route-line"
-  | "search-radius";
+  | "search-radius"
+  | "team-labels";
 
 export type CompositeLayerId =
   "scene-true-color" | "scene-false-color" | "scene-fdi" | "scene-ndvi";
@@ -42,6 +43,7 @@ export type LayerId =
   | "scene-footprint"
   | "analysis-area"
   | "field-observations"
+  | "team-labels"
   | "debris-probability"
   | "detector-zones"
   | "aoi-boundary"
@@ -156,6 +158,15 @@ export const LAYERS: readonly LayerDefinition[] = [
     modes: ["monitor"],
     legend: "observation-marks",
     plannedReason: "Нужны данные кейса в data/case на сервере.",
+  },
+  {
+    id: "team-labels",
+    label: "Разметка команды: фон и аудит зон",
+    group: "analysis",
+    capability: null,
+    hasDemo: false,
+    modes: ["monitor"],
+    legend: "team-labels",
   },
   {
     id: "debris-probability",
@@ -377,6 +388,7 @@ export const LEGACY_LAYER_ALIASES: Record<LegacyLayerId, LayerId> = {
 export const DEFAULT_VISIBLE_LAYERS: readonly LayerId[] = [
   "analysis-area",
   "field-observations",
+  "team-labels",
   "debris-probability",
   "detector-zones",
   "coverage",

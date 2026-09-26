@@ -119,3 +119,27 @@ export type CaseEvent = z.infer<typeof eventFeatureSchema>;
 
 export const getEvents = (signal?: AbortSignal) =>
   apiRequest(withQuery("/events", { decision: "accepted" }), eventCollectionSchema, { signal });
+
+const labelFeatureSchema = z.object({
+  type: z.literal("Feature"),
+  geometry: geometrySchema,
+  properties: z.object({
+    source: z.enum(["negatives", "audit"]),
+    class: z.string().nullable(),
+    title: z.string(),
+    scene_id: z.string().nullable().optional(),
+    date: z.string().optional(),
+    zone_id: z.string().optional(),
+    confidence: z.number().optional(),
+  }),
+});
+
+export const labelCollectionSchema = z.object({
+  type: z.literal("FeatureCollection"),
+  features: z.array(labelFeatureSchema),
+});
+
+export type TeamLabel = z.infer<typeof labelFeatureSchema>;
+
+export const getLabels = (signal?: AbortSignal) =>
+  apiRequest("/labels", labelCollectionSchema, { signal });

@@ -63,3 +63,11 @@ def test_cors_rejects_unknown_origin(client: TestClient) -> None:
     response = client.get("/api/v1/health", headers={"Origin": "https://example.org"})
 
     assert "access-control-allow-origin" not in response.headers
+
+
+def test_team_labels_combine_background_polygons_and_audit_points(client) -> None:
+    body = client.get("/api/v1/labels").json()
+    sources = {feature["properties"]["source"] for feature in body["features"]}
+    assert sources == {"negatives", "audit"}
+    ship = next(f for f in body["features"] if f["properties"]["class"] == "ship")
+    assert ship["properties"]["title"] == "судно"

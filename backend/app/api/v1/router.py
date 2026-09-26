@@ -4,6 +4,7 @@ from app.api.v1.routes import (
     analyses,
     case,
     drift,
+    labels,
     models,
     review,
     scenes,
@@ -22,3 +23,4 @@ router.include_router(survey.router)
 router.include_router(models.router)
 router.include_router(timeline.router)
 router.include_router(review.router)
+router.include_router(labels.router)

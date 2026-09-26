@@ -267,6 +267,19 @@ export function LayerLegend({
       return <AnalysisAreaLegend ground={ground} />;
     case "observation-marks":
       return <MeasurementsLegend ground={ground} />;
+    case "team-labels":
+      return (
+        <div className="flex flex-col gap-1 text-[11px] leading-[14px] text-text-secondary">
+          <span className="flex items-center gap-2">
+            <span aria-hidden className="h-2.5 w-4 border border-dashed border-text-secondary" />
+            заведомый фон: суда, садки, шлейфы, облака, вода
+          </span>
+          <span className="flex items-center gap-2">
+            <span aria-hidden className="size-2 rounded-full bg-text-secondary" />
+            аудит зон детектора: что это на самом деле
+          </span>
+        </div>
+      );
     case "probability-ramp":
       return <ProbabilityLegend />;
     case "zone-outline":
