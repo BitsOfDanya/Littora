@@ -1,0 +1,15 @@
+{
+  "python": "3.12.11",
+  "case_sha256": "30ce0a65e3880b833b5dfe3bc6f528ee5f5af14a0d22f25995f4ef8af585a764",
+  "frozen_model_sha256": "d25086e0dc51db3c7583f9056e62d1d93e47ec77d865e575fd81bab89a93c3dd",
+  "packages": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "rasterio": "1.5.1",
+    "scikit-learn": "1.9.1",
+    "requests": "2.34.2",
+    "pyproj": "3.8.0",
+    "nbformat": "5.11.1",
+    "nbclient": "0.11.0"
+  }
+}

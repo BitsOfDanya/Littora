@@ -1,0 +1,23 @@
+column,missing,missing_fraction
+Station,0,0.0
+Date,0,0.0
+Time (UTC),0,0.0
+Latitude (°N),0,0.0
+Longitude (°E),0,0.0
+Kd(411.6),0,0.0
+Kd(443.6),0,0.0
+Kd(489.2),0,0.0
+Kd(511.0),0,0.0
+Kd(554.0),0,0.0
+Kd(664.8),0,0.0
+Kd(683.8),0,0.0
+Rrs(411.6),0,0.0
+Rrs(443.6),0,0.0
+Rrs(489.2),0,0.0
+Rrs(511.0),0,0.0
+Rrs(554.0),0,0.0
+Rrs(664.8),0,0.0
+Rrs(683.8),0,0.0
+datetime_utc,0,0.0
+target_type,0,0.0
+litter_label_available,0,0.0

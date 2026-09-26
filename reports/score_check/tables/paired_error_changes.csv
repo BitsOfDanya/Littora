@@ -1,0 +1,9 @@
+patch_id,split,product,model,corrected_errors,introduced_errors,recovered_debris,lost_debris,removed_false_positives,added_false_positives
+22-12-20_18QYF_0,test,rhorc,mados_only,0,0,0,0,0,0
+22-12-20_18QYF_0,test,rhorc,joint,0,0,0,0,0,0
+22-12-20_18QYF_0,test,L2A,mados_only,1,8,1,8,0,0
+22-12-20_18QYF_0,test,L2A,joint,0,5,0,5,0,0
+24-4-19_36JUN_0,train,rhorc,mados_only,0,2,0,2,0,0
+24-4-19_36JUN_0,train,rhorc,joint,0,0,0,0,0,0
+24-4-19_36JUN_0,train,L2A,mados_only,0,1,0,1,0,0
+24-4-19_36JUN_0,train,L2A,joint,0,1,0,1,0,0

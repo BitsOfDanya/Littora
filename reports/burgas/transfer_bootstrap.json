@@ -1,0 +1,7 @@
+{
+  "comparison": "MAE doors_only minus doors_plus_burgas; positive improves",
+  "groups": 9,
+  "gain": 1.3656665670806634,
+  "low": -3.8631966571596537,
+  "high": 7.509061448453393
+}

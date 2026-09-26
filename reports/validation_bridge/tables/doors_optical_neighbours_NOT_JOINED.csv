@@ -1,0 +1,15 @@
+transect_id,optical_record_id,same_date,distance_m,join_approved,reason
+T1,DOORS3:TriOS:1,True,6632.922503445685,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T2,DOORS3:TriOS:1,True,23839.650628578267,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T20,DOORS3:TriOS:5,True,12776.532603421096,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T21,DOORS3:TriOS:4,True,497.1828837438467,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T22,DOORS3:TriOS:9,True,3976.2324191771395,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T23,DOORS3:TriOS:11,True,4197.408431400346,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T24,DOORS3:TriOS:10,True,4052.9608934293633,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T25,DOORS3:TriOS:15,True,5681.990879176793,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T26,DOORS3:TriOS:21,True,17426.700804060987,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T27,DOORS3:TriOS:22,True,9799.465095765498,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T28,DOORS3:TriOS:22,True,18128.232991422883,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T30,DOORS3:TriOS:23,True,23883.014024774206,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T31,DOORS3:TriOS:23,True,44091.10906912583,False,No shared survey ID or litter timestamp; spatial proximity is not identity
+T32,DOORS3:TriOS:24,True,21800.243228998246,False,No shared survey ID or litter timestamp; spatial proximity is not identity

@@ -1,0 +1,5 @@
+measurement_profile,comparison,groups,gain,low,high
+S1_trawl_5_to_50,MAE control minus environment (positive improves),55,5.0487539501447465,-33.39631346632001,46.917278552395445
+S2_visual_GT2,MAE control minus environment (positive improves),41,-4.2319202703927195,-11.396338170647367,2.5253837612704504
+S3_visual_GT2,MAE control minus environment (positive improves),8,-3.135256121121514,-4.821030838674754,-1.762786215628727
+S4_visual_GT2_5,MAE control minus environment (positive improves),9,-59.8032043123847,-85.65006781529083,-29.56392260172648

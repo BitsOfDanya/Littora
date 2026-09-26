@@ -1,0 +1,8 @@
+kind,source,split,rows,known_utc,wind_available,wave_available,current_available
+field,S1_GPGP2018,field_cv,181,150,181,181,178
+field,S2_SARGASSO_MSM41,field_cv,63,63,63,63,62
+field,S3_SE_NORTH_SEA,field_cv,41,41,41,41,40
+field,S4_BLACK_SEA_DOORS3,field_cv,33,0,33,33,29
+patch,MARIDA_L2A,test,42,42,42,42,41
+patch,MARIDA_L2A,train,110,110,110,97,110
+patch,MARIDA_L2A,val,38,38,38,30,38

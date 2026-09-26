@@ -512,7 +512,7 @@ homepage = "https://data.marine.copernicus.eu/product/WIND_GLO_PHY_L4_NRT_012_00
 
 [era5]
 title = "ERA5 — реанализ ECMWF"
-about = "ветер 10 м и волны по всему миру с 1940 года, 0.25°, задержка около 6 суток"
+about = "ветер 10 м: сетка 0.25°; волновые поля через ERA5-Ocean: 0.5°; исторический реанализ с 1940 года"
 kind = "atmosphere"
 region = "global"
 use = ["drift"]
@@ -548,7 +548,7 @@ homepage = "https://tds.hycom.org/thredds/catalog.html"
 
 [open-meteo]
 title = "Open-Meteo: течения SMOC и ветер по точкам"
-about = "API без ключа: течения из Copernicus SMOC (нет Каспия и Кольского залива), ветер ECMWF, GFS, ICON; бесплатно только некоммерчески"
+about = "API без ключа: архив ветра ERA5 и волн ERA5-Ocean с 1940; течения SMOC с 2022; бесплатно только некоммерчески. Выборки для 508 событий/патчей: data/processed/metocean"
 kind = "ocean"
 region = "global"
 use = ["drift", "demo"]
@@ -557,6 +557,18 @@ commercial = false
 access = "open"
 size = "~50 KB/точка"
 homepage = "https://open-meteo.com/en/docs/marine-weather-api"
+
+[hycom-gofs-archive]
+title = "HYCOM GOFS 3.1: архив поверхностных течений"
+about = "expt_53.X для 2014–2015; expt_56.3/57.2 для 2016; GLBv0.08/expt_93.0 для раннего 2018; GLBy0.08/expt_93.0 для 2019–2021. Глубина 0 м, шаг 3 часа; NetCDF с CF scale/fill. Манифест запросов: reports/metocean/tables/download_manifest.csv"
+kind = "ocean"
+region = "global"
+use = ["drift", "validation"]
+license = "Freely available; approved for public release"
+commercial = true
+access = "open"
+size = "точечные окрестности и четырёхдневные окна"
+homepage = "https://www.hycom.org/dataserver/gofs-3pt1/analysis"
 
 [natural-earth]
 title = "Natural Earth 1:10m — береговая линия, суша, моря, реки, порты"
@@ -671,3 +683,69 @@ files = [
   { url = "https://osmdata.openstreetmap.de/download/water-polygons-split-4326.zip" },
   { url = "https://osmdata.openstreetmap.de/download/land-polygons-split-4326.zip" },
 ]
+
+[doors3-trios-rrs]
+title = "DOORS3: спектры воды TriOS с координатами и UTC"
+about = "27 измерений Rrs, 400–850 нм; оптическая проверка, не метки мусора"
+kind = "observations"
+region = "international"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "180.2 KB"
+doi = "10.5281/zenodo.15778382"
+zenodo = 15778382
+
+[doors3-micropro-aop]
+title = "DOORS3: MicroPro Rrs и Kd"
+about = "11 агрегированных оптических измерений с UTC и координатами; не метки мусора"
+kind = "observations"
+region = "international"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "22.3 KB"
+doi = "10.5281/zenodo.15259958"
+zenodo = 15259958
+
+[doors3-water-quality]
+title = "DOORS3: хлорофилл, взвесь и прозрачность воды"
+about = "27 строк CHL/TSM/Secchi; дополнительный контекст водной оптики"
+kind = "observations"
+region = "international"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "10.5 KB"
+doi = "10.5281/zenodo.15120079"
+zenodo = 15120079
+
+[doors3-aot]
+title = "DOORS3: аэрозольная оптическая толщина"
+about = "AOT 440–936 нм за июнь 2024; атмосферный контекст"
+kind = "observations"
+region = "international"
+use = ["validation"]
+license = "CC-BY-4.0"
+commercial = true
+access = "open"
+size = "10.2 KB"
+doi = "10.5281/zenodo.15044582"
+zenodo = 15044582
+
+[burgas-bridge-bs]
+title = "IBER-BAS BRIDGE-BS: плавающий мусор в Бургасском заливе, 2021–2023"
+about = "84 визуальных учёта на 8 повторяемых трансектах; 26 нулей; опубликованная плотность всего мусора. Площадь по методике 0.0135 км². UTC, роль координат, минимальный размер и текст лицензии требуют уточнения. Исследовательская интеграция: data/processed/burgas; не пиксельные метки"
+kind = "observations"
+region = "international"
+use = ["validation"]
+license = "CC-BY-4.0 in DataCite/SEANOE icon; conflicting project-access prose; external reuse pending clarification"
+commercial = false
+access = "open"
+size = "19.9 KB"
+doi = "10.17882/98351"
+homepage = "https://www.seanoe.org/data/00872/98351/"
+files = [{ url = "https://www.seanoe.org/data/00872/98351/data/107709.txt" }]

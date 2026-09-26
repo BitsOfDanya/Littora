@@ -1,0 +1,8 @@
+source,rows,new_detector_training_labels,new_eligible_T3_events,source_table
+EMBLAS,302,0,0,reports/expansion/tables/emblas_events_pending.csv
+DOORS_litter,33,0,0,reports/validation_bridge/tables/doors_transects_pending_geometry.csv
+DOORS_TriOS,27,0,0,reports/validation_bridge/tables/doors_trios_rrs.csv
+DOORS_MicroPro,11,0,0,reports/validation_bridge/tables/doors_micropro_aop.csv
+DOORS_water_quality,27,0,0,reports/validation_bridge/tables/doors_water_quality.csv
+Romania_July2024,8,0,0,reports/validation_bridge/tables/romania_july2024_pending.csv
+BlackSea_holdout,12,0,0,reports/validation_bridge/tables/blacksea_holdout_registry.csv

@@ -1,0 +1,61 @@
+feature,units,source,role,missing
+wind_speed_ms_instant,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_u_ms_instant,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_v_ms_instant,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_speed_ms_mean24h,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_speed_ms_coverage24h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wind_u_ms_mean24h,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_u_ms_coverage24h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wind_v_ms_mean24h,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_v_ms_coverage24h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wind_speed_ms_mean72h,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_speed_ms_coverage72h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wind_u_ms_mean72h,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_u_ms_coverage72h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wind_v_ms_mean72h,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_v_ms_coverage72h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wave_height_m_instant,m,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_period_s_instant,s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_from_sin_instant,fraction,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_from_cos_instant,fraction,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_height_m_mean24h,m,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_height_m_coverage24h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wave_period_s_mean24h,s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_period_s_coverage24h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wave_from_sin_mean24h,fraction,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_from_sin_coverage24h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wave_from_cos_mean24h,fraction,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_from_cos_coverage24h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wave_height_m_mean72h,m,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_height_m_coverage72h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wave_period_s_mean72h,s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_period_s_coverage72h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wave_from_sin_mean72h,fraction,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_from_sin_coverage72h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+wave_from_cos_mean72h,fraction,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_from_cos_coverage72h,fraction,ECMWF ERA5 / Open-Meteo,quality_only,unknown; never zero-filled
+current_u_ms_instant,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_v_ms_instant,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_speed_ms_instant,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_u_ms_mean24h,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_u_ms_coverage24h,fraction,HYCOM GOFS; SMOC for DOORS 2024,quality_only,unknown; never zero-filled
+current_v_ms_mean24h,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_v_ms_coverage24h,fraction,HYCOM GOFS; SMOC for DOORS 2024,quality_only,unknown; never zero-filled
+current_speed_ms_mean24h,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_speed_ms_coverage24h,fraction,HYCOM GOFS; SMOC for DOORS 2024,quality_only,unknown; never zero-filled
+current_u_ms_mean72h,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_u_ms_coverage72h,fraction,HYCOM GOFS; SMOC for DOORS 2024,quality_only,unknown; never zero-filled
+current_v_ms_mean72h,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_v_ms_coverage72h,fraction,HYCOM GOFS; SMOC for DOORS 2024,quality_only,unknown; never zero-filled
+current_speed_ms_mean72h,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_speed_ms_coverage72h,fraction,HYCOM GOFS; SMOC for DOORS 2024,quality_only,unknown; never zero-filled
+wind_speed_ms_daily_mean,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_u_ms_daily_mean,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wind_v_ms_daily_mean,m/s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_height_m_daily_mean,m,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_period_s_daily_mean,s,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_from_sin_daily_mean,fraction,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+wave_from_cos_daily_mean,fraction,ECMWF ERA5 / Open-Meteo,environment_predictor,unknown; never zero-filled
+current_u_ms_daily_mean,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_v_ms_daily_mean,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled
+current_speed_ms_daily_mean,m/s,HYCOM GOFS; SMOC for DOORS 2024,environment_predictor,unknown; never zero-filled

@@ -1,0 +1,4 @@
+split,patches,scenes,groups,complete_environment_patches
+test,42,8,7,41
+train,110,20,19,97
+val,38,7,6,30

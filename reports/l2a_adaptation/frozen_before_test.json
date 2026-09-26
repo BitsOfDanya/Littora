@@ -1,0 +1,71 @@
+{
+  "frozen_at_utc": "2026-09-26T08:04:24.073038+00:00",
+  "forest_params": {
+    "n_estimators": 125,
+    "max_depth": 20,
+    "min_samples_leaf": 2,
+    "class_weight": "balanced_subsample",
+    "random_state": 42,
+    "n_jobs": 4
+  },
+  "input_product": "Sentinel-2 C1 L2A BOA reflectance; scale/offset already applied",
+  "bands": [
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "B8A",
+    "B11",
+    "B12"
+  ],
+  "ignore_reference_class": 0,
+  "positive_reference_class": 1,
+  "threshold_variants": [
+    {
+      "variant": "marida_original",
+      "forest": "marida",
+      "threshold": 0.6310449457633717,
+      "selection": "original MARIDA validation"
+    },
+    {
+      "variant": "joint_original",
+      "forest": "joint",
+      "threshold": 0.781312983247877,
+      "selection": "original MADOS validation"
+    },
+    {
+      "variant": "marida_l2a_threshold",
+      "forest": "marida",
+      "threshold": 0.7415970024168067,
+      "selection": "current L2A validation; max F1, highest threshold on ties"
+    },
+    {
+      "variant": "joint_l2a_threshold",
+      "forest": "joint",
+      "threshold": 0.23665228814464956,
+      "selection": "current L2A validation; max F1, highest threshold on ties"
+    },
+    {
+      "variant": "paired_rhorc_l2a_threshold",
+      "forest": "paired_rhorc",
+      "threshold": 0.48655551001856356,
+      "selection": "current L2A validation; max F1, highest threshold on ties"
+    },
+    {
+      "variant": "l2a_rf",
+      "forest": "l2a",
+      "threshold": 0.6543289330961177,
+      "selection": "current L2A validation; max F1, highest threshold on ties"
+    }
+  ],
+  "paired_pixels_sha256": "aa34b758dddcea56b1a7b24199f52b131a148b1a9eb9955cf6fdecf0a9a85645",
+  "selected_patches_sha256": "0df4bafaed25a34ad32a3dd341d470da1abc6fc73da94d032188ce914ba204a1",
+  "model_sha256": {
+    "paired_rhorc": "d98db1d393b87e97abd555f43b1d0cc53d1457f8a67887c60a1b675ca7c64b0f",
+    "l2a": "9c4eef46fc5f6f1c8272991319aea2be678eec236dec0ec61ebc895da4e5c66b"
+  }
+}

@@ -1,0 +1,4 @@
+split,patch_id,green_band_correlation
+train,19-3-20_18QYF_1,0.9928876791892728
+val,14-3-20_18QYF_4,0.9849455175177163
+test,22-12-20_18QYF_0,0.7988591525770624

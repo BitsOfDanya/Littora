@@ -1,0 +1,9 @@
+event_id,source_transect_id,station_pair,date,transect_length_km,sampled_area_km2,duration_minutes,strip_width_per_observer_m,observers,latitude,longitude,time_start_utc,items_count,concentration_items_km2,t3_eligible,missing_fields,source_doi,source_table
+CASTRO2025:JUL2024:T1,T1,1-MA05–MA08,2024-07-21,6.358,0.089,30,7,2,,,,,,False,WGS84_geometry;UTC;transect_count_density,10.1016/j.scitotenv.2025.181035,Table 1 p4; protocol section 2.2 p3
+CASTRO2025:JUL2024:T2,T2,2-MA08–MA04,2024-07-21,6.498,0.091,30,7,2,,,,,,False,WGS84_geometry;UTC;transect_count_density,10.1016/j.scitotenv.2025.181035,Table 1 p4; protocol section 2.2 p3
+CASTRO2025:JUL2024:T3,T3,3-MA12–MA13,2024-07-24,5.013,0.0702,30,7,2,,,,,,False,WGS84_geometry;UTC;transect_count_density,10.1016/j.scitotenv.2025.181035,Table 1 p4; protocol section 2.2 p3
+CASTRO2025:JUL2024:T4,T4,4-MA13–MA14,2024-07-24,6.159,0.0862,30,7,2,,,,,,False,WGS84_geometry;UTC;transect_count_density,10.1016/j.scitotenv.2025.181035,Table 1 p4; protocol section 2.2 p3
+CASTRO2025:JUL2024:T5,T5,5-R–SG09,2024-07-25,6.955,0.0974,30,7,2,,,,,,False,WGS84_geometry;UTC;transect_count_density,10.1016/j.scitotenv.2025.181035,Table 1 p4; protocol section 2.2 p3
+CASTRO2025:JUL2024:T6,T6,6-SG09–SG08,2024-07-25,6.637,0.0929,30,7,2,,,,,,False,WGS84_geometry;UTC;transect_count_density,10.1016/j.scitotenv.2025.181035,Table 1 p4; protocol section 2.2 p3
+CASTRO2025:JUL2024:T7,T7,7-SG04–SG03,2024-07-26,7.095,0.0993,30,7,2,,,,,,False,WGS84_geometry;UTC;transect_count_density,10.1016/j.scitotenv.2025.181035,Table 1 p4; protocol section 2.2 p3
+CASTRO2025:JUL2024:T8,T8,8_P006_P007,2024-07-27,6.936,0.0971,30,7,2,,,,,,False,WGS84_geometry;UTC;transect_count_density,10.1016/j.scitotenv.2025.181035,Table 1 p4; protocol section 2.2 p3

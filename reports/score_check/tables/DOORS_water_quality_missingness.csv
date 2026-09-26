@@ -1,0 +1,11 @@
+column,missing,missing_fraction
+station,0,0.0
+datetime (utc),0,0.0
+latitude,0,0.0
+longitude,0,0.0
+station depth (m),0,0.0
+sampling depth  (m),0,0.0
+tsm (mg/l),0,0.0
+chl (mg/m3),0,0.0
+secchi disk (m),0,0.0
+litter_label_available,0,0.0

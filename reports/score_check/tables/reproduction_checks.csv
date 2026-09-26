@@ -1,0 +1,7 @@
+dataset,model,pixels,max_abs_score_difference
+marida_development_test,marida_frozen,281021,3.3306690738754696e-16
+marida_development_test,mados_only,281021,2.220446049250313e-16
+marida_development_test,joint,281021,3.3306690738754696e-16
+mados_test,marida_frozen,361147,5.551115123125783e-16
+mados_test,mados_only,361147,3.3306690738754696e-16
+mados_test,joint,361147,2.220446049250313e-16

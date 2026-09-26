@@ -1,0 +1,5 @@
+patch_id,date,tile,match_status,candidate_count,stac_id,product_uri,satellite_datetime,match_method,source_image,paired_folder,common_valid_pixels,common_labelled_pixels,positive_pixels,nodata_fraction,cloud_fraction,water_fraction
+22-12-20_18QYF_0,2020-12-22,18QYF,paired,1,S2B_T18QYF_20201222T153615_L2A,S2B_MSIL2A_20201222T153619_N0500_R068_T18QYF_20230320T143352.SAFE,2020-12-22T15:37:50.122000Z,unique_tile_date_footprint; original_product_id_unavailable,data/external/marida/patches/S2_22-12-20_18QYF/S2_22-12-20_18QYF_0.tif,data/external/validation-bridge/paired/22-12-20_18QYF_0,65536.0,114.0,28.0,0.0,0.0,1.0
+27-1-19_16PCC_28,2019-01-27,16PCC,missing,0,,,,,,,,,,,,
+20-4-18_30VWH_4,2018-04-20,30VWH,missing,0,,,,,,,,,,,,
+24-4-19_36JUN_0,2019-04-24,36JUN,paired,1,S2B_T36JUN_20190424T080529_L2A,S2B_MSIL2A_20190424T073619_N0500_R092_T36JUN_20221021T090529.SAFE,2019-04-24T08:08:20.982000Z,unique_tile_date_footprint; original_product_id_unavailable,data/external/marida/patches/S2_24-4-19_36JUN/S2_24-4-19_36JUN_0.tif,data/external/validation-bridge/paired/24-4-19_36JUN_0,65536.0,6.0,4.0,0.0,0.417236328125,0.57342529296875

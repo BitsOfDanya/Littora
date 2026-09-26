@@ -1,0 +1,91 @@
+variant,class_id,pixels,predicted_debris,class_name
+spectral,1.0,102,65,Marine Debris
+spectral,2.0,43,1,Dense Sargassum
+spectral,3.0,113,3,Sparse Sargassum
+spectral,4.0,5,3,Natural Organic Material
+spectral,5.0,177,0,Ship
+spectral,6.0,6297,0,Clouds
+spectral,7.0,1415,0,Marine Water
+spectral,8.0,43453,0,Sediment-Laden Water
+spectral,9.0,55,1,Foam
+spectral,10.0,8946,0,Turbid Water
+spectral,11.0,62,0,Shallow Water
+spectral,12.0,152,0,Waves
+spectral,13.0,662,0,Cloud Shadows
+spectral,14.0,787,0,Wakes
+spectral,15.0,17,1,Mixed Water
+spectral_wind,1.0,102,44,Marine Debris
+spectral_wind,2.0,43,0,Dense Sargassum
+spectral_wind,3.0,113,0,Sparse Sargassum
+spectral_wind,4.0,5,2,Natural Organic Material
+spectral_wind,5.0,177,3,Ship
+spectral_wind,6.0,6297,0,Clouds
+spectral_wind,7.0,1415,0,Marine Water
+spectral_wind,8.0,43453,862,Sediment-Laden Water
+spectral_wind,9.0,55,0,Foam
+spectral_wind,10.0,8946,0,Turbid Water
+spectral_wind,11.0,62,0,Shallow Water
+spectral_wind,12.0,152,0,Waves
+spectral_wind,13.0,662,0,Cloud Shadows
+spectral_wind,14.0,787,0,Wakes
+spectral_wind,15.0,17,0,Mixed Water
+spectral_waves,1.0,102,13,Marine Debris
+spectral_waves,2.0,43,0,Dense Sargassum
+spectral_waves,3.0,113,0,Sparse Sargassum
+spectral_waves,4.0,5,0,Natural Organic Material
+spectral_waves,5.0,177,3,Ship
+spectral_waves,6.0,6297,0,Clouds
+spectral_waves,7.0,1415,0,Marine Water
+spectral_waves,8.0,43453,0,Sediment-Laden Water
+spectral_waves,9.0,55,7,Foam
+spectral_waves,10.0,8946,0,Turbid Water
+spectral_waves,11.0,62,0,Shallow Water
+spectral_waves,12.0,152,0,Waves
+spectral_waves,13.0,662,0,Cloud Shadows
+spectral_waves,14.0,787,0,Wakes
+spectral_waves,15.0,17,0,Mixed Water
+spectral_currents,1.0,102,47,Marine Debris
+spectral_currents,2.0,43,0,Dense Sargassum
+spectral_currents,3.0,113,1,Sparse Sargassum
+spectral_currents,4.0,5,2,Natural Organic Material
+spectral_currents,5.0,177,0,Ship
+spectral_currents,6.0,6297,0,Clouds
+spectral_currents,7.0,1415,0,Marine Water
+spectral_currents,8.0,43453,2477,Sediment-Laden Water
+spectral_currents,9.0,55,8,Foam
+spectral_currents,10.0,8946,0,Turbid Water
+spectral_currents,11.0,62,0,Shallow Water
+spectral_currents,12.0,152,0,Waves
+spectral_currents,13.0,662,0,Cloud Shadows
+spectral_currents,14.0,787,0,Wakes
+spectral_currents,15.0,17,0,Mixed Water
+spectral_all,1.0,102,47,Marine Debris
+spectral_all,2.0,43,0,Dense Sargassum
+spectral_all,3.0,113,4,Sparse Sargassum
+spectral_all,4.0,5,3,Natural Organic Material
+spectral_all,5.0,177,0,Ship
+spectral_all,6.0,6297,4,Clouds
+spectral_all,7.0,1415,4,Marine Water
+spectral_all,8.0,43453,3579,Sediment-Laden Water
+spectral_all,9.0,55,34,Foam
+spectral_all,10.0,8946,551,Turbid Water
+spectral_all,11.0,62,0,Shallow Water
+spectral_all,12.0,152,2,Waves
+spectral_all,13.0,662,0,Cloud Shadows
+spectral_all,14.0,787,3,Wakes
+spectral_all,15.0,17,0,Mixed Water
+environment_only,1.0,102,0,Marine Debris
+environment_only,2.0,43,0,Dense Sargassum
+environment_only,3.0,113,0,Sparse Sargassum
+environment_only,4.0,5,0,Natural Organic Material
+environment_only,5.0,177,0,Ship
+environment_only,6.0,6297,0,Clouds
+environment_only,7.0,1415,0,Marine Water
+environment_only,8.0,43453,0,Sediment-Laden Water
+environment_only,9.0,55,0,Foam
+environment_only,10.0,8946,0,Turbid Water
+environment_only,11.0,62,0,Shallow Water
+environment_only,12.0,152,0,Waves
+environment_only,13.0,662,0,Cloud Shadows
+environment_only,14.0,787,0,Wakes
+environment_only,15.0,17,0,Mixed Water

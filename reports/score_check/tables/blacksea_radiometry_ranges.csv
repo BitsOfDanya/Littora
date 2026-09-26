@@ -1,0 +1,25 @@
+chip_id,scope,pixels,outside_any_train_water_marginal_range,mean_bands_outside,interpretation
+novorossiysk-2025-06,all,65536,1.0,2.7743072509765625,L2A versus rhorc description; not classifier OOD or litter accuracy
+novorossiysk-2025-06,SCL_water,64684,1.0,2.768227073155649,L2A versus rhorc description; not classifier OOD or litter accuracy
+novorossiysk-2025-09,all,65536,6.103515625e-05,0.000152587890625,L2A versus rhorc description; not classifier OOD or litter accuracy
+novorossiysk-2025-09,SCL_water,65536,6.103515625e-05,0.000152587890625,L2A versus rhorc description; not classifier OOD or litter accuracy
+sochi-2025-06,all,65536,1.0,3.0006561279296875,L2A versus rhorc description; not classifier OOD or litter accuracy
+sochi-2025-06,SCL_water,65536,1.0,3.0006561279296875,L2A versus rhorc description; not classifier OOD or litter accuracy
+sochi-2025-09,all,65536,0.0001220703125,0.0004119873046875,L2A versus rhorc description; not classifier OOD or litter accuracy
+sochi-2025-09,SCL_water,65536,0.0001220703125,0.0004119873046875,L2A versus rhorc description; not classifier OOD or litter accuracy
+batumi-2025-06,all,65536,1.0,11.0,L2A versus rhorc description; not classifier OOD or litter accuracy
+batumi-2025-06,SCL_water,65536,1.0,11.0,L2A versus rhorc description; not classifier OOD or litter accuracy
+batumi-2025-09,all,65536,0.039459228515625,0.0446929931640625,L2A versus rhorc description; not classifier OOD or litter accuracy
+batumi-2025-09,SCL_water,65536,0.039459228515625,0.0446929931640625,L2A versus rhorc description; not classifier OOD or litter accuracy
+sinop-2025-06,all,65536,0.31793212890625,0.5381317138671875,L2A versus rhorc description; not classifier OOD or litter accuracy
+sinop-2025-06,SCL_water,63964,0.3181477080857983,0.538443499468451,L2A versus rhorc description; not classifier OOD or litter accuracy
+sinop-2025-09,all,65536,7.62939453125e-05,7.62939453125e-05,L2A versus rhorc description; not classifier OOD or litter accuracy
+sinop-2025-09,SCL_water,65536,7.62939453125e-05,7.62939453125e-05,L2A versus rhorc description; not classifier OOD or litter accuracy
+burgas-2025-06,all,65536,0.9995269775390625,10.813217163085938,L2A versus rhorc description; not classifier OOD or litter accuracy
+burgas-2025-06,SCL_water,60447,0.9994871540357668,10.979337270666866,L2A versus rhorc description; not classifier OOD or litter accuracy
+burgas-2025-09,all,65536,0.12158203125,0.8258514404296875,L2A versus rhorc description; not classifier OOD or litter accuracy
+burgas-2025-09,SCL_water,60455,0.0477545281614424,0.10076916714911918,L2A versus rhorc description; not classifier OOD or litter accuracy
+constanta-2025-06,all,65536,0.962860107421875,1.8718719482421875,L2A versus rhorc description; not classifier OOD or litter accuracy
+constanta-2025-06,SCL_water,62472,0.9610385452682801,1.4489691381739018,L2A versus rhorc description; not classifier OOD or litter accuracy
+constanta-2025-09,all,65536,0.5109405517578125,1.096343994140625,L2A versus rhorc description; not classifier OOD or litter accuracy
+constanta-2025-09,SCL_water,62426,0.4867202768077404,0.6609906128856566,L2A versus rhorc description; not classifier OOD or litter accuracy

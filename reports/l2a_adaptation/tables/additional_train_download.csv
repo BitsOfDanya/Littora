@@ -1,0 +1,2 @@
+patch_id,status,stac_id,all_band_valid_fraction,nodata_fraction,cloud_fraction,water_fraction
+4-9-19_16PCC_32,downloaded,S2B_T16PCC_20190904T162326_L2A,1.0,0.0,0.99822998046875,0.0

@@ -1,0 +1,18 @@
+{
+  "source": "https://doi.org/10.17882/98351",
+  "provider": "IBER-BAS; Bobchev, Berov, Karamfilov",
+  "local_matches_download": true,
+  "source_sha256": "627a240663c6fe2012573831789915de485fa94475e8b999c525dde02946f74a",
+  "events": 84,
+  "stations": 8,
+  "calendar_days": 21,
+  "campaigns": 11,
+  "reported_objects_in_abstract": 502,
+  "sum_density_times_nominal_area": 456.921,
+  "rounded_category_discrepancies": 12,
+  "inconsistent_count_area_rounding": 8,
+  "licence": "DataCite CC BY 4.0 + SEANOE CC BY icon; SEANOE prose lists FP7/H2020 BRIDGE-BS and partner/on-request access until public release",
+  "external_reuse_status": "written clarification pending; local exploratory analysis only",
+  "method_source": "https://zenodo.org/records/14608279",
+  "units_source": "https://vocab.nerc.ac.uk/collection/P06/current/NPKM/"
+}

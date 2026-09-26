@@ -1,0 +1,4 @@
+split,pixels,positive_pixels,patches,groups,positive_groups
+train,93436,742,110,19,16
+val,32907,612,38,6,5
+test,62286,102,42,7,7
