@@ -133,23 +133,43 @@ def to_csv(result: dict[str, Any]) -> str:
     rows = []
     area = _area_properties(result)
     lon, lat = _representative(result["area"])
+    concentration = result["concentration"]
     rows.append(
         {
             "feature": "request_area",
             "id": result["id"],
             "value_kind": ValueKind.REQUEST_AREA.value,
             "status": area["status_label"],
-            "value": area["concentration"],
-            "unit": area["unit"],
-            "lower": area["concentration_lower"],
-            "upper": area["concentration_upper"],
+            "value": None,
+            "unit": "",
+            "lower": None,
+            "upper": None,
             "target": area["target"],
             "measurement_profile": "",
             "date": area["acquired_at"] or area["request_date"],
             "scene_id": area["scene_id"],
             "longitude": lon,
             "latitude": lat,
-            "note": f"{result['detection']['reason']}; {result['concentration']['reason']}",
+            "note": result["detection"]["reason"],
+        }
+    )
+    rows.append(
+        {
+            "feature": "concentration",
+            "id": f"{result['id']}:concentration",
+            "value_kind": ValueKind.MODEL_ESTIMATE.value,
+            "status": concentration.get("label", ""),
+            "value": concentration["value"],
+            "unit": area["unit"],
+            "lower": concentration["lower"],
+            "upper": concentration["upper"],
+            "target": area["target"],
+            "measurement_profile": concentration.get("profile") or "",
+            "date": area["acquired_at"] or area["request_date"],
+            "scene_id": area["scene_id"],
+            "longitude": lon,
+            "latitude": lat,
+            "note": concentration["reason"],
         }
     )
     for index, zone in enumerate(result["detection"].get("zones", []), start=1):

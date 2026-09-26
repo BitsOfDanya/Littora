@@ -1,4 +1,6 @@
+import csv
 import datetime as dt
+import io
 import json
 import threading
 from collections.abc import Iterator
@@ -432,3 +434,20 @@ def test_an_unreadable_scene_mask_is_retryable(tmp_path) -> None:
     assert failed["messages"] == ["маска SCL не читается: timeout"]
     assert retried["retryable"] is False
     assert retried["quality"]["usable"] is True
+
+
+def test_csv_keeps_the_concentration_estimate_as_its_own_row(client: TestClient) -> None:
+    body = client.post("/api/v1/analyses", json=REQUEST).json()
+    rows = list(
+        csv.DictReader(
+            io.StringIO(
+                client.get(f"/api/v1/analyses/{body['id']}/export.csv").text.removeprefix("\ufeff")
+            )
+        )
+    )
+    area = next(row for row in rows if row["feature"] == "request_area")
+    estimate = next(row for row in rows if row["feature"] == "concentration")
+    assert area["value"] == ""
+    assert estimate["value_kind"] == "model_estimate"
+    assert estimate["status"] == body["concentration"]["label"]
+    assert estimate["measurement_profile"] == (body["concentration"]["profile"] or "")

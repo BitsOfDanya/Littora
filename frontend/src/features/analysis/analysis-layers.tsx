@@ -30,6 +30,7 @@ import { formatArea } from "@/lib/format/numbers";
 import {
   declutterLabels,
   formatProbability,
+  isConfident,
   type RealZone,
   toRealZones,
   zoneAdvice,
@@ -37,6 +38,7 @@ import {
   zoneLabel,
 } from "./zones";
 import { useCurrentAnalysis } from "./use-analysis";
+import { useZoneFilterStore } from "./zone-filter-store";
 import { type TimedObservation, useObservationsView } from "./use-observations-view";
 
 type Ring = { id: string; path: [number, number][] };
@@ -569,7 +571,11 @@ export function AnalysisLayers() {
   const zoneHandlers = useZoneHandlers(setHoveredZone);
   const labelZoom = useMapViewStore((state) => Math.round(state.zoom * 2) / 2);
   const showMarkers = labelZoom < ZONE_MARKERS_MAX_ZOOM;
-  const zones = useMemo(() => (analysis ? toRealZones(analysis.detection.zones) : []), [analysis]);
+  const strict = useZoneFilterStore((state) => state.strict);
+  const zones = useMemo(() => {
+    const all = analysis ? toRealZones(analysis.detection.zones) : [];
+    return strict ? all.filter(isConfident) : all;
+  }, [analysis, strict]);
 
   const layers = useMemo(() => {
     const list: Layer[] = [];

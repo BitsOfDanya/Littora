@@ -302,3 +302,14 @@ export const ADVICE_TONES: Readonly<Record<ZoneAdviceKind, string>> = {
   recheck: "border-state-caution text-state-caution",
   not_debris: "border-line-strong text-text-tertiary",
 };
+
+export const CONFIDENT_PROBABILITY = 0.5;
+export const CONFIDENT_PIXELS = 3;
+
+export function isConfident(zone: RealZone): boolean {
+  return (
+    zoneAdvice(zone).kind !== "not_debris" &&
+    (zone.probabilityMax ?? 0) >= CONFIDENT_PROBABILITY &&
+    (zone.pixels ?? 0) >= CONFIDENT_PIXELS
+  );
+}

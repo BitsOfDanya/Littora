@@ -7,6 +7,7 @@ import { useMapLayersStore } from "@/state/map-layers-store";
 import { cn } from "@/ui/cn";
 import { CONCENTRATION_UNIT } from "./analysis-copy";
 import { formatConcentration } from "./format";
+import { useZoneFilterStore } from "./zone-filter-store";
 
 const COMPOSITES: readonly [CompositeLayerId, string, keyof Analysis["layers"]][] = [
   ["scene-true-color", "RGB", "image"],
@@ -31,6 +32,8 @@ export function LayerChips({ analysis }: { analysis: Analysis }) {
   const visible = useMapLayersStore((state) => state.visible);
   const setComposite = useMapLayersStore((state) => state.setComposite);
   const toggleLayer = useMapLayersStore((state) => state.toggleLayer);
+  const strict = useZoneFilterStore((state) => state.strict);
+  const toggleStrict = useZoneFilterStore((state) => state.toggle);
   return (
     <div className="flex flex-col gap-1.5">
       <span className="text-[11px] font-semibold text-text-secondary">Показать на карте</span>
@@ -53,6 +56,21 @@ export function LayerChips({ analysis }: { analysis: Analysis }) {
           </button>
         ))}
         <span aria-hidden className="mx-1 w-px self-stretch bg-line-hairline" />
+        <button
+          type="button"
+          aria-pressed={strict}
+          disabled={!analysis.detection.zones.length}
+          onClick={toggleStrict}
+          title="Показывать только зоны с вероятностью от 0,5, от 3 пикселей и без признаков судна или сооружения"
+          className={cn(
+            CHIP,
+            strict
+              ? "border-state-ok bg-surface-raised text-state-ok"
+              : "border-line-control text-text-secondary hover:text-text-primary",
+          )}
+        >
+          Только уверенные
+        </button>
         {TOGGLES.map(([id, label, key]) => (
           <button
             key={id}
