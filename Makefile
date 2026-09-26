@@ -5,7 +5,7 @@ DETECTOR_FINAL ?= raunet__marida_mixed__common
 DETECTOR_C1 ?= raunet__marida_mixed_c1__common
 ENSEMBLE ?= raunet__marida_mixed__common,raunet_hard__marida_l2a__common,unetpp_resnet34__marida_l2a__common
 
-.PHONY: ml-env audit registry splits detector-data detector-baselines detector-marida detector-train detector-ensemble detector-export detector-checks concentration concentration-export satellite drift-check ml-all
+.PHONY: ml-env audit registry splits detector-data detector-baselines detector-marida detector-train detector-ensemble detector-export detector-checks concentration concentration-export satellite drift-check smoke smoke-api ml-all
 
 ml-env:
 	python3 -m venv ml/.venv
@@ -73,3 +73,13 @@ satellite:
 	$(PY) -m littora_ml concentration satellite --run $(DETECTOR_FINAL)
 
 ml-all: audit registry detector-data detector-baselines detector-marida detector-train detector-ensemble detector-export detector-checks concentration concentration-export satellite drift-check splits
+
+smoke:
+	$(PY) -m littora_ml detector rescore --runs $(DETECTOR_FINAL),lgbm_pixel__marida_l2a__common,rf_pixel__marida_l2a__common,fdi_rule__marida_l2a__common
+	cd backend && .venv/bin/python -m pytest -q
+	cd ml && .venv/bin/python -m pytest -q
+
+smoke-api:
+	curl -sf http://localhost:8000/api/v1/health
+	curl -sf -X POST http://localhost:8000/api/v1/analyses -H 'Content-Type: application/json' -d '{"aoi_id":"novorossiysk","aoi_name":"Новороссийск","bbox":[37.76,44.66,37.9,44.74],"date":"2025-09-04","window_days":1,"scene_id":null,"target":"litter-visual"}' -o /dev/null -w "analysis %{http_code}\n"
+	curl -sf http://localhost:8000/api/v1/models -o /dev/null -w "models %{http_code}\n"
